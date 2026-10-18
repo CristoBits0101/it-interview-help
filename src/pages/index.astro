@@ -4,35 +4,34 @@ import '@fontsource/ibm-plex-mono/500.css';
 import '../styles/global.css';
 import Icon from '../components/Icon.astro';
 import NavigationTree from '../components/NavigationTree.astro';
+import HomeOverview from '../components/HomeOverview.astro';
 import { navigation } from '../data/navigation';
 import { tracks as coreTracks, sources } from '../data/curriculum';
 import { systemDesign } from '../data/system-design';
 import { appliedAI, aiSources } from '../data/applied-ai';
 const trackOrder = ['ux-design', 'software-design', 'software-architecture', 'distributed-systems', 'system-design', 'applied-ai'];
 const tracks = [...coreTracks, systemDesign, appliedAI].sort((a, b) => trackOrder.indexOf(a.id) - trackOrder.indexOf(b.id));
-const count = (track: typeof tracks[number]) => track.modules.reduce((n, m) => n + m.concepts.length, 0);
 const firstTrack = tracks[0];
 const firstModule = firstTrack.modules[0];
-const trackLabels: Record<string, string> = { 'software-design': 'Software Design', 'software-architecture': 'Software Architecture', 'system-design': 'System Design', 'ux-design': 'User Experience Design', 'distributed-systems': 'Distributed Systems', 'applied-ai': 'Applied Artificial Intelligence' };
 ---
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Aprende System Design, arquitectura de software, SOLID, User Experience Design y Applied Artificial Intelligence. Conceptos breves, ejemplos y tarjetas de repaso para tu próxima entrevista técnica." />
+    <meta name="description" content="Orienta tu aprendizaje en Frontend, Backend, Full Stack, DevOps y Artificial Intelligence. Áreas relacionadas, etapas profesionales y conceptos para practicar." />
     <meta name="theme-color" content="#f7f8f4" />
-    <meta property="og:title" content="tech-training · Conceptos claros. Grandes ideas." />
-    <meta property="og:description" content="Tu biblioteca de ingeniería de software y Applied Artificial Intelligence. Aprende un concepto, conecta una idea, construye algo mejor." />
+    <meta property="og:title" content="Tech Training · Tu mapa de aprendizaje" />
+    <meta property="og:description" content="Elige tu perfil técnico, descubre qué áreas estudiar juntas y avanza desde fundamentos hasta especialización." />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>tech-training · Conceptos claros. Grandes ideas.</title>
+    <title>Tech Training · Home</title>
   </head>
   <body>
     <a href="#main" class="skip-link">Saltar al contenido</a>
     <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
     <aside class="sidebar" id="sidebar" aria-label="Navegación de aprendizaje">
-      <a href="#ux-design/arquitectura-informacion" class="brand" aria-label="Tech Training, home">
+      <a href="#home" class="brand" aria-label="Tech Training, home">
         <span>Tech Training</span>
       </a>
       <div class="navigation-section">
@@ -46,45 +45,21 @@ const trackLabels: Record<string, string> = { 'software-design': 'Software Desig
     <div class="workspace">
       <header class="topbar">
         <button class="icon-button mobile-toggle" id="mobile-toggle" aria-label="Abrir menú de rutas" aria-controls="sidebar" aria-expanded="false"><Icon name="menu" /></button>
-        <div class="breadcrumb"><Icon name="book" size={16} /><span>Library</span><span class="breadcrumb-slash">/</span><strong id="breadcrumb-track">User Experience Design</strong></div>
+        <nav class="breadcrumb" aria-label="Ruta actual"><a href="#home" data-home-link aria-current="page">Home</a><span class="breadcrumb-slash" id="breadcrumb-slash" hidden>/</span><strong id="breadcrumb-track" hidden></strong></nav>
         <div class="topbar-actions">
           <label class="search-box" for="search"><Icon name="search" size={18} /><input id="search" type="search" aria-label="Buscar conceptos" placeholder="Buscar un concepto..." autocomplete="off" /><kbd aria-hidden="true">/</kbd></label>
-          <button class="review-top" id="review-top" aria-label="Repaso rápido de todas las rutas"><Icon name="flash" size={16} /><span>Repaso rápido</span></button>
         </div>
       </header>
 
       <main id="main" tabindex="-1">
-        <section class="hero" id="hero" aria-labelledby="hero-title">
-          <div class="hero-copy">
-            <div class="eyebrow"><span class="live-dot"></span> MENOS RUIDO. MÁS CONOCIMIENTO.</div>
-            <h1 id="hero-title">Conceptos claros.<br /><span>Grandes ideas.</span></h1>
-            <p>De la primera idea al sistema completo.<br class="desktop-break" /> Aprende, conecta y prepárate para tu próximo reto técnico.</p>
-            <a class="hero-action" href="#study"><span>Un concepto a la vez</span><Icon name="arrow" size={17} /></a>
-          </div>
-          <div class="architecture-visual" role="img" aria-label="Un cliente envía peticiones a una API, que las distribuye a dos servicios conectados a una base de datos.">
-            <div class="visual-caption"><span class="live-dot"></span> TODO ESTÁ CONECTADO</div>
-            <div class="visual-grid"></div>
-            <svg class="diagram-lines" viewBox="0 0 390 210" aria-hidden="true"><path d="M72 102H147M201 102H229V50H273M229 102V154H273M320 50H352V102H366M320 154H352V102" /><circle cx="112" cy="102" r="3"/><circle cx="229" cy="73" r="3"/><circle cx="352" cy="127" r="3"/></svg>
-            <div class="diagram-node node-client"><Icon name="layout" size={23} /><span>Cliente</span></div>
-            <div class="diagram-node node-api"><Icon name="code" size={24} /><span>API</span></div>
-            <div class="diagram-node node-service-one"><Icon name="layers" size={22} /><span>Servicio A</span></div>
-            <div class="diagram-node node-service-two"><Icon name="layers" size={22} /><span>Servicio B</span></div>
-            <div class="diagram-database"><svg width="24" height="34" viewBox="0 0 24 34" aria-hidden="true"><ellipse cx="12" cy="6" rx="10" ry="4"/><path d="M2 6v20c0 5 20 5 20 0V6M2 16c0 5 20 5 20 0"/></svg></div>
-            <span class="visual-footnote">Las piezas pequeñas construyen grandes sistemas.</span>
-            <span class="visual-cross cross-one">+</span><span class="visual-cross cross-two">+</span>
-          </div>
-        </section>
+        <HomeOverview tracks={tracks} />
 
-        <section class="route-strip" id="route-strip" aria-label="Elige una ruta">
-          {tracks.map((track, ti) => <a href={`#${track.id}/${track.modules[0].id}`} class={`route-tile ${ti === 0 ? 'active' : ''}`} data-route={track.id}><span class="route-text"><strong>{trackLabels[track.id]}</strong><small>{count(track)} concepts</small></span><span class="route-active-dot"></span></a>)}
-        </section>
-
-        <section class="study-area" id="study" aria-labelledby="study-title">
+        <section class="study-area" id="study" aria-labelledby="study-title" hidden>
           <div class="study-heading">
             <div><div class="section-eyebrow" id="module-eyebrow">{firstTrack.eyebrow} <span>/</span> MODULE 01</div><h2 id="study-title">{firstModule.title}</h2><p id="study-description">{firstModule.description}</p></div>
             <div class="study-tools"><label class="level-select"><span class="sr-only">Filtrar por nivel</span><select id="level-filter"><option value="all">Todos los niveles</option><option value="Esencial">Esencial</option><option value="Intermedio">Intermedio</option><option value="Avanzado">Avanzado</option></select><Icon name="down" size={14} /></label></div>
           </div>
-          <div class="module-toolbar"><span><span class="toolbar-dot"></span><span id="visible-count">{firstModule.concepts.length}</span> concepts <span class="toolbar-separator">·</span> At your pace</span><button id="review-module" class="text-button"><Icon name="flash" size={15} />Review module<Icon name="arrow" size={15} /></button></div>
+          <div class="module-toolbar"><span><span class="toolbar-dot"></span><span id="visible-count">{firstModule.concepts.length}</span> concepts <span class="toolbar-separator">·</span> At your pace</span><button id="review-module" class="text-button"><Icon name="flash" size={15} />Repasar conceptos<Icon name="arrow" size={15} /></button></div>
           <div id="concept-library">
             {tracks.map((track, ti) => track.modules.map((module, mi) => <section class="concept-section" data-track-id={track.id} data-module-id={module.id} data-module-title={module.title} data-module-description={module.description} data-module-number={String(mi + 1).padStart(2, '0')} data-track-title={track.title} data-track-eyebrow={track.eyebrow} hidden={ti !== 0 || mi !== 0}>
               <h3 class="search-group-heading" hidden>{track.title}<Icon name="chevron" size={13} />{module.title}</h3>
@@ -102,7 +77,7 @@ const trackLabels: Record<string, string> = { 'software-design': 'Software Desig
         </section>
 
         <footer class="page-footer"><span>Tech Training<small>Hecho para entender, no para memorizar sin más.</small></span><button class="text-button" id="open-sources">Fuentes y recursos<Icon name="arrow" size={14} /></button></footer>
-        <noscript><p class="noscript-note">Puedes leer el primer módulo. Activa JavaScript para navegar entre rutas, buscar y guardar tu progreso.</p></noscript>
+        <noscript><p class="noscript-note">Puedes consultar el resumen y el primer itinerario. Activa JavaScript para elegir otro perfil, navegar entre módulos, buscar y guardar tu progreso.</p></noscript>
       </main>
     </div>
 

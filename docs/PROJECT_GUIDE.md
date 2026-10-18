@@ -8,7 +8,7 @@ Tech Training es una web abierta para aprender fundamentos de tecnología y prep
 
 El usuario pidió un diseño profesional, moderno y minimalista, con especial cuidado por la simetría, márgenes y alineación. Los enlaces de navegación usan nombres completos en inglés y Title Case; las explicaciones y buena parte de los controles están en español. No traduzcas ni abrevies áreas de forma arbitraria. Las siglas propias de conceptos técnicos, como SQL, RPC o LLM, pueden formar parte de las lecciones.
 
-La marca del sidebar es exactamente **Tech Training**. El usuario retiró el logo gráfico, el guion y el subtítulo «Un concepto. Un paso más.». También retiró el separador horizontal, la biblioteca de exploración/guardados y el pie de progreso. El borde vertical entre sidebar y contenido y las guías de indentación de los submenús siguen presentes.
+La marca del sidebar es exactamente **Tech Training**. El usuario retiró el logo gráfico, el guion y el subtítulo «Un concepto. Un paso más.». También retiró el separador horizontal, la biblioteca de exploración/guardados y el pie de progreso. El borde vertical entre sidebar y contenido y las guías de indentación de los submenús siguen presentes. La nueva portada Home sustituye al antiguo hero y la franja de seis rutas. La etiqueta `Library` y el acceso al repaso rápido global también se eliminaron; el repaso de conceptos visibles continúa dentro del estudio.
 
 ## 2. Tipografía
 
@@ -60,7 +60,7 @@ Estados y colores efectivos relevantes:
 
 El CSS se organiza en capas `reset`, `base`, `layout`, `components`, `responsive`. Algunos colores de texto se corrigen en la última capa, incluso fuera de media queries: no tomes una declaración anterior como el color final. Conserva las diferencias entre estados sin depender únicamente del color; hay etiquetas, `aria-current` y `aria-pressed`.
 
-Tarjetas con borde de 1 px y radio de 11 px; filas del menú con radio de 8 px; botones normalmente de 7 px. Sombras y transiciones son discretas. Se respeta `prefers-reduced-motion`.
+Tarjetas de concepto con borde de 1 px y radio de 11 px; filas del menú con radio de 8 px; botones normalmente de 7 px. Sombras y transiciones son discretas. Se respeta `prefers-reduced-motion`.
 
 ## 4. Espaciado y navegación visual
 
@@ -116,7 +116,7 @@ El árbol completo y su orden se definen en `src/data/navigation.ts`. Las once �
 - Hoja con `href`: enlace a un módulo existente.
 - Hoja sin `href`: `span` con `aria-disabled="true"`, visible y no clicable.
 
-El árbol amplio sustituye al antiguo sidebar de solo seis rutas. Las seis rutas **con lecciones** siguen este orden en la franja de acceso y la generación de contenidos:
+El árbol amplio sustituye al antiguo sidebar de solo seis rutas. Las seis rutas **con lecciones** siguen este orden en la generación de contenidos:
 
 | Ruta | ID | Conceptos actuales | Ubicación en el árbol |
 | --- | --- | ---: | --- |
@@ -131,30 +131,50 @@ Total actual: 110 conceptos. Es un inventario, no un límite de producto. `Infor
 
 Modelo: `Track` contiene módulos; cada `Module` contiene conceptos. Un `Concept` tiene `id`, `title`, `description`, `memory`, `example` y `level` (`Esencial`, `Intermedio` o `Avanzado`). Mantén definiciones precisas y breves; SOLID ya se divide en cinco principios. Enlaza fuentes originales cuando amplíes la teoría. Los archivos de datos son la fuente de verdad, no el HTML compilado.
 
-Para añadir contenido, actualiza el archivo de datos apropiado y el destino de navegación. Una nueva ruta también requiere revisar imports, `tracks`, `trackOrder` y `trackLabels` en `index.astro`. La franja actual usa una cuadrícula de cinco columnas aunque hay seis rutas: es un detalle existente que revisar si se modifica esa zona, no un requisito de diseño. No alteres todo el layout como efecto secundario de añadir una lección.
+Para añadir contenido, actualiza el archivo de datos apropiado y el destino de navegación. Una nueva ruta también requiere revisar imports, `tracks` y `trackOrder` en `index.astro`. La portada recibe esos datos y deriva de ellos disponibilidad y conteos; no mantengas una segunda cifra manual. No alteres todo el layout como efecto secundario de añadir una lección.
+
+### Home y orientación profesional
+
+La raíz y `#home` muestran una portada propia: presenta el alcance de la aplicación, el inventario de áreas y conceptos, recomendaciones por perfil y etapa y opciones de desarrollo profesional. No debe abrir por defecto User Experience Design ni ningún otro módulo. Las once áreas siguen visibles también cuando sus lecciones están pendientes; diferencia recomendaciones de estudio de contenido que realmente puede abrirse.
+
+Inventario actual: **11 áreas principales, 6 rutas con contenido, 110 conceptos y 5 perfiles**. Son valores derivados del árbol, los tracks y los perfiles, no constantes del diseño.
+
+Los perfiles definidos en `src/data/career-paths.ts` son Frontend Engineer, Backend Engineer, Full Stack Engineer, DevOps Engineer y Artificial Intelligence Engineer. Cada uno contiene Fundamentos, Junior, Mid-Level, Mid-Level → Senior y Senior. Cada etapa combina un objetivo, áreas relacionadas y un hito práctico. `areaGuidance` aporta el enfoque de cada área y conocimientos previos útiles; sus etiquetas deben coincidir exactamente con las de `navigation.ts` para resolver los destinos.
+
+La selección de perfil y etapa cambia las recomendaciones visibles con botones cuyo estado se comunica mediante `aria-pressed`. Actualmente se conserva mientras la página está cargada; no añade otra clave de localStorage. No conviertas los prerrequisitos orientativos en bloqueos de acceso, ni los hitos en certificaciones o promesas de contratación.
+
+Después de Senior se presentan ramas de especialización técnica, liderazgo técnico y gestión/dirección. Analyst y Architect son especialidades posibles, no niveles obligatorios entre Senior y puestos directivos. Technical Lead describe una responsabilidad que puede coexistir con distintos niveles. Los títulos y recorridos varían por empresa: no impongas una escalera universal ni equipares un cargo con dominio de todas las áreas.
+
+`careerSources`, en el mismo archivo de datos, conserva referencias primarias de MDN, Google Machine Learning, Google Site Reliability Engineering, SFIA y GitLab. Las recomendaciones son una síntesis editorial apoyada por esas fuentes; ninguna fuente certifica esta combinación exacta de etapas. Al cambiarlas, revisa las fuentes y los prerrequisitos además de los nombres.
+
+`HomeOverview.astro` y `home.css` contienen la composición y los estilos de la portada. Reutilizan la paleta y las tipografías comunes. El rediseño de Home no autoriza cambiar la retícula de 48 px, los iconos o la persistencia del sidebar.
 
 ## 6. Arquitectura y comportamiento
 
 | Archivo | Responsabilidad |
 | --- | --- |
 | `src/pages/index.astro` | Página única, fuentes, montaje de datos, tarjetas y diálogos |
-| `src/styles/global.css` | Tokens, diseño, estados y responsive |
+| `src/styles/global.css` | Tokens, diseño compartido, estados y responsive |
+| `src/styles/home.css` | Composición y adaptación responsive de Home |
+| `src/components/HomeOverview.astro` | Portada, inventario derivado y recomendaciones profesionales |
 | `src/components/NavigationTree.astro` | Árbol recursivo, enlaces y nodos sin contenido |
 | `src/components/Icon.astro` | Catálogo tipado de iconos Lucide |
 | `src/data/navigation.ts` | Taxonomía, nombres, iconos y destinos |
+| `src/data/career-paths.ts` | Perfiles, etapas, orientación de áreas, prerrequisitos, ramas y fuentes |
 | `src/data/curriculum.ts` | Tipos, contenido principal y fuentes |
 | `src/data/system-design.ts` | Contenido de System Design |
 | `src/data/applied-ai.ts` | Contenido y fuentes de Applied Artificial Intelligence |
-| `src/scripts/app.ts` | Rutas hash, búsqueda, niveles, progreso, repaso, menú móvil y diálogos |
+| `src/scripts/app.ts` | Home/rutas hash, búsqueda, niveles, progreso, repaso, menú móvil y diálogos |
+| `src/scripts/home.ts` | Selección de perfil y etapa, panel visible y estado accesible |
 | `src/scripts/navigation.ts` | Restaurar y guardar el estado de ramas |
 | `public/favicon.svg` | Favicon |
 | `astro.config.mjs` | URL del sitio, salida estática y configuración Astro |
 
 Astro 7.4, TypeScript estricto y CSS sin framework de componentes. No hay backend, API propia, login ni servicio de IA. Las dependencias Python que aparecieron en el material inicial eran contexto educativo; no son requisitos de ejecución.
 
-Las rutas usan `#track-id/module-id`. El primer módulo es `#ux-design/arquitectura-informacion`. Los hashes de módulo desconocidos vuelven al primero; `#main` y `#study` son anclas internas. Los modos actuales son módulo y búsqueda; no hay rutas de exploración global ni de guardados.
+La raíz y `#home` abren Home. Los módulos usan `#track-id/module-id`, por ejemplo `#ux-design/arquitectura-informacion`. Los hashes desconocidos vuelven a `#home`; los destinos internos de la portada permiten desplazarse a sus secciones. `#main` es el salto accesible al contenido y `#study` se conserva como ancla cuando se está en un módulo. Los modos actuales son Home, módulo y búsqueda; `routeMode` recuerda si la búsqueda se inició desde Home o desde un módulo. No hay rutas de exploración global ni de guardados.
 
-La búsqueda es global, ignora mayúsculas y diacríticos, y acepta `/` o `Ctrl/Cmd + K` para enfocar el campo. El filtro por nivel se combina con la vista. «Limpiar filtros» restaura el módulo actual. «Lo entiendo» marca progreso; el repaso oculta la definición, prioriza pendientes y mezcla tarjetas. El repaso global selecciona hasta 10; el del módulo usa las visibles.
+La búsqueda es global, ignora mayúsculas y diacríticos, y acepta `/` o `Ctrl/Cmd + K` para enfocar el campo. El filtro por nivel se combina con la vista. Vaciar la búsqueda o pulsar «Limpiar filtros» restaura `routeMode`: Home si se inició allí, o el módulo seleccionado. «Lo entiendo» marca progreso; «Repasar conceptos» usa todas las tarjetas visibles del módulo o de los resultados, oculta la definición, prioriza pendientes y mezcla tarjetas. No hay un botón de repaso global ni un límite fijo de diez tarjetas.
 
 ### Persistencia local
 
@@ -189,14 +209,15 @@ No existe script `npm test`. `dist/` es generado, no se versiona. Para cambios s
 Verifica según el alcance del cambio:
 
 1. Tipos y build cuando cambie código, configuración o dependencias.
-2. Navegación, búsqueda y retorno desde resultados vacíos si cambian rutas o filtros.
+2. Raíz/`#home`, enlaces de módulo, anclas internas, navegación atrás y retorno al origen desde búsqueda vacía o «Limpiar filtros» si cambian rutas o filtros.
 3. Progreso y estado de ramas tras recargar si cambian almacenamiento o navegación.
 4. Fuente computada y carga de fuentes, no solo imports, si cambia tipografía.
 5. Separación entre centros de filas, ancho, chevrons de varios niveles y textos completos si cambia el sidebar.
 6. Escritorio de 1440 px y móvil de 390 px como referencias, menú abierto y subniveles incluidos.
 7. Foco visible, teclado, diálogos, Escape y ausencia de errores de consola cuando cambien interacciones.
+8. En Home, combinación de los cinco perfiles con sus etapas, recomendaciones y prerrequisitos, conteos derivados, enlaces disponibles y áreas pendientes sin enlaces ficticios. Comprueba también el repaso de resultados visibles después de buscar desde Home.
 
-La última revisión visual registrada comprobó filas principales de 48 px, misma distancia entre centros desde la marca hasta la última área, chevrons alineados, fuentes correctas, móvil sin desbordamiento y sin errores de JavaScript. Es evidencia de esa versión, no una garantía para cambios futuros.
+La revisión visual anterior a Home comprobó filas principales de 48 px, misma distancia entre centros desde la marca hasta la última área, chevrons alineados, fuentes correctas, móvil sin desbordamiento y sin errores de JavaScript. El rediseño de Home conservó esa retícula. La comprobación de la nueva portada validó sus 25 combinaciones de perfil y etapa, navegación Home/módulo/atrás y rutas desconocidas, búsqueda vacía y sin resultados, progreso tras recarga y repaso desde módulo y búsqueda. Se revisaron capturas a 1440 y 390 px y ausencia de desbordamiento horizontal a 1440, 1050, 900, 850, 640 y 390 px, además de apertura/cierre del menú móvil, Google Sans Flex computada y ausencia de errores de JavaScript. Las capturas se toman una vez terminada la transición del sidebar.
 
 En el entorno original el visor automatizado llegó a fallar por BitLocker. La alternativa que funcionó fue Playwright con Chrome instalado, en un contexto de prueba independiente. No instales navegadores o dependencias sin comprobar primero las herramientas disponibles. Los scripts y capturas de esa comprobación eran temporales y no forman parte del proyecto.
 

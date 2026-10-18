@@ -1,6 +1,8 @@
 import { initializeNavigation } from './navigation';
+import { initializeCareerPaths } from './home';
 
 initializeNavigation();
+initializeCareerPaths();
 
 const $ = <T extends HTMLElement = HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
 const $$ = <T extends HTMLElement = HTMLElement>(selector: string) => Array.from(document.querySelectorAll<T>(selector));
@@ -21,7 +23,8 @@ try {
 
 let currentModule = sections[0].dataset.moduleId!;
 let currentTrack = sections[0].dataset.trackId!;
-let mode: 'module' | 'search' = 'module';
+let routeMode: 'home' | 'module' = 'home';
+let mode: 'home' | 'module' | 'search' = 'home';
 let toastTimer: ReturnType<typeof setTimeout>;
 const say = (message: string) => {
   const toast = $('#toast');
@@ -52,12 +55,21 @@ function refreshProgress() {
 function refreshView() {
   const query = normalize(search.value.trim());
   const selectedSection = sections.find(section => section.dataset.moduleId === currentModule)!;
-  const isGrouped = mode !== 'module';
+  const isHome = mode === 'home';
+  const isGrouped = mode === 'search';
+  $('#home-view').hidden = !isHome;
+  $('#study').hidden = isHome;
+  $('#breadcrumb-slash').hidden = isHome;
+  $('#breadcrumb-track').hidden = isHome;
+  const homeLink = $('[data-home-link]');
+  if (isHome) homeLink.setAttribute('aria-current', 'page');
+  else homeLink.removeAttribute('aria-current');
+  document.title = isHome ? 'Tech Training · Home' : mode === 'search' ? 'Búsqueda · Tech Training' : `${selectedSection.dataset.moduleTitle} · Tech Training`;
   let visibleCount = 0;
   sections.forEach(section => {
     let groupCount = 0;
     section.querySelectorAll<HTMLElement>('.concept-card').forEach(card => {
-      const matchesMode = mode === 'search' || section.dataset.moduleId === currentModule;
+      const matchesMode = mode === 'search' || mode === 'module' && section.dataset.moduleId === currentModule;
       const matchesLevel = levelFilter.value === 'all' || card.dataset.level === levelFilter.value;
       const matchesSearch = !query || normalize(`${section.dataset.trackTitle} ${section.dataset.trackEyebrow} ${section.dataset.moduleTitle} ${card.querySelector('h3')!.textContent} ${card.querySelector('.concept-description')!.textContent} ${card.querySelector('.memory-line')!.textContent}`).includes(query);
       card.hidden = !(matchesMode && matchesLevel && matchesSearch);
@@ -70,8 +82,6 @@ function refreshView() {
   $('#visible-count').textContent = String(visibleCount);
   $('#empty-state').hidden = visibleCount > 0;
   $('#module-bottom').hidden = isGrouped || visibleCount === 0;
-  $('#hero').hidden = isGrouped;
-  $('#route-strip').hidden = isGrouped;
   const heading = $('#study-title');
   const description = $('#study-description');
   const eyebrow = $('#module-eyebrow');
@@ -84,7 +94,7 @@ function refreshView() {
     heading.textContent = 'Encuentra la conexión.';
     description.textContent = `Resultados para «${search.value.trim()}» en todas las rutas.`;
     eyebrow.textContent = 'BUSCAR CONCEPTOS';
-    $('#breadcrumb-track').textContent = 'Búsqueda';
+    $('#breadcrumb-track').textContent = isHome ? '' : 'Búsqueda';
   }
   $<HTMLButtonElement>('#review-module').disabled = visibleCount === 0;
   $('#review-module').style.opacity = visibleCount === 0 ? '.4' : '1';
@@ -96,7 +106,6 @@ function refreshView() {
     if (mode === 'module' && link === currentLink) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   });
-  $$('[data-route]').forEach(link => link.classList.toggle('active', mode === 'module' && link.dataset.route === currentTrack));
   const next = sections[(sections.indexOf(selectedSection) + 1) % sections.length];
   const nextLink = $<HTMLAnchorElement>('#next-module');
   nextLink.href = `#${next.dataset.trackId}/${next.dataset.moduleId}`;
@@ -105,27 +114,32 @@ function refreshView() {
 
 function goToHash(initial = false) {
   const route = location.hash.slice(1);
-  if (route === 'study' || route === 'main') return;
+  if (route === 'main') return;
+  if (route === 'study' && routeMode === 'module') return;
   search.value = '';
   levelFilter.value = 'all';
   const match = sections.find(section => `${section.dataset.trackId}/${section.dataset.moduleId}` === route);
-  const section = match || sections[0];
-  currentModule = section.dataset.moduleId!;
-  currentTrack = section.dataset.trackId!;
-  mode = 'module';
-  if (route && !match) {
-    history.replaceState(null, '', `#${currentTrack}/${currentModule}`);
+  const anchor = document.getElementById(route);
+  const homeAnchor = anchor && $('#home-view').contains(anchor) ? anchor : null;
+  if (match) {
+    currentModule = match.dataset.moduleId!;
+    currentTrack = match.dataset.trackId!;
+    routeMode = 'module';
+  } else {
+    routeMode = 'home';
+    if (route && route !== 'home' && !homeAnchor) history.replaceState(null, '', '#home');
   }
+  mode = routeMode;
   closeMenu();
   refreshView();
-  if (!initial) {
-    const main = $('#main');
-    main.focus({ preventScroll: true });
+  if (homeAnchor) requestAnimationFrame(() => homeAnchor.scrollIntoView({ block: 'start' }));
+  else if (!initial) {
+    $('#main').focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 }
 window.addEventListener('hashchange', () => goToHash());
-$$<HTMLAnchorElement>('[data-route], [data-nav-link], .brand').forEach(link => {
+$$<HTMLAnchorElement>('[data-route], [data-nav-link], [data-home-link], .brand').forEach(link => {
   link.addEventListener('click', event => {
     if (new URL(link.href).hash === location.hash) { event.preventDefault(); goToHash(); }
   });
@@ -133,11 +147,11 @@ $$<HTMLAnchorElement>('[data-route], [data-nav-link], .brand').forEach(link => {
 $('#clear-filters').addEventListener('click', () => {
   search.value = '';
   levelFilter.value = 'all';
-  mode = 'module';
+  mode = routeMode;
   refreshView();
   search.focus();
 });
-search.addEventListener('input', () => { mode = search.value.trim() ? 'search' : 'module'; refreshView(); });
+search.addEventListener('input', () => { mode = search.value.trim() ? 'search' : routeMode; refreshView(); });
 levelFilter.addEventListener('change', refreshView);
 
 $('#concept-library').addEventListener('click', event => {
@@ -215,8 +229,8 @@ function drawReview() {
   $('#review-helper').hidden = false;
   $('#reveal-answer').focus();
 }
-function startReview(global = false) {
-  const available = global ? cards : cards.filter(card => !card.hidden && !card.closest<HTMLElement>('.concept-section')!.hidden);
+function startReview() {
+  const available = cards.filter(card => !card.hidden && !card.closest<HTMLElement>('.concept-section')!.hidden);
   if (!available.length) { say('Elige primero algún concepto para repasar.'); return; }
   // Prioritize pending concepts; shuffle within each group for varied practice.
   const shuffle = (list: HTMLElement[]) => {
@@ -224,11 +238,10 @@ function startReview(global = false) {
     for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; }
     return copy;
   };
-  reviewCards = [...shuffle(available.filter(card => !learned.has(card.dataset.conceptId!))), ...shuffle(available.filter(card => learned.has(card.dataset.conceptId!)))].slice(0, global ? 10 : available.length);
+  reviewCards = [...shuffle(available.filter(card => !learned.has(card.dataset.conceptId!))), ...shuffle(available.filter(card => learned.has(card.dataset.conceptId!)))];
   reviewIndex = 0; reviewUnderstood = 0;
   reviewDialog.showModal(); drawReview();
 }
-$('#review-top').addEventListener('click', () => startReview(true));
 $('#review-module').addEventListener('click', () => startReview());
 $('#reveal-answer').addEventListener('click', () => { $('#review-answer').hidden = false; $('#reveal-answer').hidden = true; $('#review-rating').hidden = false; $('#review-again').focus(); });
 function nextReview(understood: boolean) {
