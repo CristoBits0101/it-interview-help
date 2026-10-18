@@ -34,7 +34,7 @@ Las rutas siguen este orden de aprendizaje:
 
 Cada concepto contiene una definición, una frase para recordarlo, un ejemplo y un nivel. Las fuentes originales están enlazadas en «Fuentes y recursos».
 
-Edita `src/data/curriculum.ts` y `src/data/applied-ai.ts` para ampliar el contenido. Los IDs deben ser únicos y estables para conservar los enlaces y el progreso. `src/pages/index.astro` genera el contenido; `src/scripts/app.ts` controla las interacciones y `src/styles/global.css` el diseño.
+Edita `src/data/curriculum.ts`, `src/data/system-design.ts` y `src/data/applied-ai.ts` para ampliar el contenido; `src/data/navigation.ts` define el árbol y sus enlaces. Los IDs deben ser únicos y estables para conservar los enlaces y el progreso. `src/pages/index.astro` genera el contenido; `src/scripts/app.ts` controla las interacciones y `src/styles/global.css` el diseño.
 
 ## Uso y privacidad
 
@@ -49,3 +49,8 @@ Las dependencias Python del material de referencia son contexto para la ruta App
 ## Validación
 
 Comprobados build estático y tipos, búsqueda global, filtro vacío, navegación entre rutas, progreso tras recargar, tarjetas de repaso y menú móvil. Revisados tamaños de 390 y 1440 píxeles. Auditoría npm sin vulnerabilidades detectadas en la instalación realizada.
+
+## Memoria del proyecto
+
+- [AGENTS.md](AGENTS.md): instrucciones de continuidad para agentes y colaboradores.
+- [Guía de producto, diseño y desarrollo](docs/PROJECT_GUIDE.md): preferencias, tipografías, colores, espaciado, navegación, arquitectura, comprobaciones y publicación.
