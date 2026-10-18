@@ -1,0 +1,23 @@
+---
+import {
+  ArrowRight, BookOpen, Check, ChevronDown, ChevronRight, Code2,
+  Layers3, LayoutDashboard, Lightbulb, Menu,
+  Search, X, Zap, Sigma, ChartColumn, CodeXml, Cpu,
+  MousePointerClick, Blocks, Database, Workflow, ShieldCheck, FlaskConical, BrainCircuit,
+} from 'lucide-astro';
+
+const icons = {
+  arrow: ArrowRight, book: BookOpen, check: Check,
+  chevron: ChevronRight, down: ChevronDown, code: Code2,
+  layers: Layers3, layout: LayoutDashboard, bulb: Lightbulb, menu: Menu,
+  search: Search, close: X,
+  flash: Zap, sigma: Sigma, chart: ChartColumn, programming: CodeXml,
+  cpu: Cpu, interaction: MousePointerClick, blocks: Blocks, database: Database,
+  workflow: Workflow, shield: ShieldCheck, science: FlaskConical, brain: BrainCircuit,
+};
+export type IconName = keyof typeof icons;
+interface Props { name: IconName; size?: number; class?: string }
+const { name, size = 20, class: className = '' } = Astro.props;
+const Glyph = icons[name];
+---
+<Glyph size={size} class={className} stroke-width={1.65} aria-hidden="true" focusable="false" />
