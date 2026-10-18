@@ -21,7 +21,7 @@ La marca del sidebar es exactamente **Tech Training**. El usuario retiró el log
 | Submenús | 11 px, línea 24 px |
 | Etiqueta `LEARNING PATHS` | 9 px, peso 650, tracking 1.5 px, línea 24 px |
 
-`src/pages/index.astro` importa `@fontsource-variable/google-sans-flex` y `@fontsource/ibm-plex-mono/500.css`. Las fuentes se incluyen en los assets de la web; no dependen de una petición a Google Fonts en ejecución. En CSS, `--body` contiene Google Sans Flex y `--display` referencia `var(--body)`.
+`src/pages/index.astro` importa `@fontsource-variable/google-sans-flex` y `@fontsource/ibm-plex-mono/500.css`. Las fuentes se incluyen en los assets de la web; no dependen de una petición a Google Fonts en ejecución. En `src/styles/tokens.css`, `--body` contiene Google Sans Flex, `--display` referencia `var(--body)` y `--brand` contiene IBM Plex Mono. Solo `.brand` usa `--brand` y peso 500; el texto de marca del footer sigue la fuente general. No declares familias distintas en componentes ni mezcles tipografías según la sección. Controles, diálogos y encabezados heredan la familia general.
 
 Referencias pedidas por el usuario: [Google Sans Flex](https://fonts.google.com/specimen/Google+Sans+Flex) e [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono).
 
@@ -29,42 +29,70 @@ Error que no debe repetirse: antes se importaba Google Sans Flex pero `--body` s
 
 ## 3. Colores y superficies
 
-Los tokens de `:root` en `src/styles/global.css` son la referencia principal:
+`src/styles/tokens.css` es la única fuente de colores literales. Contiene 22 tonos de la gama verde, marfil y neutros; `global.css` y `home.css` consumen variables. Usa los tokens por función, no selecciones un tono nuevo para cada componente.
 
 | Token | Valor | Función |
 | --- | --- | --- |
 | `--paper` | `#ffffff` | Tarjetas y superficies |
-| `--canvas` | `#fcfcfa` | Fondo general |
+| `--canvas` | `#fcfcfa` | Fondo general y color del navegador |
 | `--sidebar` | `#f4f5f0` | Fondo de navegación |
 | `--ink` | `#252d29` | Texto principal |
-| `--muted` | `#717870` | Texto secundario base |
+| `--muted` | `#717870` | Texto secundario neutro |
 | `--line` | `#e5e8e0` | Bordes y divisiones |
-| `--green` | `#285c45` | Acción principal, foco y acento |
+| `--green` | `#285c45` | Acción principal, foco y favicon |
 | `--lime` | `#d5edaf` | Selección de texto |
+| `--text-secondary` | `#4c584a` | Texto secundario con mayor contraste |
+| `--text-soft` | `#657357` | Descripciones y etiquetas secundarias |
+| `--disabled` | `#7a8276` | Contenido no disponible |
+| `--accent` | `#56754c` | Iconos y acentos secundarios |
+| `--accent-strong` | `#31593b` | Texto seleccionado |
+| `--accent-hover` | `#3b7252` | Hover de acciones principales |
+| `--accent-heading` | `#6c8559` | Énfasis en el título de Home |
+| `--surface-soft` | `#f5f7f0` | Fondos secundarios suaves |
+| `--surface-tinted` | `#edf3e5` | Paneles y nivel Esencial |
+| `--surface-hover` | `#e9ede3` | Hover de navegación y controles |
+| `--surface-selected` | `#e3ecd9` | Selección y nivel Intermedio |
+| `--border-soft` | `#d9dfd3` | Guías de árbol y bordes suaves |
+| `--border-accent` | `#bacdab` | Bordes destacados |
+| `--border-strong` | `#94ad7c` | Borde de selección |
 
-Estados y colores efectivos relevantes:
+Estados de nivel:
 
-| Elemento | Colores |
-| --- | --- |
-| Texto del menú / deshabilitado | `#4c584a` / `#7a8276` |
-| Iconos de área / chevrons | `#56754c` / `#7a8674` |
-| Hover de navegación | Fondo `#e9ede3`, texto `--green` |
-| Enlace actual | Fondo `#e3ecd9`, texto `#31593b`, peso 600 |
-| Guías de submenú | `#d9dfd3` |
-| Descripción de concepto | `#66705e` |
-| Etiquetas secundarias y `LEARNING PATHS` | `#657357` |
-| Ayuda para recordar | Fondo `#f5f7f0`, borde `#c5d8b0`, texto `#5c6d48` |
-| Nivel Esencial | Fondo `#f0f5e9`, texto `#536c38` |
-| Nivel Intermedio | Fondo `#edf2f8`, texto `#506d8a` |
-| Nivel Avanzado | Fondo `#f4edf7`, texto `#7f5b8e` |
+| Nivel | Fondo | Texto |
+| --- | --- | --- |
+| Esencial | `--surface-tinted` | `--text-secondary` |
+| Intermedio | `--surface-selected` | `--accent-strong` |
+| Avanzado | `--green` | `--paper` |
 
-El CSS se organiza en capas `reset`, `base`, `layout`, `components`, `responsive`. Algunos colores de texto se corrigen en la última capa, incluso fuera de media queries: no tomes una declaración anterior como el color final. Conserva las diferencias entre estados sin depender únicamente del color; hay etiquetas, `aria-current` y `aria-pressed`.
+No reintroduzcas azul o violeta para distinguir niveles. Conserva etiquetas y estados accesibles (`aria-current`, `aria-pressed`); el significado no debe depender únicamente del color.
+
+Fuera de `tokens.css`, usa `var(...)` o `currentColor`. Sombras, fondos translúcidos y overlays se derivan con `color-mix()` de los tokens y `transparent`. No añadas hexadecimales, colores nombrados ni RGB/HSL literales en componentes, hojas de estilo, metadatos o scripts. Si hace falta ampliar la paleta, define y documenta el token en un único lugar. El favicon toma `--green` del archivo de tokens y `theme-color` toma `--canvas`; no mantienen copias de esos valores.
+
+El CSS se organiza en capas `reset`, `base`, `layout`, `components` y `responsive`. Comprueba los valores computados, incluidos hover, selección y diálogos. No uses correcciones de color dispersas en la capa responsive como sustituto de los tokens comunes.
 
 Tarjetas de concepto con borde de 1 px y radio de 11 px; filas del menú con radio de 8 px; botones normalmente de 7 px. Sombras y transiciones son discretas. Se respeta `prefers-reduced-motion`.
 
 ## 4. Espaciado y navegación visual
 
-Preferencia general del usuario: separación visual simétrica y gaps proporcionados, normalmente la mitad del margen/padding. El contenido principal parte de `--space-page: 42px` y `--space-gap: 21px`, con ajustes responsive existentes.
+Preferencia general del usuario: separación visual simétrica y gaps iguales a la mitad del padding de su contenedor. Los pares compartidos se declaran en `tokens.css`:
+
+| Ámbito | Padding o margen de referencia | Gap derivado |
+| --- | --- | --- |
+| Página base | `--space-page: 42px` | `--space-gap: calc(var(--space-page) / 2)` = 21 px |
+| Página hasta 1250 px | 28 px | 14 px |
+| Página hasta 640 px | 20 px | 10 px |
+| Panel de Home | `--space-panel: 32px` | `--gap-panel` = 16 px |
+| Tarjeta | `--space-card: 24px` | `--gap-card` = 12 px |
+| Control | `--space-control: 16px` | `--gap-control` = 8 px |
+| Elemento compacto | `--space-compact: 12px` | `--gap-compact` = 6 px |
+
+Topbar y contenido principal comparten alineación horizontal y el mismo padding de página, incluso cuando el contenido alcanza su ancho máximo de 1500 px. La raíz de Home usa el padding de página y su gap derivado, la mitad de ese padding, entre sus bloques.
+
+Las tarjetas de conceptos tienen padding uniforme en sus cuatro lados: 24 px de base, 28 px desde 1600 px y 20 px hasta 1050 px. Su gap local vuelve a derivarse de esa medida. Home adapta sus paneles, tarjetas y controles mediante overrides locales en container queries; conserva en cada ámbito la relación 2:1.
+
+Al sobrescribir una variable de espacio en un contenedor o breakpoint, vuelve a declarar allí su gap como `calc(var(--space-...) / 2)`. Una variable derivada heredada puede haberse resuelto con el valor del ancestro; no presupongas que cambiar solo el padding local recalcula el gap. Mantén juntos ambos tokens y comprueba sus píxeles computados. Bordes, radios, alturas de controles y pequeños ajustes de línea no son gaps estructurales.
+
+La navegación conserva una retícula propia de filas; no apliques gaps adicionales que alteren su ritmo.
 
 En el sidebar se corrigió un problema concreto: sumar gap + padding + márgenes daba separaciones distintas entre marca, subtítulo y desplegables. La implementación actual usa una **retícula uniforme de filas**, sin separación vertical adicional entre cajas:
 
@@ -103,6 +131,10 @@ No vuelvas al ajuste anterior de gaps 16/8/4 sumados a padding vertical: el usua
 | Artificial Intelligence | `BrainCircuit` |
 
 Usa iconos por significado, no por posición. Solo las áreas principales llevan estos iconos; los chevrons repetidos indican una acción común y sí se conservan.
+
+Todos los pictogramas se obtienen de `lucide-astro` mediante `Icon.astro`, también los puntos decorativos (`Circle`, relleno para `dot`) y el favicon (`CodeXml`). No añadas SVG dibujados a mano, iconos hechos con CSS, emojis ni caracteres usados como sustitutos de iconos. Los números de etapas, signos de puntuación y flechas dentro de explicaciones técnicas siguen siendo texto. Los contenedores, bordes y conectores de layout se pueden construir con CSS.
+
+`src/pages/favicon.svg.ts` prerenderiza `/favicon.svg` con AstroContainer y el componente `Icon`; devuelve SVG sin wrapper HTML. No recrees `public/favicon.svg` ni copies geometría de la biblioteca a un asset manual. Al sincronizar una copia antigua del sitio, elimina aquel asset obsoleto para que no compita con el endpoint.
 
 ### Responsive
 
@@ -154,7 +186,8 @@ Después de Senior se presentan ramas de especialización técnica, liderazgo t�
 | Archivo | Responsabilidad |
 | --- | --- |
 | `src/pages/index.astro` | Página única, fuentes, montaje de datos, tarjetas y diálogos |
-| `src/styles/global.css` | Tokens, diseño compartido, estados y responsive |
+| `src/styles/tokens.css` | Única paleta literal, familias tipográficas y pares padding/gap |
+| `src/styles/global.css` | Diseño compartido, estados y responsive; consume tokens |
 | `src/styles/home.css` | Composición y adaptación responsive de Home |
 | `src/components/HomeOverview.astro` | Portada, inventario derivado y recomendaciones profesionales |
 | `src/components/NavigationTree.astro` | Árbol recursivo, enlaces y nodos sin contenido |
@@ -167,7 +200,7 @@ Después de Senior se presentan ramas de especialización técnica, liderazgo t�
 | `src/scripts/app.ts` | Home/rutas hash, búsqueda, niveles, progreso, repaso, menú móvil y diálogos |
 | `src/scripts/home.ts` | Selección de perfil y etapa, panel visible y estado accesible |
 | `src/scripts/navigation.ts` | Restaurar y guardar el estado de ramas |
-| `public/favicon.svg` | Favicon |
+| `src/pages/favicon.svg.ts` | Favicon estático generado desde Lucide y tokens de color |
 | `astro.config.mjs` | URL del sitio, salida estática y configuración Astro |
 
 Astro 7.4, TypeScript estricto y CSS sin framework de componentes. No hay backend, API propia, login ni servicio de IA. Las dependencias Python que aparecieron en el material inicial eran contexto educativo; no son requisitos de ejecución.
@@ -211,13 +244,16 @@ Verifica según el alcance del cambio:
 1. Tipos y build cuando cambie código, configuración o dependencias.
 2. Raíz/`#home`, enlaces de módulo, anclas internas, navegación atrás y retorno al origen desde búsqueda vacía o «Limpiar filtros» si cambian rutas o filtros.
 3. Progreso y estado de ramas tras recargar si cambian almacenamiento o navegación.
-4. Fuente computada y carga de fuentes, no solo imports, si cambia tipografía.
-5. Separación entre centros de filas, ancho, chevrons de varios niveles y textos completos si cambia el sidebar.
+4. Fuente computada y carga efectiva de Google Sans Flex en menú, contenido y controles; IBM Plex Mono 500 solo en la marca. Comprueba `document.fonts.ready`, no solo imports.
+5. Separación entre centros de filas, ancho, chevrons de varios niveles y textos completos si cambia el sidebar. Para otros contenedores, mide igualdad de padding en los cuatro lados, gap derivado y alineación topbar/contenido en sus breakpoints.
 6. Escritorio de 1440 px y móvil de 390 px como referencias, menú abierto y subniveles incluidos.
 7. Foco visible, teclado, diálogos, Escape y ausencia de errores de consola cuando cambien interacciones.
 8. En Home, combinación de los cinco perfiles con sus etapas, recomendaciones y prerrequisitos, conteos derivados, enlaces disponibles y áreas pendientes sin enlaces ficticios. Comprueba también el repaso de resultados visibles después de buscar desde Home.
+9. Procedencia Lucide de los SVG de interfaz y favicon, respuesta SVG válida y ausencia de geometría artesanal. Audita colores literales fuera de `tokens.css` y colores computados de niveles, hover, selección y diálogos.
 
 La revisión visual anterior a Home comprobó filas principales de 48 px, misma distancia entre centros desde la marca hasta la última área, chevrons alineados, fuentes correctas, móvil sin desbordamiento y sin errores de JavaScript. El rediseño de Home conservó esa retícula. La comprobación de la nueva portada validó sus 25 combinaciones de perfil y etapa, navegación Home/módulo/atrás y rutas desconocidas, búsqueda vacía y sin resultados, progreso tras recarga y repaso desde módulo y búsqueda. Se revisaron capturas a 1440 y 390 px y ausencia de desbordamiento horizontal a 1440, 1050, 900, 850, 640 y 390 px, además de apertura/cierre del menú móvil, Google Sans Flex computada y ausencia de errores de JavaScript. Las capturas se toman una vez terminada la transición del sidebar.
+
+La auditoría posterior de identidad visual validó `astro check` sobre 15 archivos sin errores y el build estático, incluido el favicon generado. En Chrome se comprobaron 582 SVG, todos de Lucide, y la carga y familias computadas de ambas fuentes. Se midieron 13 filas de navegación de 48 px, 12 chevrons alineados y centrados, y padding igual en los cuatro lados de las tarjetas de conceptos. A 1920, 1440, 1050, 900, 850, 640 y 390 px se verificaron alineación de topbar y contenido, gaps equivalentes a la mitad de su padding de referencia, ausencia de desbordamiento horizontal y ausencia de errores JavaScript.
 
 En el entorno original el visor automatizado llegó a fallar por BitLocker. La alternativa que funcionó fue Playwright con Chrome instalado, en un contexto de prueba independiente. No instales navegadores o dependencias sin comprobar primero las herramientas disponibles. Los scripts y capturas de esa comprobación eran temporales y no forman parte del proyecto.
 

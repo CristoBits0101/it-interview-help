@@ -1,0 +1,18 @@
+import type { APIRoute } from 'astro';
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+import Icon from '../components/Icon.astro';
+import designTokens from '../styles/tokens.css?raw';
+
+export const prerender = true;
+
+export const GET: APIRoute = async () => {
+  const color = designTokens.match(/--green:\s*(#[\da-fA-F]{6})\s*;/)?.[1];
+  if (!color) throw new Error('The green design token must define a six-digit hex color.');
+  const container = await AstroContainer.create();
+  const svg = await container.renderToString(Icon, {
+    props: { name: 'programming', size: 32, color },
+  });
+  return new Response(svg.trim(), {
+    headers: { 'Content-Type': 'image/svg+xml; charset=utf-8' },
+  });
+};

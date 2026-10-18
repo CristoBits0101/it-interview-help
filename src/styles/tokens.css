@@ -1,0 +1,48 @@
+@layer reset, base, layout, components, responsive;
+@layer base {
+  :root {
+    --paper: #ffffff;
+    --canvas: #fcfcfa;
+    --sidebar: #f4f5f0;
+    --ink: #252d29;
+    --muted: #717870;
+    --line: #e5e8e0;
+    --green: #285c45;
+    --lime: #d5edaf;
+    --text-secondary: #4c584a;
+    --text-soft: #657357;
+    --disabled: #7a8276;
+    --accent: #56754c;
+    --accent-strong: #31593b;
+    --accent-hover: #3b7252;
+    --accent-heading: #6c8559;
+    --surface-soft: #f5f7f0;
+    --surface-tinted: #edf3e5;
+    --surface-hover: #e9ede3;
+    --surface-selected: #e3ecd9;
+    --border-soft: #d9dfd3;
+    --border-accent: #bacdab;
+    --border-strong: #94ad7c;
+    --body: 'Google Sans Flex Variable', sans-serif;
+    --display: var(--body);
+    --brand: 'IBM Plex Mono', monospace;
+    --space-page: 42px;
+    --space-gap: calc(var(--space-page) / 2);
+    --space-panel: 32px;
+    --gap-panel: calc(var(--space-panel) / 2);
+    --space-card: 24px;
+    --gap-card: calc(var(--space-card) / 2);
+    --space-control: 16px;
+    --gap-control: calc(var(--space-control) / 2);
+    --space-compact: 12px;
+    --gap-compact: calc(var(--space-compact) / 2);
+  }
+}
+@layer responsive {
+  @media (max-width: 1250px) {
+    :root { --space-page: 28px; --space-gap: calc(var(--space-page) / 2); }
+  }
+  @media (max-width: 640px) {
+    :root { --space-page: 20px; --space-gap: calc(var(--space-page) / 2); }
+  }
+}

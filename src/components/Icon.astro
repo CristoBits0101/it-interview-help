@@ -1,13 +1,13 @@
 ---
 import {
-  ArrowRight, Check, ChevronDown, ChevronRight,
+  ArrowRight, Check, ChevronDown, ChevronRight, Circle,
   Lightbulb, Menu,
   Search, X, Zap, Sigma, ChartColumn, CodeXml, Cpu,
   MousePointerClick, Blocks, Database, Workflow, ShieldCheck, FlaskConical, BrainCircuit,
 } from 'lucide-astro';
 
 const icons = {
-  arrow: ArrowRight, check: Check,
+  arrow: ArrowRight, check: Check, circle: Circle, dot: Circle,
   chevron: ChevronRight, down: ChevronDown,
   bulb: Lightbulb, menu: Menu,
   search: Search, close: X,
@@ -16,8 +16,8 @@ const icons = {
   workflow: Workflow, shield: ShieldCheck, science: FlaskConical, brain: BrainCircuit,
 };
 export type IconName = keyof typeof icons;
-interface Props { name: IconName; size?: number; class?: string }
-const { name, size = 20, class: className = '' } = Astro.props;
+interface Props { name: IconName; size?: number; class?: string; color?: string }
+const { name, size = 20, class: className = '', color } = Astro.props;
 const Glyph = icons[name];
 ---
-<Glyph size={size} class={className} stroke-width={1.65} aria-hidden="true" focusable="false" />
+<Glyph size={size} class={className} color={color} fill={name === 'dot' ? 'currentColor' : 'none'} stroke-width={1.65} aria-hidden="true" focusable="false" />
