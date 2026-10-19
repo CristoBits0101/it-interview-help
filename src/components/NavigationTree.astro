@@ -4,11 +4,20 @@ import type { NavigationNode } from '../data/navigation';
 interface Props { nodes: NavigationNode[]; depth?: number; parentPath?: string }
 const { nodes, depth = 0, parentPath = '' } = Astro.props;
 const branchId = (label: string) => [parentPath, encodeURIComponent(label)].filter(Boolean).join('/');
+const hasContent = (node: NavigationNode): boolean => node.children?.length
+  ? node.children.some(hasContent)
+  : Boolean(node.href);
 ---
 <ul class:list={['navigation-tree', { 'navigation-root': depth === 0 }]}>
   {nodes.map(node => (
     <li>
-      {node.children?.length ? (
+      {!hasContent(node) ? (
+        <span class="navigation-row navigation-disabled" aria-disabled="true">
+          {depth === 0 && node.icon && <Icon name={node.icon} size={18} class="navigation-icon" />}
+          <span class="navigation-label">{node.label}</span>
+          {node.children?.length && <Icon name="down" size={14} class="navigation-chevron" />}
+        </span>
+      ) : node.children?.length ? (
         <details class="navigation-branch" data-nav-branch={branchId(node.label)}>
           <summary class="navigation-row">
             {depth === 0 && node.icon && <Icon name={node.icon} size={18} class="navigation-icon" />}
@@ -17,16 +26,11 @@ const branchId = (label: string) => [parentPath, encodeURIComponent(label)].filt
           </summary>
           <Astro.self nodes={node.children} depth={depth + 1} parentPath={branchId(node.label)} />
         </details>
-      ) : node.href ? (
+      ) : (
         <a class="navigation-row navigation-link" href={node.href} data-nav-link data-nav-module={node.module}>
           {depth === 0 && node.icon && <Icon name={node.icon} size={18} class="navigation-icon" />}
           <span class="navigation-label">{node.label}</span>
         </a>
-      ) : (
-        <span class="navigation-row navigation-disabled" aria-disabled="true">
-          {depth === 0 && node.icon && <Icon name={node.icon} size={18} class="navigation-icon" />}
-          <span class="navigation-label">{node.label}</span>
-        </span>
       )}
     </li>
   ))}

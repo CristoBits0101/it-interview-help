@@ -27,8 +27,8 @@ const stats = [
   <header class="home-intro">
     <div class="home-intro-copy">
       <p class="home-kicker"><Icon name="dot" size={5} class="home-kicker-dot" /> TU MAPA DE APRENDIZAJE</p>
-      <h1 id="home-title">Tu próximo paso,<br /><span>con dirección.</span></h1>
-      <p class="home-intro-description">Elige el perfil que quieres construir. Descubre qué áreas conectar, en qué orden estudiarlas y cómo avanzar de los fundamentos a decisiones de mayor alcance.</p>
+      <h1 id="home-title">Organiza tu<br /><span>aprendizaje técnico.</span></h1>
+      <p class="home-intro-description">Elige un perfil y una etapa para ver las áreas recomendadas. Estudia los conceptos disponibles y consulta sus fuentes originales.</p>
       <a class="home-primary-link" href="#career-paths">Encuentra tu ruta <Icon name="arrow" size={17} /></a>
     </div>
     <div class="home-learning-map" aria-label="Proceso de aprendizaje">
@@ -48,7 +48,7 @@ const stats = [
   <section class="home-section" id="career-paths" aria-labelledby="career-title">
     <header class="home-section-heading">
       <div><p class="home-kicker">01 / ELIGE TU DIRECCIÓN</p><h2 id="career-title">Un perfil. Varias áreas conectadas.</h2></div>
-      <p>Selecciona una especialidad y una etapa. Las bases se acumulan: cada nivel amplía el anterior.</p>
+      <p>Selecciona una especialidad y una etapa. El orden de estudio es orientativo y conserva los conocimientos de base.</p>
     </header>
 
     <div class="career-profile-options" role="group" aria-label="Perfil profesional">
@@ -60,7 +60,7 @@ const stats = [
       <ol class="career-stage-options" aria-labelledby="career-stage-label">
         {stages.map((stage, index) => <li><button type="button" data-career-stage={stage.id} aria-label={stage.label} aria-pressed={index === 0} aria-controls="career-panels"><span class="career-stage-number" aria-hidden="true">{index + 1}</span><span>{stage.label}</span></button></li>)}
       </ol>
-      <p class="career-stage-note">Las etapas orientan el aprendizaje; los títulos varían según la organización.</p>
+      <p class="career-stage-note">Las etapas orientan el aprendizaje. Los títulos varían según la organización.</p>
     </div>
 
     <p id="career-selection-status" class="sr-only" role="status" aria-live="polite"></p>
@@ -81,8 +81,8 @@ const stats = [
                   const linkedTrack = area?.href ? tracks.find(track => area.href?.startsWith(`#${track.id}/`)) : undefined;
                   return <li class="career-area-card">
                     <div class="career-area-heading"><span class="career-area-number">{String(index + 1).padStart(2, '0')}</span>
-                      <div>{area?.href ? <a href={area.href} data-route={linkedTrack?.id}>{label}<Icon name="arrow" size={14} /></a> : <strong>{label}</strong>}
-                        {area?.href ? <span class="career-content-status is-available">{linkedTrack ? `${conceptCount(linkedTrack)} conceptos disponibles` : 'Contenido disponible'}</span> : <span class="career-content-status">Contenido pendiente</span>}
+                      <div>{linkedTrack && area?.href ? <a href={area.href} data-route={linkedTrack.id}>{label}<Icon name="arrow" size={14} /></a> : <strong>{label}</strong>}
+                        {linkedTrack ? <span class="career-content-status is-available">{conceptCount(linkedTrack)} conceptos disponibles</span> : <span class="career-content-status">Contenido no disponible ahora</span>}
                       </div>
                     </div>
                     {guidance && <><p class="career-area-focus">{guidance.focus}</p><p class="career-prerequisites"><span>Base previa</span>{guidance.prerequisites.length ? guidance.prerequisites.join(' · ') : 'Puedes empezar aquí'}</p></>}
@@ -90,13 +90,13 @@ const stats = [
                 })}
               </ol>
             </div>
-            <aside class="career-outcome" aria-label="Objetivo y práctica de esta etapa">
-              <span class="career-outcome-symbol"><Icon name="bulb" size={24} /></span>
+            <div class="career-outcome" role="group" aria-label="Objetivo y práctica de esta etapa">
+              <span class="career-outcome-symbol"><Icon name="target" size={24} /></span>
               <p class="home-kicker">QUÉ DEBERÍAS PODER HACER</p>
               <h4>{stage.goal}</h4>
               <div class="career-milestone"><p>DEMUESTRA LO APRENDIDO</p><p>{stage.milestone}</p></div>
-              <p class="career-outcome-note">Avanza por lo que puedes explicar, construir y sostener; no solo por los conceptos que has leído.</p>
-            </aside>
+              <p class="career-outcome-note">Valora lo que puedes explicar y construir. Comprueba también que puedes mantenerlo. Leer los conceptos es solo el comienzo.</p>
+            </div>
           </div>
         </section>
       ))}
@@ -107,16 +107,16 @@ const stats = [
   <section class="home-section" aria-labelledby="growth-title">
     <header class="home-section-heading">
       <div><p class="home-kicker">02 / AMPLÍA TU ALCANCE</p><h2 id="growth-title">Después de Senior, el camino se abre.</h2></div>
-      <p>El crecimiento puede ser técnico, de liderazgo o de negocio. Analyst, Architect y Lead describen responsabilidades; no son peldaños obligatorios para todo el mundo.</p>
+      <p>Puedes crecer en especialización técnica o en liderazgo y negocio. Analyst y Architect describen especialidades. Lead describe una responsabilidad de liderazgo. No son etapas obligatorias para todo el mundo.</p>
     </header>
     <div class="career-branches">
       {careerBranches.map(branch => <article class="career-branch"><h3>{branch.title}</h3><p>{branch.description}</p><ol aria-label={`Recorrido orientativo: ${branch.title}`}>{branch.sequence.map((step, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{step}</li>)}</ol></article>)}
     </div>
-    <details class="career-methodology"><summary>Cómo interpretar estos niveles <Icon name="down" size={15} /></summary><div><p>Esta es una propuesta de estudio, no una escala universal de puestos. La autonomía, la complejidad y el alcance de las decisiones importan más que el título o los años. Las responsabilidades de análisis pueden aparecer desde las primeras etapas; la dirección tecnológica también exige gestión de personas, estrategia y negocio.</p><p>Referencias para las competencias y la progresión:</p><ul>{careerSources.map(source => <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}<Icon name="arrow" size={13} /></a></li>)}</ul></div></details>
+    <details class="career-methodology"><summary>Cómo interpretar estos niveles <Icon name="down" size={15} /></summary><div><p>Esta propuesta orienta el estudio. No representa una escala universal de puestos. Valora la autonomía y la complejidad del trabajo. Considera también el alcance de las decisiones. El título y los años no bastan para determinar una etapa. Las responsabilidades de análisis pueden aparecer desde las primeras etapas. La dirección tecnológica también exige gestión de personas y conocimientos de estrategia y negocio.</p><p>Referencias para las competencias y la progresión.</p><ul>{careerSources.map(source => <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}<Icon name="arrow" size={13} /></a></li>)}</ul></div></details>
   </section>
 
   <section class="home-section" id="available-routes" aria-labelledby="available-title">
-    <header class="home-section-heading"><div><p class="home-kicker">03 / PASA A LOS CONCEPTOS</p><h2 id="available-title">Empieza a estudiar hoy.</h2></div><p>{tracks.length} rutas disponibles. Conceptos breves, ejemplos y práctica para comprobar lo que has entendido.</p></header>
+    <header class="home-section-heading"><div><p class="home-kicker">03 / PASA A LOS CONCEPTOS</p><h2 id="available-title">Explora las rutas disponibles.</h2></div><p>{tracks.length} rutas disponibles. Definiciones breves y fuentes originales para profundizar.</p></header>
     <div class="home-route-grid">
       {tracks.map((track, index) => <a class="home-route-card" href={`#${track.id}/${track.modules[0].id}`} data-route={track.id}><div class="home-route-meta"><span>RUTA {String(index + 1).padStart(2, '0')}</span><Icon name="arrow" size={18} /></div><h3>{routeLabel(track)}</h3><p>{conceptCount(track)} conceptos <span>·</span> {track.modules.length} {track.modules.length === 1 ? 'módulo' : 'módulos'}</p></a>)}
     </div>

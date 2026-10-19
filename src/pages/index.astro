@@ -6,12 +6,18 @@ import designTokens from '../styles/tokens.css?raw';
 import Icon from '../components/Icon.astro';
 import NavigationTree from '../components/NavigationTree.astro';
 import HomeOverview from '../components/HomeOverview.astro';
-import { navigation } from '../data/navigation';
-import { tracks as coreTracks, sources } from '../data/curriculum';
-import { systemDesign } from '../data/system-design';
-import { appliedAI, aiSources } from '../data/applied-ai';
-const trackOrder = ['ux-design', 'software-design', 'software-architecture', 'distributed-systems', 'system-design', 'applied-ai'];
-const tracks = [...coreTracks, systemDesign, appliedAI].sort((a, b) => trackOrder.indexOf(a.id) - trackOrder.indexOf(b.id));
+import { navigation, type NavigationNode } from '../data/navigation';
+import { tracks as coreTracks } from '../data/curriculum';
+const tracks = coreTracks.filter(track => track.id === 'software-design');
+const availableTrackIds = new Set(tracks.map(track => track.id));
+const isAvailableHref = (href?: string) => Boolean(href && [...availableTrackIds].some(trackId => href.startsWith(`#${trackId}/`)));
+const visibleNavigation = (nodes: NavigationNode[]): NavigationNode[] => nodes.map(node => ({
+  ...node,
+  href: isAvailableHref(node.href) ? node.href : undefined,
+  children: node.children ? visibleNavigation(node.children) : undefined,
+}));
+const navigationForAvailableContent = visibleNavigation(navigation);
+const sources = [...new Map(tracks.flatMap(track => track.modules.flatMap(module => module.concepts.map(concept => [concept.source.url, { title: concept.source.title, url: concept.source.url }] as const)))).values()];
 const firstTrack = tracks[0];
 const firstModule = firstTrack.modules[0];
 const canvasColor = designTokens.match(/--canvas:\s*(#[\da-fA-F]{6})\s*;/)?.[1];
@@ -33,24 +39,25 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
   <body>
     <a href="#main" class="skip-link">Saltar al contenido</a>
     <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
-    <aside class="sidebar" id="sidebar" aria-label="Navegación de aprendizaje">
-      <a href="#home" class="brand" aria-label="Tech Training, home">
-        <span>Tech Training</span>
-      </a>
+    <div class="sidebar" id="sidebar" role="complementary" aria-label="Navegación de aprendizaje">
+      <div class="sidebar-header">
+        <a href="#home" class="brand" aria-label="Tech Training. Inicio" lang="en"><span>Tech Training</span></a>
+        <button class="icon-button sidebar-close" id="sidebar-close" aria-label="Cerrar menú de rutas"><Icon name="close" /></button>
+      </div>
       <div class="navigation-section">
-        <p class="nav-eyebrow" id="navigation-heading">LEARNING PATHS</p>
-        <nav class="course-nav" aria-labelledby="navigation-heading">
-          <NavigationTree nodes={navigation} />
+        <p class="nav-eyebrow" id="navigation-heading" lang="en">LEARNING PATHS</p>
+        <nav class="course-nav" aria-labelledby="navigation-heading" lang="en">
+          <NavigationTree nodes={navigationForAvailableContent} />
         </nav>
       </div>
-    </aside>
+    </div>
 
     <div class="workspace">
       <header class="topbar">
         <button class="icon-button mobile-toggle" id="mobile-toggle" aria-label="Abrir menú de rutas" aria-controls="sidebar" aria-expanded="false"><Icon name="menu" /></button>
-        <nav class="breadcrumb" aria-label="Ruta actual"><a href="#home" data-home-link aria-current="page">Home</a><span class="breadcrumb-slash" id="breadcrumb-slash" hidden>/</span><strong id="breadcrumb-track" hidden></strong></nav>
+        <nav class="breadcrumb" aria-label="Ruta actual"><a href="#home" data-home-link aria-current="page" lang="en">Home</a><span class="breadcrumb-path" id="breadcrumb-path" hidden></span></nav>
         <div class="topbar-actions">
-          <label class="search-box" for="search"><Icon name="search" size={18} /><input id="search" type="search" aria-label="Buscar conceptos" placeholder="Buscar un concepto..." autocomplete="off" /><kbd aria-hidden="true">/</kbd></label>
+          <div class="search-box" role="search" aria-label="Buscar conceptos"><Icon name="search" size={18} /><input id="search" type="search" aria-label="Buscar conceptos" placeholder="Buscar conceptos" autocomplete="off" aria-keyshortcuts="Control+k Meta+k" /><button class="search-clear" id="search-clear" type="button" aria-label="Borrar búsqueda" hidden><Icon name="close" size={15} /></button></div>
         </div>
       </header>
 
@@ -58,28 +65,35 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
         <HomeOverview tracks={tracks} />
 
         <section class="study-area" id="study" aria-labelledby="study-title" hidden>
-          <div class="study-heading">
-            <div><div class="section-eyebrow" id="module-eyebrow">{firstTrack.eyebrow} <span>/</span> MODULE 01</div><h2 id="study-title">{firstModule.title}</h2><p id="study-description">{firstModule.description}</p></div>
-            <div class="study-tools"><label class="level-select"><span class="sr-only">Filtrar por nivel</span><select id="level-filter"><option value="all">Todos los niveles</option><option value="Esencial">Esencial</option><option value="Intermedio">Intermedio</option><option value="Avanzado">Avanzado</option></select><Icon name="down" size={14} /></label></div>
+          <h1 class="sr-only" id="study-title">{firstModule.title}</h1>
+          <div class="module-toolbar">
+            <p class="concept-count" lang="en"><span id="visible-count">{firstModule.concepts.length}</span> CONCEPTS</p>
+            <div class="level-select" role="group" aria-label="Filtrar por nivel">
+              <button class="level-step level-previous" id="level-previous" type="button" aria-label="Nivel anterior" disabled><Icon name="chevron" size={16} /></button>
+              <span class="level-current" id="level-current" aria-live="polite" aria-atomic="true">Todos los niveles</span>
+              <button class="level-step level-next" id="level-next" type="button" aria-label="Nivel siguiente"><Icon name="chevron" size={16} /></button>
+            </div>
           </div>
-          <div class="module-toolbar"><span><Icon name="dot" size={5} class="toolbar-dot" /><span id="visible-count">{firstModule.concepts.length}</span> concepts <span class="toolbar-separator">·</span> At your pace</span><button id="review-module" class="text-button"><Icon name="flash" size={15} />Repasar conceptos<Icon name="arrow" size={15} /></button></div>
+          <p id="results-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
           <div id="concept-library">
             {tracks.map((track, ti) => track.modules.map((module, mi) => <section class="concept-section" data-track-id={track.id} data-module-id={module.id} data-module-title={module.title} data-module-description={module.description} data-module-number={String(mi + 1).padStart(2, '0')} data-track-title={track.title} data-track-eyebrow={track.eyebrow} hidden={ti !== 0 || mi !== 0}>
-              <h3 class="search-group-heading" hidden>{track.title}<Icon name="chevron" size={13} />{module.title}</h3>
+              <h2 class="search-group-heading sr-only">{track.title}<Icon name="chevron" size={13} />{module.title}</h2>
               <div class="concept-grid">{module.concepts.map((concept, ci) => <article class="concept-card" id={`concept-${concept.id}`} data-concept-id={concept.id} data-level={concept.level}>
-                <div class="card-top"><div class="concept-meta"><span class="concept-number">{String(ci + 1).padStart(2, '0')}</span><span class={`level-badge level-${concept.level.toLowerCase()}`}><Icon name="dot" size={4} class="level-dot" />{concept.level}</span></div></div>
-                <h3>{concept.title}</h3><p class="concept-description">{concept.description}</p>
-                <div class="memory-line"><Icon name="bulb" size={17} /><p>{concept.memory}</p></div>
-                <details class="concept-example"><summary>Un ejemplo<Icon name="down" size={14} /></summary><p>{concept.example}</p></details>
-                <div class="card-footer"><span class="card-category">{track.eyebrow}</span><button class="learn-button" data-learn={concept.id} aria-pressed="false"><span class="check-circle"><Icon name="check" size={11} /></span><span class="learn-label">Lo entiendo</span></button></div>
+                <div class="card-top"><div class="card-heading"><span class="concept-number">{String(ci + 1).padStart(2, '0')}</span><h3>{concept.title}</h3></div><span class={`level-badge level-${concept.level.toLowerCase()}`}>{concept.level}</span></div>
+                <div class="concept-description">
+                  <p>{concept.description}</p>
+                </div>
+                <a class="concept-source" href={concept.source.url} target="_blank" rel="noopener noreferrer" title={concept.source.title} aria-label={`${concept.source.publisher}. Fuente original. ${concept.source.title}. Sobre ${concept.title}. Se abre en una pestaña nueva.`}>
+                  <Icon name="bulb" size={17} /><span class="source-publisher">{concept.source.publisher}</span><Icon name="link" size={16} />
+                </a>
+                <div class="card-footer"><button class="learn-button" data-learn={concept.id} aria-pressed="false"><span class="check-circle"><Icon name="check" size={11} /></span><span class="learn-label">Lo entiendo</span></button></div>
               </article>)}</div>
             </section>))}
           </div>
-          <div class="empty-state" id="empty-state" hidden><span class="empty-icon"><Icon name="search" size={26} /></span><h3 id="empty-title">No encontramos ese concepto</h3><p id="empty-description">Prueba con otra palabra o cambia el nivel seleccionado.</p><button class="primary-button" id="clear-filters">Limpiar filtros</button></div>
-          <div class="module-bottom" id="module-bottom"><div><Icon name="bulb" size={21} /><p><strong>Hazlo tuyo.</strong> Explica el concepto en voz alta, sin mirar la definición.</p></div><a class="next-module" id="next-module" href="#system-design/sd-capacity">Siguiente módulo<Icon name="arrow" size={18} /></a></div>
+          <div class="empty-state" id="empty-state" hidden><span class="empty-icon"><Icon name="search" size={26} /></span><h2 id="empty-title">No hay conceptos con estos filtros</h2><p id="empty-description">Prueba con otra palabra o cambia el nivel seleccionado.</p><button class="primary-button" id="clear-filters">Limpiar filtros</button></div>
+          <div class="module-bottom" id="module-bottom"><a class="next-module" id="next-module" href="#software-design/patrones">Siguiente módulo<Icon name="arrow" size={13} /></a></div>
         </section>
 
-        <footer class="page-footer"><span>Tech Training<small>Hecho para entender, no para memorizar sin más.</small></span><button class="text-button" id="open-sources">Fuentes y recursos<Icon name="arrow" size={14} /></button></footer>
         <noscript><p class="noscript-note">Puedes consultar el resumen y el primer itinerario. Activa JavaScript para elegir otro perfil, navegar entre módulos, buscar y guardar tu progreso.</p></noscript>
       </main>
     </div>
@@ -87,14 +101,14 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
     <dialog class="review-dialog" id="review-dialog" aria-labelledby="review-title">
       <div class="dialog-top"><span class="eyebrow"><Icon name="flash" size={15} /> REPASO ACTIVO</span><button class="icon-button" data-close-dialog aria-label="Cerrar repaso"><Icon name="close" /></button></div>
       <div class="review-progress"><span id="review-position">1 / 5</span><span id="review-category">System Design</span></div>
-      <div id="review-question"><p class="review-prompt">¿Cómo se lo explicarías a otra persona?</p><h2 id="review-title"></h2><div id="review-answer" hidden><p id="review-definition"></p><div class="memory-line"><Icon name="bulb" size={19} /><p id="review-memory"></p></div></div></div>
+      <div id="review-question"><p class="review-prompt">¿Cómo se lo explicarías a otra persona?</p><h2 id="review-title"></h2><div id="review-answer" hidden><div class="concept-description" id="review-definition"></div><div id="review-source"></div></div></div>
       <button class="primary-button reveal-button" id="reveal-answer">Mostrar explicación<Icon name="down" size={17} /></button>
       <div class="review-rating" id="review-rating" hidden><button class="secondary-button" id="review-again">Seguir practicando</button><button class="primary-button" id="review-known">Lo entiendo<Icon name="check" size={17} /></button></div>
       <div class="review-complete" id="review-complete" hidden><span class="complete-icon"><Icon name="check" size={30} /></span><h2 id="review-complete-title">Un paso más.</h2><p id="review-summary"></p><button class="primary-button" data-close-dialog>Volver a los conceptos<Icon name="arrow" size={17} /></button></div>
       <p class="review-helper" id="review-helper">Primero recuérdalo. Después, compruébalo.</p>
     </dialog>
 
-    <dialog class="sources-dialog" id="sources-dialog" aria-labelledby="sources-title"><div class="dialog-top"><h2 id="sources-title">Sigue aprendiendo</h2><button class="icon-button" data-close-dialog aria-label="Cerrar fuentes"><Icon name="close" /></button></div><p>Una definición es el comienzo. Profundiza con documentación y referencias originales.</p><div class="source-list">{[...sources, ...aiSources].map(source => <a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}<Icon name="arrow" size={17} /></a>)}</div><p class="privacy-note">Tu progreso y el estado del menú se almacenan únicamente en este navegador.</p></dialog>
+    <dialog class="sources-dialog" id="sources-dialog" aria-labelledby="sources-title"><div class="dialog-top"><h2 id="sources-title">Sigue aprendiendo</h2><button class="icon-button" data-close-dialog aria-label="Cerrar fuentes"><Icon name="close" /></button></div><p>Una definición es el comienzo. Profundiza con documentación y referencias originales.</p><div class="source-list">{sources.map(source => <a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}<Icon name="arrow" size={17} /></a>)}</div><p class="privacy-note">Tu progreso y el estado del menú se almacenan únicamente en este navegador.</p></dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script>import '../scripts/app';</script>
   </body>

@@ -32,9 +32,16 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
   { label: 'Software Engineering', icon: 'blocks', children: [
     { label: 'Software Requirements' },
     { label: 'Software Development', children: [
-      { label: 'Backend Development' }, { label: 'Frontend Development' },
+      { label: 'Frontend Development' }, { label: 'Backend Development' },
     ] },
-    { label: 'Software Design', href: '#software-design/solid' },
+    { label: 'Software Design', href: '#software-design/solid', children: [
+      { label: 'SOLID Principles', module: 'solid', href: '#software-design/solid' },
+      { label: 'Design Patterns', children: [
+          { label: 'Creational', module: 'patrones', href: '#software-design/patrones' },
+          { label: 'Structural', module: 'patrones-estructurales', href: '#software-design/patrones-estructurales' },
+          { label: 'Behavioral', module: 'patrones-comportamiento', href: '#software-design/patrones-comportamiento' },
+      ] },
+    ] },
     { label: 'Software Architecture', href: '#software-architecture/estilos-arquitectura' },
     { label: 'System Design', href: '#system-design/sd-fundamentals' },
     { label: 'Software Testing' }, { label: 'Software Quality' },

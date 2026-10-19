@@ -25,24 +25,24 @@ El build genera `dist/`, listo para cualquier alojamiento de archivos estáticos
 
 Home resume la aplicación y permite elegir un perfil —Frontend Engineer, Backend Engineer, Full Stack Engineer, DevOps Engineer o Artificial Intelligence Engineer— y una etapa, desde Fundamentos hasta Senior. Cada selección recomienda áreas relacionadas, conocimientos previos y un objetivo práctico. La progresión posterior distingue especialización, liderazgo y gestión; no representa una jerarquía profesional universal.
 
-La portada calcula su inventario a partir de los datos: actualmente 11 áreas principales, 6 rutas con contenido, 110 conceptos y 5 perfiles. Las áreas todavía sin lecciones permanecen visibles como pendientes, sin enlaces ficticios.
+Home conserva sus 11 áreas y 5 perfiles. Por petición del usuario, actualmente solo tiene contenido de estudio accesible la ruta Software Design, con 18 conceptos en dos módulos. Las demás áreas permanecen visibles en el árbol y en las recomendaciones de Home, pero sus enlaces están deshabilitados. El catálogo de datos conserva el resto del material sin mostrarlo como páginas disponibles.
 
-Las rutas con lecciones siguen este orden de aprendizaje:
+El catálogo de lecciones guardado sigue este orden de aprendizaje. La navegación visible permite abrir Software Design:
 
 1. User Experience Design: 6 conceptos de arquitectura de información y experiencia de usuario.
-2. Software Design: 15 conceptos, incluidos S, O, L, I y D por separado.
+2. Software Design: 18 conceptos en SOLID Principles y Design Patterns. Los principios siguen el orden S, O, L, I, D; los 13 patrones se ordenan por dificultad orientativa.
 3. Software Architecture: 5 conceptos.
 4. Distributed Systems: 40 conceptos en 5 módulos sobre comunicación, datos, coordinación y mensajería.
 5. System Design: 12 conceptos sobre requisitos, capacidad, flujo de datos y bloques de arquitectura.
 6. Applied Artificial Intelligence: 32 conceptos en 5 módulos: LLMs, recuperación, RAG, agentes y evaluación.
 
-Cada concepto contiene una definición, una frase para recordarlo, un ejemplo y un nivel. Las fuentes originales están enlazadas en «Fuentes y recursos».
+Cada tarjeta muestra una definición breve y una lista de ideas completas con punto final. La explicación presenta el concepto y aclara su funcionamiento y sus límites. La bombilla enlaza a una fuente concreta con el nombre del autor u organismo. Las referencias están centralizadas en `src/data/concept-sources.ts` y se contrastaron el 19 de octubre de 2026. Los ejemplos y recordatorios históricos se conservan en los datos pero no se muestran. Al final de cada módulo aparece únicamente el enlace «Siguiente módulo».
 
-Edita `src/data/curriculum.ts`, `src/data/system-design.ts` y `src/data/applied-ai.ts` para ampliar las lecciones; `src/data/navigation.ts` define el árbol y sus enlaces. `src/data/career-paths.ts` contiene perfiles, etapas, prerrequisitos orientativos y fuentes primarias. Los IDs deben ser únicos y estables para conservar los enlaces y el progreso. `src/pages/index.astro` monta la página; `HomeOverview.astro`, `home.ts` y `home.css` implementan Home junto con la navegación general de `app.ts` y los estilos compartidos de `global.css`.
+Edita `src/data/curriculum.ts`, `src/data/design-patterns.ts`, `src/data/system-design.ts` y `src/data/applied-ai.ts` para ampliar las lecciones; `src/data/navigation.ts` define el árbol y sus enlaces. `src/data/career-paths.ts` contiene perfiles, etapas, prerrequisitos orientativos y fuentes primarias. Los IDs deben ser únicos y estables para conservar los enlaces y el progreso. `src/pages/index.astro` monta la página; `HomeOverview.astro`, `home.ts` y `home.css` implementan Home junto con la navegación general de `app.ts` y los estilos compartidos de `global.css`.
 
 ## Uso y privacidad
 
-Busca en todas las rutas con `/` o `Ctrl/Cmd + K`, filtra por nivel y marca los conceptos que comprendes. Al vaciar la búsqueda o limpiar filtros vuelves a Home o al módulo desde el que buscaste. «Repasar conceptos» usa las tarjetas visibles y prioriza las pendientes; oculta la definición hasta que intentas recordarla.
+Busca en todas las rutas con `Ctrl/Cmd + K`, filtra por nivel y marca los conceptos que comprendes. Al vaciar la búsqueda o limpiar filtros vuelves a Home o al módulo desde el que buscaste. La cabecera de estudio muestra únicamente el contador de conceptos y el selector de niveles en una misma línea a tamaño de texto normal. El breadcrumb identifica la página también en móvil.
 
 El progreso se almacena solo en `localStorage` del navegador (`tech-training:v1`). El menú empieza cerrado y recuerda las ramas abiertas con `tech-training:navigation:v1`. No se comparten entre dispositivos. Si el almacenamiento no está disponible, se mantienen durante la sesión. Las tipografías se sirven desde la propia web.
 
@@ -58,3 +58,5 @@ Para validar cambios, ejecuta tipos y build; comprueba Home, selección de perfi
 
 - [AGENTS.md](AGENTS.md): instrucciones de continuidad para agentes y colaboradores.
 - [Guía de producto, diseño y desarrollo](docs/PROJECT_GUIDE.md): preferencias, tipografías, colores, espaciado, navegación, arquitectura, comprobaciones y publicación.
+- [Revisión de accesibilidad](docs/ACCESSIBILITY_REVIEW.md): criterios WCAG 2.2 y USWDS, contrastes medidos, mejoras de lectura, pruebas y límites de la revisión.
+- [Auditoría de la sesión y continuidad](docs/SESSION_AUDIT.md): peticiones verificadas, correcciones que prevalecen e instrucciones para futuras sesiones.
