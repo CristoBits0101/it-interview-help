@@ -69,9 +69,9 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
           <div class="module-toolbar">
             <p class="concept-count" lang="en"><span id="visible-count">{firstModule.concepts.length}</span> CONCEPTS</p>
             <div class="level-select" role="group" aria-label="Filtrar por nivel">
-              <button class="level-step level-previous" id="level-previous" type="button" aria-label="Nivel anterior" disabled><Icon name="chevron" size={16} /></button>
+              <button class="level-step level-previous" id="level-previous" type="button" aria-label="Nivel anterior" disabled><span class="level-step-visual"><Icon name="chevron" size={16} /></span></button>
               <span class="level-current" id="level-current" aria-live="polite" aria-atomic="true">Todos los niveles</span>
-              <button class="level-step level-next" id="level-next" type="button" aria-label="Nivel siguiente"><Icon name="chevron" size={16} /></button>
+              <button class="level-step level-next" id="level-next" type="button" aria-label="Nivel siguiente"><span class="level-step-visual"><Icon name="chevron" size={16} /></span></button>
             </div>
           </div>
           <p id="results-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
@@ -84,7 +84,7 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
                   <p>{concept.description}</p>
                 </div>
                 <a class="concept-source" href={concept.source.url} target="_blank" rel="noopener noreferrer" title={concept.source.title} aria-label={`${concept.source.publisher}. Fuente original. ${concept.source.title}. Sobre ${concept.title}. Se abre en una pestaña nueva.`}>
-                  <Icon name="bulb" size={17} /><span class="source-publisher">{concept.source.publisher}</span><Icon name="link" size={16} />
+                  <Icon name="bulb" size={20} /><span class="source-publisher">{concept.source.publisher}</span><Icon name="link" size={16} />
                 </a>
                 <div class="card-footer"><button class="learn-button" data-learn={concept.id} aria-pressed="false"><span class="check-circle"><Icon name="check" size={11} /></span><span class="learn-label">Lo entiendo</span></button></div>
               </article>)}</div>

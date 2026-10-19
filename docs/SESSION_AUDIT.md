@@ -8,7 +8,11 @@ Por petición posterior, los nombres de esas categorías quedan en inglés Title
 
 ## 19 de octubre de 2026 — hover del selector de niveles
 
-Por petición del usuario, el círculo de hover de las flechas se redujo de 32 a 24 px. El botón conserva 40 px de área táctil. Al revisar la aplicación ampliada, se vio que centrar el círculo y el icono en toda la caja dejaba 8 px de inset en los extremos. Ahora cada círculo se apoya en el borde exterior de su botón y su SVG de 16 px se desplaza con él para quedar centrado dentro del círculo. El selector usa margen automático al inicio para quedar alineado a la derecha también si ocupa una segunda fila en móvil. Se comprobó en Chrome a 1440, 390 y 320 px.
+El círculo de hover mide 24 px y el botón conserva 40 px de área táctil. `.level-step-visual` reúne el borde circular y el SVG de 16 px y los centra mediante grid sin padding. Se alinea al borde exterior del botón. La última corrección añade un ajuste óptico de 0.5 px hacia la punta de cada chevron, ya que el usuario seguía percibiendo descentrado pese al centrado geométrico. Se pasó el cursor por ambas flechas en Chrome y se revisaron sus capturas ampliadas. El selector conserva su alineación al borde derecho y no hay desbordamiento horizontal.
+
+Los gaps número–título, bombilla–autor–enlace y check–«Lo entiendo» se unificaron con `--gap-card`. Se verificaron 14 px para padding de tarjeta de 28 px, 12 px para 24 px y 10 px para 20 px. La fuente y el botón dejaron de usar el gap compacto fijo de 6 px; sus paddings también derivan de la escala de la tarjeta.
+
+La siguiente revisión corrige el ancho anterior a los textos, que seguían en columnas distintas pese a compartir gap. Bombilla y check miden 20 px y el número mide `20px + --gap-card`. La raya de la fuente se dibuja sin consumir ancho. En Chrome, título, autor y «Lo entiendo» tienen coordenadas X idénticas a 1920, 1440, 1050, 390 y 320 px: no hay diferencia entre las tres columnas en ninguno de esos anchos. Se revisaron las tarjetas y ambos hovers a tamaño ampliado.
 
 Fecha: 19 de octubre de 2026. Proyecto: `C:\Workspace\tech-training`.
 
