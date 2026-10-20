@@ -1,5 +1,15 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 20 de octubre de 2026 — etiqueta Codificación
+
+El botón «Ejemplo» pasa a llamarse «Codificación» para identificar la vista de código. Se conservan el ID `example`, sus datos y el estado deshabilitado cuando no hay contenido.
+
+## 20 de octubre de 2026 — fuentes de Design Patterns
+
+Por petición expresa del usuario, las 13 tarjetas de patrones muestran Refactoring.Guru y enlazan a la página específica de cada patrón en español. Factory conserva su ID y enlaza a Factory Method. Esta decisión sustituye las referencias anteriores de patrones a UNC y Addison-Wesley. SOLID conserva sus cinco referencias originales. No se modifican explicaciones, niveles, categorías ni progreso.
+
+Se verificaron las 13 páginas de destino y los enlaces renderizados en Chrome en las tres categorías (4/3/6 tarjetas). A 390 px los nombres de fuente no desbordan. SOLID conserva sus cinco enlaces. `npm run check` sin errores, avisos ni sugerencias y `npm run build` correcto.
+
 ## 20 de octubre de 2026 — proporciones de botones del portfolio
 
 El usuario considera demasiado ovalados los botones de vistas y pide usar como referencia [su portfolio](https://cristobits0101.dev/). La web pública confirma para «Open CV» y «Cont@ct Me» altura de 48 px, padding vertical/horizontal de 12/24 px y radio CSS de `10rem` (160 px), limitado geométricamente a 24 px por la altura. Se trasladan esas proporciones a los botones de vistas con altura mínima de `3rem`, padding de 12/24 px y radio de `1.5rem`. Se mantienen la familia y la paleta de Tech Training.

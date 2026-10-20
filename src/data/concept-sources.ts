@@ -5,9 +5,9 @@ export type ConceptSource = {
 };
 
 // Reviewed on 2026-10-19. Link to the actual concept, never a search or home page.
-// GoF entries use the original book text in UNC's academic archive.
+// Design-pattern references selected by the user on 2026-10-20.
 const source = (publisher: string, title: string, url: string): ConceptSource => ({ publisher, title, url });
-const gof = (title: string, page: string) => source('Gamma · Helm · Johnson · Vlissides', `${title} — Design Patterns · Archivo UNC`, `https://www.cs.unc.edu/~stotts/GOF/hires/${page}.htm`);
+const refactoringGuru = (title: string, slug: string) => source('Refactoring.Guru', `${title} — Patrones de diseño`, `https://refactoring.guru/es/design-patterns/${slug}`);
 
 export const conceptSources = {
   distributed: source('AWS Builders’ Library', 'Challenges with distributed systems', 'https://aws.amazon.com/builders-library/challenges-with-distributed-systems/'),
@@ -49,19 +49,19 @@ export const conceptSources = {
   lsp: source('Barbara Liskov y Jeannette Wing', 'A Behavioral Notion of Subtyping', 'https://www.cs.cmu.edu/~wing/publications/LiskovWing94.pdf'),
   isp: source('Robert C. Martin', 'The Interface Segregation Principle', 'https://objectmentor.com/resources/articles/isp.pdf'),
   dip: source('Robert C. Martin', 'The Dependency Inversion Principle', 'https://objectmentor.com/resources/articles/dip.pdf'),
-  facade: gof('Facade', 'pat4e'),
-  adapter: source('GoF · Addison-Wesley', 'Design Patterns: Adapter', 'https://www.informit.com/articles/article.aspx?p=1398600'),
-  iterator: gof('Iterator', 'pat5d'),
-  factory: gof('Factory Method', 'pat3c'),
-  builder: gof('Builder', 'pat3b'),
-  prototype: gof('Prototype', 'pat3d'),
-  strategy: gof('Strategy', 'pat5i'),
-  decorator: gof('Decorator', 'pat4d'),
-  observer: gof('Observer', 'pat5g'),
-  singleton: gof('Singleton', 'pat3e'),
-  state: gof('State', 'pat5h'),
-  mediator: gof('Mediator', 'pat5e'),
-  visitor: gof('Visitor', 'pat5k'),
+  facade: refactoringGuru('Facade', 'facade'),
+  adapter: refactoringGuru('Adapter', 'adapter'),
+  iterator: refactoringGuru('Iterator', 'iterator'),
+  factory: refactoringGuru('Factory Method', 'factory-method'),
+  builder: refactoringGuru('Builder', 'builder'),
+  prototype: refactoringGuru('Prototype', 'prototype'),
+  strategy: refactoringGuru('Strategy', 'strategy'),
+  decorator: refactoringGuru('Decorator', 'decorator'),
+  observer: refactoringGuru('Observer', 'observer'),
+  singleton: refactoringGuru('Singleton', 'singleton'),
+  state: refactoringGuru('State', 'state'),
+  mediator: refactoringGuru('Mediator', 'mediator'),
+  visitor: refactoringGuru('Visitor', 'visitor'),
   informationArchitecture: source('Nielsen Norman Group', 'The Difference Between Information Architecture and Navigation', 'https://www.nngroup.com/articles/ia-vs-navigation/'),
   taxonomy: source('Nielsen Norman Group', 'Taxonomy 101', 'https://www.nngroup.com/articles/taxonomy-101/'),
   hierarchy: source('Nielsen Norman Group', 'Visual Hierarchy in UX', 'https://www.nngroup.com/articles/visual-hierarchy-ux-definition/'),
