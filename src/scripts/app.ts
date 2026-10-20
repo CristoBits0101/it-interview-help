@@ -77,7 +77,7 @@ function refreshView() {
   const query = normalize(search.value.trim());
   searchClear.hidden = !search.value;
   const selectedSection = sections.find(section => section.dataset.moduleId === currentModule)!;
-  const matchesSearch = (card: HTMLElement) => !query || normalize(`${card.closest<HTMLElement>('.concept-section')!.dataset.trackTitle} ${card.closest<HTMLElement>('.concept-section')!.dataset.trackEyebrow} ${card.closest<HTMLElement>('.concept-section')!.dataset.moduleTitle} ${card.querySelector('h3')!.textContent} ${card.querySelector('.concept-description')!.textContent}`).includes(query);
+  const matchesSearch = (card: HTMLElement) => !query || normalize(`${card.closest<HTMLElement>('.concept-section')!.dataset.trackTitle} ${card.closest<HTMLElement>('.concept-section')!.dataset.trackEyebrow} ${card.closest<HTMLElement>('.concept-section')!.dataset.moduleTitle} ${card.querySelector('h3')!.textContent} ${card.querySelector('[data-card-panel="explanation"]')!.textContent}`).includes(query);
   const availableCards = cards.filter(card => {
     const section = card.closest<HTMLElement>('.concept-section')!;
     return (mode === 'search' || mode === 'module' && section.dataset.moduleId === currentModule) && matchesSearch(card);
@@ -235,6 +235,19 @@ levelNext.addEventListener('click', () => moveLevel(1));
 $('#concept-library').addEventListener('click', event => {
   const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button');
   if (!button) return;
+  if (button.dataset.cardView) {
+    if (button.disabled || button.getAttribute('aria-pressed') === 'true') return;
+    const card = button.closest<HTMLElement>('.concept-card')!;
+    const panel = card.querySelector<HTMLElement>(`[data-card-panel="${button.dataset.cardView}"]`);
+    if (!panel?.textContent?.trim()) return;
+    card.querySelectorAll<HTMLButtonElement>('[data-card-view]').forEach(viewButton => {
+      viewButton.setAttribute('aria-pressed', String(viewButton === button));
+    });
+    card.querySelectorAll<HTMLElement>('[data-card-panel]').forEach(viewPanel => {
+      viewPanel.hidden = viewPanel !== panel;
+    });
+    return;
+  }
   const learnId = button.dataset.learn;
   if (learnId) {
     if (learned.has(learnId)) learned.delete(learnId);
@@ -296,7 +309,7 @@ function drawReview() {
   const card = reviewCards[reviewIndex];
   $('#review-position').textContent = `${reviewIndex + 1} / ${reviewCards.length}`;
   $('#review-title').textContent = card.querySelector('h3')!.textContent;
-  $('#review-definition').replaceChildren(...Array.from(card.querySelector('.concept-description')!.children, child => child.cloneNode(true)));
+  $('#review-definition').replaceChildren(...Array.from(card.querySelector('[data-card-panel="explanation"]')!.children, child => child.cloneNode(true)));
   $('#review-source').replaceChildren(card.querySelector('.concept-source')!.cloneNode(true));
   $('#review-category').textContent = card.closest<HTMLElement>('.concept-section')!.dataset.trackEyebrow!;
   $('#review-answer').hidden = true;

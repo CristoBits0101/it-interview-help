@@ -5,11 +5,13 @@ export type Concept = {
   id: string;
   title: string;
   description: string;
+  /** Optional card views. Blank content leaves its button disabled. */
+  useCase?: string;
+  example?: string;
   /** Historical notes for unpublished content. Published answers live in description. */
   details?: string[];
   source: ConceptSource;
   memory?: string;
-  example?: string;
   level: 'Esencial' | 'Intermedio' | 'Avanzado';
 };
 

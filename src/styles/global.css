@@ -117,7 +117,13 @@
   .source-publisher { display: block; font-size: var(--font-small); font-weight: 400; line-height: 1.6; overflow-wrap: anywhere; }
   .concept-source:hover { color: var(--ink); }
   .card-footer { --learn-content-inset: 11px; border-top: 1px solid var(--line); margin-top: var(--space-card); padding: calc(var(--space-card) - var(--learn-content-inset)) 0 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: var(--gap-card); }
-  .learn-button { display: flex; align-items: center; justify-content: center; gap: var(--gap-card); min-height: 44px; font-size: var(--font-small); font-weight: 400; color: var(--text-soft); padding: calc(var(--gap-card) / 2) var(--gap-card); }
+  .card-views { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-card); max-width: 100%; }
+  .card-view-button { min-height: 44px; padding: calc(var(--gap-card) / 2) 0; color: var(--text-soft); font-size: var(--font-small); font-weight: 400; }
+  .card-view-button[aria-pressed='true'] { color: var(--ink); cursor: default; }
+  .card-view-button:disabled { color: var(--disabled); cursor: default; }
+  .card-view-button:not(:disabled):not([aria-pressed='true']) { transition: color .16s; }
+  .card-view-button:not(:disabled):not([aria-pressed='true']):hover { color: var(--ink); }
+  .learn-button { display: flex; align-items: center; justify-content: center; gap: var(--gap-card); min-height: 44px; margin-inline-start: auto; font-size: var(--font-small); font-weight: 400; color: var(--text-soft); padding: calc(var(--gap-card) / 2) 0 calc(var(--gap-card) / 2) var(--gap-card); }
   .learn-button:hover, .learn-button[aria-pressed='true'] { color: var(--accent-hover); }
   .check-circle { border: 1px solid var(--control-border); border-radius: 50%; width: var(--card-leading-size, 20px); height: var(--card-leading-size, 20px); flex-shrink: 0; display: grid; place-items: center; }
   .learn-button[aria-pressed='true'] .check-circle { background: var(--accent); color: var(--paper); border-color: var(--green); }

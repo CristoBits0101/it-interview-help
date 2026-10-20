@@ -7,7 +7,16 @@ import Icon from '../components/Icon.astro';
 import NavigationTree from '../components/NavigationTree.astro';
 import HomeOverview from '../components/HomeOverview.astro';
 import { navigation, type NavigationNode } from '../data/navigation';
-import { tracks as coreTracks } from '../data/curriculum';
+import { tracks as coreTracks, type Concept } from '../data/curriculum';
+const conceptViews = (concept: Concept) => {
+  const views = [
+    { id: 'explanation', label: 'Explicación', content: concept.description.trim() },
+    { id: 'use-case', label: 'Caso de uso', content: concept.useCase?.trim() ?? '' },
+    { id: 'example', label: 'Ejemplo', content: concept.example?.trim() ?? '' },
+  ];
+  const initial = views.find(view => view.content);
+  return views.map(view => ({ ...view, active: view.id === initial?.id }));
+};
 const tracks = coreTracks.filter(track => track.id === 'software-design');
 const availableTrackIds = new Set(tracks.map(track => track.id));
 const isAvailableHref = (href?: string) => Boolean(href && [...availableTrackIds].some(trackId => href.startsWith(`#${trackId}/`)));
@@ -80,13 +89,18 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
               <h2 class="search-group-heading sr-only">{track.title}<Icon name="chevron" size={13} />{module.title}</h2>
               <div class="concept-grid">{module.concepts.map((concept, ci) => <article class="concept-card" id={`concept-${concept.id}`} data-concept-id={concept.id} data-level={concept.level}>
                 <div class="card-top"><div class="card-heading"><span class="concept-number">{String(ci + 1).padStart(2, '0')}</span><h3>{concept.title}</h3></div><span class={`level-badge level-${concept.level.toLowerCase()}`}>{concept.level}</span></div>
-                <div class="concept-description">
-                  <p>{concept.description}</p>
+                <div class="concept-description" aria-live="polite" aria-atomic="true">
+                  {conceptViews(concept).map(view => <div id={`concept-${concept.id}-${view.id}`} data-card-panel={view.id} hidden={!view.active}><p>{view.content}</p></div>)}
                 </div>
                 <a class="concept-source" href={concept.source.url} target="_blank" rel="noopener noreferrer" title={concept.source.title} aria-label={`${concept.source.publisher}. Fuente original. ${concept.source.title}. Sobre ${concept.title}. Se abre en una pestaña nueva.`}>
                   <Icon name="bulb" size={20} /><span class="source-publisher">{concept.source.publisher}</span><Icon name="link" size={16} />
                 </a>
-                <div class="card-footer"><button class="learn-button" data-learn={concept.id} aria-pressed="false"><span class="check-circle"><Icon name="check" size={11} /></span><span class="learn-label">Lo entiendo</span></button></div>
+                <div class="card-footer">
+                  <div class="card-views" role="group" aria-label={`Contenido de ${concept.title}`}>
+                    {conceptViews(concept).map(view => <button type="button" class="card-view-button" data-card-view={view.id} aria-controls={`concept-${concept.id}-${view.id}`} aria-pressed={String(view.active)} disabled={!view.content}>{view.label}</button>)}
+                  </div>
+                  <button type="button" class="learn-button" data-learn={concept.id} aria-pressed="false"><span class="check-circle"><Icon name="check" size={11} /></span><span class="learn-label">Lo entiendo</span></button>
+                </div>
               </article>)}</div>
             </section>))}
           </div>

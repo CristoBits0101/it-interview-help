@@ -1,5 +1,11 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 20 de octubre de 2026 — vistas en el pie de las tarjetas
+
+El usuario pidió «Explicación», «Caso de Uso» y «Ejemplo» a la izquierda del pie y mover «Lo entiendo» a la derecha. Cada botón selecciona su panel dentro de esa tarjeta. Solo los apartados con contenido no vacío están habilitados; el seleccionado no cambia de aspecto ni tiene transición al hover. Los 18 conceptos actuales solo tienen explicación, así que los otros dos botones se muestran deshabilitados. No se añadieron casos ni ejemplos nuevos. La petición sustituye la anterior colocación de «Lo entiendo» a la izquierda y permite los ejemplos como vista opcional, sin recuperar el desplegable retirado.
+
+Se añadieron `useCase` opcional y paneles asociados mediante `aria-controls`, con estado `aria-pressed` y anuncio de cambios. Búsqueda y repaso siguen leyendo la explicación estable. En Chrome se verificaron los estados iniciales de las 18 tarjetas, el salto de teclado sobre controles deshabilitados, ausencia de hover/transición en el activo, la independencia de cada tarjeta, búsqueda y persistencia del progreso. El cambio entre apartados con contenido se probó con datos temporales solo en el navegador. El pie se revisó a 1920, 1440, 1050, 390 y 320 px; conserva «Lo entiendo» a la derecha y permite dos filas en móvil sin desbordamiento.
+
 ## 19 de octubre de 2026 — categorías de Design Patterns
 
 Por petición del usuario, el desplegable `Design Patterns` dentro de Software Design se divide en `Creational`, `Structural` y `Behavioral`. Sus páginas muestran 4, 3 y 6 conceptos y reutilizan las tarjetas, fuentes, búsqueda y progreso existentes. Se conserva la ruta `#software-design/patrones` como Creational y los IDs de conceptos para no perder enlaces ni progreso. La ruta de Software Design tiene ahora cuatro páginas: SOLID y las tres categorías.
