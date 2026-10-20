@@ -26,7 +26,7 @@ export const designPatterns: Concept[] = [
   {
     id: 'factory',
     title: 'Factory',
-    description: 'Factory separa la creación de objetos de su uso. En Factory Method las subclases deciden qué tipo crear.',
+    description: 'Devuelve un objeto según el argumento recibido con un método común de interfaz o clase abstracta.',
     source: conceptSources.factory,
     level: 'Esencial',
   },

@@ -12,7 +12,7 @@ const conceptViews = (concept: Concept) => {
   const views = [
     { id: 'explanation', label: 'Explicación', content: concept.description.trim() },
     { id: 'use-case', label: 'Caso de uso', content: concept.useCase?.trim() ?? '' },
-    { id: 'example', label: 'Codificación', content: concept.example?.trim() ?? '' },
+    { id: 'example', label: 'Implementación', content: concept.example?.trim() ?? '' },
   ];
   const initial = views.find(view => view.content);
   return views.map(view => ({ ...view, active: view.id === initial?.id }));

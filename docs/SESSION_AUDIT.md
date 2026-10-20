@@ -1,5 +1,9 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 20 de octubre de 2026 — etiqueta Implementación
+
+El usuario confirma «Implementación» como nombre definitivo de la vista de código. Sustituye «Codificación» y conserva el ID `example`, los datos y la disponibilidad según contenido.
+
 ## 20 de octubre de 2026 — etiqueta Codificación
 
 El botón «Ejemplo» pasa a llamarse «Codificación» para identificar la vista de código. Se conservan el ID `example`, sus datos y el estado deshabilitado cuando no hay contenido.
