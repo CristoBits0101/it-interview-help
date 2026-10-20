@@ -33,7 +33,7 @@ export const designPatterns: Concept[] = [
   {
     id: 'builder',
     title: 'Builder',
-    description: 'Builder separa la construcción de un objeto en pasos para crear distintas representaciones con el mismo proceso.',
+    description: 'Simplifica la creación de objetos evitando múltiples constructores o numerosos parámetros.',
     source: conceptSources.builder,
     level: 'Esencial',
   },

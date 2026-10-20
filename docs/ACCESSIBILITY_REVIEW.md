@@ -1,5 +1,40 @@
 # Revisión de accesibilidad y legibilidad
 
+## Actualización del 20 de octubre de 2026
+
+Alcance actual: Home y cuatro páginas de Software Design con 18 conceptos. La revisión anterior de todo el catálogo se conserva debajo como historial.
+
+### Referencias consultadas
+
+- [WCAG 2.2, recomendación del W3C](https://www.w3.org/TR/WCAG22/): referencia normativa de trabajo AA. [WCAG 3.0](https://www.w3.org/TR/wcag-3.0/) figura como Working Draft del 10 de septiembre de 2026 y no se presenta como norma aprobada.
+- [Tamaño mínimo de objetivos](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html), [reflujo](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html) y [contraste no textual](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html): mínimo AA de 24 × 24 px con excepciones, revisión a 320 CSS px y contraste de indicadores necesarios de al menos 3:1. El proyecto conserva controles principales de al menos 44 px de altura.
+- [Guía cognitiva del W3C](https://www.w3.org/TR/coga-usable/): patrones familiares, controles reconocibles y relación clara entre acción y contenido. Es guía complementaria, no un criterio normativo adicional de WCAG.
+- [Content switcher de Carbon](https://www.carbondesignsystem.com/building-blocks/core/components/content-switcher/guidelines): agrupación de vistas relacionadas, selección visible y estados diferenciados. Se aplica su organización visual con botones nativos y `aria-pressed`, sin afirmar que se usa la implementación de Carbon.
+- [Mayer, 2017, Using multimedia for e-learning](https://onlinelibrary.wiley.com/doi/10.1111/jcal.12197): coherencia, señalización y segmentación para reducir procesamiento ajeno al objetivo. Aplicarlo a esta interfaz es una decisión de diseño informada; sus resultados sobre aprendizaje multimedia no prueban la eficacia concreta de este pie.
+- [Roediger y Karpicke, 2006](https://www.psychologicalscience.org/journals/psychological-science/j.1467-9280.2006.01693.x/) y [Butler y Roediger, 2008](https://link.springer.com/article/10.3758/MC.36.3.604): evidencia experimental sobre recuperación y feedback. «Lo entiendo» conserva su función de autovaloración y no acredita dominio. Un cambio visual confirma una acción de interfaz, no sustituye feedback educativo correctivo.
+- [Portfolio del usuario](https://cristobits0101.dev/): referencia visual solicitada para las proporciones de los botones. La medición de la web pública da 48 px de altura, padding de 12/24 px y radio CSS de `10rem` (160 px) para «Open CV» y «Cont@ct Me», con radio efectivo de 24 px por la altura. Es una preferencia estética, no una norma de accesibilidad. No se copian su tipografía ni su paleta.
+
+### Decisiones aplicadas
+
+- Pie con rejilla `minmax(0, 1fr) auto`, tamaños mínimos y container queries de cada tarjeta. Por debajo de 32 rem, vistas y comprensión ocupan filas separadas; por debajo de 18 rem las vistas forman una columna sin retirar el padding horizontal. El texto personalizado puede replegar opciones completas sin cortar palabras. No se oculta el overflow ni se fija la altura del contenido.
+- Por referencia posterior al portfolio, las vistas conservan fondo suave con botones de altura mínima de `3rem` (48 px), padding vertical/horizontal de 12/24 px y radio de `1.5rem` (24 px). El grupo calcula un radio concéntrico de botón más inset de 4 px y borde de 1 px, equivalente a 29 px a tamaño normal. Sustituye los radios `9999px` del selector para conservar su curvatura al replegarse sin formar un óvalo grande. El seleccionado tiene superficie blanca y borde contrastado, además de estado accesible. Los apartados vacíos siguen usando `disabled`; el activo no cambia ni se anima al hover.
+- «Lo entiendo» vuelve al check circular con texto sin fondo ni borde exterior, también al hover y en estado comprendido. Permanece a la derecha con padding izquierdo `--gap-card`, derecho 0, vertical de la mitad de `--gap-card` y objetivo mínimo de 44 px. El check marcado conserva su relleno y el estado accesible. Se mantiene el foco interior de 2 px en los controles del pie para que sea visible y no quede cortado por el grupo.
+- El separador deja el padding completo hasta las superficies del pie. El grupo anidado usa padding de 4 px y gap de 2 px. Se retira el cálculo fijo de compensación de 11 px del antiguo pie de texto plano.
+- Se conserva la gama de 23 colores. Contrastes calculados: lectura 7,49:1; fuente 5,40:1; vista seleccionada 7,76:1; texto deshabilitado 4,65:1; texto comprendido 8,01:1 sobre la tarjeta blanca tras retirar su fondo. El borde de selección usa `--control-border`, que supera 3:1. Los bordes suaves son decorativos y no la única señal de selección o foco.
+- Se mantienen Google Sans Flex y la marca IBM Plex Mono, con tamaños 13/14/15 px y pesos 300/400/500. Encabezados pequeños con tracking normal y línea 1.4, sin la compresión heredada de títulos grandes. Se conserva la justificación solicitada para las explicaciones y su reflujo sin recorte.
+- Radios compartidos 12/8/6 px para superficies, controles e interiores, con la excepción posterior de radios interior/exterior de 24/29 px a tamaño normal en el selector de vistas. El buscador y los niveles conservan sus radios completos. La fuente conserva sus esquinas cuadradas. Estadísticas de Home con separación real desde sus divisiones. La tarjeta cambia de borde al hover y no se eleva como si fuera un enlace. Se mantienen las preferencias de movimiento reducido y los colores forzados.
+- No se añaden premios, presión temporal, adornos ni afirmaciones sobre una psicología universal del verde. Se priorizan agrupación, previsibilidad, legibilidad y foco en un concepto cada vez.
+
+### Verificación y alcance
+
+Revisión específica tras ajustar las proporciones al portfolio: Chrome a 1440, 390 y 320 px confirmó botones de 48 px, radio interior de 24 px y exterior de 29 px. Con texto al 200 % a 1920, 1440, 390 y 320 px no hubo desbordamiento. Las cajas del selector y «Lo entiendo» conservan 0 px de diferencia respecto a los extremos del separador. Se mantuvieron activo sin hover y apartados vacíos deshabilitados. Se inspeccionaron las capturas de 1440 y 320 px. `astro check` sobre 17 archivos terminó sin errores, avisos ni sugerencias y la compilación fue correcta. Este ajuste no incluye un nuevo análisis de axe.
+
+Chrome: las cinco páginas disponibles a 1920, 1440, 1150, 1050, 850, 640, 390 y 320 px. Texto al 200 % a 1440, 390 y 320 px. Espaciado personalizado de letras, palabras, líneas y párrafos en Home, SOLID y Creational. Sin desbordamiento horizontal, texto de botones recortado ni controles fuera del pie. Inspección visual de tarjetas, Home y ambos estados de comprensión. Carga local de fuentes, tamaño y familia computados y SVG de Lucide revisados.
+
+Seis análisis de axe-core 4.10.3 sobre Home, SOLID y Creational a 1440 y 320 px: ninguna infracción automática con las reglas A/AA hasta 2.2 y buenas prácticas. Foco comprobado con Tab real: contorno sólido de 2 px dentro del control. Estados de hover, movimiento reducido y colores forzados revisados. No se añadieron dependencias al proyecto. Las verificaciones automáticas y locales no constituyen una certificación completa de conformidad ni una validación experimental de aprendizaje.
+
+## Historial de la revisión del 19 de octubre
+
 Revisión local del 19 de octubre de 2026. Alcance: Home y sus 25 combinaciones de perfil y etapa. Los 17 módulos y sus 113 tarjetas. Búsqueda con resultados y vacía. Filtro de nivel. Navegación y menú móvil. Estados de foco, hover y selección.
 
 ## Criterios utilizados

@@ -1,5 +1,45 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 20 de octubre de 2026 — proporciones de botones del portfolio
+
+El usuario considera demasiado ovalados los botones de vistas y pide usar como referencia [su portfolio](https://cristobits0101.dev/). La web pública confirma para «Open CV» y «Cont@ct Me» altura de 48 px, padding vertical/horizontal de 12/24 px y radio CSS de `10rem` (160 px), limitado geométricamente a 24 px por la altura. Se trasladan esas proporciones a los botones de vistas con altura mínima de `3rem`, padding de 12/24 px y radio de `1.5rem`. Se mantienen la familia y la paleta de Tech Training.
+
+El radio del grupo se calcula de forma concéntrica como radio del botón más 4 px de inset y 1 px de borde, equivalente a 29 px a tamaño normal. Se conservan padding/gap del grupo de 4/2 px. Esta decisión sustituye los radios `9999px` del selector y de sus botones descritos más abajo, evitando que el contorno crezca como un óvalo al replegarse. Buscador y niveles conservan sus radios completos. El pie pasa a dos filas por debajo de 32 rem y las vistas a columna por debajo de 18 rem sin retirar el padding horizontal. Se mantienen los extremos del separador y el aspecto de «Lo entiendo».
+
+Verificación específica en Chrome a 1440, 390 y 320 px: botones de 48 px, radios interior/exterior de 24/29 px y cajas a 0 px de los extremos del separador. Texto al 200 % a 1920, 1440, 390 y 320 px sin desbordamiento. Activo sin hover y apartados vacíos deshabilitados conservados. Capturas de 1440 y 320 px revisadas. `astro check` sobre 17 archivos sin errores, avisos ni sugerencias y compilación correcta. No se ejecutó un nuevo análisis de axe para este ajuste.
+
+## 20 de octubre de 2026 — saliente tipográfico en el pie
+
+La comparación de cajas no detectaba el saliente visible del último carácter. Con Google Sans Flex cargada a 14 px, «Lo entiendo» mide 74,998 px de avance y 75,654 px hasta el extremo derecho de la tinta según Canvas TextMetrics. La métrica estima un saliente de aproximadamente 0,656 px aunque su caja DOM coincida con el separador. La auditoría no reprodujo un desbordamiento de layout ni tinta rasterizada fuera a escala normal. Se añade `.05em` de padding al final de `.learn-label` para contener ese saliente sin modificar los extremos del pie ni añadir un margen estructural. Selector, fuente, cabecera y separadores conservan el ancho útil determinado por el padding de la tarjeta. Tras la compensación, Chrome a 1920, 1440, 390 y 320 px conserva las cajas a 0 px de los extremos y la métrica de tinta queda dentro. Se comprobó también texto al 200 %. Tipos y build correctos.
+
+## 20 de octubre de 2026 — alineación exacta del pie
+
+La petición más reciente retira el inset horizontal anterior. El pie conserva únicamente su padding superior. El inicio del selector y el extremo derecho de «Lo entiendo» deben coincidir con los extremos del separador sin excederlos ni quedar retranqueados. Se conserva el ancho natural del selector y su límite del 100 %. Esta decisión sustituye el margen interior descrito a continuación.
+
+## 20 de octubre de 2026 — margen interior del pie
+
+El ajuste de ancho del selector no resolvía la percepción indicada por el usuario. Se añade padding horizontal simétrico de `--gap-card` a `.card-footer`. El separador mantiene su ancho y los controles quedan dentro de sus extremos. «Lo entiendo» deja 12 px en escritorio base y 10 px en móvil respecto al extremo derecho del separador. Se conserva el padding superior completo. Revisado visualmente y medido en Chrome a 1440, 390 y 320 px y con texto al 200 % a 320 px sin desbordamientos.
+
+## 20 de octubre de 2026 — ancho del selector en el pie
+
+Tras la observación visual del usuario, el selector de vistas se ajusta al ancho de sus etiquetas con `width: fit-content` y `max-width: 100%`. Se elimina el estiramiento innecesario del grupo dentro de la columna del pie. El separador conserva el mismo ancho que el resto del contenido y «Lo entiendo» permanece a la derecha. Chrome a 1440, 390 y 320 px y texto al 200 % a 320 px: sin controles fuera del pie ni desbordamiento horizontal. Se conservan los radios completos y los estados deshabilitado y activo sin hover.
+
+## 20 de octubre de 2026 — ajuste posterior de los controles del pie
+
+La última petición es «Lo entiendo dejalo como estaba y los botones full rounded fondo y diseño». «Lo entiendo» recupera el check circular y el texto sin fondo ni borde exterior en estado normal, hover o seleccionado, conservando su posición a la derecha. Usa padding izquierdo `--gap-card`, derecho 0 y vertical de la mitad de `--gap-card`, objetivo mínimo de 44 px y foco visible. El check marcado conserva su relleno. Esta decisión sustituye la superficie secundaria añadida en la armonización anterior.
+
+El selector de vistas conserva su fondo suave, la selección blanca y el borde contrastado. Tanto el grupo como sus botones interiores pasan a radio completo de `9999px`. No cambian la selección de paneles, la desactivación de apartados vacíos ni la ausencia de hover y transición en el apartado activo. La documentación recoge esta excepción a los radios generales de 8/6 px. Se conserva la separación completa tras el separador y la distribución adaptable del pie.
+
+Revisión específica en Chrome a 1440, 390 y 320 px y con texto al 200 %: sin desbordamiento. Se confirmó la alineación de «Lo entiendo» al extremo derecho, su transparencia y ausencia de borde en todos los estados, el relleno del check marcado, los radios completos del selector y los estados activo y deshabilitado.
+
+## 20 de octubre de 2026 — armonización del pie y revisión de UX/UI
+
+Se investigaron WCAG 2.2, el estado de borrador de WCAG 3.0, la guía cognitiva del W3C, el selector de contenido de Carbon y publicaciones originales de Mayer y de Roediger y colaboradores. Se documentan fuentes y límites en [ACCESSIBILITY_REVIEW.md](ACCESSIBILITY_REVIEW.md). No se atribuye a los colores una mejora universal de aprendizaje.
+
+El pie combina un selector agrupado de vistas y una acción de comprensión independiente. La selección tiene superficie y borde accesibles, permanece estática al hover y los apartados vacíos siguen deshabilitados. Los controles quedan dentro del separador, con objetivos de al menos 44 px. La tarjeta usa container queries para repartir el pie en una o dos filas y responder a texto ampliado. El padding tras el separador es completo; se retira la compensación fija de 11 px. Se mantienen los tonos de la paleta y la escala tipográfica, se normalizan radios y tracking y se retira la elevación de tarjetas no clicables. Home recupera distancia entre estadísticas y divisiones.
+
+Verificación en Chrome de Home y las cuatro páginas disponibles a ocho anchos (320 a 1920 px), texto al 200 % a tres anchos y espaciado personalizado. No hubo desbordamiento ni controles fuera de los límites del pie. Seis análisis de axe 4.10.3 con reglas A/AA hasta WCAG 2.2 y buenas prácticas no detectaron infracciones automáticas. Se verificaron foco por teclado, activo sin hover, movimiento reducido y colores forzados. Estos resultados locales no equivalen a una certificación completa ni a un ensayo de eficacia de aprendizaje.
+
 ## 20 de octubre de 2026 — vistas en el pie de las tarjetas
 
 El usuario pidió «Explicación», «Caso de Uso» y «Ejemplo» a la izquierda del pie y mover «Lo entiendo» a la derecha. Cada botón selecciona su panel dentro de esa tarjeta. Solo los apartados con contenido no vacío están habilitados; el seleccionado no cambia de aspecto ni tiene transición al hover. Los 18 conceptos actuales solo tienen explicación, así que los otros dos botones se muestran deshabilitados. No se añadieron casos ni ejemplos nuevos. La petición sustituye la anterior colocación de «Lo entiendo» a la izquierda y permite los ejemplos como vista opcional, sin recuperar el desplegable retirado.

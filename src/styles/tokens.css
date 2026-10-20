@@ -36,6 +36,9 @@
     --font-section: .9375rem;
     --line-body: 1.6;
     --control-border: var(--text-soft);
+    --radius-card: 12px;
+    --radius-control: 8px;
+    --radius-inset: 6px;
     --space-navigation-row: 18px;
     --gap-navigation-row: calc(var(--space-navigation-row) / 2);
     --space-navigation-indent: 24px;
