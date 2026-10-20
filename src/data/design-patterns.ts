@@ -40,7 +40,7 @@ export const designPatterns: Concept[] = [
   {
     id: 'prototype',
     title: 'Prototype',
-    description: 'Prototype crea objetos copiando uno existente y define qué datos se duplican o permanecen compartidos.',
+    description: 'Permite copiar un objeto y el estado de sus atributos.',
     source: conceptSources.prototype,
     level: 'Intermedio',
   },
