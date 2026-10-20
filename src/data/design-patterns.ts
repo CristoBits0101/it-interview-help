@@ -25,7 +25,7 @@ export const designPatterns: Concept[] = [
   },
   {
     id: 'factory',
-    title: 'Factory',
+    title: 'Simple Factory',
     description: 'Devuelve un objeto según el argumento recibido con un método común de interfaz o clase abstracta.',
     source: conceptSources.factory,
     level: 'Esencial',
