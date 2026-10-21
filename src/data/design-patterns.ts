@@ -73,6 +73,13 @@ export const designPatterns: Concept[] = [
     level: 'Intermedio',
   },
   {
+    id: 'factory-method',
+    title: 'Factory Method',
+    description: 'Una clase padre define un método de creación común que cada subclase implementa para devolver un objeto.',
+    source: conceptSources.factoryMethod,
+    level: 'Intermedio',
+  },
+  {
     id: 'state',
     title: 'State',
     description: 'State cambia el comportamiento de un objeto al delegarlo en otro que representa su estado actual.',
@@ -100,7 +107,7 @@ const patternPages = [
     id: 'patrones',
     title: 'Creational',
     description: 'Patrones para decidir cómo se crean los objetos.',
-    conceptIds: ['factory', 'builder', 'prototype', 'singleton'],
+    conceptIds: ['factory', 'builder', 'prototype', 'singleton', 'factory-method'],
   },
   {
     id: 'patrones-estructurales',

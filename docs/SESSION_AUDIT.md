@@ -1,5 +1,13 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 21 de octubre de 2026 — conservar la explicación de Simple Factory
+
+El usuario no autorizó reformular Simple Factory al añadir Factory Method. Se restaura literalmente su explicación anterior: «Devuelve un objeto según el argumento recibido con un método común de interfaz o clase abstracta.» Se conserva la tarjeta nueva de Factory Method. No reformules conceptos existentes como efecto secundario de añadir otro.
+
+## 21 de octubre de 2026 — Factory Method independiente
+
+Se añade Factory Method en Creational con ID `factory-method` y nivel Intermedio. Simple Factory conserva `factory` y su nivel Esencial. Se aclara su explicación y se corrige su fuente a la sección Simple Factory de Factory Comparison. Factory Method conserva la referencia específica en español. Creational muestra cinco tarjetas y el total pasa a 14 patrones y 19 conceptos con SOLID. No se añaden casos de uso ni implementaciones. Verificado en Chrome a 1440, 390 y 320 px. Comprobación de tipos y compilación correctas. El enlace de Simple Factory usa un fragmento de texto porque la sección no tiene un ID HTML.
+
 ## 20 de octubre de 2026 — etiqueta Implementación
 
 El usuario confirma «Implementación» como nombre definitivo de la vista de código. Sustituye «Codificación» y conserva el ID `example`, los datos y la disponibilidad según contenido.
