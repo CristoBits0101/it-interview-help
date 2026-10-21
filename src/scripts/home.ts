@@ -17,4 +17,5 @@ export function initializeCareerPaths() {
   };
   profiles.forEach(button => button.addEventListener('click', () => { profileId = button.dataset.careerProfile!; update(); }));
   stages.forEach(button => button.addEventListener('click', () => { stageId = button.dataset.careerStage!; update(); }));
+  return update;
 }

@@ -8,6 +8,9 @@ import NavigationTree from '../components/NavigationTree.astro';
 import HomeOverview from '../components/HomeOverview.astro';
 import { navigation, type NavigationNode } from '../data/navigation';
 import { tracks as coreTracks, type Concept } from '../data/curriculum';
+import { designPatterns } from '../data/design-patterns';
+import { translatePatternTitle } from '../scripts/i18n';
+const patternIds = new Set(designPatterns.map(pattern => pattern.id));
 const conceptViews = (concept: Concept) => {
   const views = [
     { id: 'explanation', label: 'Explicación', content: concept.description.trim() },
@@ -67,6 +70,14 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
         <nav class="breadcrumb" aria-label="Ruta actual"><a href="#home" data-home-link aria-current="page" lang="en">Home</a><span class="breadcrumb-path" id="breadcrumb-path" hidden></span></nav>
         <div class="topbar-actions">
           <div class="search-box" role="search" aria-label="Buscar conceptos"><Icon name="search" size={18} /><input id="search" type="search" aria-label="Buscar conceptos" placeholder="Buscar conceptos" autocomplete="off" aria-keyshortcuts="Control+k Meta+k" /><button class="search-clear" id="search-clear" type="button" aria-label="Borrar búsqueda" hidden><Icon name="close" size={15} /></button></div>
+          <div class="language-selector">
+            <label class="sr-only" for="language-select">Idioma</label>
+            <select id="language-select" autocomplete="language">
+              <option value="es" lang="es">Español</option>
+              <option value="en" lang="en">English</option>
+            </select>
+            <Icon name="down" size={14} />
+          </div>
         </div>
       </header>
 
@@ -88,7 +99,7 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
             {tracks.map((track, ti) => track.modules.map((module, mi) => <section class="concept-section" data-track-id={track.id} data-module-id={module.id} data-module-title={module.title} data-module-description={module.description} data-module-number={String(mi + 1).padStart(2, '0')} data-track-title={track.title} data-track-eyebrow={track.eyebrow} hidden={ti !== 0 || mi !== 0}>
               <h2 class="search-group-heading sr-only">{track.title}<Icon name="chevron" size={13} />{module.title}</h2>
               <div class="concept-grid">{module.concepts.map((concept, ci) => <article class="concept-card" id={`concept-${concept.id}`} data-concept-id={concept.id} data-level={concept.level}>
-                <div class="card-top"><div class="card-heading"><span class="concept-number">{String(ci + 1).padStart(2, '0')}</span><h3>{concept.title}</h3></div><span class={`level-badge level-${concept.level.toLowerCase()}`}>{concept.level}</span></div>
+                <div class="card-top"><div class="card-heading"><span class="concept-number">{String(ci + 1).padStart(2, '0')}</span><h3 data-pattern-title={patternIds.has(concept.id) ? concept.title : undefined} lang={patternIds.has(concept.id) ? 'es' : undefined} translate={patternIds.has(concept.id) ? 'no' : undefined}>{patternIds.has(concept.id) ? translatePatternTitle(concept.title, 'es') : concept.title}</h3></div><span class={`level-badge level-${concept.level.toLowerCase()}`}>{concept.level}</span></div>
                 <div class="concept-description" aria-live="polite" aria-atomic="true">
                   {conceptViews(concept).map(view => <div id={`concept-${concept.id}-${view.id}`} data-card-panel={view.id} hidden={!view.active}><p>{view.content}</p></div>)}
                 </div>

@@ -1,12 +1,14 @@
 # Memoria de producto, diseño y desarrollo
 
-Estado documentado: **20 de octubre de 2026**. Lee también [AGENTS.md](../AGENTS.md). Las preferencias expresas del usuario se indican como tales; las medidas y limitaciones describen la implementación actual y no impiden cambios posteriores solicitados.
+Estado documentado: **21 de octubre de 2026**. Lee también [AGENTS.md](../AGENTS.md). Las preferencias expresas del usuario se indican como tales; las medidas y limitaciones describen la implementación actual y no impiden cambios posteriores solicitados.
 
 ## 1. Propósito y preferencias
 
 Tech Training es una web abierta para aprender fundamentos de tecnología y preparar pruebas técnicas. Prioriza conceptos claros, descripciones cortas y recuperación activa de lo aprendido. No es una aplicación de escritorio ni una plataforma que ejecute modelos de IA.
 
-El usuario pidió un diseño profesional, moderno y minimalista, con especial cuidado por la simetría, márgenes y alineación. Los enlaces de navegación usan nombres completos en inglés y Title Case; las explicaciones y buena parte de los controles están en español. No traduzcas ni abrevies áreas de forma arbitraria. Las siglas propias de conceptos técnicos, como SQL, RPC o LLM, pueden formar parte de las lecciones.
+La interfaz de Home y Software Design está disponible en español e inglés. El selector de idiomas es un `<select>` nativo con las opciones Español y English en la cabecera después del buscador. Sustituye los dos botones ES / EN. El español es el idioma inicial y la elección se conserva en `tech-training:language:v1`. El cambio mantiene la ruta actual y actualiza títulos, navegación, tarjetas, niveles, ayudas y mensajes dinámicos. Mantén las dos versiones al editar contenido visible. Los textos bilingües se centralizan en `src/scripts/i18n.ts`. Por la última petición del 21 de octubre, los nombres de patrones de diseño muestran solo su traducción española al elegir Español y solo su nombre inglés al elegir English, sin combinar ambos. Las siglas técnicas conservan su notación.
+
+El usuario pidió un diseño profesional, moderno y minimalista, con especial cuidado por la simetría, márgenes y alineación. Los enlaces de navegación usan nombres completos en el idioma elegido y conservan Title Case. Las etiquetas inglesas canónicas se mantienen en los datos para resolver rutas y persistencia. Las siglas propias de conceptos técnicos, como SQL, RPC o LLM, pueden formar parte de las lecciones.
 
 La marca del sidebar es exactamente **Tech Training**. El usuario retiró el logo gráfico, el guion y el subtítulo «Un concepto. Un paso más.». También retiró el separador horizontal, la biblioteca de exploración/guardados y el pie de progreso. El borde vertical entre sidebar y contenido y las guías de indentación de los submenús siguen presentes. La nueva portada Home sustituye al antiguo hero y la franja de seis rutas. La etiqueta `Library` y el acceso al repaso rápido global también se eliminaron. Más adelante se retiró el botón de repaso de la cabecera de estudio; su código y diálogo se conservan.
 
@@ -126,7 +128,7 @@ En el sidebar se corrigió un problema concreto: sumar gap + padding + márgenes
 
 | Propiedad | Valor actual |
 | --- | --- |
-| Ancho del sidebar | 332 px; móvil `min(332px, 100vw)` |
+| Ancho del sidebar | Intrínseco al texto más largo de todos los subniveles renderizados mediante `--sidebar-width`; móvil `min(var(--sidebar-width), 100vw)` |
 | Padding exterior | 16 px en los cuatro lados |
 | Marca | `min-height: 48px`, texto a 20 px, padding vertical/horizontal 9/18 px |
 | Etiqueta y filas de navegación de todos los niveles | `min-height: 48px`, `line-height: 24px`, padding vertical de 12 px y horizontal de 18 px |
@@ -137,7 +139,9 @@ En el sidebar se corrigió un problema concreto: sumar gap + padding + márgenes
 | Indentación de cada árbol hijo | Margen izquierdo 24 px + padding izquierdo 12 px + guía de 1 px |
 | Inset derecho de todas las filas | `--navigation-end-inset: 18px` |
 
-La retícula mantiene 48 px entre centros de filas de una sola línea, incluidos marca y etiqueta. No significa que los trazos de fuentes de diferentes tamaños tengan exactamente el mismo espacio óptico. Los títulos largos de subniveles pueden ocupar más de una línea; no recortes contenido ni fuerces alturas que lo oculten. Los nombres principales permanecen en una línea cuando caben.
+La retícula mantiene 48 px entre centros de filas, incluidos marca y etiqueta. No significa que los trazos de fuentes de diferentes tamaños tengan exactamente el mismo espacio óptico. Por petición del 21 de octubre, todas las etiquetas se muestran completas en una sola línea. No uses wrap, elipsis ni overflow oculto. `navigation.ts` mide un clon temporal con todos los subniveles renderizados abiertos y lo retira inmediatamente sin modificar el estado del menú real. Incluye las indentaciones, iconos, paddings, chevrons y el espacio de scrollbar. El ancho se recalcula con el idioma, las fuentes, el tamaño de texto y el espaciado. La variable compartida ajusta también el margen del contenido y la posición del toast. Tras habilitar todas las ramas, en Chrome a tamaño normal se midieron 423 px en español y 347 px en inglés; son resultados y no valores que se deban fijar.
+
+La barra vertical pertenece al aside completo y ocupa toda su altura junto al borde derecho sin margen exterior. Conserva el padding interior de 16 px y reserva el espacio de la barra para que no cambie el ancho al abrir ramas. La cabecera es sticky para mantener accesible la marca y el cierre móvil. Si una pantalla estrecha no permite mostrar una fila completa, la sección de navegación admite desplazamiento horizontal interno sin truncar texto ni desplazar la cabecera.
 
 Los chevrons son de 14 px, con `margin-inline-start: auto` y centrado vertical. La indentación solo cambia la izquierda; añadir márgenes o padding derecho a cada subárbol rompe su columna común. Los iconos de área son de 18 px. `Icon.astro` centraliza Lucide con trazo 1.65 y SVG decorativos `aria-hidden`.
 
@@ -167,11 +171,11 @@ Todos los pictogramas se obtienen de `lucide-astro` mediante `Icon.astro`, tambi
 
 ### Responsive
 
-El sidebar es fijo en escritorio. A 850 px o menos pasa a un panel móvil con backdrop, control de foco, `inert`, cierre con Escape y cierre al navegar. Las tarjetas pasan a una columna cuando su contenedor mide 44rem o menos. Esta condición también responde al tamaño de fuente del navegador. Hay ajustes adicionales en 1050, 1250 y 1600 px. Conserva la navegación accesible y verifica ausencia de desbordamiento horizontal, también con submenús abiertos.
+El sidebar es fijo en escritorio. A 850 px o menos pasa a un panel móvil con backdrop, control de foco, `inert`, cierre con Escape y cierre al navegar. También pasa a panel plegable si su ancho intrínseco dejaría menos de 20 rem al contenido principal, para responder a traducciones largas y texto ampliado. `navigation.ts` coordina `.sidebar-drawer` y el evento `sidebar-layout-change` con el estado accesible de `app.ts`. Las tarjetas pasan a una columna cuando su contenedor mide 44rem o menos. Esta condición también responde al tamaño de fuente del navegador. Hay ajustes adicionales en 1050, 1250 y 1600 px. Conserva la navegación accesible y verifica ausencia de desbordamiento horizontal de la página, también con submenús abiertos. El desplazamiento horizontal interno del menú en pantallas estrechas es intencional para conservar las etiquetas completas.
 
 ## 5. Taxonomía y contenido
 
-El árbol completo y su orden se definen en `src/data/navigation.ts`. Las once áreas principales aparecen en el mismo orden que la tabla de iconos. Las áreas y ramas sin contenido permanecen visibles como filas deshabilitadas. Sus descendientes se conservan en los datos y aparecerán cuando la rama tenga contenido disponible.
+El árbol completo y su orden se definen en `src/data/navigation.ts`. Las once áreas principales aparecen en el mismo orden que la tabla de iconos. Por petición del 21 de octubre, todas las ramas con hijos se pueden desplegar aunque no tengan páginas disponibles. Sus descendientes se renderizan y conservan el árbol completo. Las hojas sin destino siguen como filas deshabilitadas sin enlace. Esta decisión sustituye el bloqueo recursivo de ramas sin contenido. Abrirlas no publica páginas ni cambia las rutas disponibles.
 
 Por petición del usuario, dentro de Software Development aparece primero Frontend Development y después Backend Development.
 
@@ -195,7 +199,7 @@ El árbol amplio sustituye al antiguo sidebar de solo seis rutas. El catálogo f
 | System Design | `system-design` | 12 | Software Engineering |
 | Applied Artificial Intelligence | `applied-ai` | 32 | Artificial Intelligence |
 
-Total actual en el catálogo fuente: 113 conceptos. La interfaz disponible muestra Home y Software Design con 18 conceptos en cuatro páginas: SOLID Principles, Creational, Structural y Behavioral. Las recomendaciones de Home conservan el mapa profesional y muestran las rutas excluidas como no disponibles. El diálogo histórico de fuentes se limita a las referencias de Software Design. `Information Architecture` y `User Experience Design` apuntan actualmente al mismo módulo en el catálogo; no dupliques sus conceptos solo para crear dos destinos. Sistemas distribuidos y diseño de sistemas son áreas distintas, no una debe absorber la otra.
+Total actual en el catálogo fuente: 113 conceptos. La interfaz disponible muestra Home y Software Design con 19 conceptos en cuatro páginas: SOLID Principles, Creational, Structural y Behavioral. Las recomendaciones de Home conservan el mapa profesional y muestran las rutas excluidas como no disponibles. El diálogo histórico de fuentes se limita a las referencias de Software Design. `Information Architecture` y `User Experience Design` apuntan actualmente al mismo módulo en el catálogo; no dupliques sus conceptos solo para crear dos destinos. Sistemas distribuidos y diseño de sistemas son áreas distintas, no una debe absorber la otra.
 
 Modelo: `Track` contiene módulos; cada `Module` contiene conceptos. Un `Concept` tiene `id`, `title`, `description`, `source` y `level` (`Esencial`, `Intermedio` o `Avanzado`). `description` contiene la Explicación en un único párrafo. `useCase` y `example` son campos opcionales para los otros dos botones; si faltan o solo tienen espacios, sus botones quedan deshabilitados. Los 19 conceptos publicados solo tienen explicación. No se añade contenido para habilitar controles por iniciativa del agente. `source` es obligatorio y referencia un autor u organismo con título y URL en `src/data/concept-sources.ts`. `details` y `memory` son históricos y no se renderizan. Búsqueda y repaso leen explícitamente el panel de explicación para no variar al cambiar de vista. Los archivos de datos son la fuente de verdad, no el HTML compilado.
 
@@ -278,7 +282,7 @@ La búsqueda es global, ignora mayúsculas y diacríticos, y acepta `Ctrl/Cmd + 
 | `tech-training:v1` | `{ "learned": ["concept-id", ...] }`: conceptos comprendidos |
 | `tech-training:navigation:v1` | Array de IDs de ramas abiertas, calculados a partir de su ruta completa de etiquetas codificadas |
 
-No se sincroniza entre dispositivos. Se validan IDs al leer y se ignoran las ramas que ahora están deshabilitadas por no tener contenido. Si localStorage está bloqueado o contiene JSON inválido, la interfaz debe seguir funcionando. Menús cerrados en una primera visita sin estado; después se restaura cada rama disponible, incluidos hijos abiertos dentro de padres cerrados. Se guarda con `toggle` y `pagehide`. Navegar a una lección no abre sus padres automáticamente.
+No se sincroniza entre dispositivos. Se validan IDs al leer y se ignoran solo los que ya no existen en el árbol renderizado. Se conserva el estado de todas las ramas con hijos aunque no tengan contenido publicado. Si localStorage está bloqueado o contiene JSON inválido, la interfaz debe seguir funcionando. Menús cerrados en una primera visita sin estado; después se restaura cada rama, incluidos hijos abiertos dentro de padres cerrados. Se guarda con `toggle` y `pagehide`. Navegar a una lección no abre sus padres automáticamente.
 
 Los IDs de conceptos y módulos deben ser únicos y estables; la selección de módulo también compara su ID por separado. Renombrar una etiqueta de rama cambia su clave de persistencia: considera compatibilidad al reorganizar el árbol.
 
@@ -344,3 +348,12 @@ La vista «Implementación» sustituye la etiqueta «Ejemplo» por petición del
 El 21 de octubre de 2026 se añade Factory Method con ID `factory-method` y nivel Intermedio. Simple Factory conserva el ID `factory` y nivel Esencial. Son conceptos distintos. Simple Factory enlaza a la sección correspondiente de Factory Comparison de Refactoring.Guru en inglés. Factory Method enlaza a su página en español. Hay 14 patrones y 19 conceptos publicados en Software Design.
 
 Al añadir un concepto no reformules otros existentes sin petición expresa. El 21 de octubre se restauró literalmente la explicación de Simple Factory por indicación del usuario.
+
+
+### Corrección de idiomas del 21 de octubre de 2026
+
+El selector nativo mantiene un objetivo de 44 px y la escala de 14 px/400. Usa los tokens y el chevron de Lucide. La cabecera permite reflujo al ampliar texto sin desbordar. Las traducciones conservan el HTML y las cadenas originales mediante referencias a cada nodo y atributo. Navegación y breadcrumb mantienen Title Case como `Diseño de Software`. Los párrafos mantienen la capitalización y el número de frases originales. Los títulos de patrones se localizan con `translatePatternTitle` en `src/scripts/i18n.ts`: por ejemplo `Método de Fábrica` en español y `Factory Method` en inglés. Cada título muestra un solo idioma. El HTML inicial usa español y conserva el nombre inglés de `src/data/design-patterns.ts` en `data-pattern-title`. El motor actualiza explícitamente el texto y su atributo `lang`; `translate="no"` protege frente a traducciones automáticas externas. El repaso mantiene estos atributos y las etiquetas accesibles leen el título localizado. La búsqueda admite los dos nombres. Esta petición sustituye los títulos siempre ingleses y la presentación bilingüe anterior. No se reformulan las explicaciones españolas. Se cubren además metadatos, autorías, títulos de fuentes, etiquetas accesibles y anuncios de búsquedas y perfiles. Behavioral se traduce como `Comportamiento`.
+
+El selector de idiomas no muestra outline exterior ni sombra al enfocarse por petición posterior del usuario. La señal de foco utiliza el fondo suave y el color de texto e icono. El modo de colores forzados mantiene el contorno del sistema.
+
+La capitalización de títulos y etiquetas se aplica solo a las palabras principales. Artículos, preposiciones y conjunciones como de, del, la, en e y quedan en minúscula salvo al inicio. Conserva nombres propios y siglas. Ejemplos: `Diseño de Software`, `Calidad del Software` y `Director of Engineering`. Esta precisión sustituye la regla anterior que capitalizaba cada palabra.

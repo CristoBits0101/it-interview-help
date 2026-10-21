@@ -1,5 +1,47 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 21 de octubre de 2026 — títulos españoles sin duplicar nombres
+
+La última petición sustituye la decisión de mantener siempre el título inglés. Con Español seleccionado, los 14 patrones muestran solo su nombre español. Con English seleccionado muestran solo el inglés. No se añade un segundo nombre tras `·`. Las equivalencias se centralizan en `translatePatternTitle` e incluyen `Fábrica Simple`, `Constructor`, `Instancia Única` y `Método de Fábrica`. Los datos e IDs conservan su forma original. `data-pattern-title` guarda el nombre inglés canónico y el motor actualiza el texto y `lang` de forma explícita. El HTML inicial también muestra español. El repaso y las etiquetas accesibles conservan el nombre visible y la búsqueda admite ambos idiomas.
+
+Chrome comprobó los 14 nombres durante cinco alternancias ES/EN y tras recargar. Las búsquedas `Método de Fábrica` y `Factory Method` devuelven la misma tarjeta española y ocurre lo mismo con `Instancia Única` y `Singleton`. Las etiquetas de vistas y fuentes coinciden con cada título. Revisadas capturas a 1440 y 320 px sin desbordamiento. Se conserva Google Sans Flex. Tipos y compilación correctos.
+
+## 21 de octubre de 2026 — títulos de patrones siempre en inglés
+
+El usuario pide conservar los nombres de los patrones de diseño en inglés por ser su denominación natural para el estudio técnico. Se elimina la tabla de títulos bilingües del motor de traducción. Los títulos se toman de `src/data/design-patterns.ts` sin añadir equivalentes españoles tras `·`. Se marcan con `lang="en"` y `translate="no"` y el motor respeta esos atributos. El repaso mantiene también esa semántica. La búsqueda y los nombres accesibles usan el mismo título. Las categorías y explicaciones siguen el idioma seleccionado. Esta decisión sustituye la presentación bilingüe descrita en la revisión anterior.
+
+Verificado en Chrome: los 14 títulos permanecen iguales durante cinco cambios consecutivos ES/EN y tras recargar. Se recorrieron Creational, Structural y Behavioral y se comprobaron las etiquetas de vistas y fuentes. Buscar `Factory Method` devuelve su tarjeta. Las explicaciones siguen cambiando de idioma. Se revisaron escritorio y móvil a 320 px sin desbordamiento y con Google Sans Flex. Tipos y compilación correctos.
+
+## 21 de octubre de 2026 — desplegables sin bloqueo por contenido
+
+El usuario retira el bloqueo de ramas sin contenido. Todas las ramas con hijos vuelven a ser `details`/`summary` operables con ratón y teclado y conservan su persistencia. Se renderizan sus descendientes aunque no tengan ninguna página disponible. Solo las hojas sin destino continúan deshabilitadas. Las páginas disponibles siguen siendo Home y Software Design. Esta petición sustituye la decisión anterior de desactivar ramas vacías y su comprobación recursiva de contenido.
+
+Comprobado en Chrome: 14 desplegables operables y 45 hojas deshabilitadas. La primera visita mantiene todas las ramas cerradas. Mathematics abre con Enter y conserva su estado al recargar. Las 63 etiquetas se traducen en español e inglés. Con todos los subniveles abiertos no hay etiquetas partidas ni desbordamiento de página en escritorio. El ancho automático se ajusta a 423 px en español y 347 px en inglés. A 320 px funcionan abrir/cerrar ramas, el desplazamiento interno y el cierre móvil sin desbordamiento de página. Solo permanecen los cuatro enlaces de páginas publicadas. Tipos y compilación correctos.
+
+El árbol completo exige más espacio al ampliar texto. Se añade el paso a panel plegable cuando el ancho del sidebar dejaría menos de 20 rem al contenido, además del umbral móvil de 850 px. Los estilos, backdrop y estado `inert` comparten esta decisión. Se comprobó ausencia de desbordamiento a 1024 y 851 px con texto al 100 % y 200 %.
+
+## 21 de octubre de 2026 — ancho del aside y scroll a toda altura
+
+El usuario pide ajustar el ancho al largo de las etiquetas sin saltos de línea ni texto oculto y colocar la barra vertical a toda altura junto al borde derecho. Se sustituye el ancho fijo de 332 px por una medición del contenido completo, incluidos los subniveles cerrados. La medición usa un clon temporal sin IDs que se retira síncronamente y no modifica la persistencia ni abre ramas reales. `--sidebar-width` coordina aside, workspace y toast. Se recalcula con idioma, fuentes, ampliación y espaciado. La navegación usa etiquetas de una sola línea sin elipsis. En móvil conserva un scroll horizontal interno cuando el ancho disponible es insuficiente. La barra vertical corresponde al aside completo sin margen derecho y la cabecera sticky conserva el cierre accesible.
+
+Verificado en Chrome a 1440, 1024, 851, 390 y 320 px con español e inglés y subniveles abiertos. Se midieron 362 px en español y 326 px en inglés a tamaño normal sin desbordamiento de página. Las flechas mantienen el inset de 18 px. Se comprobó texto al 200 % y espaciado personalizado sin cortes ni wrap. A 900 px de altura, el contenedor del scroll mide exactamente de 0 a 900 px; la sección interior no tiene scroll vertical propio. El botón de cierre sigue visible y operable al final del scroll vertical y horizontal móvil. Revisadas capturas de escritorio y móvil. `npm run check` pasó sobre 18 archivos sin incidencias y `npm run build` terminó correctamente.
+
+## 21 de octubre de 2026 — mayúsculas solo en palabras principales
+
+Se corrige la capitalización de navegación, breadcrumb, etiquetas profesionales y títulos de fuentes. Las palabras de enlace quedan en minúscula salvo al inicio. Por ejemplo `Diseño de Software`, `Calidad del Software` y `Director of Engineering`. Se mantienen siglas y nombres propios.
+
+## 21 de octubre de 2026 — foco del selector de idiomas
+
+Se retiran el contorno exterior y la sombra de foco del selector de idiomas. El foco usa el fondo suave y el color de texto e icono. Se conserva el indicador del sistema en colores forzados.
+
+## 21 de octubre de 2026 — selector nativo y fidelidad de traducción
+
+El usuario señala pérdida de capitalización y formato y traducciones incompletas. Se sustituyen los botones ES / EN por un selector nativo Español / English. Se conserva Title Case en navegación y breadcrumb y las mayúsculas de etiquetas y contadores. El motor conserva el texto original de los nodos y atributos para evitar traducciones acumulativas. Las explicaciones españolas no se reformulan. Los títulos de patrones incluyen en español el nombre técnico y su traducción tal como se propuso antes de la aprobación inicial. Se completan metadatos, nombres accesibles de perfiles y marca, fuentes, autorías y anuncios de resultados y selección profesional. La búsqueda admite las etiquetas localizadas. Esta decisión sustituye la forma de control y las limitaciones de cobertura del primer selector. Verificación en Chrome: recorrido ES → EN → ES repetido conserva exactamente textos, títulos y estructura; sin cadenas españolas pendientes de traducción en el inventario de textos ingleses. Se comprobó búsqueda y anuncios en el idioma nuevo y persistencia al recargar la misma ruta. Reflujo a 320, 390 y 1440 px y texto al 200 % sin desbordamiento. Se evita partir títulos y etiquetas de nivel en móvil. Tipos y compilación correctos.
+
+## 21 de octubre de 2026 — selector ES / EN
+
+Se añade un selector compacto a la derecha del buscador en la cabecera. La preferencia se guarda en `tech-training:language:v1`; cambiar idioma conserva la ruta, filtros y progreso. El español es el idioma inicial. Se localizan la navegación, la interfaz y el contenido de Home y Software Design, incluidos los conceptos SOLID, los 14 patrones, orientación profesional, filtros, estados y etiquetas accesibles. Las equivalencias centrales viven en `src/scripts/i18n.ts`; conserva ambas versiones al editar texto visible.
+
 ## 21 de octubre de 2026 — conservar la explicación de Simple Factory
 
 El usuario no autorizó reformular Simple Factory al añadir Factory Method. Se restaura literalmente su explicación anterior: «Devuelve un objeto según el argumento recibido con un método común de interfaz o clase abstracta.» Se conserva la tarjeta nueva de Factory Method. No reformules conceptos existentes como efecto secundario de añadir otro.

@@ -69,7 +69,7 @@ const stats = [
         <section class="career-panel" data-career-panel={profile.id} data-stage={stage.id} hidden={profileIndex !== 0 || stageIndex !== 0} aria-labelledby={`career-heading-${profile.id}-${stage.id}`}>
           <header class="career-panel-heading">
             <div><p class="home-kicker">{stage.label}</p><h3 id={`career-heading-${profile.id}-${stage.id}`}>{profile.label}</h3><p>{profile.summary}</p></div>
-            <span class="career-area-count">{stage.areas.length} áreas en esta etapa</span>
+            <span class="career-area-count" data-stage-area-count={stage.areas.length}>{stage.areas.length} áreas en esta etapa</span>
           </header>
           <div class="career-plan-layout">
             <div class="career-plan-content">
@@ -81,11 +81,11 @@ const stats = [
                   const linkedTrack = area?.href ? tracks.find(track => area.href?.startsWith(`#${track.id}/`)) : undefined;
                   return <li class="career-area-card">
                     <div class="career-area-heading"><span class="career-area-number">{String(index + 1).padStart(2, '0')}</span>
-                      <div>{linkedTrack && area?.href ? <a href={area.href} data-route={linkedTrack.id}>{label}<Icon name="arrow" size={14} /></a> : <strong>{label}</strong>}
+                      <div>{linkedTrack && area?.href ? <a href={area.href} data-route={linkedTrack.id}><span data-area-translation={label}>{label}</span><Icon name="arrow" size={14} /></a> : <strong data-area-translation={label}>{label}</strong>}
                         {linkedTrack ? <span class="career-content-status is-available">{conceptCount(linkedTrack)} conceptos disponibles</span> : <span class="career-content-status">Contenido no disponible ahora</span>}
                       </div>
                     </div>
-                    {guidance && <><p class="career-area-focus">{guidance.focus}</p><p class="career-prerequisites"><span>Base previa</span>{guidance.prerequisites.length ? guidance.prerequisites.join(' · ') : 'Puedes empezar aquí'}</p></>}
+                    {guidance && <><p class="career-area-focus">{guidance.focus}</p><p class="career-prerequisites"><span>Base previa</span>{guidance.prerequisites.length ? guidance.prerequisites.map((prerequisite, prerequisiteIndex) => <>{prerequisiteIndex > 0 && ' · '}<span data-area-translation={prerequisite}>{prerequisite}</span></>) : 'Puedes empezar aquí'}</p></>}
                   </li>;
                 })}
               </ol>
@@ -116,9 +116,9 @@ const stats = [
   </section>
 
   <section class="home-section" id="available-routes" aria-labelledby="available-title">
-    <header class="home-section-heading"><div><p class="home-kicker">03 / PASA A LOS CONCEPTOS</p><h2 id="available-title">Explora las rutas disponibles.</h2></div><p>{tracks.length} rutas disponibles. Definiciones breves y fuentes originales para profundizar.</p></header>
+    <header class="home-section-heading"><div><p class="home-kicker">03 / PASA A LOS CONCEPTOS</p><h2 id="available-title">Explora las rutas disponibles.</h2></div><p class="available-route-summary" data-route-count={tracks.length}>{tracks.length} rutas disponibles. Definiciones breves y fuentes originales para profundizar.</p></header>
     <div class="home-route-grid">
-      {tracks.map((track, index) => <a class="home-route-card" href={`#${track.id}/${track.modules[0].id}`} data-route={track.id}><div class="home-route-meta"><span>RUTA {String(index + 1).padStart(2, '0')}</span><Icon name="arrow" size={18} /></div><h3>{routeLabel(track)}</h3><p>{conceptCount(track)} conceptos <span>·</span> {track.modules.length} {track.modules.length === 1 ? 'módulo' : 'módulos'}</p></a>)}
+      {tracks.map((track, index) => <a class="home-route-card" href={`#${track.id}/${track.modules[0].id}`} data-route={track.id}><div class="home-route-meta"><span data-route-number={String(index + 1).padStart(2, '0')}>RUTA {String(index + 1).padStart(2, '0')}</span><Icon name="arrow" size={18} /></div><h3>{routeLabel(track)}</h3><p><span data-concept-count={conceptCount(track)}>{conceptCount(track)} conceptos</span> <span aria-hidden="true">·</span> <span data-module-count={track.modules.length}>{track.modules.length} {track.modules.length === 1 ? 'módulo' : 'módulos'}</span></p></a>)}
     </div>
   </section>
 </section>

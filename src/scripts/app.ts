@@ -1,8 +1,12 @@
 import { initializeNavigation } from './navigation';
 import { initializeCareerPaths } from './home';
+import { applyStaticTranslations, getSavedLanguage, saveLanguage, translate, translatePatternTitle, type Language } from './i18n';
 
 initializeNavigation();
-initializeCareerPaths();
+const refreshCareerSelection = initializeCareerPaths();
+let language: Language = getSavedLanguage();
+applyStaticTranslations(language);
+refreshCareerSelection?.();
 
 const $ = <T extends HTMLElement = HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
 const $$ = <T extends HTMLElement = HTMLElement>(selector: string) => Array.from(document.querySelectorAll<T>(selector));
@@ -30,7 +34,7 @@ const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u0
 function setLevel(index: number) {
   currentLevelIndex = Math.max(0, Math.min(levelOptions.length - 1, index));
   currentLevelValue = levelOptions[currentLevelIndex].value;
-  levelCurrent.textContent = levelOptions[currentLevelIndex].label;
+  levelCurrent.textContent = translate(levelOptions[currentLevelIndex].label, language);
   levelPrevious.disabled = currentLevelIndex === 0;
   levelNext.disabled = currentLevelIndex === levelOptions.length - 1;
 }
@@ -57,7 +61,7 @@ const say = (message: string) => {
 const persist = () => {
   try { localStorage.setItem(storageKey, JSON.stringify({ learned: [...learned] })); }
   catch { storageAvailable = false; }
-  if (!storageAvailable) say('El progreso se mantendrá durante esta sesión. El almacenamiento local no está disponible.');
+  if (!storageAvailable) say(translate('El progreso se mantendrá durante esta sesión. El almacenamiento local no está disponible.', language));
 };
 
 function refreshProgress() {
@@ -68,8 +72,9 @@ function refreshProgress() {
     card.classList.toggle('is-learned', isLearned);
     const learnButton = card.querySelector<HTMLButtonElement>('[data-learn]')!;
     learnButton.setAttribute('aria-pressed', String(isLearned));
-    learnButton.setAttribute('aria-label', `${isLearned ? 'Comprendido' : 'Lo entiendo'}. ${title}`);
-    learnButton.querySelector('.learn-label')!.textContent = isLearned ? 'Comprendido' : 'Lo entiendo';
+    const label = isLearned ? 'Comprendido' : 'Lo entiendo';
+    learnButton.setAttribute('aria-label', `${translate(label, language)}. ${title}`);
+    learnButton.querySelector('.learn-label')!.textContent = translate(label, language);
   });
 }
 
@@ -77,7 +82,14 @@ function refreshView() {
   const query = normalize(search.value.trim());
   searchClear.hidden = !search.value;
   const selectedSection = sections.find(section => section.dataset.moduleId === currentModule)!;
-  const matchesSearch = (card: HTMLElement) => !query || normalize(`${card.closest<HTMLElement>('.concept-section')!.dataset.trackTitle} ${card.closest<HTMLElement>('.concept-section')!.dataset.trackEyebrow} ${card.closest<HTMLElement>('.concept-section')!.dataset.moduleTitle} ${card.querySelector('h3')!.textContent} ${card.querySelector('[data-card-panel="explanation"]')!.textContent}`).includes(query);
+  const matchesSearch = (card: HTMLElement) => {
+    const section = card.closest<HTMLElement>('.concept-section')!;
+    const metadata = [section.dataset.trackTitle, section.dataset.trackEyebrow, section.dataset.moduleTitle]
+      .map(label => `${label ?? ''} ${translate(label ?? '', language)}`).join(' ');
+    const title = card.querySelector<HTMLElement>('h3')!;
+    const patternTitle = title.dataset.patternTitle ?? '';
+    return !query || normalize(`${metadata} ${title.textContent} ${patternTitle} ${translatePatternTitle(patternTitle, 'es')} ${card.querySelector('[data-card-panel="explanation"]')!.textContent}`).includes(query);
+  };
   const availableCards = cards.filter(card => {
     const section = card.closest<HTMLElement>('.concept-section')!;
     return (mode === 'search' || mode === 'module' && section.dataset.moduleId === currentModule) && matchesSearch(card);
@@ -86,7 +98,7 @@ function refreshView() {
   levelOptions = [allLevelOptions[0], ...allLevelOptions.slice(1).filter(option => availableLevels.has(option.value))];
   if (!levelOptions.some(option => option.value === currentLevelValue)) currentLevelValue = 'all';
   currentLevelIndex = levelOptions.findIndex(option => option.value === currentLevelValue);
-  levelCurrent.textContent = levelOptions[currentLevelIndex].label;
+  levelCurrent.textContent = translate(levelOptions[currentLevelIndex].label, language);
   levelPrevious.disabled = currentLevelIndex === 0;
   levelNext.disabled = currentLevelIndex === levelOptions.length - 1;
   const navigationLinks = $$<HTMLAnchorElement>('[data-nav-link]');
@@ -96,7 +108,7 @@ function refreshView() {
     ?? navigationLinks.find(link => !link.dataset.navModule && new URL(link.href).hash.slice(1).split('/')[0] === currentTrack);
   const moduleLabel = currentLink?.querySelector('.navigation-label')?.textContent ?? selectedSection.dataset.moduleTitle!;
   const parentPath = currentLink?.closest<HTMLElement>('[data-nav-branch]')?.dataset.navBranch;
-  const navigationPath = [...(parentPath?.split('/').map(label => decodeURIComponent(label)) ?? []), moduleLabel];
+  const navigationPath = [...(parentPath?.split('/').map(label => translate(decodeURIComponent(label), language)) ?? []), moduleLabel];
   const isHome = mode === 'home';
   const isGrouped = mode === 'search';
   $('#home-view').hidden = !isHome;
@@ -104,7 +116,7 @@ function refreshView() {
   const breadcrumbPath = $('#breadcrumb-path');
   breadcrumbPath.hidden = isHome;
   breadcrumbPath.replaceChildren();
-  const pathLabels = isHome ? [] : isGrouped ? ['Búsqueda'] : navigationPath;
+  const pathLabels = isHome ? [] : isGrouped ? [translate('Búsqueda', language)] : navigationPath;
   pathLabels.forEach((label, index) => {
     const separator = document.createElement('span');
     separator.className = 'breadcrumb-slash';
@@ -114,7 +126,7 @@ function refreshView() {
     const item = document.createElement('span');
     item.className = isCurrent ? 'breadcrumb-current' : 'breadcrumb-ancestor';
     item.textContent = label;
-    item.lang = isGrouped ? 'es' : 'en';
+    item.lang = language;
     item.title = label;
     if (isCurrent) {
       item.id = 'breadcrumb-module';
@@ -125,7 +137,7 @@ function refreshView() {
   const homeLink = $('[data-home-link]');
   if (isHome) homeLink.setAttribute('aria-current', 'page');
   else homeLink.removeAttribute('aria-current');
-  document.title = isHome ? 'Tech Training · Home' : mode === 'search' ? 'Búsqueda · Tech Training' : `${selectedSection.dataset.moduleTitle} · Tech Training`;
+  document.title = isHome ? `Tech Training · ${translate('Home', language)}` : mode === 'search' ? `${translate('Búsqueda', language)} · Tech Training` : `${translate(selectedSection.dataset.moduleTitle!, language)} · Tech Training`;
   let visibleCount = 0;
   sections.forEach(section => {
     let groupCount = 0;
@@ -141,18 +153,19 @@ function refreshView() {
     visibleCount += groupCount;
   });
   $('#visible-count').textContent = String(visibleCount);
+  $('.concept-count').setAttribute('aria-label', `${visibleCount} ${language === 'en' ? visibleCount === 1 ? 'concept' : 'concepts' : visibleCount === 1 ? 'concepto' : 'conceptos'}`);
   $('#empty-state').hidden = visibleCount > 0;
   $('#module-bottom').hidden = isGrouped || visibleCount === 0;
   const heading = $('#study-title');
   if (mode === 'module') {
     heading.textContent = moduleLabel;
   } else {
-    heading.textContent = 'Resultados de búsqueda';
+    heading.textContent = translate('Resultados de búsqueda', language);
   }
   if (reviewModuleButton) {
     reviewModuleButton.disabled = visibleCount === 0;
     reviewModuleButton.style.opacity = visibleCount === 0 ? '.4' : '1';
-    reviewModuleButton.setAttribute('aria-label', mode === 'module' ? 'Repasar el módulo visible' : 'Repasar los conceptos visibles');
+    reviewModuleButton.setAttribute('aria-label', translate(mode === 'module' ? 'Repasar el módulo visible' : 'Repasar los conceptos visibles', language));
   }
   navigationLinks.forEach(link => {
     if (mode === 'module' && link === currentLink) link.setAttribute('aria-current', 'page');
@@ -161,7 +174,7 @@ function refreshView() {
   const next = sections[(sections.indexOf(selectedSection) + 1) % sections.length];
   const nextLink = $<HTMLAnchorElement>('#next-module');
   nextLink.href = `#${next.dataset.trackId}/${next.dataset.moduleId}`;
-  nextLink.setAttribute('aria-label', `Siguiente módulo: ${next.dataset.moduleTitle}`);
+  nextLink.setAttribute('aria-label', `${translate('Siguiente módulo:', language)} ${translate(next.dataset.moduleTitle!, language)}`);
 }
 
 function goToHash(initial = false) {
@@ -213,7 +226,7 @@ function announceResults() {
   clearTimeout(resultsTimer);
   resultsTimer = setTimeout(() => {
     const count = Number($('#visible-count').textContent);
-    $('#results-status').textContent = `${count} ${count === 1 ? 'concepto encontrado' : 'conceptos encontrados'}.`;
+    $('#results-status').textContent = `${count} ${translate(count === 1 ? 'concepto encontrado' : 'conceptos encontrados', language)}.`;
   }, 350);
 }
 search.addEventListener('input', () => { mode = search.value.trim() ? 'search' : routeMode; refreshView(); announceResults(); });
@@ -252,7 +265,7 @@ $('#concept-library').addEventListener('click', event => {
   if (learnId) {
     if (learned.has(learnId)) learned.delete(learnId);
     else learned.add(learnId);
-    say(learned.has(learnId) ? 'Concepto marcado como comprendido.' : 'Concepto marcado como pendiente.');
+    say(translate(learned.has(learnId) ? 'Concepto marcado como comprendido.' : 'Concepto marcado como pendiente.', language));
     persist(); refreshProgress();
   }
 });
@@ -260,6 +273,7 @@ $('#concept-library').addEventListener('click', event => {
 const sidebar = $('#sidebar');
 const backdrop = $('#mobile-backdrop');
 const mobileToggle = $('#mobile-toggle');
+const isNavigationDrawer = () => document.documentElement.classList.contains('sidebar-drawer');
 function closeMenu() {
   sidebar.classList.remove('mobile-open');
   backdrop.hidden = true;
@@ -268,7 +282,7 @@ function closeMenu() {
   $('.workspace').inert = false;
   sidebar.setAttribute('role', 'complementary');
   sidebar.removeAttribute('aria-modal');
-  if (window.matchMedia('(max-width: 850px)').matches) sidebar.inert = true;
+  if (isNavigationDrawer()) sidebar.inert = true;
 }
 function openMenu() {
   sidebar.inert = false;
@@ -284,8 +298,7 @@ function openMenu() {
 mobileToggle.addEventListener('click', () => sidebar.classList.contains('mobile-open') ? closeMenu() : openMenu());
 $('#sidebar-close').addEventListener('click', () => { closeMenu(); mobileToggle.focus(); });
 backdrop.addEventListener('click', () => { closeMenu(); mobileToggle.focus(); });
-const mobileMedia = window.matchMedia('(max-width: 850px)');
-mobileMedia.addEventListener('change', () => { closeMenu(); sidebar.inert = mobileMedia.matches; });
+window.addEventListener('sidebar-layout-change', () => { closeMenu(); sidebar.inert = isNavigationDrawer(); });
 document.addEventListener('keydown', event => {
   if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k' && !$('dialog[open]') && !sidebar.classList.contains('mobile-open')) {
     event.preventDefault(); search.focus();
@@ -308,10 +321,16 @@ let reviewUnderstood = 0;
 function drawReview() {
   const card = reviewCards[reviewIndex];
   $('#review-position').textContent = `${reviewIndex + 1} / ${reviewCards.length}`;
-  $('#review-title').textContent = card.querySelector('h3')!.textContent;
+  const cardTitle = card.querySelector('h3')!;
+  const reviewTitle = $('#review-title');
+  reviewTitle.textContent = cardTitle.textContent;
+  reviewTitle.lang = cardTitle.lang || language;
+  reviewTitle.translate = cardTitle.translate;
+  if (cardTitle.dataset.patternTitle) reviewTitle.dataset.patternTitle = cardTitle.dataset.patternTitle;
+  else delete reviewTitle.dataset.patternTitle;
   $('#review-definition').replaceChildren(...Array.from(card.querySelector('[data-card-panel="explanation"]')!.children, child => child.cloneNode(true)));
   $('#review-source').replaceChildren(card.querySelector('.concept-source')!.cloneNode(true));
-  $('#review-category').textContent = card.closest<HTMLElement>('.concept-section')!.dataset.trackEyebrow!;
+  $('#review-category').textContent = translate(card.closest<HTMLElement>('.concept-section')!.dataset.trackEyebrow!, language);
   $('#review-answer').hidden = true;
   $('#reveal-answer').hidden = false;
   $('#review-rating').hidden = true;
@@ -323,7 +342,7 @@ function drawReview() {
 }
 function startReview() {
   const available = cards.filter(card => !card.hidden && !card.closest<HTMLElement>('.concept-section')!.hidden);
-  if (!available.length) { say('Elige primero algún concepto para repasar.'); return; }
+  if (!available.length) { say(translate('Elige primero algún concepto para repasar.', language)); return; }
   // Prioritize pending concepts; shuffle within each group for varied practice.
   const shuffle = (list: HTMLElement[]) => {
     const copy = [...list];
@@ -346,16 +365,28 @@ function nextReview(understood: boolean) {
   else {
     $('#review-question').hidden = true; $('#review-rating').hidden = true; $('#review-helper').hidden = true;
     $('#review-complete').hidden = false;
-    $('#review-summary').textContent = `Conceptos repasados: ${reviewCards.length}. Comprendidos: ${reviewUnderstood}. Para seguir practicando: ${reviewCards.length - reviewUnderstood}.`;
+    $('#review-summary').textContent = language === 'en'
+      ? `Concepts reviewed: ${reviewCards.length}. Understood: ${reviewUnderstood}. Keep practicing: ${reviewCards.length - reviewUnderstood}.`
+      : `Conceptos repasados: ${reviewCards.length}. Comprendidos: ${reviewUnderstood}. Para seguir practicando: ${reviewCards.length - reviewUnderstood}.`;
     reviewDialog.setAttribute('aria-labelledby', 'review-complete-title');
     $('#review-complete button').focus();
   }
 }
 $('#review-known').addEventListener('click', () => nextReview(true));
 $('#review-again').addEventListener('click', () => nextReview(false));
+const languageSelect = $<HTMLSelectElement>('#language-select');
+languageSelect.addEventListener('change', () => {
+  language = languageSelect.value === 'en' ? 'en' : 'es';
+  saveLanguage(language);
+  applyStaticTranslations(language);
+  refreshView();
+  refreshProgress();
+  refreshCareerSelection?.();
+  if ($('#results-status').textContent || mode === 'search') announceResults();
+});
 $$('[data-close-dialog]').forEach(button => button.addEventListener('click', () => button.closest<HTMLDialogElement>('dialog')!.close()));
 $$<HTMLDialogElement>('dialog').forEach(dialog => dialog.addEventListener('click', event => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); } }));
 document.querySelector('#open-sources')?.addEventListener('click', () => $<HTMLDialogElement>('#sources-dialog').showModal());
 refreshProgress();
 goToHash(true);
-sidebar.inert = mobileMedia.matches;
+sidebar.inert = isNavigationDrawer();
