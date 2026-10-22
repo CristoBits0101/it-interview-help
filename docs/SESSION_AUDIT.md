@@ -1,5 +1,9 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 22 de octubre de 2026 — Hexagonal en patrones arquitectónicos
+
+Se añade Hexagonal bajo Software Architecture → Architectural Patterns, junto a MVC. La etiqueta es Hexagonal en español e inglés y permanece deshabilitada hasta publicar contenido. La clasificación se contrasta con el [artículo original de Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture), que presenta Ports and Adapters como patrón. Verificado el árbol en ES/EN/ES y móvil a 320 px sin desbordamiento. Tipos y compilación correctos.
+
 ## 22 de octubre de 2026 — REST API sin Design
 
 La hoja REST API Design pasa a llamarse REST API en inglés y API REST en español. Se mantiene dentro de API Design y no cambia su estado pendiente de contenido ni el resto de la jerarquía. La etiqueta de su rama superior conserva Design.

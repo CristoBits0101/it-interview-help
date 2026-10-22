@@ -54,6 +54,7 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
       ] },
       { label: 'Architectural Patterns', children: [
         { label: 'MVC' },
+        { label: 'Hexagonal' },
       ] },
     ] },
     { label: 'System Design', href: '#system-design/sd-fundamentals' },

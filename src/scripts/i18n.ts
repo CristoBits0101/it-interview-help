@@ -222,6 +222,7 @@ Object.assign(spanishToEnglish, {
 const navigationEnglishToSpanish: Record<string, string> = {
   'API Design': 'Diseño de API', 'REST API': 'API REST',
   'Architectural Styles': 'Estilos arquitectónicos', 'Architectural Patterns': 'Patrones arquitectónicos',
+  Hexagonal: 'Hexagonal',
   Monolithic: 'Monolítica', Microservices: 'Microservicios', 'Event-Driven': 'Orientada a eventos',
   CONCEPTS: 'CONCEPTOS', PATH: 'RUTA',
   Creational: 'Creacionales', Structural: 'Estructurales', Behavioral: 'Comportamiento',
