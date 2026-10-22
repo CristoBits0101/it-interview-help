@@ -1,10 +1,11 @@
-# Tech Training — instrucciones para agentes
+# Tech Interview Prep — instrucciones para agentes
 
 Lee [docs/PROJECT_GUIDE.md](docs/PROJECT_GUIDE.md) antes de modificar el proyecto. Es la memoria de producto, diseño y desarrollo. Consulta también [docs/SESSION_AUDIT.md](docs/SESSION_AUDIT.md), que relaciona las peticiones de esta sesión con su resultado y las instrucciones de continuidad. Esta documentación recoge decisiones del usuario y el estado verificado el 20 de octubre de 2026; una petición posterior del usuario tiene prioridad. Actualízala cuando cambie una decisión para evitar contradicciones.
 
 ## Proyecto y alcance
 
 - Aplicación web estática de aprendizaje y preparación de entrevistas técnicas. Astro, TypeScript y CSS; sin backend ni aplicación de escritorio.
+- Su objetivo es repasar fundamentos para entrevistas técnicas de distintos perfiles y empresas. No pretende enseñar exhaustivamente todas las áreas desde cero ni reproducir un currículo universitario completo. El usuario eligió Tech Interview Prep el 22 de octubre de 2026.
 - Repositorio: https://github.com/CristoBits0101/tech-training. La rama principal es `main`.
 - Web: https://tech-training.active-map-0560.chatgpt.site/.
 - En el ordenador original, el código está en `C:\Workspace\tech-training`. `C:\Workspace\big-tech-training` y `arrimate-monolithic-platform` son otros proyectos: comprueba la carpeta antes de editar.
@@ -12,7 +13,7 @@ Lee [docs/PROJECT_GUIDE.md](docs/PROJECT_GUIDE.md) antes de modificar el proyect
 
 ## Decisiones que debes conservar
 
-- Marca visible: **Tech Training**, sin guion, punto final, icono ni subtítulo. La marca y el enlace Home llevan a la portada real, no al primer módulo.
+- Marca visible: **Tech Interview Prep**, sin guion, punto final ni icono. Home muestra el subtítulo «Fundamentos para entrevistas técnicas» y su versión inglesa «Foundations for technical interviews» con una presentación breve. La marca y el enlace Home llevan a la portada real, no al primer módulo.
 - La raíz y `#home` muestran el resumen de aprendizaje: áreas, lecciones disponibles y recomendaciones por perfil y etapa. Los contadores se derivan de los datos; no fijes a mano el inventario de áreas, rutas, conceptos y perfiles.
 - Las recomendaciones profesionales son orientativas: relacionan áreas, conocimientos previos y objetivos prácticos. No presentes Analyst, Architect, liderazgo y dirección como ascensos obligatorios de una única jerarquía. Conserva las fuentes primarias en `src/data/career-paths.ts`.
 - **Google Sans Flex** en toda la interfaz y encabezados mediante `--body`/`--display`. **IBM Plex Mono 500** solo en `.brand`, mediante `--brand`. Las familias se definen en `src/styles/tokens.css` y se sirven localmente con Fontsource. No mezcles fuentes ni añadas familias por componente. Inter y Manrope se eliminaron. Jerarquía tipográfica: títulos 15 px/peso 500, subtítulos 14 px/peso 400 y texto 13 px/peso 300. La marca `.brand` usa 20 px/peso 500 por petición expresa del usuario. No uses pesos extra gruesos.
@@ -78,3 +79,14 @@ Al añadir un concepto no reformules otros existentes sin petición expresa. El 
 - Por petición del 21 de octubre, el selector de idiomas no añade contorno exterior ni sombra al enfocarse. El foco usa el fondo suave y el color de texto e icono. En colores forzados conserva el indicador del sistema.
 
 La capitalización de títulos y etiquetas se aplica solo a las palabras principales. Artículos, preposiciones y conjunciones como de, del, la, en e y quedan en minúscula salvo al inicio. Conserva nombres propios y siglas. Ejemplos: `Diseño de Software`, `Calidad del Software` y `Director of Engineering`. Esta precisión sustituye la regla anterior que capitalizaba cada palabra.
+
+## Organización conceptual y orden de aprendizaje — 22 de octubre de 2026
+La revisión final cubre 114 nodos y 28 desplegables. Los siete grupos principales son Sistemas Informáticos, Interacción Persona-Computadora, Ingeniería de Software, Gestión e Ingeniería de Datos, Ciberseguridad, Ciencia de Datos e Inteligencia Artificial. La pertenencia conceptual y los conocimientos previos son relaciones distintas. El orden del menú orienta el aprendizaje sin obligar a completar cada grupo antes del siguiente. Es una síntesis editorial contrastada con CS2023, SWEBOK y cursos reales. No es una taxonomía universal ni una reproducción de MIT o Harvard.
+
+Programación y sus bases pertenecen a Desarrollo de Software. Diseño, Arquitectura, Pruebas y Operación conservan sus ámbitos. Matemáticas Discretas precede a estructuras y algoritmos dentro de Desarrollo y se referencia también desde Criptografía. Las bases matemáticas y estadísticas se comparten entre Ciencia de Datos e IA mediante definiciones únicas. No vuelvas a encerrarlas bajo Algoritmos ni a tratarlas como propiedad exclusiva de Ciencia de Datos.
+
+Gestión e Ingeniería de Datos agrupa Gestión de Datos y la rama Ingeniería de Datos. Modelado, transacciones e índices están bajo Bases de Datos porque no son exclusivos del modelo relacional. Búsqueda Vectorial es una capacidad y no un tercer modelo excluyente. IA incluye búsqueda, planificación y razonamiento además de aprendizaje automático. Aplicaciones de IA Generativa queda dentro de IA Generativa y mantiene el ID applied-ai.
+
+Los roles se mantienen en Home. Sus fundamentos remiten a Programming Fundamentals. Las etapas iniciales incorporan computación, pruebas y seguridad. Las referencias y sus prerrequisitos están comprobados y no tienen ciclos. Las migraciones de navegación conservan preferencias antiguas sin abrir padres automáticamente. Solo Home y Software Design siguen publicados, con 19 conceptos y cuatro módulos. Las hojas pendientes siguen sin enlaces.
+
+Se corrigieron las explicaciones y traducciones de Simple Factory, Builder y Factory Method. La revisión conceptual solicitada el 22 de octubre sustituye para esos textos la restauración literal del 21 de octubre. Se conservan IDs y progreso. La justificación, las fuentes y el alcance de las pruebas están en [la revisión de navegación](docs/NAVIGATION_REVIEW.md). Ejecuta npm run check:curriculum además de tipos y build cuando cambien las relaciones del catálogo.

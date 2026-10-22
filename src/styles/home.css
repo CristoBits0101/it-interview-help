@@ -1,26 +1,13 @@
 @layer components {
   /* Keep each local inset and its derived gap together across container sizes. */
-  .home-learning-map, .career-panel { --gap-panel: calc(var(--space-panel) / 2); }
+  .career-panel { --gap-panel: calc(var(--space-panel) / 2); }
   .home-stats, .career-outcome, .career-branches, .career-methodology, .home-route-grid { --gap-card: calc(var(--space-card) / 2); }
   .career-profile-options, .career-stage-options { --gap-control: calc(var(--space-control) / 2); }
   #home-view { display: flex; flex-direction: column; gap: var(--space-gap); padding-top: var(--space-page); min-width: 0; container-type: inline-size; }
-  .home-intro { display: grid; grid-template-columns: 1.35fr 1fr; align-items: center; gap: var(--space-gap); }
+  .home-introduction { display: flex; flex-direction: column; gap: var(--gap-compact); }
+  .home-introduction h1 { font-size: var(--font-section); line-height: 1.4; font-weight: 500; letter-spacing: normal; }
+  .home-introduction p { font-size: var(--font-body); line-height: 1.6; color: var(--text-soft); }
   .home-kicker { display: flex; align-items: center; gap: var(--gap-compact); font-size: var(--font-meta); line-height: 1.5; font-weight: 300; letter-spacing: 1.35px; color: var(--text-soft); text-transform: uppercase; }
-  .home-kicker-dot { width: 5px; height: 5px; color: var(--accent); }
-  #home-title { margin: var(--space-control) 0; font-size: var(--font-section); line-height: 1.4; letter-spacing: normal; font-weight: 500; }
-  #home-title span { color: var(--accent-heading); }
-  .home-intro-description { max-width: 550px; font-size: var(--font-body); line-height: 1.8; color: var(--text-soft); }
-  .home-primary-link { display: inline-flex; align-items: center; justify-content: center; gap: var(--gap-card); background: var(--green); color: var(--paper); border-radius: var(--radius-control); padding: var(--gap-card) var(--space-card); margin-top: var(--space-card); font-size: var(--font-small); font-weight: 400; transition: background .15s; }
-  .home-primary-link:hover { background: var(--accent-hover); }
-  .home-learning-map { border: 1px solid var(--border-soft); background: var(--surface-tinted); border-radius: var(--radius-card); padding: var(--space-panel); }
-  .home-map-label { font-size: var(--font-meta); letter-spacing: 1.2px; color: var(--text-soft); font-weight: 300; margin-bottom: var(--gap-panel); }
-  .home-learning-map ol { display: flex; flex-direction: column; gap: var(--gap-panel); list-style: none; margin: 0; padding: 0; }
-  .home-learning-map li { position: relative; display: flex; align-items: center; gap: var(--gap-panel); }
-  .home-learning-map li:not(:last-child)::after { content: ''; position: absolute; top: 44px; bottom: calc(4px - var(--gap-panel)); left: 19px; width: 1px; background: var(--border-accent); }
-  .home-map-number { width: 40px; height: 40px; flex: 0 0 40px; border: 1px solid var(--border-soft); border-radius: 50%; display: grid; place-items: center; font-size: var(--font-meta); font-weight: 300; color: var(--accent); background: var(--canvas); }
-  .home-learning-map li:last-child .home-map-number { color: var(--paper); border-color: var(--green); background: var(--green); }
-  .home-learning-map strong { display: block; font-size: var(--font-small); font-weight: 400; }
-  .home-learning-map li p { color: var(--text-soft); font-size: var(--font-body); margin-top: var(--gap-compact); }
   .home-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--paper); padding: var(--gap-card); margin: 0; }
   .home-stat { --space-stat: var(--gap-card); --gap-stat: calc(var(--space-stat) / 2); padding: var(--space-stat); display: flex; flex-direction: column; gap: var(--gap-stat); }
   .home-stat + .home-stat { border-left: 1px solid var(--line); }
@@ -110,7 +97,6 @@
 
 @layer responsive {
   @container (max-width: 56.25rem) {
-    .home-learning-map { --space-panel: 24px; }
     .home-section-heading { display: block; }
     .home-section-heading > p { margin-top: var(--gap-card); max-width: 620px; }
     .career-plan-layout { grid-template-columns: minmax(0, 1fr); }
@@ -125,8 +111,6 @@
     .career-stage-options button { flex-direction: column; align-items: flex-start; font-size: var(--font-small); }
   }
   @container (max-width: 42.5rem) {
-    .home-intro { grid-template-columns: 1fr; }
-    .home-learning-map { display: none; }
     .home-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; }
     .home-stat { --space-stat: var(--space-card); --gap-stat: calc(var(--space-stat) / 2); }
     .home-stat:nth-child(3) { border-left: none; }
@@ -139,7 +123,6 @@
   }
   @container (max-width: 26.875rem) {
     .home-section-heading h2 { font-size: var(--font-section); }
-    .home-intro-description { font-size: var(--font-body); }
     .home-stats, .career-outcome, .career-branches, .career-methodology, .home-route-grid { --space-card: 20px; }
     .home-stat-value { font-size: var(--font-section); }
     .home-stat-detail { font-size: var(--font-body); }

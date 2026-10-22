@@ -4,13 +4,13 @@ Estado documentado: **22 de octubre de 2026**. Lee también [AGENTS.md](../AGENT
 
 ## 1. Propósito y preferencias
 
-Tech Training es una web abierta para aprender fundamentos de tecnología y preparar pruebas técnicas. Prioriza conceptos claros, descripciones cortas y recuperación activa de lo aprendido. No es una aplicación de escritorio ni una plataforma que ejecute modelos de IA.
+Tech Interview Prep prepara fundamentos para entrevistas técnicas de distintos perfiles y empresas. Prioriza conceptos claros, descripciones cortas y recuperación activa de lo aprendido. No pretende enseñar exhaustivamente todas las áreas desde cero ni reproducir un currículo universitario completo. No es una aplicación de escritorio ni una plataforma que ejecute modelos de IA. El nombre elegido el 22 de octubre de 2026 es Tech Interview Prep.
 
 La interfaz de Home y Software Design está disponible en español e inglés. El selector de idiomas es un `<select>` nativo con las opciones Español y English en la cabecera después del buscador. Sustituye los dos botones ES / EN. El español es el idioma inicial y la elección se conserva en `tech-training:language:v1`. El cambio mantiene la ruta actual y actualiza títulos, navegación, tarjetas, niveles, ayudas y mensajes dinámicos. Mantén las dos versiones al editar contenido visible. Los textos bilingües se centralizan en `src/scripts/i18n.ts`. Por la última petición del 21 de octubre, los nombres de patrones de diseño muestran solo su traducción española al elegir Español y solo su nombre inglés al elegir English, sin combinar ambos. Las siglas técnicas conservan su notación.
 
 El usuario pidió un diseño profesional, moderno y minimalista, con especial cuidado por la simetría, márgenes y alineación. Los enlaces de navegación usan nombres completos en el idioma elegido y conservan Title Case. Las etiquetas inglesas canónicas se mantienen en los datos para resolver rutas y persistencia. Las siglas propias de conceptos técnicos, como SQL, RPC o LLM, pueden formar parte de las lecciones.
 
-La marca del sidebar es exactamente **Tech Training**. El usuario retiró el logo gráfico, el guion y el subtítulo «Un concepto. Un paso más.». También retiró el separador horizontal, la biblioteca de exploración/guardados y el pie de progreso. El borde vertical entre sidebar y contenido y las guías de indentación de los submenús siguen presentes. La nueva portada Home sustituye al antiguo hero y la franja de seis rutas. La etiqueta `Library` y el acceso al repaso rápido global también se eliminaron. Más adelante se retiró el botón de repaso de la cabecera de estudio; su código y diálogo se conservan.
+La marca del sidebar es exactamente **Tech Interview Prep**. El usuario retiró el logo gráfico, el guion y el subtítulo «Un concepto. Un paso más.». También retiró el separador horizontal, la biblioteca de exploración/guardados y el pie de progreso. El borde vertical entre sidebar y contenido y las guías de indentación de los submenús siguen presentes. La nueva portada Home sustituye al antiguo hero y la franja de seis rutas. La etiqueta `Library` y el acceso al repaso rápido global también se eliminaron. Más adelante se retiró el botón de repaso de la cabecera de estudio; su código y diálogo se conservan.
 
 ## 2. Tipografía
 
@@ -151,14 +151,10 @@ Los contenedores mantienen lados opuestos iguales. El padding horizontal puede d
 
 | Área | Icono Lucide |
 | --- | --- |
-| Mathematics | `Sigma` |
-| Statistics | `ChartColumn` |
-| Programming | `CodeXml` |
 | Computer Systems | `Cpu` |
 | Human-Computer Interaction | `MousePointerClick` |
 | Software Engineering | `Blocks` |
-| Data Management | `Database` |
-| Data Engineering | `Workflow` |
+| Data Management and Engineering | `Workflow` |
 | Cybersecurity | `ShieldCheck` |
 | Data Science | `FlaskConical` |
 | Artificial Intelligence | `BrainCircuit` |
@@ -175,7 +171,7 @@ El sidebar es fijo en escritorio. A 850 px o menos pasa a un panel móvil con ba
 
 ## 5. Taxonomía y contenido
 
-El árbol completo y su orden se definen en `src/data/navigation.ts`. Las once áreas principales aparecen en el mismo orden que la tabla de iconos. Por petición del 21 de octubre, todas las ramas con hijos se pueden desplegar aunque no tengan páginas disponibles. Sus descendientes se renderizan y conservan el árbol completo. Las hojas sin destino siguen como filas deshabilitadas sin enlace. Esta decisión sustituye el bloqueo recursivo de ramas sin contenido. Abrirlas no publica páginas ni cambia las rutas disponibles.
+El árbol completo y su orden se definen en `src/data/navigation.ts`. Las siete áreas principales aparecen en el mismo orden que la tabla de iconos. Por petición del 21 de octubre, todas las ramas con hijos se pueden desplegar aunque no tengan páginas disponibles. Sus descendientes se renderizan y conservan el árbol completo. Las hojas sin destino siguen como filas deshabilitadas sin enlace. Esta decisión sustituye el bloqueo recursivo de ramas sin contenido. Abrirlas no publica páginas ni cambia las rutas disponibles.
 
 Por petición del usuario, dentro de Software Development aparece primero Frontend Development y después Backend Development.
 
@@ -183,25 +179,24 @@ El 22 de octubre, Software Architecture pasa a ser un desplegable con Architectu
 
 `NavigationTree.astro` distingue:
 
-- Rama con alguna hoja descendiente con `href`: `details`/`summary` nativos, desplegable. La disponibilidad se comprueba recursivamente en todos los niveles.
-- Rama sin ninguna hoja descendiente con `href`: `span` con `aria-disabled="true"` y chevron cerrado. No puede abrirse con ratón ni teclado y no entra en el orden de tabulación. Texto e iconos usan `--disabled`, igual que las hojas sin destino y sin cambio en hover.
+- Rama con hijos: `details`/`summary` nativos. Se puede desplegar aunque todavía no tenga lecciones publicadas.
 - Hoja con `href`: enlace a un módulo existente.
 - Hoja sin `href`: `span` con `aria-disabled="true"`, visible y no clicable.
 
-Esta petición del 19 de octubre de 2026 sustituye la decisión anterior de mantener operables todas las ramas con hijos aunque no tuvieran lecciones. Al añadir un destino válido a cualquiera de sus hojas se habilitan automáticamente sus antecesoras.
+La petición del 21 de octubre sustituye el bloqueo de ramas vacías del día 19. Abrir una rama no habilita destinos sin contenido.
 
 El árbol amplio sustituye al antiguo sidebar de solo seis rutas. El catálogo fuente conserva seis rutas con lecciones. La disponibilidad visible en la aplicación quedó limitada posteriormente a Software Design. Las otras rutas no se renderizan como páginas ni tienen enlaces activos. Este es el orden de su catálogo fuente:
 
 | Ruta | ID | Conceptos actuales | Ubicación en el árbol |
 | --- | --- | ---: | --- |
 | User Experience Design | `ux-design` | 6 | Human-Computer Interaction |
-| Software Design | `software-design` | 18 | Software Engineering |
+| Software Design | `software-design` | 19 | Software Engineering |
 | Software Architecture | `software-architecture` | 5 | Software Engineering |
 | Distributed Systems | `distributed-systems` | 40 | Computer Systems |
 | System Design | `system-design` | 12 | Software Engineering |
-| Applied Artificial Intelligence | `applied-ai` | 32 | Artificial Intelligence |
+| Generative AI Applications | `applied-ai` | 32 | Artificial Intelligence → Generative Artificial Intelligence |
 
-Total actual en el catálogo fuente: 113 conceptos. La interfaz disponible muestra Home y Software Design con 19 conceptos en cuatro páginas: SOLID Principles, Creational, Structural y Behavioral. Las recomendaciones de Home conservan el mapa profesional y muestran las rutas excluidas como no disponibles. El diálogo histórico de fuentes se limita a las referencias de Software Design. `Information Architecture` y `User Experience Design` apuntan actualmente al mismo módulo en el catálogo; no dupliques sus conceptos solo para crear dos destinos. Sistemas distribuidos y diseño de sistemas son áreas distintas, no una debe absorber la otra.
+Total actual en el catálogo fuente: 114 conceptos. La interfaz disponible muestra Home y Software Design con 19 conceptos en cuatro páginas: SOLID Principles, Creational, Structural y Behavioral. Las recomendaciones de Home conservan el mapa profesional y muestran las rutas excluidas como no disponibles. El diálogo histórico de fuentes se limita a las referencias de Software Design. `Information Architecture` y `User Experience Design` apuntan actualmente al mismo módulo en el catálogo; no dupliques sus conceptos solo para crear dos destinos. Sistemas distribuidos y diseño de sistemas son áreas distintas, no una debe absorber la otra.
 
 Modelo: `Track` contiene módulos; cada `Module` contiene conceptos. Un `Concept` tiene `id`, `title`, `description`, `source` y `level` (`Esencial`, `Intermedio` o `Avanzado`). `description` contiene la Explicación en un único párrafo. `useCase` y `example` son campos opcionales para los otros dos botones; si faltan o solo tienen espacios, sus botones quedan deshabilitados. Los 19 conceptos publicados solo tienen explicación. No se añade contenido para habilitar controles por iniciativa del agente. `source` es obligatorio y referencia un autor u organismo con título y URL en `src/data/concept-sources.ts`. `details` y `memory` son históricos y no se renderizan. Búsqueda y repaso leen explícitamente el panel de explicación para no variar al cambiar de vista. Los archivos de datos son la fuente de verdad, no el HTML compilado.
 
@@ -227,9 +222,9 @@ Para añadir contenido, actualiza el archivo de datos apropiado y el destino de 
 
 ### Home y orientación profesional
 
-La raíz y `#home` muestran una portada propia: presenta el alcance de la aplicación, el inventario de áreas y conceptos, recomendaciones por perfil y etapa y opciones de desarrollo profesional. No debe abrir por defecto User Experience Design ni ningún otro módulo. Las once áreas siguen visibles también cuando sus lecciones están pendientes; diferencia recomendaciones de estudio de contenido que realmente puede abrirse.
+La raíz y `#home` muestran una portada propia: presenta el alcance de la aplicación, el inventario de áreas y conceptos, recomendaciones por perfil y etapa y opciones de desarrollo profesional. No debe abrir por defecto User Experience Design ni ningún otro módulo. Las siete áreas siguen visibles también cuando sus lecciones están pendientes; diferencia recomendaciones de estudio de contenido que realmente puede abrirse.
 
-Inventario actual: **11 áreas principales, 6 rutas con contenido, 113 conceptos y 5 perfiles**. Son valores derivados del árbol, los tracks y los perfiles, no constantes del diseño.
+Inventario visible actual: **7 áreas principales, 1 ruta con contenido, 19 conceptos y 5 perfiles**. El catálogo fuente conserva seis rutas y 114 conceptos. Son valores derivados del árbol, los tracks y los perfiles, no constantes del diseño.
 
 Los perfiles definidos en `src/data/career-paths.ts` son Frontend Engineer, Backend Engineer, Full Stack Engineer, DevOps Engineer y Artificial Intelligence Engineer. Cada uno contiene Fundamentos, Junior, Mid-Level, Mid-Level → Senior y Senior. Cada etapa combina un objetivo, áreas relacionadas y un hito práctico. `areaGuidance` aporta el enfoque de cada área y conocimientos previos útiles; sus etiquetas deben coincidir exactamente con las de `navigation.ts` para resolver los destinos.
 
@@ -359,3 +354,25 @@ El selector nativo mantiene un objetivo de 44 px y la escala de 14 px/400. Usa l
 El selector de idiomas no muestra outline exterior ni sombra al enfocarse por petición posterior del usuario. La señal de foco utiliza el fondo suave y el color de texto e icono. El modo de colores forzados mantiene el contorno del sistema.
 
 La capitalización de títulos y etiquetas se aplica solo a las palabras principales. Artículos, preposiciones y conjunciones como de, del, la, en e y quedan en minúscula salvo al inicio. Conserva nombres propios y siglas. Ejemplos: `Diseño de Software`, `Calidad del Software` y `Director of Engineering`. Esta precisión sustituye la regla anterior que capitalizaba cada palabra.
+
+### Home sin introducción — 22 de octubre de 2026
+Por petición del usuario se retira únicamente la cabecera introductoria: Tu mapa de aprendizaje, Organiza tu aprendizaje técnico, su descripción, Encuentra tu ruta y El conocimiento se construye. Home comienza visualmente por las cuatro estadísticas. Se conservan los perfiles, el selector de etapa, las recomendaciones, las ramas profesionales y las rutas disponibles. El título Home permanece solo para lectores de pantalla.
+
+
+## Organización conceptual y orden de aprendizaje — 22 de octubre de 2026
+La revisión final cubre 114 nodos y 28 desplegables. Los siete grupos principales son Sistemas Informáticos, Interacción Persona-Computadora, Ingeniería de Software, Gestión e Ingeniería de Datos, Ciberseguridad, Ciencia de Datos e Inteligencia Artificial. La pertenencia conceptual y los conocimientos previos son relaciones distintas. El orden del menú orienta el aprendizaje sin obligar a completar cada grupo antes del siguiente. Es una síntesis editorial contrastada con CS2023, SWEBOK y cursos reales. No es una taxonomía universal ni una reproducción de MIT o Harvard.
+
+Programación y sus bases pertenecen a Desarrollo de Software. Diseño, Arquitectura, Pruebas y Operación conservan sus ámbitos. Matemáticas Discretas precede a estructuras y algoritmos dentro de Desarrollo y se referencia también desde Criptografía. Las bases matemáticas y estadísticas se comparten entre Ciencia de Datos e IA mediante definiciones únicas. No vuelvas a encerrarlas bajo Algoritmos ni a tratarlas como propiedad exclusiva de Ciencia de Datos.
+
+Gestión e Ingeniería de Datos agrupa Gestión de Datos y la rama Ingeniería de Datos. Modelado, transacciones e índices están bajo Bases de Datos porque no son exclusivos del modelo relacional. Búsqueda Vectorial es una capacidad y no un tercer modelo excluyente. IA incluye búsqueda, planificación y razonamiento además de aprendizaje automático. Aplicaciones de IA Generativa queda dentro de IA Generativa y mantiene el ID applied-ai.
+
+Los roles se mantienen en Home. Sus fundamentos remiten a Programming Fundamentals. Las etapas iniciales incorporan computación, pruebas y seguridad. Las referencias y sus prerrequisitos están comprobados y no tienen ciclos. Las migraciones de navegación conservan preferencias antiguas sin abrir padres automáticamente. Solo Home y Software Design siguen publicados, con 19 conceptos y cuatro módulos. Las hojas pendientes siguen sin enlaces.
+
+Se corrigieron las explicaciones y traducciones de Simple Factory, Builder y Factory Method. La revisión conceptual solicitada el 22 de octubre sustituye para esos textos la restauración literal del 21 de octubre. Se conservan IDs y progreso. La justificación, las fuentes y el alcance de las pruebas están en [la revisión de navegación](NAVIGATION_REVIEW.md). Ejecuta npm run check:curriculum además de tipos y build cuando cambien las relaciones del catálogo.
+
+Aclaración posterior: Sistemas comienza con Fundamentos de Computación; Desarrollo incluye Frontend, Backend y Móvil. Estas hojas todavía no tienen lecciones ni enlaces habilitados. El último grupo se llama Inteligencia Artificial: nombra el campo, no un puesto.
+
+
+### Identidad y orientación para entrevistas — 22 de octubre de 2026
+
+El usuario eligió Tech Interview Prep y autorizó únicamente el cambio de nombre, subtítulo y presentación/orientación. Home incorpora una cabecera breve con «Fundamentos para entrevistas técnicas» y «Repasa conceptos clave y prepara tus respuestas para entrevistas técnicas de distintos perfiles y empresas». En inglés usa «Foundations for technical interviews» y su presentación traducida. La escala tipográfica existente se conserva. Esta petición posterior permite esa presentación breve sin recuperar el antiguo hero, sus diagramas o llamadas a la acción. Se actualizan marca, nombre accesible, títulos dinámicos y metadatos. El selector de perfil orienta el repaso para entrevistas. No se modifican áreas, conceptos ni recomendaciones curriculares. Se mantienen IDs, claves de almacenamiento, nombre interno del paquete y destino de alojamiento para conservar compatibilidad. No se publica remotamente.

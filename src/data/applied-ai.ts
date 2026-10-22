@@ -3,8 +3,8 @@ import type { Track } from './curriculum';
 
 export const appliedAI: Track = {
   id: 'applied-ai',
-  title: 'Applied Artificial Intelligence',
-  eyebrow: 'APPLIED ARTIFICIAL INTELLIGENCE',
+  title: 'Generative AI Applications',
+  eyebrow: 'GENERATIVE AI APPLICATIONS',
   modules: [
     {
       id: 'ai-fundamentos',

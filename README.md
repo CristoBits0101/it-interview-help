@@ -1,6 +1,8 @@
-# tech-training
+# Tech Interview Prep
 
 Web estática responsive para preparar entrevistas técnicas y repasar ingeniería de software. Construida con Astro 7, TypeScript y CSS; sin backend, cuentas ni servicios de IA necesarios para usarla.
+
+El contenido se centra en fundamentos para entrevistas de distintos perfiles y empresas. No pretende enseñar exhaustivamente todas las áreas desde cero ni sustituir una formación completa.
 
 ## Desarrollo
 
@@ -15,6 +17,7 @@ Abre la dirección que imprime Astro, normalmente `http://localhost:4321`.
 
 ```bash
 npm run check
+npm run check:curriculum
 npm run build
 npm run preview
 ```
@@ -25,38 +28,41 @@ El build genera `dist/`, listo para cualquier alojamiento de archivos estáticos
 
 Home resume la aplicación y permite elegir un perfil —Frontend Engineer, Backend Engineer, Full Stack Engineer, DevOps Engineer o Artificial Intelligence Engineer— y una etapa, desde Fundamentos hasta Senior. Cada selección recomienda áreas relacionadas, conocimientos previos y un objetivo práctico. La progresión posterior distingue especialización, liderazgo y gestión; no representa una jerarquía profesional universal.
 
-Home conserva sus 11 áreas y 5 perfiles. Por petición del usuario, actualmente solo tiene contenido de estudio accesible la ruta Software Design, con 18 conceptos en dos módulos. Las demás áreas permanecen visibles en el árbol y en las recomendaciones de Home, pero sus enlaces están deshabilitados. El catálogo de datos conserva el resto del material sin mostrarlo como páginas disponibles.
+Home presenta el subtítulo «Fundamentos para entrevistas técnicas» y una orientación breve. Conserva los cuatro contadores y los selectores de profesión y etapa. El menú reúne siete grupos: Sistemas Informáticos, Interacción Persona-Computadora, Ingeniería de Software, Gestión e Ingeniería de Datos, Ciberseguridad, Ciencia de Datos e Inteligencia Artificial. Las bases se integran en sus ámbitos y se comparten cuando corresponda. El orden orienta el aprendizaje sin imponer una secuencia única entre especialidades.
 
-El catálogo de lecciones guardado sigue este orden de aprendizaje. La navegación visible permite abrir Software Design:
+Actualmente solo tiene contenido de estudio accesible la ruta Software Design, con 19 conceptos en cuatro módulos. Las demás áreas permanecen visibles en el árbol y en las recomendaciones de Home. Sus ramas se pueden desplegar, pero las hojas sin contenido publicado no tienen enlace activo.
+
+El catálogo fuente conserva estas rutas. La navegación publicada permite abrir Software Design:
 
 1. User Experience Design: 6 conceptos de arquitectura de información y experiencia de usuario.
-2. Software Design: 18 conceptos en SOLID Principles y Design Patterns. Los principios siguen el orden S, O, L, I, D; los 13 patrones se ordenan por dificultad orientativa.
+2. Software Design: 19 conceptos. SOLID Principles contiene cinco principios en el orden S, O, L, I, D. Design Patterns contiene cinco creacionales, tres estructurales y seis de comportamiento.
 3. Software Architecture: 5 conceptos.
 4. Distributed Systems: 40 conceptos en 5 módulos sobre comunicación, datos, coordinación y mensajería.
 5. System Design: 12 conceptos sobre requisitos, capacidad, flujo de datos y bloques de arquitectura.
-6. Applied Artificial Intelligence: 32 conceptos en 5 módulos: LLMs, recuperación, RAG, agentes y evaluación.
+6. Generative AI Applications: 32 conceptos en cinco módulos de LLMs, recuperación, RAG, agentes y evaluación. Conserva el ID applied-ai.
 
-Cada tarjeta muestra una definición breve y una lista de ideas completas con punto final. La explicación presenta el concepto y aclara su funcionamiento y sus límites. La bombilla enlaza a una fuente concreta con el nombre del autor u organismo. Las referencias están centralizadas en `src/data/concept-sources.ts` y se contrastaron el 19 de octubre de 2026. Los ejemplos y recordatorios históricos se conservan en los datos pero no se muestran. Al final de cada módulo aparece únicamente el enlace «Siguiente módulo».
+Cada tarjeta publicada muestra una explicación breve en un párrafo y su fuente concreta. Las referencias están centralizadas en `src/data/concept-sources.ts`. Las vistas Caso de Uso e Implementación solo se habilitan cuando existe contenido. Los ejemplos y recordatorios históricos de las rutas no publicadas se conservan en los datos. Al final de cada módulo aparece únicamente «Siguiente módulo» cuando existe un destino posterior.
 
 Edita `src/data/curriculum.ts`, `src/data/design-patterns.ts`, `src/data/system-design.ts` y `src/data/applied-ai.ts` para ampliar las lecciones; `src/data/navigation.ts` define el árbol y sus enlaces. `src/data/career-paths.ts` contiene perfiles, etapas, prerrequisitos orientativos y fuentes primarias. Los IDs deben ser únicos y estables para conservar los enlaces y el progreso. `src/pages/index.astro` monta la página; `HomeOverview.astro`, `home.ts` y `home.css` implementan Home junto con la navegación general de `app.ts` y los estilos compartidos de `global.css`.
 
 ## Uso y privacidad
 
-Busca en todas las rutas con `Ctrl/Cmd + K`, filtra por nivel y marca los conceptos que comprendes. Al vaciar la búsqueda o limpiar filtros vuelves a Home o al módulo desde el que buscaste. La cabecera de estudio muestra únicamente el contador de conceptos y el selector de niveles en una misma línea a tamaño de texto normal. El breadcrumb identifica la página también en móvil.
+Busca en los conceptos publicados con `Ctrl/Cmd + K`, filtra por nivel y marca los conceptos que comprendes. Al vaciar la búsqueda o limpiar filtros vuelves a Home o al módulo desde el que buscaste. La cabecera de estudio muestra únicamente el contador de conceptos y el selector de niveles en una misma línea a tamaño de texto normal. El breadcrumb identifica la página también en móvil.
 
 El progreso se almacena solo en `localStorage` del navegador (`tech-training:v1`). El menú empieza cerrado y recuerda las ramas abiertas con `tech-training:navigation:v1`. No se comparten entre dispositivos. Si el almacenamiento no está disponible, se mantienen durante la sesión. Las tipografías se sirven desde la propia web.
 
 La aplicación genera HTML estático. JavaScript habilita la selección de perfil y etapa, la navegación entre módulos, búsqueda, progreso y repaso. Sin JavaScript se pueden consultar el resumen y el primer itinerario de Home. La selección de perfil y etapa no se guarda entre recargas.
 
-Las dependencias Python del material de referencia son contexto para la ruta Applied Artificial Intelligence; no son necesarias para ejecutar esta web.
+Las dependencias Python del material de referencia son contexto para la ruta Generative AI Applications; no son necesarias para ejecutar esta web.
 
 ## Validación
 
-Para validar cambios, ejecuta tipos y build; comprueba Home, selección de perfil/etapa, enlaces disponibles, búsqueda y retorno a la vista de origen, progreso tras recargar, repaso y menú móvil. Usa 390 y 1440 píxeles como referencias visuales. La [guía del proyecto](docs/PROJECT_GUIDE.md) distingue las comprobaciones históricas de las necesarias para el rediseño actual.
+Para validar cambios, ejecuta check:curriculum, tipos y build; comprueba Home, selección de perfil/etapa, enlaces disponibles, búsqueda y retorno a la vista de origen, progreso tras recargar, repaso y menú móvil. Usa 390 y 1440 píxeles como referencias visuales. La [guía del proyecto](docs/PROJECT_GUIDE.md) distingue las comprobaciones históricas de las necesarias para el rediseño actual.
 
 ## Memoria del proyecto
 
 - [AGENTS.md](AGENTS.md): instrucciones de continuidad para agentes y colaboradores.
+- [Revisión conceptual de navegación](docs/NAVIGATION_REVIEW.md): pertenencia de áreas, bases compartidas, progresión pedagógica, fuentes y validación.
 - [Guía de producto, diseño y desarrollo](docs/PROJECT_GUIDE.md): preferencias, tipografías, colores, espaciado, navegación, arquitectura, comprobaciones y publicación.
 - [Revisión de accesibilidad](docs/ACCESSIBILITY_REVIEW.md): criterios WCAG 2.2 y USWDS, contrastes medidos, mejoras de lectura, pruebas y límites de la revisión.
 - [Auditoría de la sesión y continuidad](docs/SESSION_AUDIT.md): peticiones verificadas, correcciones que prevalecen e instrucciones para futuras sesiones.

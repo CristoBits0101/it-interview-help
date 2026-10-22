@@ -16,7 +16,7 @@ const routeLabel = (track: Track) => catalog.find(node => node.href?.startsWith(
 const firstProfile = careerProfiles[0];
 const stages = firstProfile.stages;
 const stats = [
-  { value: navigation.length, label: 'Áreas principales', detail: 'El mapa completo' },
+  { value: navigation.length, label: 'Áreas principales', detail: 'Temas para repasar' },
   { value: tracks.length, label: 'Rutas con contenido', detail: 'Disponibles para estudiar' },
   { value: totalConcepts, label: 'Conceptos', detail: 'Breves y conectados' },
   { value: careerProfiles.length, label: 'Perfiles profesionales', detail: 'Un camino para cada objetivo' },
@@ -24,21 +24,9 @@ const stats = [
 ---
 
 <section id="home-view" aria-labelledby="home-title">
-  <header class="home-intro">
-    <div class="home-intro-copy">
-      <p class="home-kicker"><Icon name="dot" size={5} class="home-kicker-dot" /> TU MAPA DE APRENDIZAJE</p>
-      <h1 id="home-title">Organiza tu<br /><span>aprendizaje técnico.</span></h1>
-      <p class="home-intro-description">Elige un perfil y una etapa para ver las áreas recomendadas. Estudia los conceptos disponibles y consulta sus fuentes originales.</p>
-      <a class="home-primary-link" href="#career-paths">Encuentra tu ruta <Icon name="arrow" size={17} /></a>
-    </div>
-    <div class="home-learning-map" aria-label="Proceso de aprendizaje">
-      <p class="home-map-label">EL CONOCIMIENTO SE CONSTRUYE</p>
-      <ol>
-        <li><span class="home-map-number">01</span><div><strong>Construye una base</strong><p>Comprende antes de especializarte.</p></div></li>
-        <li><span class="home-map-number">02</span><div><strong>Conecta las áreas</strong><p>Estudia según el perfil que buscas.</p></div></li>
-        <li><span class="home-map-number">03</span><div><strong>Amplía tu impacto</strong><p>De resolver tareas a orientar equipos.</p></div></li>
-      </ol>
-    </div>
+  <header class="home-introduction">
+    <h1 id="home-title">Fundamentos para entrevistas técnicas</h1>
+    <p>Repasa conceptos clave y prepara tus respuestas para entrevistas técnicas de distintos perfiles y empresas.</p>
   </header>
 
   <dl class="home-stats" aria-label="Resumen del catálogo">
@@ -48,7 +36,7 @@ const stats = [
   <section class="home-section" id="career-paths" aria-labelledby="career-title">
     <header class="home-section-heading">
       <div><p class="home-kicker">01 / ELIGE TU DIRECCIÓN</p><h2 id="career-title">Un perfil. Varias áreas conectadas.</h2></div>
-      <p>Selecciona una especialidad y una etapa. El orden de estudio es orientativo y conserva los conocimientos de base.</p>
+      <p>Selecciona un perfil y una etapa para orientar tu repaso. Refuerza los fundamentos y prepara cómo explicarlos.</p>
     </header>
 
     <div class="career-profile-options" role="group" aria-label="Perfil profesional">

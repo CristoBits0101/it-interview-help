@@ -255,3 +255,35 @@ Tras completar la redacción de Home se validaron sus 94 campos de texto editori
 No se han encontrado otros incumplimientos de los requisitos de contenido y presentación comprobados. La certificación completa de accesibilidad y las pruebas con lectores de pantalla reales siguen fuera de la evidencia disponible. Las verificaciones se refieren a esta aplicación local; no certifican la accesibilidad de los documentos externos enlazados.
 
 Los scripts y capturas utilizados para esta auditoría son temporales. No deben añadirse a Git. El resultado persistente es esta matriz, la guía, la revisión de accesibilidad y las instrucciones de AGENTS.
+
+### Simplificación de Home — 22 de octubre de 2026
+Se elimina la introducción superior y sus estilos exclusivos. Se mantienen las cuatro estadísticas y todo el contenido posterior, incluidos profesión y etapa, de acuerdo con la aclaración final del usuario de quitar solo la parte de arriba.
+
+Validación de esta simplificación: Astro check sin errores, advertencias ni sugerencias; build correcto. Home revisada en navegador a 1440 y 390 px; en móvil no hay desbordamiento horizontal. Se verifican cuatro estadísticas, cinco perfiles, cinco etapas y ausencia de la introducción.
+
+## Organización conceptual y orden de aprendizaje — 22 de octubre de 2026
+La revisión final cubre 114 nodos y 28 desplegables. Los siete grupos principales son Sistemas Informáticos, Interacción Persona-Computadora, Ingeniería de Software, Gestión e Ingeniería de Datos, Ciberseguridad, Ciencia de Datos e Inteligencia Artificial. La pertenencia conceptual y los conocimientos previos son relaciones distintas. El orden del menú orienta el aprendizaje sin obligar a completar cada grupo antes del siguiente. Es una síntesis editorial contrastada con CS2023, SWEBOK y cursos reales. No es una taxonomía universal ni una reproducción de MIT o Harvard.
+
+Programación y sus bases pertenecen a Desarrollo de Software. Diseño, Arquitectura, Pruebas y Operación conservan sus ámbitos. Matemáticas Discretas precede a estructuras y algoritmos dentro de Desarrollo y se referencia también desde Criptografía. Las bases matemáticas y estadísticas se comparten entre Ciencia de Datos e IA mediante definiciones únicas. No vuelvas a encerrarlas bajo Algoritmos ni a tratarlas como propiedad exclusiva de Ciencia de Datos.
+
+Gestión e Ingeniería de Datos agrupa Gestión de Datos y la rama Ingeniería de Datos. Modelado, transacciones e índices están bajo Bases de Datos porque no son exclusivos del modelo relacional. Búsqueda Vectorial es una capacidad y no un tercer modelo excluyente. IA incluye búsqueda, planificación y razonamiento además de aprendizaje automático. Aplicaciones de IA Generativa queda dentro de IA Generativa y mantiene el ID applied-ai.
+
+Los roles se mantienen en Home. Sus fundamentos remiten a Programming Fundamentals. Las etapas iniciales incorporan computación, pruebas y seguridad. Las referencias y sus prerrequisitos están comprobados y no tienen ciclos. Las migraciones de navegación conservan preferencias antiguas sin abrir padres automáticamente. Solo Home y Software Design siguen publicados, con 19 conceptos y cuatro módulos. Las hojas pendientes siguen sin enlaces.
+
+Se corrigieron las explicaciones y traducciones de Simple Factory, Builder y Factory Method. La revisión conceptual solicitada el 22 de octubre sustituye para esos textos la restauración literal del 21 de octubre. Se conservan IDs y progreso. La justificación, las fuentes y el alcance de las pruebas están en [la revisión de navegación](NAVIGATION_REVIEW.md). Ejecuta npm run check:curriculum además de tipos y build cuando cambien las relaciones del catálogo.
+
+Se incorporan Fundamentos de Computación y Desarrollo Móvil a petición del usuario; ambos permanecen sin destino mientras no exista contenido.
+
+Validación: Astro check sin errores, advertencias ni sugerencias y build correcto. Comprobadas las referencias de las 25 combinaciones de perfil/etapa, sus prerrequisitos, etiquetas únicas y los cuatro enlaces de módulos publicados. Navegador revisado a 1440 y 390 px, con menú móvil abierto sin desbordamiento de página, traducciones nuevas en ambos idiomas y breadcrumb de SOLID conservado. Las nuevas hojas no habilitan contenido inexistente.
+
+
+Validación final de la revisión conceptual: 114 entradas, 28 ramas, cuatro enlaces de módulo y 25 combinaciones de perfil/etapa. Las cuatro rutas se recorrieron en ambos idiomas con 5/5/3/6 conceptos. Home se comprobó en 25 estados a 1440 px y otros 25 a 390 px. Menú móvil sin desbordamiento de página. Nuevas explicaciones en un máximo de tres líneas a 320 px en ambos idiomas. Preferencias originales restauradas y verificadas tras recarga. check:curriculum correcto. Astro check con cero errores, advertencias y sugerencias. Build correcto. Esta revisión actualiza las cifras y decisiones históricas anteriores; no certifica palabra por palabra el contenido aún no publicado.
+
+Aclaración final de producto: preparación de fundamentos para entrevistas técnicas de distintos perfiles y empresas. No es un currículo universitario completo ni una formación exhaustiva desde cero. La marca Tech Training se conserva mientras el usuario valora nombres alternativos. La verificación de esta revisión cubre cuatro enlaces de módulo y 28 desplegables; no respalda una cifra de 360 enlaces comprobados.
+
+
+### Identidad y orientación para entrevistas — 22 de octubre de 2026
+
+El usuario eligió Tech Interview Prep y autorizó únicamente el cambio de nombre, subtítulo y presentación/orientación. Home incorpora una cabecera breve con «Fundamentos para entrevistas técnicas» y «Repasa conceptos clave y prepara tus respuestas para entrevistas técnicas de distintos perfiles y empresas». En inglés usa «Foundations for technical interviews» y su presentación traducida. La escala tipográfica existente se conserva. Esta petición posterior permite esa presentación breve sin recuperar el antiguo hero, sus diagramas o llamadas a la acción. Se actualizan marca, nombre accesible, títulos dinámicos y metadatos. El selector de perfil orienta el repaso para entrevistas. No se modifican áreas, conceptos ni recomendaciones curriculares. Se mantienen IDs, claves de almacenamiento, nombre interno del paquete y destino de alojamiento para conservar compatibilidad. No se publica remotamente.
+
+Validación del cambio de identidad: marca y etiqueta accesible correctas. Subtítulo, presentación, descripción y Open Graph comprobados en español e inglés. Títulos de Home, búsqueda y módulo correctos. Revisión visual a 1440 y 390 px y marca legible a 320 px sin desbordamiento de página. Se mantienen cuatro enlaces y 28 desplegables. check:curriculum conserva 114 entradas y 19 conceptos. Astro check con cero errores, advertencias y sugerencias. Build correcto.

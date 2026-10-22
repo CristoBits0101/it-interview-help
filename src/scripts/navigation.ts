@@ -1,3 +1,5 @@
+import { migrateBranchId } from '../data/navigation-migrations';
+
 const navigationStorageKey = 'tech-training:navigation:v1';
 
 function fitSidebarToLabels() {
@@ -53,7 +55,8 @@ export function initializeNavigation() {
   try {
     const stored: unknown = JSON.parse(localStorage.getItem(navigationStorageKey) ?? '[]');
     if (Array.isArray(stored)) {
-      expanded = new Set(stored.filter((id): id is string => typeof id === 'string' && validIds.has(id)));
+      expanded = new Set(stored.filter((id): id is string => typeof id === 'string')
+        .map(migrateBranchId).filter(id => validIds.has(id)));
     }
   } catch {
     // Storage can be unavailable or malformed; the initial menu stays closed.

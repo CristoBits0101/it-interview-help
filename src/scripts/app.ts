@@ -137,7 +137,7 @@ function refreshView() {
   const homeLink = $('[data-home-link]');
   if (isHome) homeLink.setAttribute('aria-current', 'page');
   else homeLink.removeAttribute('aria-current');
-  document.title = isHome ? `Tech Training · ${translate('Home', language)}` : mode === 'search' ? `${translate('Búsqueda', language)} · Tech Training` : `${translate(selectedSection.dataset.moduleTitle!, language)} · Tech Training`;
+  document.title = isHome ? `Tech Interview Prep · ${translate('Home', language)}` : mode === 'search' ? `${translate('Búsqueda', language)} · Tech Interview Prep` : `${translate(selectedSection.dataset.moduleTitle!, language)} · Tech Interview Prep`;
   let visibleCount = 0;
   sections.forEach(section => {
     let groupCount = 0;
