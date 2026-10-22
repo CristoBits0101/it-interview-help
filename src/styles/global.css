@@ -26,7 +26,7 @@
 }
 @layer layout {
   :root { --sidebar-width: 332px; }
-  .sidebar { width: var(--sidebar-width); height: 100dvh; position: fixed; inset: 0 auto 0 0; background: var(--sidebar); border-right: 1px solid var(--line); padding: 16px; display: flex; flex-direction: column; z-index: 30; overflow-y: auto; scrollbar-width: thin; scrollbar-gutter: stable; }
+  .sidebar { --sidebar-padding: 16px; width: var(--sidebar-width); height: 100dvh; position: fixed; inset: 0 auto 0 0; background: var(--sidebar); border-right: 1px solid var(--line); padding: var(--sidebar-padding); display: flex; flex-direction: column; z-index: 30; overflow-y: auto; scrollbar-width: thin; scrollbar-gutter: stable; }
   .workspace { margin-left: var(--sidebar-width); }
   .topbar { min-height: 78px; padding: var(--space-gap) max(var(--space-page), calc((100% - 1500px) / 2 + var(--space-page))); border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-gap); background: var(--canvas); position: sticky; top: 0; z-index: 20; }
   main { max-width: 1500px; margin: auto; padding: 0 var(--space-page); outline: none; }
@@ -38,6 +38,7 @@
 @layer components {
   .brand { display: flex; align-items: center; flex-shrink: 0; font-family: var(--brand); font-size: var(--font-brand); font-weight: 500; letter-spacing: -.05em; padding: 9px 18px; min-height: 48px; line-height: 1; }
   .sidebar-header { position: sticky; top: 0; z-index: 1; display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; background: var(--sidebar); }
+  .sidebar-header::before { content: ''; position: absolute; inset: calc(-1 * var(--sidebar-padding)) calc(-1 * var(--sidebar-padding)) 0; z-index: -1; background: var(--sidebar); pointer-events: none; }
   .sidebar-header .brand { min-width: 0; flex-shrink: 1; white-space: nowrap; overflow-x: auto; }
   .icon-button.sidebar-close { display: none; flex-shrink: 0; }
   .nav-eyebrow { color: var(--text-soft); font-size: var(--font-meta); letter-spacing: .125em; font-weight: 300; display: flex; flex-shrink: 0; align-items: center; padding: 12px var(--space-navigation-row); min-width: max-content; min-height: 48px; line-height: 24px; white-space: nowrap; }

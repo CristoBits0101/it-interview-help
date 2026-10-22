@@ -1,5 +1,31 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 22 de octubre de 2026 — REST API sin Design
+
+La hoja REST API Design pasa a llamarse REST API en inglés y API REST en español. Se mantiene dentro de API Design y no cambia su estado pendiente de contenido ni el resto de la jerarquía. La etiqueta de su rama superior conserva Design.
+
+## 22 de octubre de 2026 — etiquetas de estilos sin redundancia
+
+Se retira Architecture de las tres hojas: Monolithic, Microservices y Event-Driven. En español quedan Monolítica, Microservicios y Orientada a Eventos. La categoría superior ya aporta el contexto arquitectónico. Se mantienen el árbol y sus estados. Verificado ES/EN/ES y móvil a 320 px sin desbordamiento. Tipos y compilación correctos.
+
+## 22 de octubre de 2026 — arquitectura visible en el aside
+
+Se incorpora a Software Architecture la jerarquía Architectural Styles → REST, Monolithic Architecture, Microservices Architecture y Event-Driven Architecture y Architectural Patterns → MVC. Las dos categorías son desplegables y las hojas no tienen href hasta publicar su contenido. Se conservan REST API Design bajo Software Design → API Design y las páginas e IDs existentes. Todas las etiquetas nuevas se traducen al español y REST/MVC conservan sus siglas. La clasificación se contrasta con Microsoft Learn y la definición original de REST de Fielding, enlazadas en PROJECT_GUIDE.
+
+Verificado en Chrome el árbol completo y sus traducciones durante ES/EN/ES, apertura y cierre con Enter y menú móvil a 320 px sin desbordamiento de página. Revisada captura de escritorio. Las cinco hojas permanecen deshabilitadas y no se añaden destinos vacíos. Tipos y compilación correctos.
+
+## 22 de octubre de 2026 — API Design y REST API Design
+
+Se añade dentro de Software Design el desplegable `API Design` con la hoja `REST API Design`, después de Design Patterns. Se traducen como `Diseño de API` y `Diseño de API REST`. La rama se puede abrir aunque no tenga páginas publicadas. La hoja permanece deshabilitada y sin href. Esta petición reincorpora únicamente estos niveles de navegación y no restaura el antiguo módulo REST ni sus conceptos.
+
+Verificado en Chrome el árbol anidado y la alternancia ES/EN/ES, apertura con teclado y vista móvil a 320 px sin desbordamiento de página. Se conserva la marca fija y el scroll. Tipos y compilación correctos.
+
+## 21 de octubre de 2026 — cobertura opaca de la cabecera del aside
+
+El usuario pide que las filas que pasan por detrás de Tech Training no se vean, conservando el diseño del scroll. El fondo de la cabecera sticky ya cubría su propia caja pero dejaba visible el contenido en el padding superior. Se añade un pseudoelemento opaco que cubre también ese padding y los laterales. Sus offsets derivan de `--sidebar-padding`, compartida con el padding del aside. No añade espacio de layout, no intercepta clics y conserva el scroll vertical a toda altura.
+
+Reproducido y comparado en Chrome con todas las ramas abiertas y scrollTop de 120 px. Las capturas muestran texto sobre la marca antes del ajuste y fondo limpio después. Verificado a 1440 y 320 px, incluido texto al 200 %. Se conservan los anchos de 423/320 px, el padding, la posición de la cabecera y el scrollbar de 10 px. El contenedor sigue de 0 a 900 px de altura y no hay desbordamiento de página. Tipos y compilación correctos.
+
 ## 21 de octubre de 2026 — títulos españoles sin duplicar nombres
 
 La última petición sustituye la decisión de mantener siempre el título inglés. Con Español seleccionado, los 14 patrones muestran solo su nombre español. Con English seleccionado muestran solo el inglés. No se añade un segundo nombre tras `·`. Las equivalencias se centralizan en `translatePatternTitle` e incluyen `Fábrica Simple`, `Constructor`, `Instancia Única` y `Método de Fábrica`. Los datos e IDs conservan su forma original. `data-pattern-title` guarda el nombre inglés canónico y el motor actualiza el texto y `lang` de forma explícita. El HTML inicial también muestra español. El repaso y las etiquetas accesibles conservan el nombre visible y la búsqueda admite ambos idiomas.

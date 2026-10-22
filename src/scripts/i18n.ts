@@ -220,6 +220,9 @@ Object.assign(spanishToEnglish, {
 });
 
 const navigationEnglishToSpanish: Record<string, string> = {
+  'API Design': 'Diseño de API', 'REST API': 'API REST',
+  'Architectural Styles': 'Estilos arquitectónicos', 'Architectural Patterns': 'Patrones arquitectónicos',
+  Monolithic: 'Monolítica', Microservices: 'Microservicios', 'Event-Driven': 'Orientada a eventos',
   CONCEPTS: 'CONCEPTOS', PATH: 'RUTA',
   Creational: 'Creacionales', Structural: 'Estructurales', Behavioral: 'Comportamiento',
   Home: 'Inicio', Mathematics: 'Matemáticas', 'Discrete Mathematics': 'Matemáticas discretas', 'Linear Algebra': 'Álgebra lineal', Calculus: 'Cálculo', 'Probability Theory': 'Teoría de la probabilidad',

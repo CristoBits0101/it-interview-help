@@ -41,8 +41,21 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
           { label: 'Structural', module: 'patrones-estructurales', href: '#software-design/patrones-estructurales' },
           { label: 'Behavioral', module: 'patrones-comportamiento', href: '#software-design/patrones-comportamiento' },
       ] },
+      { label: 'API Design', children: [
+        { label: 'REST API' },
+      ] },
     ] },
-    { label: 'Software Architecture', href: '#software-architecture/estilos-arquitectura' },
+    { label: 'Software Architecture', href: '#software-architecture/estilos-arquitectura', children: [
+      { label: 'Architectural Styles', children: [
+        { label: 'REST' },
+        { label: 'Monolithic' },
+        { label: 'Microservices' },
+        { label: 'Event-Driven' },
+      ] },
+      { label: 'Architectural Patterns', children: [
+        { label: 'MVC' },
+      ] },
+    ] },
     { label: 'System Design', href: '#system-design/sd-fundamentals' },
     { label: 'Software Testing' }, { label: 'Software Quality' },
     { label: 'Software Engineering Operations' }, { label: 'Software Maintenance' },
