@@ -1,0 +1,19 @@
+---
+import Icon from '../Icon.astro';
+import StudySection from './StudySection.astro';
+import StudyToolbar from './StudyToolbar.astro';
+import type { Track } from '../../data/curriculum';
+interface Props { tracks: Track[]; purposeModuleIds: ReadonlySet<string>; compactTrackIds: ReadonlySet<string>; patternIds: ReadonlySet<string>; aliases: ReadonlyMap<string, string> }
+const { tracks, purposeModuleIds, compactTrackIds, patternIds, aliases } = Astro.props;
+const firstModule = tracks[0].modules[0];
+---
+<section class="study-area" id="study" aria-labelledby="study-title" hidden>
+          <h1 class="study-title sr-only" id="study-title">{firstModule.title}</h1>
+          <StudyToolbar count={firstModule.concepts.length} />
+          <p id="results-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+          <div id="concept-library">
+            {tracks.map((track, ti) => track.modules.map((module, mi) => <StudySection track={track} module={module} index={mi} initial={ti === 0 && mi === 0} showPurpose={purposeModuleIds.has(module.id)} hideEmptyViews={compactTrackIds.has(track.id)} patternIds={patternIds} aliases={aliases} />))}
+          </div>
+          <div class="empty-state" id="empty-state" hidden><span class="empty-icon"><Icon name="search" size={26} /></span><h2 id="empty-title">No hay conceptos con estos filtros</h2><p id="empty-description">Prueba con otra palabra o cambia el nivel seleccionado.</p><button class="primary-button" id="clear-filters">Limpiar filtros</button></div>
+          <div class="module-bottom" id="module-bottom"><a class="next-module" id="next-module" href="#software-design/patrones">Siguiente módulo<Icon name="arrow" size={13} /></a></div>
+        </section>

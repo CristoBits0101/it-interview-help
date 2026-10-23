@@ -9,15 +9,17 @@ export interface CareerStage {
 export interface CareerProfile {
   id: string;
   label: string;
+  purpose: string;
   summary: string;
   stages: CareerStage[];
 }
 
 // Editorial study recommendations, not a universal career ladder or certification.
 // Repeated areas mean deeper practice as autonomy and responsibility increase.
-export const careerProfiles: CareerProfile[] = [
+const careerProfileTemplates: CareerProfile[] = [
   {
     id: 'frontend', label: 'Frontend Engineer',
+    purpose: 'Construye interfaces web.',
     summary: 'Combina la programación con la experiencia de usuario. Aplica criterios de calidad para construir interfaces accesibles.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Entiende la web y organiza la información antes de elegir un framework.', areas: ['Computing Fundamentals', 'Programming Fundamentals', 'Computer Networks', 'User Research', 'Information Architecture', 'Software Requirements'], milestone: 'Construye una página semántica y explica cómo llega del servidor al navegador.' },
@@ -29,6 +31,7 @@ export const careerProfiles: CareerProfile[] = [
   },
   {
     id: 'backend', label: 'Backend Engineer',
+    purpose: 'Implementa la lógica de negocio.',
     summary: 'Empieza por los servicios y los datos. Añade distribución y nube cuando entiendas sus costes.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende el lenguaje de programación y los procesos. Estudia la comunicación entre cliente y servidor.', areas: ['Computing Fundamentals', 'Programming Fundamentals', 'Operating Systems', 'Computer Networks', 'Software Requirements'], milestone: 'Explica una petición HTTP y construye un programa que procese y valide datos.' },
@@ -40,6 +43,7 @@ export const careerProfiles: CareerProfile[] = [
   },
   {
     id: 'full-stack', label: 'Full Stack Engineer',
+    purpose: 'Conecta interfaces y servicios web.',
     summary: 'Conecta la interfaz con los servicios y los datos. Profundiza en una parte sin perder la visión completa.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Conecta los fundamentos de programación con el recorrido de una petición web.', areas: ['Computing Fundamentals', 'Programming Fundamentals', 'Operating Systems', 'Computer Networks', 'User Research', 'Information Architecture', 'Software Requirements'], milestone: 'Describe cómo una petición viaja del navegador al servidor y accede a los datos. Maqueta una interfaz clara.' },
@@ -51,6 +55,7 @@ export const careerProfiles: CareerProfile[] = [
   },
   {
     id: 'devops', label: 'DevOps Engineer',
+    purpose: 'Automatiza la entrega y operación del software.',
     summary: 'Automatiza la entrega y la operación de sistemas. Colabora con los equipos para mantener software fiable.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Aprende a automatizar tareas y diagnosticar procesos y conexiones.', areas: ['Computing Fundamentals', 'Operating Systems', 'Computer Networks', 'Programming Fundamentals', 'Security Fundamentals'], milestone: 'Automatiza una tarea. Practica el diagnóstico de fallos de procesos y permisos. Revisa también los problemas de conexión.' },
@@ -62,6 +67,7 @@ export const careerProfiles: CareerProfile[] = [
   },
   {
     id: 'artificial-intelligence', label: 'Artificial Intelligence Engineer',
+    purpose: 'Aplica modelos de IA a problemas reales.',
     summary: 'Aplica matemáticas e ingeniería al trabajo con datos. Evalúa los modelos antes de integrarlos en productos útiles.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Construye una base de programación y razonamiento matemático para trabajar con datos.', areas: ['Computing Fundamentals', 'Programming Fundamentals', 'Algebra and Functions', 'Linear Algebra', 'Probability Theory', 'Statistics'], milestone: 'Manipula un conjunto de datos y explica cómo lo representan los vectores. Describe sus distribuciones y su variabilidad.' },
@@ -72,6 +78,27 @@ export const careerProfiles: CareerProfile[] = [
     ],
   },
 ];
+
+// Shared study stages are recognizable labels rather than a universal job ladder.
+// Keep legacy IDs stable. The former transition stage contributes its areas to Senior.
+export const careerStages = [
+  { id: 'foundation', label: 'Trainee / Becario' },
+  { id: 'junior', label: 'Entry Level / Junior' },
+  { id: 'mid', label: 'Mid Level / Semi-Senior' },
+  { id: 'senior', label: 'Senior' },
+] as const;
+
+export const careerProfiles: CareerProfile[] = careerProfileTemplates.map(profile => ({
+  ...profile,
+  stages: careerStages.map(({ id, label }) => {
+    const stage = profile.stages.find(stage => stage.id === id)!;
+    const transition = profile.stages.find(stage => stage.id === 'advanced');
+    return {
+      ...stage, label,
+      areas: id === 'senior' ? [...new Set([...(transition?.areas ?? []), ...stage.areas])] : stage.areas,
+    };
+  }),
+}));
 
 // Dependencies describe useful prior knowledge, not hard admission requirements.
 // Keep labels identical to navigation.ts so existing lessons can be resolved.

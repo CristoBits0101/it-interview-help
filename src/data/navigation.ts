@@ -1,4 +1,5 @@
 import type { IconName } from '../components/Icon.astro';
+import { glossaryTopics } from './ai-glossary';
 
 export interface NavigationNode {
   label: string;
@@ -137,7 +138,9 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
     ] },
     { label: 'Natural Language Processing' }, { label: 'Computer Vision' },
     { label: 'Generative Artificial Intelligence', children: [
-      { label: 'Generative AI Applications', href: '#applied-ai/ai-fundamentos' },
+      { label: 'Generative AI Applications', href: '#applied-ai/ai-fundamentos', children: glossaryTopics.map(topic => ({
+        label: topic.en, module: topic.id, href: `#applied-ai/${topic.id}`,
+      })) },
     ] },
   ] },
 ];

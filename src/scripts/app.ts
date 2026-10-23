@@ -1,3 +1,8 @@
+import { $, $$ } from './dom';
+import { initializeNavigationDrawer } from './navigation-drawer';
+import { initializeStudyCards } from './study-cards';
+import { initializeReview } from './review';
+import { initializeDialogs } from './dialogs';
 import { initializeNavigation } from './navigation';
 import { initializeCareerPaths } from './home';
 import { applyStaticTranslations, getSavedLanguage, saveLanguage, translate, translatePatternTitle, type Language } from './i18n';
@@ -8,9 +13,8 @@ let language: Language = getSavedLanguage();
 applyStaticTranslations(language);
 refreshCareerSelection?.();
 
-const $ = <T extends HTMLElement = HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
-const $$ = <T extends HTMLElement = HTMLElement>(selector: string) => Array.from(document.querySelectorAll<T>(selector));
 const search = $<HTMLInputElement>('#search');
+const navigationDrawer = initializeNavigationDrawer(search);
 const searchClear = $<HTMLButtonElement>('#search-clear');
 const levelPrevious = $<HTMLButtonElement>('#level-previous');
 const levelNext = $<HTMLButtonElement>('#level-next');
@@ -88,7 +92,7 @@ function refreshView() {
       .map(label => `${label ?? ''} ${translate(label ?? '', language)}`).join(' ');
     const title = card.querySelector<HTMLElement>('h3')!;
     const patternTitle = title.dataset.patternTitle ?? '';
-    return !query || normalize(`${metadata} ${title.textContent} ${patternTitle} ${translatePatternTitle(patternTitle, 'es')} ${card.querySelector('[data-card-panel="explanation"]')!.textContent}`).includes(query);
+    return !query || normalize(`${metadata} ${title.textContent} ${card.dataset.searchAliases ?? ''} ${patternTitle} ${translatePatternTitle(patternTitle, 'es')} ${card.querySelector('[data-card-panel="explanation"]')!.textContent}`).includes(query);
   };
   const availableCards = cards.filter(card => {
     const section = card.closest<HTMLElement>('.concept-section')!;
@@ -157,8 +161,10 @@ function refreshView() {
   $('#empty-state').hidden = visibleCount > 0;
   $('#module-bottom').hidden = isGrouped || visibleCount === 0;
   const heading = $('#study-title');
+  const showPatternPurpose = mode === 'module' && selectedSection.hasAttribute('data-pattern-category');
+  heading.classList.toggle('sr-only', !showPatternPurpose);
   if (mode === 'module') {
-    heading.textContent = moduleLabel;
+    heading.textContent = showPatternPurpose ? translate(selectedSection.dataset.moduleDescription!, language).replace(/\.$/u, '') : moduleLabel;
   } else {
     heading.textContent = translate('Resultados de búsqueda', language);
   }
@@ -195,7 +201,7 @@ function goToHash(initial = false) {
     if (route && route !== 'home' && !homeAnchor) history.replaceState(null, '', '#home');
   }
   mode = routeMode;
-  closeMenu();
+  navigationDrawer.close();
   refreshView();
   if (homeAnchor) requestAnimationFrame(() => homeAnchor.scrollIntoView({ block: 'start' }));
   else if (!initial) {
@@ -245,135 +251,14 @@ const moveLevel = (step: number) => {
 levelPrevious.addEventListener('click', () => moveLevel(-1));
 levelNext.addEventListener('click', () => moveLevel(1));
 
-$('#concept-library').addEventListener('click', event => {
-  const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button');
-  if (!button) return;
-  if (button.dataset.cardView) {
-    if (button.disabled || button.getAttribute('aria-pressed') === 'true') return;
-    const card = button.closest<HTMLElement>('.concept-card')!;
-    const panel = card.querySelector<HTMLElement>(`[data-card-panel="${button.dataset.cardView}"]`);
-    if (!panel?.textContent?.trim()) return;
-    card.querySelectorAll<HTMLButtonElement>('[data-card-view]').forEach(viewButton => {
-      viewButton.setAttribute('aria-pressed', String(viewButton === button));
-    });
-    card.querySelectorAll<HTMLElement>('[data-card-panel]').forEach(viewPanel => {
-      viewPanel.hidden = viewPanel !== panel;
-    });
-    return;
-  }
-  const learnId = button.dataset.learn;
-  if (learnId) {
-    if (learned.has(learnId)) learned.delete(learnId);
-    else learned.add(learnId);
-    say(translate(learned.has(learnId) ? 'Concepto marcado como comprendido.' : 'Concepto marcado como pendiente.', language));
-    persist(); refreshProgress();
-  }
-});
-
-const sidebar = $('#sidebar');
-const backdrop = $('#mobile-backdrop');
-const mobileToggle = $('#mobile-toggle');
-const isNavigationDrawer = () => document.documentElement.classList.contains('sidebar-drawer');
-function closeMenu() {
-  sidebar.classList.remove('mobile-open');
-  backdrop.hidden = true;
-  mobileToggle.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
-  $('.workspace').inert = false;
-  sidebar.setAttribute('role', 'complementary');
-  sidebar.removeAttribute('aria-modal');
-  if (isNavigationDrawer()) sidebar.inert = true;
-}
-function openMenu() {
-  sidebar.inert = false;
-  sidebar.classList.add('mobile-open');
-  backdrop.hidden = false;
-  mobileToggle.setAttribute('aria-expanded', 'true');
-  document.body.style.overflow = 'hidden';
-  $('.workspace').inert = true;
-  sidebar.setAttribute('role', 'dialog');
-  sidebar.setAttribute('aria-modal', 'true');
-  sidebar.querySelector<HTMLAnchorElement>('.brand')!.focus();
-}
-mobileToggle.addEventListener('click', () => sidebar.classList.contains('mobile-open') ? closeMenu() : openMenu());
-$('#sidebar-close').addEventListener('click', () => { closeMenu(); mobileToggle.focus(); });
-backdrop.addEventListener('click', () => { closeMenu(); mobileToggle.focus(); });
-window.addEventListener('sidebar-layout-change', () => { closeMenu(); sidebar.inert = isNavigationDrawer(); });
-document.addEventListener('keydown', event => {
-  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k' && !$('dialog[open]') && !sidebar.classList.contains('mobile-open')) {
-    event.preventDefault(); search.focus();
-  }
-  if (sidebar.classList.contains('mobile-open')) {
-    if (event.key === 'Escape') { closeMenu(); mobileToggle.focus(); }
-    if (event.key === 'Tab') {
-      const focusable = Array.from(sidebar.querySelectorAll<HTMLElement>('a, button, summary')).filter(el => el.checkVisibility());
-      const first = focusable[0], last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-    }
-  }
-});
-
-const reviewDialog = $<HTMLDialogElement>('#review-dialog');
-let reviewCards: HTMLElement[] = [];
-let reviewIndex = 0;
-let reviewUnderstood = 0;
-function drawReview() {
-  const card = reviewCards[reviewIndex];
-  $('#review-position').textContent = `${reviewIndex + 1} / ${reviewCards.length}`;
-  const cardTitle = card.querySelector('h3')!;
-  const reviewTitle = $('#review-title');
-  reviewTitle.textContent = cardTitle.textContent;
-  reviewTitle.lang = cardTitle.lang || language;
-  reviewTitle.translate = cardTitle.translate;
-  if (cardTitle.dataset.patternTitle) reviewTitle.dataset.patternTitle = cardTitle.dataset.patternTitle;
-  else delete reviewTitle.dataset.patternTitle;
-  $('#review-definition').replaceChildren(...Array.from(card.querySelector('[data-card-panel="explanation"]')!.children, child => child.cloneNode(true)));
-  $('#review-source').replaceChildren(card.querySelector('.concept-source')!.cloneNode(true));
-  $('#review-category').textContent = translate(card.closest<HTMLElement>('.concept-section')!.dataset.trackEyebrow!, language);
-  $('#review-answer').hidden = true;
-  $('#reveal-answer').hidden = false;
-  $('#review-rating').hidden = true;
-  $('#review-complete').hidden = true;
-  $('#review-question').hidden = false;
-  reviewDialog.setAttribute('aria-labelledby', 'review-title');
-  $('#review-helper').hidden = false;
-  $('#reveal-answer').focus();
-}
-function startReview() {
-  const available = cards.filter(card => !card.hidden && !card.closest<HTMLElement>('.concept-section')!.hidden);
-  if (!available.length) { say(translate('Elige primero algún concepto para repasar.', language)); return; }
-  // Prioritize pending concepts; shuffle within each group for varied practice.
-  const shuffle = (list: HTMLElement[]) => {
-    const copy = [...list];
-    for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; }
-    return copy;
-  };
-  reviewCards = [...shuffle(available.filter(card => !learned.has(card.dataset.conceptId!))), ...shuffle(available.filter(card => learned.has(card.dataset.conceptId!)))];
-  reviewIndex = 0; reviewUnderstood = 0;
-  reviewDialog.showModal(); drawReview();
-}
-reviewModuleButton?.addEventListener('click', () => startReview());
-$('#reveal-answer').addEventListener('click', () => { $('#review-answer').hidden = false; $('#reveal-answer').hidden = true; $('#review-rating').hidden = false; $('#review-again').focus(); });
-function nextReview(understood: boolean) {
-  const id = reviewCards[reviewIndex].dataset.conceptId!;
-  if (understood) { learned.add(id); reviewUnderstood++; }
-  else learned.delete(id);
+initializeStudyCards($('#concept-library'), learnId => {
+  if (learned.has(learnId)) learned.delete(learnId);
+  else learned.add(learnId);
+  say(translate(learned.has(learnId) ? 'Concepto marcado como comprendido.' : 'Concepto marcado como pendiente.', language));
   persist(); refreshProgress();
-  reviewIndex++;
-  if (reviewIndex < reviewCards.length) drawReview();
-  else {
-    $('#review-question').hidden = true; $('#review-rating').hidden = true; $('#review-helper').hidden = true;
-    $('#review-complete').hidden = false;
-    $('#review-summary').textContent = language === 'en'
-      ? `Concepts reviewed: ${reviewCards.length}. Understood: ${reviewUnderstood}. Keep practicing: ${reviewCards.length - reviewUnderstood}.`
-      : `Conceptos repasados: ${reviewCards.length}. Comprendidos: ${reviewUnderstood}. Para seguir practicando: ${reviewCards.length - reviewUnderstood}.`;
-    reviewDialog.setAttribute('aria-labelledby', 'review-complete-title');
-    $('#review-complete button').focus();
-  }
-}
-$('#review-known').addEventListener('click', () => nextReview(true));
-$('#review-again').addEventListener('click', () => nextReview(false));
+});
+
+initializeReview({ cards, learned, getLanguage: () => language, onChange: () => { persist(); refreshProgress(); }, onNotice: say, trigger: reviewModuleButton });
 const languageSelect = $<HTMLSelectElement>('#language-select');
 languageSelect.addEventListener('change', () => {
   language = languageSelect.value === 'en' ? 'en' : 'es';
@@ -384,9 +269,6 @@ languageSelect.addEventListener('change', () => {
   refreshCareerSelection?.();
   if ($('#results-status').textContent || mode === 'search') announceResults();
 });
-$$('[data-close-dialog]').forEach(button => button.addEventListener('click', () => button.closest<HTMLDialogElement>('dialog')!.close()));
-$$<HTMLDialogElement>('dialog').forEach(dialog => dialog.addEventListener('click', event => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); } }));
-document.querySelector('#open-sources')?.addEventListener('click', () => $<HTMLDialogElement>('#sources-dialog').showModal());
+initializeDialogs();
 refreshProgress();
 goToHash(true);
-sidebar.inert = isNavigationDrawer();

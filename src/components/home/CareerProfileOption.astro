@@ -1,0 +1,21 @@
+---
+import Icon from '../Icon.astro';
+import type { CareerProfile } from '../../data/career-paths';
+
+interface Props {
+  profile: Pick<CareerProfile, 'id' | 'label' | 'purpose'>;
+  index: number;
+  selected?: boolean;
+  controls?: string;
+}
+const { profile, index, selected = false, controls = 'career-panels' } = Astro.props;
+const descriptionId = `career-purpose-${profile.id}`;
+---
+<button type="button" data-career-profile={profile.id} aria-label={profile.label} aria-describedby={descriptionId} aria-pressed={selected} aria-controls={controls}>
+  <span class="career-option-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+  <span class="career-option-copy">
+    <span class="career-option-title">{profile.label}</span>
+    <span class="career-option-description" id={descriptionId}>{profile.purpose}</span>
+  </span>
+  <span class="career-selected-mark"><Icon name="check" size={13} /></span>
+</button>

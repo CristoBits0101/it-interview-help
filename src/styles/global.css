@@ -90,6 +90,7 @@
   .section-eyebrow { font-size: var(--font-meta); letter-spacing: 1.25px; color: var(--text-soft); font-weight: 300; margin-bottom: 8px; }
   .section-eyebrow span { padding: 0 7px; color: var(--paper); }
   .study-heading h2 { font-size: var(--font-section); line-height: 1.4; letter-spacing: normal; }
+  .study-title:not(.sr-only) { font-family: var(--brand); font-size: var(--font-title); font-weight: 500; line-height: 1.4; text-transform: uppercase; margin: 0 0 var(--space-gap); padding: 0 var(--space-compact); border-inline-start: 2px solid var(--accent); }
   .study-heading p { font-size: var(--font-meta); color: var(--text-soft); margin-top: 7px; max-width: 680px; }
   .level-select { display: flex; align-items: center; gap: 8px; max-width: 100%; margin-inline-start: auto; color: var(--text-secondary); }
   .level-step { display: grid; flex: 0 0 40px; align-items: center; width: 40px; height: 40px; padding: 0; border-radius: 50%; color: var(--text-soft); }
@@ -133,7 +134,8 @@
   .card-view-button:disabled { color: var(--disabled); cursor: default; }
   .card-view-button:not(:disabled):not([aria-pressed='true']) { transition: color .16s, background-color .16s; }
   .card-view-button:not(:disabled):not([aria-pressed='true']):hover { color: var(--ink); background: var(--surface-hover); }
-  .card-footer button:focus-visible { outline: 2px solid var(--green); outline-offset: -3px; }
+    .card-footer button:focus-visible { outline: 2px solid var(--green); outline-offset: -3px; }
+    .card-views[hidden] + .learn-button { grid-column: 1 / -1; }
   .learn-button { display: flex; align-items: center; justify-content: center; justify-self: end; min-width: 0; max-width: 100%; gap: var(--gap-card); min-height: 44px; font-size: var(--font-small); font-weight: 400; line-height: 1.4; color: var(--text-soft); padding: calc(var(--gap-card) / 2) 0 calc(var(--gap-card) / 2) var(--gap-card); border: 0; border-radius: var(--radius-control); background: transparent; }
   /* Compensate the final glyph's ink overhang without insetting the footer. */
   .learn-label { padding-inline-end: .05em; }

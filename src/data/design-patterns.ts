@@ -106,19 +106,19 @@ const patternPages = [
   {
     id: 'patrones',
     title: 'Creational',
-    description: 'Patrones para decidir cómo se crean los objetos.',
+    description: 'Definen cómo se crean los objetos.',
     conceptIds: ['factory', 'builder', 'prototype', 'singleton', 'factory-method'],
   },
   {
     id: 'patrones-estructurales',
     title: 'Structural',
-    description: 'Patrones para organizar objetos y sus relaciones.',
+    description: 'Definen cómo se componen los objetos para formar estructuras.',
     conceptIds: ['facade', 'adapter', 'decorator'],
   },
   {
     id: 'patrones-comportamiento',
     title: 'Behavioral',
-    description: 'Patrones para organizar la comunicación y las responsabilidades entre objetos.',
+    description: 'Define cómo colaboran y se reparten responsabilidades los objetos.',
     conceptIds: ['iterator', 'strategy', 'observer', 'state', 'mediator', 'visitor'],
   },
 ];

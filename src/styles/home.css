@@ -20,18 +20,20 @@
   .home-section-heading h2 { font-size: var(--font-section); line-height: 1.4; letter-spacing: normal; margin-top: var(--gap-compact); font-weight: 500; }
   .home-section-heading > p { flex: 1; max-width: 350px; font-size: var(--font-body); line-height: 1.75; color: var(--text-soft); }
   .career-profile-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); gap: var(--gap-control); }
-  .career-profile-options button { overflow-wrap: anywhere; position: relative; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-control); text-align: left; min-height: 104px; padding: var(--space-control); background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-control); font-size: var(--font-small); line-height: 1.4; font-weight: 400; transition: border-color .15s, background .15s; }
+  .career-profile-options button { overflow-wrap: anywhere; position: relative; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-control); text-align: left; min-height: 104px; padding: var(--space-control); background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-profile); font-size: var(--font-small); line-height: 1.4; font-weight: 400; transition: border-color .15s, background .15s; }
   .career-profile-options button:hover { border-color: var(--border-accent); background: var(--surface-soft); }
   .career-profile-options button[aria-pressed='true'] { background: var(--surface-tinted); border-color: var(--control-border); color: var(--accent-strong); }
   .career-option-number { font-size: var(--font-meta); font-weight: 300; color: var(--text-soft); }
+  .career-option-copy { min-width: 0; display: flex; flex-direction: column; gap: var(--gap-control); }
+  .career-option-description { font-size: var(--font-body); font-weight: 300; line-height: 1.6; color: var(--text-secondary); overflow-wrap: normal; word-break: normal; hyphens: none; }
   .career-selected-mark { position: absolute; top: var(--space-control); right: var(--space-control); display: none; width: 18px; height: 18px; place-items: center; background: var(--green); color: var(--paper); border-radius: 50%; }
   .career-profile-options button[aria-pressed='true'] .career-selected-mark { display: grid; }
   .career-stage-section { display: flex; flex-direction: column; gap: var(--gap-control); }
   .career-control-label { font-size: var(--font-small); font-weight: 400; color: var(--text-secondary); }
   .career-stage-note { font-size: var(--font-body); line-height: 1.6; color: var(--text-soft); }
-  .career-stage-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); list-style: none; margin: 0; padding: var(--gap-control); gap: calc(var(--gap-control) / 2); background: var(--sidebar); border: 1px solid var(--line); border-radius: var(--radius-control); }
+  .career-stage-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); list-style: none; margin: 0; padding: var(--gap-control); gap: calc(var(--gap-control) / 2); background: var(--sidebar); border: 1px solid var(--line); border-radius: 9999px; }
   .career-stage-options li { min-width: 0; }
-  .career-stage-options button { display: flex; align-items: center; gap: var(--gap-control); min-height: 52px; width: 100%; height: 100%; padding: var(--space-control); border: 1px solid transparent; border-radius: var(--radius-inset); text-align: left; font-size: var(--font-small); font-weight: 400; line-height: 1.4; color: var(--text-soft); }
+  .career-stage-options button { display: flex; align-items: center; gap: var(--gap-control); min-height: 52px; width: 100%; height: 100%; padding: var(--space-control); border: 1px solid var(--border-soft); border-radius: 9999px; background: var(--paper); text-align: left; font-size: var(--font-small); font-weight: 400; line-height: 1.4; color: var(--text-soft); }
   .career-stage-options button:hover { background: var(--surface-hover); }
   .career-stage-options button[aria-pressed='true'] { background: var(--paper); border-color: var(--control-border); color: var(--green); box-shadow: 0 2px 5px color-mix(in srgb, var(--ink) 2%, transparent); font-weight: 400; }
   .career-stage-number { display: grid; place-items: center; min-width: 1.85em; min-height: 1.85em; flex: 0 0 auto; font-size: var(--font-meta); font-weight: 300; border: 1px solid var(--border-soft); border-radius: 50%; }

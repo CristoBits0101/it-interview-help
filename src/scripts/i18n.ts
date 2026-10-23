@@ -1,6 +1,13 @@
+import { glossaryTranslations } from '../data/ai-glossary';
 export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
+  'Construye interfaces web.': 'Builds web interfaces.',
+  'Implementa la lógica de negocio.': 'Implements business logic.',
+  'Conecta interfaces y servicios web.': 'Connects web interfaces and services.',
+  'Automatiza la entrega y operación del software.': 'Automates software delivery and operations.',
+  'Aplica modelos de IA a problemas reales.': 'Applies AI models to real problems.',
+  'Trainee / Becario': 'Trainee / Intern',
   'Centraliza la creación de objetos y elige qué clase instanciar según los datos recibidos.': 'Centralizes object creation and chooses which class to instantiate based on the supplied data.',
   'Construye objetos complejos paso a paso y separa ese proceso de la representación del resultado.': 'Builds complex objects step by step and separates that process from the resulting representation.',
   'Una clase padre define un método de creación que las subclases pueden redefinir para elegir el tipo de objeto.': 'A parent class defines a creation method that subclasses can override to choose the object type.',
@@ -53,9 +60,9 @@ const spanishToEnglish: Record<string, string> = {
   'rutas disponibles. Definiciones breves y fuentes originales para profundizar.': 'learning paths available. Concise definitions and original sources to explore further.',
   RUTA: 'PATH', módulo: 'module', módulos: 'modules',
   'SOLID · cinco principios': 'SOLID · five principles',
-  'Patrones para decidir cómo se crean los objetos.': 'Patterns for deciding how objects are created.',
-  'Patrones para organizar objetos y sus relaciones.': 'Patterns for organizing objects and their relationships.',
-  'Patrones para organizar la comunicación y las responsabilidades entre objetos.': 'Patterns for organizing communication and responsibilities between objects.',
+  'Definen cómo se crean los objetos.': 'They define how objects are created.',
+  'Definen cómo se componen los objetos para formar estructuras.': 'They define how objects are composed into structures.',
+  'Define cómo colaboran y se reparten responsabilidades los objetos.': 'Defines how objects collaborate and share responsibilities.',
   'Un módulo debe responder a una sola responsabilidad de negocio y tener una única razón para cambiar.': 'A module should serve one business responsibility and have one reason to change.',
   'Permite añadir comportamientos sin modificar el código estable mediante implementaciones nuevas.': 'Add new behavior through new implementations without changing stable code.',
   'Un tipo derivado debe sustituir al tipo base respetando sus garantías sin exigir condiciones más estrictas.': 'A derived type should replace its base type while honoring its guarantees and without requiring stricter conditions.',
@@ -280,6 +287,14 @@ const titleCase = (value: string) => {
 };
 const navigationLabels = Object.fromEntries(Object.entries(navigationEnglishToSpanish).map(([en, es]) => [en, titleCase(es)]));
 const spanishNavigationLabels = Object.fromEntries(Object.entries(navigationEnglishToSpanish).flatMap(([en, es]) => [[es, en], [titleCase(es), en]]));
+Object.assign(spanishToEnglish, glossaryTranslations);
+Object.assign(spanishToEnglish, {
+  'Lewis y colaboradores': 'Lewis and colleagues', 'Wei y colaboradores': 'Wei and colleagues',
+  'Yao y colaboradores': 'Yao and colleagues', 'Shinn y colaboradores': 'Shinn and colleagues',
+  'Malkov y Yashunin': 'Malkov and Yashunin', 'Robertson y Zaragoza': 'Robertson and Zaragoza',
+  'Radford y colaboradores': 'Radford and colleagues', 'Ho y colaboradores': 'Ho and colleagues',
+  'Kingma y Welling': 'Kingma and Welling', 'Shi y colaboradores': 'Shi and colleagues',
+});
 const englishToSpanish: Record<string, string> = {};
 for (const [es, en] of Object.entries(spanishToEnglish)) englishToSpanish[en] ??= es;
 

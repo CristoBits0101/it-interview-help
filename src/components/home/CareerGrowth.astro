@@ -1,0 +1,15 @@
+---
+import Icon from '../Icon.astro';
+interface Props { branches: { title: string; description: string; sequence: string[] }[]; sources: { title: string; url: string }[] }
+const { branches, sources } = Astro.props;
+---
+<section class="home-section" aria-labelledby="growth-title">
+    <header class="home-section-heading">
+      <div><p class="home-kicker">02 / AMPLÍA TU ALCANCE</p><h2 id="growth-title">Después de Senior, el camino se abre.</h2></div>
+      <p>Puedes crecer en especialización técnica o en liderazgo y negocio. Analyst y Architect describen especialidades. Lead describe una responsabilidad de liderazgo. No son etapas obligatorias para todo el mundo.</p>
+    </header>
+    <div class="career-branches">
+      {branches.map(branch => <article class="career-branch"><h3>{branch.title}</h3><p>{branch.description}</p><ol aria-label={`Recorrido orientativo: ${branch.title}`}>{branch.sequence.map((step, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{step}</li>)}</ol></article>)}
+    </div>
+    <details class="career-methodology"><summary>Cómo interpretar estos niveles <Icon name="down" size={15} /></summary><div><p>Esta propuesta orienta el estudio. No representa una escala universal de puestos. Valora la autonomía y la complejidad del trabajo. Considera también el alcance de las decisiones. El título y los años no bastan para determinar una etapa. Las responsabilidades de análisis pueden aparecer desde las primeras etapas. La dirección tecnológica también exige gestión de personas y conocimientos de estrategia y negocio.</p><p>Referencias para las competencias y la progresión.</p><ul>{sources.map(source => <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}<Icon name="arrow" size={13} /></a></li>)}</ul></div></details>
+  </section>

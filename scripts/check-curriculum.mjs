@@ -26,7 +26,7 @@ const { navigation, sharedFoundations } = await import('../src/data/navigation.t
 const { careerProfiles, areaGuidance } = await import('../src/data/career-paths.ts');
 const { tracks } = await import('../src/data/curriculum.ts');
 const { systemDesign } = await import('../src/data/system-design.ts');
-const { appliedAI } = await import('../src/data/applied-ai.ts');
+const { aiGlossary: appliedAI, glossaryInventory } = await import('../src/data/ai-glossary.ts');
 const { translate } = await import('../src/scripts/i18n.ts');
 const { migrateBranchId } = await import('../src/data/navigation-migrations.ts');
 const pathId = path => path.map(encodeURIComponent).join('/');
@@ -103,5 +103,28 @@ for (const concept of publishedConcepts) {
   assert(concept.description && new URL(concept.source.url).protocol === 'https:');
   assert.notEqual(translate(concept.description, 'en'), concept.description, `Untranslated concept: ${concept.id}`);
 }
+const glossary = appliedAI.modules.flatMap(m => m.concepts);
+assert.equal(glossary.length, 104, 'Retain the 100 README terms and four agreed model basics');
+const publishedIds = [...publishedConcepts, ...glossary].map(c => c.id);
+assert.equal(new Set(publishedIds).size, publishedIds.length, 'Concept IDs must be globally unique');
+assert.equal(new Set(glossaryInventory.map(c => c.term)).size, 100);
+for (const module of appliedAI.modules) {
+  assert(all.some(n => n.module === module.id && n.href === `#applied-ai/${module.id}`), `Missing glossary page: ${module.id}`);
+  for (const c of module.concepts) {
+    assert(c.description.endsWith('.') && !/[,;:—→]/u.test(c.description), `Interview wording: ${c.id}`);
+    assert.notEqual(translate(c.description, 'en'), c.description, `Untranslated glossary: ${c.id}`);
+    assert.equal(translate(translate(c.description, 'en'), 'es'), c.description, `Translation round trip: ${c.id}`);
+    assert(c.source.publisher && c.source.title && new URL(c.source.url).protocol === 'https:', `Missing glossary source: ${c.id}`);
+  }
+}
+const readmeIndex = process.argv.indexOf('--readme');
+if (readmeIndex >= 0) {
+  const readme = readFileSync(process.argv[readmeIndex + 1], 'utf8');
+  const table = readme.split('## Glosario de Terminos')[1]?.split('\n## ')[0];
+  assert(table, 'README glossary heading not found');
+  const terms = [...table.matchAll(/^\| ([^|]+) \|/gm)].map(m => m[1].trim()).filter(t => t !== 'Termino' && !t.startsWith('---'));
+  assert.deepEqual(terms.sort(), glossaryInventory.map(c => c.term).sort(), 'README inventory coverage');
+}
 console.log(`Validated ${all.length} navigation entries, ${branches.size} branches, ${lessonLinks.length} published links, ${publishedConcepts.length} published concepts and ${careerProfiles.reduce((n, p) => n + p.stages.length, 0)} career stages.`);
+console.log(`Also validated ${glossary.length} bilingual glossary entries across ${appliedAI.modules.length} published local pages.`);
 if (process.argv.includes('--inventory')) console.log(all.map(n => `${'  '.repeat(n.path.length - 1)}- ${n.label}${n.shared ? ' [shared]' : ''}${n.href ? ` → ${n.href}` : ''}`).join('\n'));

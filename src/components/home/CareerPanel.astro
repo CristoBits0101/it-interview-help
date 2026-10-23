@@ -1,0 +1,42 @@
+---
+import Icon from '../Icon.astro';
+import type { Track } from '../../data/curriculum';
+import type { NavigationNode } from '../../data/navigation';
+import type { CareerProfile, CareerStage } from '../../data/career-paths';
+import { countConcepts } from '../../lib/catalog';
+interface Props { profile: CareerProfile; stage: CareerStage; initial: boolean; tracks: Track[]; areas: ReadonlyMap<string, NavigationNode>; guidanceByArea: Record<string, { focus: string; prerequisites: string[] }> }
+const { profile, stage, initial, tracks, areas, guidanceByArea } = Astro.props;
+---
+<section class="career-panel" data-career-panel={profile.id} data-stage={stage.id} hidden={!initial} aria-labelledby={`career-heading-${profile.id}-${stage.id}`}>
+          <header class="career-panel-heading">
+            <div><p class="home-kicker">{stage.label}</p><h3 id={`career-heading-${profile.id}-${stage.id}`}>{profile.label}</h3><p>{profile.summary}</p></div>
+            <span class="career-area-count" data-stage-area-count={stage.areas.length}>{stage.areas.length} áreas en esta etapa</span>
+          </header>
+          <div class="career-plan-layout">
+            <div class="career-plan-content">
+              <p class="career-list-label">Orden sugerido de estudio <span>Conserva las bases de etapas anteriores</span></p>
+              <ol class="career-area-grid">
+                {stage.areas.map((label, index) => {
+                  const area = areas.get(label);
+                  const guidance = guidanceByArea[label];
+                  const linkedTrack = area?.href ? tracks.find(track => area.href?.startsWith(`#${track.id}/`)) : undefined;
+                  return <li class="career-area-card">
+                    <div class="career-area-heading"><span class="career-area-number">{String(index + 1).padStart(2, '0')}</span>
+                      <div>{linkedTrack && area?.href ? <a href={area.href} data-route={linkedTrack.id}><span data-area-translation={label}>{label}</span><Icon name="arrow" size={14} /></a> : <strong data-area-translation={label}>{label}</strong>}
+                        {linkedTrack ? <span class="career-content-status is-available">{countConcepts(linkedTrack)} conceptos disponibles</span> : <span class="career-content-status">Contenido no disponible ahora</span>}
+                      </div>
+                    </div>
+                    {guidance && <><p class="career-area-focus">{guidance.focus}</p><p class="career-prerequisites"><span>Base previa</span>{guidance.prerequisites.length ? guidance.prerequisites.map((prerequisite, prerequisiteIndex) => <>{prerequisiteIndex > 0 && ' · '}<span data-area-translation={prerequisite}>{prerequisite}</span></>) : 'Puedes empezar aquí'}</p></>}
+                  </li>;
+                })}
+              </ol>
+            </div>
+            <div class="career-outcome" role="group" aria-label="Objetivo y práctica de esta etapa">
+              <span class="career-outcome-symbol"><Icon name="target" size={24} /></span>
+              <p class="home-kicker">QUÉ DEBERÍAS PODER HACER</p>
+              <h4>{stage.goal}</h4>
+              <div class="career-milestone"><p>DEMUESTRA LO APRENDIDO</p><p>{stage.milestone}</p></div>
+              <p class="career-outcome-note">Valora lo que puedes explicar y construir. Comprueba también que puedes mantenerlo. Leer los conceptos es solo el comienzo.</p>
+            </div>
+          </div>
+        </section>

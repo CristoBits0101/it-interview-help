@@ -1,5 +1,29 @@
 # Memoria de producto, diseño y desarrollo
 
+## Entrega de la sesión — 23 de octubre de 2026
+
+El usuario autoriza expresamente subir a GitHub el lote acumulado del glosario, componentes y ajustes de interfaz. Sustituye la instrucción anterior de mantenerlo pendiente de subir. La web de Sites requiere una publicación independiente y no se despliega con esta petición. Se detienen los servidores locales al terminar. No se repite el apagado solicitado en la sesión del día anterior.
+
+## 23 de octubre: descripciones de perfiles
+
+Las cinco tarjetas para elegir perfil incluyen una frase breve bajo el nombre que resume el trabajo del rol. El campo `purpose` vive en `career-paths.ts` y se traduce en `i18n.ts`. `CareerProfileOption.astro` recibe perfil, índice y selección por parámetros. La descripción usa 13 px/peso 300 y se conecta al botón con `aria-describedby`. Por petición posterior expresa la frase de Frontend es «Construye interfaces web». Su versión inglesa es «Builds web interfaces». No se enumeran criterios de calidad en esta descripción breve.
+
+## 23 de octubre: cuatro etapas de Home
+
+Las etiquetas definitivas pedidas por el usuario son `Trainee / Becario`, `Entry Level / Junior`, `Mid Level / Semi-Senior` y `Senior`. En inglés `Becario` se presenta como `Intern`. El selector recupera fondo y borde exteriores redondeados y conserva los botones con radio completo. Sustituye el selector anterior de cinco etapas y la retirada temporal del marco. `careerStages` define los cuatro nombres compartidos. Se conservan IDs de las etapas restantes y las áreas de la antigua transición se unen a Senior sin duplicados. Las plantillas anteriores permanecen en el catálogo fuente como referencia. Home tiene ahora veinte combinaciones de perfil y etapa. Son etiquetas editoriales reconocibles y no se presentan como una clasificación universal ni como equivalencias contractuales exactas entre trainee y becario.
+
+## 23 de octubre: arquitectura reutilizable
+
+El usuario solicita conservar como pauta de futuro una aplicación componentizada con propiedades tipadas y datos por parámetros. La página principal compone el layout, Home y estudio. Se separan tarjetas, fuentes, vistas, controles, diálogos y paneles de Home. El catálogo disponible se centraliza en `src/data/published-catalog.ts`. Los scripts delegan menú móvil, vistas de tarjetas, repaso y cierre de diálogos. No se modifica el diseño ni se añaden dependencias. La organización y los contratos de continuidad se describen en [COMPONENT_ARCHITECTURE.md](COMPONENT_ARCHITECTURE.md). Antes de añadir marcado repetido se debe buscar un componente reutilizable. Se conserva el almacenamiento local de las ramas abiertas y cerradas al recargar y cambiar idioma.
+
+## 23 de octubre: propósito de las categorías de patrones
+
+Por petición expresa se muestra una frase como título encima del contador y los niveles únicamente en Creational, Structural y Behavioral. Los textos explican respectivamente cómo se crean los objetos, cómo se componen y cómo colaboran y reparten responsabilidades. Se derivan de las descripciones de `designPatternPages` y tienen versiones ES/EN. El h1 compartido usa IBM Plex Mono mediante `--brand` a 15 px/peso 500 y separación `--space-gap` por la petición posterior del mismo día. Es una excepción expresa al uso exclusivo de esta familia en la marca. La cabecera incorpora una línea izquierda de 2 px con --accent y padding vertical de 0 y horizontal de 12 px derivado de --space-compact. No añade fondo ni icono. Por petición posterior del 23 de octubre estas tres frases se muestran en mayúsculas mediante text-transform en ambos idiomas sin modificar sus datos originales. Sus cabeceras visibles omiten el punto final por petición posterior. Esta petición sustituye la restricción anterior de no mostrar encabezados para esas tres páginas. SOLID, glosario y búsqueda conservan sus encabezados semánticos ocultos. No se modifica el contenido de ninguna tarjeta ni se suben los cambios.
+
+## Actualización vigente: glosario de IA
+
+Por petición posterior del 22 de octubre se implementa localmente el glosario orientado a entrevistas. Son cien términos del README de prácticas y cuatro fundamentos acordados. Aplicaciones de IA Generativa contiene diez páginas temáticas bajo IA Generativa. El catálogo local disponible suma 123 conceptos y catorce módulos entre Software Design y esta ruta. Este cambio sustituye para el código local la limitación previa a Home y Software Design. No se ha subido ni publicado. El detalle y las fuentes están en [AI_GLOSSARY_REVIEW.md](AI_GLOSSARY_REVIEW.md). El contenido y las traducciones propias del glosario viven juntos en `src/data/ai-glossary.ts` y se integran en `i18n.ts`. Las fuentes siguen en `concept-sources.ts`. La referencia de cien entradas tiene cobertura automática contra el README local. Las tarjetas conservan el diseño compartido pero ocultan los controles de vistas cuando solo tienen explicación. No se añaden casos de uso o código ficticios. El antiguo `applied-ai.ts` permanece histórico y no se monta junto al glosario.
+
 Estado documentado: **22 de octubre de 2026**. Lee también [AGENTS.md](../AGENTS.md). Las preferencias expresas del usuario se indican como tales; las medidas y limitaciones describen la implementación actual y no impiden cambios posteriores solicitados.
 
 ## 1. Propósito y preferencias
@@ -366,7 +390,7 @@ Programación y sus bases pertenecen a Desarrollo de Software. Diseño, Arquitec
 
 Gestión e Ingeniería de Datos agrupa Gestión de Datos y la rama Ingeniería de Datos. Modelado, transacciones e índices están bajo Bases de Datos porque no son exclusivos del modelo relacional. Búsqueda Vectorial es una capacidad y no un tercer modelo excluyente. IA incluye búsqueda, planificación y razonamiento además de aprendizaje automático. Aplicaciones de IA Generativa queda dentro de IA Generativa y mantiene el ID applied-ai.
 
-Los roles se mantienen en Home. Sus fundamentos remiten a Programming Fundamentals. Las etapas iniciales incorporan computación, pruebas y seguridad. Las referencias y sus prerrequisitos están comprobados y no tienen ciclos. Las migraciones de navegación conservan preferencias antiguas sin abrir padres automáticamente. Solo Home y Software Design siguen publicados, con 19 conceptos y cuatro módulos. Las hojas pendientes siguen sin enlaces.
+Los roles se mantienen en Home. Sus fundamentos remiten a Programming Fundamentals. Las etapas iniciales incorporan computación, pruebas y seguridad. Las referencias y sus prerrequisitos están comprobados y no tienen ciclos. Las migraciones de navegación conservan preferencias antiguas sin abrir padres automáticamente. El estado remoto auditado tenía Home y Software Design con 19 conceptos y cuatro módulos. La petición posterior incorpora localmente el glosario de IA con 104 conceptos en diez páginas y queda pendiente de subir. Las hojas pendientes siguen sin enlaces.
 
 Se corrigieron las explicaciones y traducciones de Simple Factory, Builder y Factory Method. La revisión conceptual solicitada el 22 de octubre sustituye para esos textos la restauración literal del 21 de octubre. Se conservan IDs y progreso. La justificación, las fuentes y el alcance de las pruebas están en [la revisión de navegación](NAVIGATION_REVIEW.md). Ejecuta npm run check:curriculum además de tipos y build cuando cambien las relaciones del catálogo.
 
@@ -376,3 +400,11 @@ Aclaración posterior: Sistemas comienza con Fundamentos de Computación; Desarr
 ### Identidad y orientación para entrevistas — 22 de octubre de 2026
 
 El usuario eligió Tech Interview Prep y autorizó únicamente el cambio de nombre, subtítulo y presentación/orientación. Home incorpora una cabecera breve con «Fundamentos para entrevistas técnicas» y «Repasa conceptos clave y prepara tus respuestas para entrevistas técnicas de distintos perfiles y empresas». En inglés usa «Foundations for technical interviews» y su presentación traducida. La escala tipográfica existente se conserva. Esta petición posterior permite esa presentación breve sin recuperar el antiguo hero, sus diagramas o llamadas a la acción. Se actualizan marca, nombre accesible, títulos dinámicos y metadatos. El selector de perfil orienta el repaso para entrevistas. No se modifican áreas, conceptos ni recomendaciones curriculares. Se mantienen IDs, claves de almacenamiento, nombre interno del paquete y destino de alojamiento para conservar compatibilidad. No se publica remotamente.
+
+La redacción vigente del propósito de Comportamiento es «Define cómo colaboran y se reparten responsabilidades los objetos». La cabecera se presenta en mayúsculas y sin punto final. Su versión inglesa es «Defines how objects collaborate and share responsibilities».
+
+Petición del 23 de octubre: los botones del selector de etapa de Home usan radio completo de 9999 px. Se retira el marco exterior del grupo para que el reflujo no produzca un óvalo grande. Conserva colores, escala y estados. Se está contrastando una propuesta de niveles laborales basada en empresas reales. No presentar Fundamentos o Intermedio–Senior como categorías laborales oficiales ni mezclar Lead, Analyst, Architect y CTO en una única escalera. Las etiquetas y recomendaciones del catálogo aún no se han reestructurado durante esta consulta.
+
+Petición posterior del 23 de octubre: las tarjetas de selección de perfil bajo «Un perfil. Varias áreas conectadas» usan radio 2XL equivalente a 16 px a escala normal mediante --radius-profile: 1rem. No se aplica a las demás tarjetas ni al selector de etapas, que conserva su radio completo.
+
+Descripción de Backend elegida expresamente el 23 de octubre tras debatir alternativas: «Implementa la lógica de negocio». Versión inglesa: «Implements business logic». Sustituye «Desarrolla servicios y gestiona datos». No modificar las frases durante una conversación exploratoria sin una petición de cambio.

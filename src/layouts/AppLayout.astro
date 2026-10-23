@@ -1,0 +1,51 @@
+---
+import '@fontsource-variable/google-sans-flex';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/global.css';
+import designTokens from '../styles/tokens.css?raw';
+import Sidebar from '../components/layout/Sidebar.astro';
+import Topbar from '../components/layout/Topbar.astro';
+import ReviewDialog from '../components/dialogs/ReviewDialog.astro';
+import SourcesDialog from '../components/dialogs/SourcesDialog.astro';
+import type { NavigationNode } from '../data/navigation';
+import type { ConceptSource } from '../data/concept-sources';
+interface Props { navigation: NavigationNode[]; sources: Pick<ConceptSource, 'title' | 'url'>[] }
+const { navigation, sources } = Astro.props;
+const canvasColor = designTokens.match(/--canvas:\s*(#[\da-fA-F]{6})\s*;/)?.[1];
+if (!canvasColor) throw new Error('The canvas design token must define a six-digit hex color.');
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Repasa conceptos clave y prepara tus respuestas para entrevistas técnicas de distintos perfiles y empresas." />
+    <meta name="theme-color" content={canvasColor} />
+    <meta property="og:title" content="Tech Interview Prep · Fundamentos para entrevistas técnicas" />
+    <meta property="og:description" content="Repasa conceptos clave y prepara tus respuestas para entrevistas técnicas de distintos perfiles y empresas." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Tech Interview Prep · Inicio</title>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+    <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
+    <Sidebar nodes={navigation} />
+
+    <div class="workspace">
+      <Topbar />
+
+      <main id="main" tabindex="-1">
+        <slot />
+
+        <noscript><p class="noscript-note">Puedes consultar el resumen y el primer itinerario. Activa JavaScript para elegir otro perfil, navegar entre módulos, buscar y guardar tu progreso.</p></noscript>
+      </main>
+    </div>
+
+    <ReviewDialog />
+
+    <SourcesDialog sources={sources} />
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script>import '../scripts/app';</script>
+  </body>
+</html>

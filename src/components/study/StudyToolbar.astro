@@ -1,0 +1,13 @@
+---
+import Icon from '../Icon.astro';
+interface Props { count: number }
+const { count } = Astro.props;
+---
+<div class="module-toolbar">
+            <p class="concept-count" lang="en"><span id="visible-count">{count}</span> CONCEPTS</p>
+            <div class="level-select" role="group" aria-label="Filtrar por nivel">
+              <button class="level-step level-previous" id="level-previous" type="button" aria-label="Nivel anterior" disabled><span class="level-step-visual"><Icon name="chevron" size={16} /></span></button>
+              <span class="level-current" id="level-current" aria-live="polite" aria-atomic="true">Todos los niveles</span>
+              <button class="level-step level-next" id="level-next" type="button" aria-label="Nivel siguiente"><span class="level-step-visual"><Icon name="chevron" size={16} /></span></button>
+            </div>
+          </div>

@@ -1,5 +1,37 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 23 de octubre de 2026 — entrega autorizada en GitHub
+
+El usuario pide detener el servidor y subir el código a GitHub. Se prepara la entrega del lote acumulado con el glosario bilingüe, componentes reutilizables y últimos ajustes de Home y patrones. Esta autorización sustituye la retención local de las entradas históricas. Se comprueban tipos, currículo, compilación y diferencias antes de crear el commit y subirlo. No se publica Sites ni se apaga el ordenador. El resultado real de la sincronización se verifica con Git.
+
+## 23 de octubre de 2026 — descripción breve de cada perfil
+
+Se añaden cinco frases profesionales bajo los nombres del selector de perfil. Se almacenan en el campo `purpose` y tienen versión inglesa. Se extrae `CareerProfileOption.astro` con propiedades tipadas y descripción accesible. Se conserva el radio 2XL y el diseño responsive. Tipos, currículo y build correctos. Cinco descripciones y selección verificadas en ambos idiomas a 1440, 390 y 320 px y con texto al 200 % sin desbordamiento. El usuario pregunta después por la diferencia entre accesibilidad y usabilidad y aclara que no está pidiendo modificar el texto. No se cambia esa frase por la pregunta.
+
+## 23 de octubre de 2026 — cuatro etapas y fondo redondeado
+
+Se recupera el fondo con borde del selector de etapas y se redondea el contorno completo. Los botones también permanecen completamente redondeados. Por instrucciones sucesivas del usuario las etiquetas finales son `Trainee / Becario`, `Entry Level / Junior`, `Mid Level / Semi-Senior` y `Senior`. La tercera incluye barra por su última corrección. La primera se traduce como `Trainee / Intern` en inglés. Se mantienen IDs y se unifican las áreas de la transición anterior dentro de Senior. No se pierden las plantillas originales de recomendaciones. Los cinco perfiles comparten cuatro etapas y veinte paneles. No se presenta como una escala laboral oficial universal. Currículo y build correctos. Selector comprobado en ambos idiomas a 1440, 390 y 320 px sin desbordamiento y con selección operativa.
+
+## 23 de octubre de 2026 — componentes y persistencia de navegación
+
+Se extraen componentes tipados de layout, navegación, controles, estudio, tarjetas, fuentes, vistas, diálogos y paneles de Home. El catálogo local disponible sale de la página y se centraliza en `published-catalog.ts`. La lógica interactiva se reparte por responsabilidades con callbacks para estado y avisos. Se mantiene el diseño y los datos. Se incorpora la pauta permanente en AGENTS y [COMPONENT_ARCHITECTURE.md](COMPONENT_ARCHITECTURE.md).
+
+Tipos sin errores, advertencias ni sugerencias. Currículo y build correctos. Comparación de 28 árboles DOM antes y después sin diferencias de estructura, atributos o textos ni errores de ejecución. Verificados perfil/etapa, vistas de tarjetas con datos temporales que no se publican, teclado y menú móvil. El usuario confirma que quiere conservar las ramas abiertas y cerradas. Se prueba el almacenamiento local existente tras recarga, cierre de rama y cambio de idioma. No se añaden cookies ni seguimiento. Los cambios siguen pendientes de subir y se conservan los anteriores.
+
+## 23 de octubre de 2026 — descripción de cada categoría de patrones
+
+El usuario solicita una frase como título encima de conceptos y niveles que explique el sentido de Creational, Structural y Behavioral. Se utiliza el h1 de estudio y las descripciones del catálogo con traducción al inglés. Los tres textos describen creación, composición y colaboración con reparto de responsabilidades. Estilo compartido de 15 px/peso 500 y separación derivada del padding de página. Se limita a esas tres rutas y desaparece en búsqueda. Las demás páginas mantienen su cabecera anterior. Esta decisión prevalece sobre la retirada histórica de títulos visibles. Se conservan todos los cambios locales pendientes del glosario y no se publica ni se repite el apagado de la sesión anterior.
+
+## 22 de octubre de 2026 — Glosario de IA para entrevistas
+
+El usuario pide implementar directamente el glosario del README local de rag-agentic-ai-toolkit. Se incorporan sus cien términos sin omisiones ni duplicados y cuatro fundamentos tratados en la conversación. Hay diez páginas bajo Aplicaciones de IA Generativa con 104 conceptos bilingües. Se distinguen fundamentos, recuperación, almacenamiento vectorial, RAG, agentes, bibliotecas, proveedores, multimodalidad, generación visual y voz. Python no recibe una nueva ruta. Las tarjetas reutilizan el diseño existente y ocultan los controles de vistas vacías únicamente en este glosario. Se conservan IDs antiguos reutilizables y el contenido histórico no montado. Software Design no se reformula.
+
+La cobertura de cien entradas se contrasta automáticamente con el README de origen. `check:curriculum` valida además IDs globales, destinos de las diez páginas, fuentes HTTPS y traducciones de ida y vuelta. Se actualizan Home y su inventario desde los datos. El catálogo local tiene 123 conceptos en catorce módulos. La restricción previa de mostrar únicamente Software Design queda sustituida para esta implementación local. No se hace commit, push ni publicación. Las decisiones, fuentes y límites están en [AI_GLOSSARY_REVIEW.md](AI_GLOSSARY_REVIEW.md).
+
+Se comprobaron navegación y las diez páginas en español e inglés a 1440, 390 y 320 px. Se revisaron búsqueda, persistencia de progreso, extremos del filtro de niveles, menú móvil, texto al 200 %, espaciado personalizado, movimiento reducido y colores forzados. Google Sans Flex computada a 13 px/peso 300 en descripciones. Cuarenta análisis de axe en las diez páginas a 1440 y 320 px en ambos idiomas sin infracciones automáticas. Se mantienen los límites ya documentados sobre lectores de pantalla reales y certificación de accesibilidad. Los scripts y capturas de prueba se guardan fuera del repositorio.
+
+El usuario solicita apagar el ordenador al terminar. Es una instrucción para esta ejecución y no una automatización ni una instrucción para sesiones futuras. Se conserva la solicitud para el último paso tras guardar y validar los cambios. No se fuerza el cierre de aplicaciones ajenas.
+
 ## 22 de octubre de 2026 — Hexagonal en patrones arquitectónicos
 
 Se añade Hexagonal bajo Software Architecture → Architectural Patterns, junto a MVC. La etiqueta es Hexagonal en español e inglés y permanece deshabilitada hasta publicar contenido. La clasificación se contrasta con el [artículo original de Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture), que presenta Ports and Adapters como patrón. Verificado el árbol en ES/EN/ES y móvil a 320 px sin desbordamiento. Tipos y compilación correctos.
@@ -287,3 +319,25 @@ Aclaración final de producto: preparación de fundamentos para entrevistas téc
 El usuario eligió Tech Interview Prep y autorizó únicamente el cambio de nombre, subtítulo y presentación/orientación. Home incorpora una cabecera breve con «Fundamentos para entrevistas técnicas» y «Repasa conceptos clave y prepara tus respuestas para entrevistas técnicas de distintos perfiles y empresas». En inglés usa «Foundations for technical interviews» y su presentación traducida. La escala tipográfica existente se conserva. Esta petición posterior permite esa presentación breve sin recuperar el antiguo hero, sus diagramas o llamadas a la acción. Se actualizan marca, nombre accesible, títulos dinámicos y metadatos. El selector de perfil orienta el repaso para entrevistas. No se modifican áreas, conceptos ni recomendaciones curriculares. Se mantienen IDs, claves de almacenamiento, nombre interno del paquete y destino de alojamiento para conservar compatibilidad. No se publica remotamente.
 
 Validación del cambio de identidad: marca y etiqueta accesible correctas. Subtítulo, presentación, descripción y Open Graph comprobados en español e inglés. Títulos de Home, búsqueda y módulo correctos. Revisión visual a 1440 y 390 px y marca legible a 320 px sin desbordamiento de página. Se mantienen cuatro enlaces y 28 desplegables. check:curriculum conserva 114 entradas y 19 conceptos. Astro check con cero errores, advertencias y sugerencias. Build correcto.
+
+Validación del título de propósito del 23 de octubre: Astro check sin errores, advertencias ni sugerencias. check:curriculum y build correctos. Comprobados los doce estados de las tres categorías en ES/EN a 1440 y 320 px con título visible a 15 px/peso 500 encima del contador y sin desbordamiento. Revisadas capturas en escritorio y móvil. Búsqueda, SOLID y glosario conservan el título oculto. git diff --check correcto.
+
+Ajuste posterior del 23 de octubre: a petición del usuario las tres frases de propósito usan IBM Plex Mono mediante el token --brand. Conservan 15 px/peso 500, traducción y espaciado. Esta excepción a la familia general se limita a los títulos visibles de estas tres categorías.
+
+Petición posterior del 23 de octubre: la cabecera de propósito incorpora una línea izquierda discreta de 2 px en --accent y padding de 6/12 px derivado de --space-compact. Conserva IBM Plex Mono a 15 px/peso 500, sin fondo ni icono. El objetivo es identificar visualmente la cabecera de categoría con un tratamiento mínimo.
+
+Ajuste de altura de la barra del 23 de octubre: se retira únicamente el padding vertical de la cabecera. La línea pasa de 33 a 21 px cuando el texto ocupa una línea. Conserva el texto a 15 px/peso 500, IBM Plex Mono, padding horizontal de 12 px, grosor de 2 px y separación exterior.
+
+Petición posterior del 23 de octubre: las tres frases de propósito pasan visualmente a mayúsculas mediante text-transform. Se conservan los originales y traducciones, IBM Plex Mono a 15 px/peso 500 y la barra compacta sin padding vertical.
+
+Petición posterior del 23 de octubre: se omite el punto final al presentar las tres cabeceras de propósito en ambos idiomas. Las descripciones originales conservan su puntuación y no se alteran las tarjetas.
+
+Redacción posterior del 23 de octubre: Comportamiento muestra «DEFINE CÓMO COLABORAN Y SE REPARTEN RESPONSABILIDADES LOS OBJETOS» por petición literal del usuario. Se actualiza también la traducción inglesa. Las otras dos cabeceras se conservan.
+
+23 de octubre: botones de etapa de Home completamente redondeados sin marco exterior continuo. Se mantiene la selección y el contenido actual mientras se concreta la escala laboral. La investigación contrasta GitLab y Dropbox y distingue niveles técnicos de especialidades y gestión.
+
+23 de octubre: radio 2XL en los cinco botones de perfil de Home mediante el token compartido --radius-profile de 1rem. Se conservan padding, gap, colores y estados.
+
+Petición posterior expresa: la descripción de Frontend se simplifica a «Construye interfaces web». Se actualiza también la traducción inglesa. Esta instrucción sustituye el texto que mencionaba accesibilidad.
+
+23 de octubre: el usuario elige para Backend «Implementa la lógica de negocio». Se actualizan purpose y traducción inglesa. Las alternativas anteriores eran un debate y no se aplicaron.
