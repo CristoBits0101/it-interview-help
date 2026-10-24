@@ -1,18 +1,17 @@
 ---
-import Icon from '../Icon.astro';
 import CareerPanel from './CareerPanel.astro';
 import CareerProfileOption from './CareerProfileOption.astro';
+import CareerStageOption from './CareerStageOption.astro';
 import type { Track } from '../../data/curriculum';
 import type { NavigationNode } from '../../data/navigation';
 import type { CareerProfile } from '../../data/career-paths';
-interface Props { profiles: CareerProfile[]; tracks: Track[]; areas: ReadonlyMap<string, NavigationNode>; guidanceByArea: Record<string, { focus: string; prerequisites: string[] }> }
-const { profiles, tracks, areas, guidanceByArea } = Astro.props;
+interface Props { profiles: CareerProfile[]; tracks: Track[]; areas: ReadonlyMap<string, NavigationNode>; guidanceByArea: Record<string, { focus: string; prerequisites: string[] }>; termDescriptions: Record<string, string> }
+const { profiles, tracks, areas, guidanceByArea, termDescriptions } = Astro.props;
 const stages = profiles[0].stages;
 ---
 <section class="home-section" id="career-paths" aria-labelledby="career-title">
     <header class="home-section-heading">
-      <div><p class="home-kicker">01 / ELIGE TU DIRECCIÓN</p><h2 id="career-title">Un perfil. Varias áreas conectadas.</h2></div>
-      <p>Selecciona un perfil y una etapa para orientar tu repaso. Refuerza los fundamentos y prepara cómo explicarlos.</p>
+      <h2 id="career-title">Elige tu Dirección</h2>
     </header>
 
     <div class="career-profile-options" role="group" aria-label="Perfil profesional">
@@ -22,14 +21,12 @@ const stages = profiles[0].stages;
     <div class="career-stage-section">
       <p class="career-control-label" id="career-stage-label">¿En qué etapa quieres trabajar?</p>
       <ol class="career-stage-options" aria-labelledby="career-stage-label">
-        {stages.map((stage, index) => <li><button type="button" data-career-stage={stage.id} aria-label={stage.label} aria-pressed={index === 0} aria-controls="career-panels"><span class="career-stage-number" aria-hidden="true">{index + 1}</span><span>{stage.label}</span></button></li>)}
+        {stages.map((stage, index) => <CareerStageOption stage={stage} index={index} selected={index === 0} descriptions={termDescriptions} />)}
       </ol>
-      <p class="career-stage-note">Las etapas orientan el aprendizaje. Los títulos varían según la organización.</p>
     </div>
 
     <p id="career-selection-status" class="sr-only" role="status" aria-live="polite"></p>
     <div id="career-panels">
       {profiles.map((profile, profileIndex) => profile.stages.map((stage, stageIndex) => <CareerPanel profile={profile} stage={stage} initial={profileIndex === 0 && stageIndex === 0} tracks={tracks} areas={areas} guidanceByArea={guidanceByArea} />))}
     </div>
-    <p class="career-availability-note"><Icon name="circle" size={6} class="career-availability-dot" />El mapa incluye áreas todavía sin lecciones. Solo los títulos con contenido disponible abren una ruta.</p>
   </section>

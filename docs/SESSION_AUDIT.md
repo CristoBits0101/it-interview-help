@@ -1,5 +1,75 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 24 de octubre de 2026 — interlineado global de 16 px
+
+Por petición expresa del usuario todas las interfaces usan un interlineado compartido de 1rem (16 px a tamaño normal) mediante --line-body. Incluye Home, navegación, búsqueda, selectores, tarjetas, diálogos y código en ambos idiomas y todos los estados responsive. Esta decisión sustituye únicamente los valores anteriores de line-height y el factor proporcional. Se conservan familias, tamaños, pesos, colores, padding y alturas mínimas de controles y filas. El interlineado escala con el tamaño raíz y permite las preferencias de espaciado del usuario.
+
+## 24 de octubre de 2026 — interlineado proporcional compartido — histórico
+
+Por precisión expresa del usuario toda la aplicación usa el mismo factor de interlineado sin unidad: `--line-body: 1.6`. Las reglas locales de Home, navegación, estudio, controles, diálogos y código remiten a ese token. La altura resultante es proporcional al tamaño de cada fuente y sustituye las alturas particulares anteriores. Se conservan familias, tamaños, pesos, colores y espaciados salvo la igualdad tipográfica solicitada para las cifras y etiquetas del resumen de Home. Ambos usan Google Sans Flex a `--font-small` (14 px), peso 400, tracking normal y línea de 22,4 px a escala normal. Conservan sus colores distintos.
+
+Aplicado tanto en el worktree de revisión como en `C:\Workspace\tech-training` conservando los cambios previos. Tipos sin errores, advertencias ni sugerencias y build correcto. Verificado en la página local servida a 1280 px: resumen ES/EN con tipografía idéntica, factor 1.6 en el texto visible de Home y Creacionales y en títulos, controles y código del diálogo de implementación. Sin desbordamiento horizontal en Home y Creacionales. Revisión visual de Home y diálogo. Revisión posterior: Home, Creacionales y su diálogo se comprueban a 320 y 390 px con texto normal sin desbordamiento de página ni texto fuera de sus cajas. Home y su panel de recomendaciones también se comprueban con el tamaño raíz duplicado de 16 a 32 px a 320 y 1280 px y el resumen en inglés a 320 y 390 px sin desbordamientos. La prueba al 200 % detecta limitaciones previas en estudio: números que exceden sus círculos, la etiqueta Implementación que supera su caja a 320 px y títulos de la guía que se solapan a ese ancho. Se reproducen al restituir temporalmente el interlineado anterior de los elementos afectados; el número ya heredaba 1.6 antes del cambio. No se modifican esos problemas de anchura y tamaño fijo ajenos al ajuste solicitado ni se afirma que toda la aplicación supere la prueba al 200 %. Se retiran todos los estilos temporales de prueba y se restaura el viewport. Sigue sin realizarse una prueba con lector de pantalla. No se publica en Sites.
+
+## 24 de octubre de 2026 — tooltips y pegatinas en las etiquetas de etapa
+
+El usuario solicita una definición breve bilingüe para cada una de las siete etiquetas. Se presenta en tooltips disponibles al pasar el puntero y accesibles mediante teclado y dispositivos táctiles. Trainee se explica como formación para un puesto o una nueva área sin asociarlo a carecer de estudios. Las definiciones no incorporan años ni equivalencias obligatorias entre nombres.
+
+Las cápsulas conservan su aspecto de pegatina con radio completo de `9999px` y acabado plano sin sombra ni borde blanco inferior. Sus colores de texto, fondo y borde permanecen fijos. Conservan Google Sans Flex a 13 px y peso 300 y no tienen hover ni estado activo propios. Siguen siendo etiquetas dentro de cuatro botones compartidos con los mismos IDs, números, 20 paneles y persistencia. Esta petición habilita las explicaciones en tooltips que antes no se mostraban.
+
+## 24 de octubre de 2026 — tipografía compartida en las cápsulas de etapa
+
+Por petición del usuario los nombres de las cápsulas usan la misma tipografía que los números del 1 al 4: Google Sans Flex, tamaño `--font-meta` de `.8125rem` (13 px a escala normal) y peso 300. El ajuste se limita a `.career-stage-term`.
+
+## 24 de octubre de 2026 — cápsulas de nombres dentro de cuatro botones de etapa
+
+El usuario aclara que desea cuatro botones y cuatro itinerarios compartidos. Dentro de cada botón los nombres aparecen en cápsulas redondeadas: `Trainee` y `Becario`, `Entry Level` y `Junior`, `Mid Level` y `Semi-Senior` y finalmente `Senior` solo. Cada grupo conserva un único número del 1 al 4. En inglés se muestra `Intern` en lugar de `Becario`. Pulsar cualquiera de las cápsulas activa el botón y el itinerario del grupo. Se retiran los separadores de barras o punto medio. No se añaden años ni texto aclaratorio.
+
+Se conservan los IDs `foundation`, `junior`, `mid` y `senior` y los 20 paneles derivados de cinco perfiles y cuatro etapas. Senior mantiene la unión con advanced. La selección y el cierre siguen guardándose por ID. La separación de los siete nombres es visual y no crea siete etapas independientes ni IDs nuevos.
+
+Validación: tipos sin errores ni avisos y currículo y build correctos. En navegador se comprueban español e inglés a 1600 y 390 px y el ajuste a 320 px sin desbordamiento. Trainee y Becario abren el mismo panel y una segunda pulsación cierra el grupo. Las cápsulas permanecen dentro de sus botones.
+
+## 24 de octubre de 2026 — punto medio en las etiquetas de etapa — histórico
+
+El usuario autoriza sustituir las barras por un punto medio en las etiquetas de Home: `Trainee · Becario`, `Entry Level · Junior`, `Mid Level · Semi-Senior` y `Senior`. En inglés se muestra `Trainee · Intern` en la primera etapa. Se conservan las cuatro etapas y sus IDs. Esta decisión sustituye los separadores de las etiquetas históricas del 23 de octubre.
+
+## 24 de octubre de 2026 — etiquetas de etapa alineadas a la izquierda
+
+El usuario decide alinear a la izquierda el texto de los botones de etapa. El cambio se limita a `text-align` de las etiquetas y conserva las posiciones y medidas de los números y la distribución de escritorio y móvil. La pregunta que identifica el selector no cambia. Esta decisión sustituye el centrado anterior documentado más abajo.
+
+Build y `git diff --check` correctos. Verificado en navegador a 1600 y 390 px: las cuatro etiquetas usan alineación izquierda y los números conservan sus medidas e inset izquierdo. Sin desbordamiento horizontal en móvil.
+
+## 24 de octubre de 2026 — estadísticas con contador y título juntos
+
+Se coloca cada contador a la izquierda de su título y la subdescripción debajo. Los títulos pasan a Áreas Principales, Rutas con Contenido, Conceptos y Perfiles Profesionales con traducciones equivalentes. Los contadores conservan el verde existente y usan peso 400. Se mantienen los valores calculados y el resto de textos.
+
+Validación: Astro check sin errores, advertencias ni sugerencias y build correcto. Verificado en navegador a 1600, 390 y 320 px con revisión de ES/EN. Los contadores usan peso computado 400 y conservan el color verde. Título y cifra comparten fila y la descripción queda debajo. Sin desbordamiento horizontal ni errores de consola.
+
+## 24 de octubre de 2026 — centrado de etiquetas de etapa
+
+Se centra únicamente el texto de las etapas respecto al botón completo mediante columnas laterales iguales. Se corrige el primer ajuste que centraba la etiqueta solo en el espacio posterior al número. Los círculos permanecen a la izquierda con sus medidas originales y se conserva el modo responsive en columna.
+
+Verificado en navegador a 1600 y 390 px: las cajas de las cuatro etiquetas coinciden con el centro horizontal de sus botones. Sin desbordamiento horizontal. Se comprueban español e inglés y se conserva el número en el lateral izquierdo.
+
+## 24 de octubre de 2026 — descripciones de perfiles sin punto final
+
+Se retira el punto final de los cinco textos breves de Elige tu Dirección en ES/EN. A petición del usuario se acorta únicamente DevOps a «Automatiza la entrega y operación» con traducción «Automates delivery and operations». Se conservan los resúmenes y las recomendaciones de los paneles.
+
+Verificados los cinco textos renderizados en español e inglés. Tipos y compilación correctos.
+
+## 24 de octubre de 2026 — espacio exterior del contenido
+
+Por aclaración del usuario el padding exterior pertenece a `main` arriba y abajo. Se aplica `--space-page` en sus cuatro lados y se retiran los paddings equivalentes de Home, estudio y el final de Siguiente módulo. Se conservan el margen entre tarjetas y pie y los gaps entre secciones. Home y búsqueda también mantienen espacio al final.
+
+Validación: build y git diff --check correctos. Home comprobada en navegador a 1280 y 390 px con padding inferior de 42 y 20 px respectivamente y sin desbordamiento horizontal. Glosario y búsqueda con y sin resultados revisados a 390 px. Estudio y pie no duplican padding. Sin errores de consola.
+
+## 24 de octubre de 2026 — cierre del panel de etapa de Home
+
+El usuario solicita cerrar el panel inferior al volver a pulsar la etapa seleccionada. El selector admite quedar sin etapa activa y oculta el contenedor completo. Seleccionar una etapa lo abre con el perfil actual. El cambio de perfil y de idioma conserva el cierre y el anuncio accesible está traducido a ES/EN. Por petición posterior la etapa o el cierre se guardan en almacenamiento local y se restauran al recargar. La primera visita conserva la selección inicial. Los datos inválidos o el almacenamiento inaccesible no bloquean la interacción.
+
+Validación: Astro check sin errores, advertencias ni sugerencias y build correcto. Comprobados en navegador cierre y reapertura, cambio directo de etapa, cambio de perfil y de idioma con el panel cerrado, activación con Enter y Espacio y conservación del foco en el botón.
+
+Validación posterior de persistencia: recargar conserva el panel cerrado sin ninguna etapa marcada. Seleccionar Junior y recargar restaura Junior y su panel. Volver a cerrarlo y recargar conserva de nuevo el cierre. Sin errores de consola.
+
 ## 24 de octubre de 2026 — retirada de información redundante
 
 Por petición expresa se retiran el contador de pasos y Líneas clave. Se conserva el paginado con su estado activo y el resaltado de código. La descripción centrada ocupa el ancho disponible sin reservar columnas para el contador eliminado. Se retira también su actualización del script. Tipos y compilación correctos. Navegación comprobada a 1440, 390 y 320 px.
@@ -65,7 +135,7 @@ El usuario pide detener el servidor y subir el código a GitHub. Se prepara la e
 
 Se añaden cinco frases profesionales bajo los nombres del selector de perfil. Se almacenan en el campo `purpose` y tienen versión inglesa. Se extrae `CareerProfileOption.astro` con propiedades tipadas y descripción accesible. Se conserva el radio 2XL y el diseño responsive. Tipos, currículo y build correctos. Cinco descripciones y selección verificadas en ambos idiomas a 1440, 390 y 320 px y con texto al 200 % sin desbordamiento. El usuario pregunta después por la diferencia entre accesibilidad y usabilidad y aclara que no está pidiendo modificar el texto. No se cambia esa frase por la pregunta.
 
-## 23 de octubre de 2026 — cuatro etapas y fondo redondeado
+## 23 de octubre de 2026 — cuatro etapas y fondo redondeado — histórico
 
 Se recupera el fondo con borde del selector de etapas y se redondea el contorno completo. Los botones también permanecen completamente redondeados. Por instrucciones sucesivas del usuario las etiquetas finales son `Trainee / Becario`, `Entry Level / Junior`, `Mid Level / Semi-Senior` y `Senior`. La tercera incluye barra por su última corrección. La primera se traduce como `Trainee / Intern` en inglés. Se mantienen IDs y se unifican las áreas de la transición anterior dentro de Senior. No se pierden las plantillas originales de recomendaciones. Los cinco perfiles comparten cuatro etapas y veinte paneles. No se presenta como una escala laboral oficial universal. Currículo y build correctos. Selector comprobado en ambos idiomas a 1440, 390 y 320 px sin desbordamiento y con selección operativa.
 

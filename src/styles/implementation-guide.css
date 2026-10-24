@@ -3,9 +3,9 @@
   .implementation-dialog[open] { display: flex; flex-direction: column; }
   .implementation-header, .implementation-footer { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-card); padding: var(--gap-card) var(--space-card); flex-shrink: 0; }
   .implementation-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr); border-bottom: 1px solid var(--line); }
-  .implementation-header h2 { font-size: var(--font-title); line-height: 1.4; }
+  .implementation-header h2 { font-size: var(--font-title); line-height: var(--line-body); }
   .implementation-headings { min-width: 0; text-align: center; }
-  .implementation-header h3 { margin: 0; font: 500 var(--font-title)/1.4 var(--brand); text-transform: uppercase; }
+  .implementation-header h3 { margin: 0; font: 500 var(--font-title)/var(--line-body) var(--brand); text-transform: uppercase; }
   .implementation-header .icon-button { flex-shrink: 0; justify-self: end; border-radius: 9999px; }
   .implementation-body { display: flex; flex-direction: column; gap: var(--gap-card); padding: var(--gap-card) var(--space-card) 0; overflow: auto; min-height: 0; }
   .implementation-body > * { flex-shrink: 0; }
@@ -17,7 +17,7 @@
   .implementation-step-intro { min-width: 0; }
   .implementation-why { margin: 0; font-size: var(--font-body); color: var(--text-secondary); text-align: center; }
   .implementation-code { overflow: auto; border: 1px solid var(--border-soft); border-radius: var(--radius-profile); background: var(--surface-soft); max-width: 100%; }
-  .implementation-code pre, .implementation-output pre { margin: 0; padding: var(--space-compact); font: 500 var(--font-body)/1.7 var(--code); tab-size: 4; color: var(--ink); white-space: pre; }
+  .implementation-code pre, .implementation-output pre { margin: 0; padding: var(--space-compact); font: 500 var(--font-body)/var(--line-body) var(--code); tab-size: 4; color: var(--ink); white-space: pre; }
   .implementation-code code, .implementation-output code { font: inherit; }
   .implementation-code-line { display: block; min-width: max-content; border-inline-start: 2px solid transparent; padding-inline-end: var(--space-compact); }
   .implementation-code-line.is-key { background: var(--surface-selected); border-inline-start-color: var(--green); }

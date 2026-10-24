@@ -6,10 +6,12 @@ import { initializeReview } from './review';
 import { initializeDialogs } from './dialogs';
 import { initializeNavigation } from './navigation';
 import { initializeCareerPaths } from './home';
+import { initializeCareerTooltips } from './career-tooltips';
 import { applyStaticTranslations, getSavedLanguage, saveLanguage, translate, translatePatternTitle, type Language } from './i18n';
 
 initializeNavigation();
 const refreshCareerSelection = initializeCareerPaths();
+initializeCareerTooltips();
 let language: Language = getSavedLanguage();
 applyStaticTranslations(language);
 refreshCareerSelection?.();

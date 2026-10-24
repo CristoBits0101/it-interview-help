@@ -1,0 +1,25 @@
+---
+import type { CareerStage } from '../../data/career-paths';
+
+interface Props {
+  stage: CareerStage;
+  index: number;
+  selected: boolean;
+  descriptions: Record<string, string>;
+}
+
+const { stage, index, selected, descriptions } = Astro.props;
+const terms = stage.terms ?? [stage.label];
+const tooltipId = `career-tooltip-${stage.id}`;
+---
+<li data-career-stage-option>
+  <button type="button" data-career-stage={stage.id} aria-label={stage.label} aria-pressed={selected} aria-controls="career-panels" aria-describedby={tooltipId}>
+    <span class="career-stage-number" aria-hidden="true">{index + 1}</span>
+    <span class="career-stage-labels">
+      {terms.map(term => <span class="career-stage-term" data-career-term={term}>{term}</span>)}
+    </span>
+  </button>
+  <div id={tooltipId} class="career-stage-tooltip" role="tooltip" hidden>
+    {terms.map(term => <p data-career-term-description={term}><strong>{term}</strong><span>{descriptions[term]}</span></p>)}
+  </div>
+</li>

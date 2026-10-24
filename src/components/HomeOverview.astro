@@ -1,11 +1,10 @@
 ---
 import type { Track } from '../data/curriculum';
 import { navigation } from '../data/navigation';
-import { careerProfiles, areaGuidance, careerBranches, careerSources } from '../data/career-paths';
+import { careerProfiles, areaGuidance, careerBranches, careerTermDescriptions } from '../data/career-paths';
 import HomeStats from './home/HomeStats.astro';
 import CareerPaths from './home/CareerPaths.astro';
 import CareerGrowth from './home/CareerGrowth.astro';
-import AvailableRoutes from './home/AvailableRoutes.astro';
 import { flattenNavigation, countConcepts } from '../lib/catalog';
 import '../styles/home.css';
 
@@ -14,26 +13,20 @@ const { tracks } = Astro.props;
 const catalog = flattenNavigation(navigation);
 const areas = new Map(catalog.map(node => [node.label, node]));
 const totalConcepts = tracks.reduce((total, track) => total + countConcepts(track), 0);
-const routeLabels = new Map(tracks.map(track => [track.id, catalog.find(node => node.href?.startsWith(`#${track.id}/`) && !node.module)?.label ?? track.title]));
 const stats = [
-  { value: navigation.length, label: 'Áreas principales', detail: 'Temas para repasar' },
-  { value: tracks.length, label: 'Rutas con contenido', detail: 'Disponibles para estudiar' },
+  { value: navigation.length, label: 'Áreas Principales', detail: 'Temas para repasar' },
+  { value: tracks.length, label: 'Rutas con Contenido', detail: 'Disponibles para estudiar' },
   { value: totalConcepts, label: 'Conceptos', detail: 'Breves y conectados' },
-  { value: careerProfiles.length, label: 'Perfiles profesionales', detail: 'Un camino para cada objetivo' },
+  { value: careerProfiles.length, label: 'Perfiles Profesionales', detail: 'Un camino para cada objetivo' },
 ];
 ---
 
 <section id="home-view" aria-labelledby="home-title">
-  <header class="home-introduction">
-    <h1 id="home-title">Fundamentos para entrevistas técnicas</h1>
-    <p>Repasa conceptos clave y prepara tus respuestas para entrevistas técnicas de distintos perfiles y empresas.</p>
-  </header>
+  <h1 id="home-title" class="sr-only">Inicio</h1>
 
   <HomeStats stats={stats} />
 
-  <CareerPaths profiles={careerProfiles} tracks={tracks} areas={areas} guidanceByArea={areaGuidance} />
+  <CareerPaths profiles={careerProfiles} tracks={tracks} areas={areas} guidanceByArea={areaGuidance} termDescriptions={careerTermDescriptions} />
 
-  <CareerGrowth branches={careerBranches} sources={careerSources} />
-
-  <AvailableRoutes tracks={tracks} labels={routeLabels} />
+  <CareerGrowth branches={careerBranches} />
 </section>

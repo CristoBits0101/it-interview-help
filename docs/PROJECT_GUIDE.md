@@ -1,5 +1,59 @@
 # Memoria de producto, diseño y desarrollo
 
+## 24 de octubre de 2026 — interlineado global de 16 px
+
+Por petición expresa del usuario todas las interfaces usan un interlineado compartido de 1rem (16 px a tamaño normal) mediante --line-body. Incluye Home, navegación, búsqueda, selectores, tarjetas, diálogos y código en ambos idiomas y todos los estados responsive. Esta decisión sustituye únicamente los valores anteriores de line-height y el factor proporcional. Se conservan familias, tamaños, pesos, colores, padding y alturas mínimas de controles y filas. El interlineado escala con el tamaño raíz y permite las preferencias de espaciado del usuario.
+
+## 24 de octubre de 2026 — interlineado proporcional compartido — histórico
+
+Por precisión expresa del usuario toda la aplicación usa el mismo factor de interlineado sin unidad: `--line-body: 1.6`. Las reglas locales de Home, navegación, estudio, controles, diálogos y código remiten a ese token. La altura resultante es proporcional al tamaño de cada fuente y sustituye las alturas particulares anteriores. Se conservan familias, tamaños, pesos, colores y espaciados salvo la igualdad tipográfica solicitada para las cifras y etiquetas del resumen de Home. Ambos usan Google Sans Flex a `--font-small` (14 px), peso 400, tracking normal y línea de 22,4 px a escala normal. Conservan sus colores distintos.
+
+Aplicado tanto en el worktree de revisión como en `C:\Workspace\tech-training` conservando los cambios previos. Tipos sin errores, advertencias ni sugerencias y build correcto. Verificado en la página local servida a 1280 px: resumen ES/EN con tipografía idéntica, factor 1.6 en el texto visible de Home y Creacionales y en títulos, controles y código del diálogo de implementación. Sin desbordamiento horizontal en Home y Creacionales. Revisión visual de Home y diálogo. Revisión posterior: Home, Creacionales y su diálogo se comprueban a 320 y 390 px con texto normal sin desbordamiento de página ni texto fuera de sus cajas. Home y su panel de recomendaciones también se comprueban con el tamaño raíz duplicado de 16 a 32 px a 320 y 1280 px y el resumen en inglés a 320 y 390 px sin desbordamientos. La prueba al 200 % detecta limitaciones previas en estudio: números que exceden sus círculos, la etiqueta Implementación que supera su caja a 320 px y títulos de la guía que se solapan a ese ancho. Se reproducen al restituir temporalmente el interlineado anterior de los elementos afectados; el número ya heredaba 1.6 antes del cambio. No se modifican esos problemas de anchura y tamaño fijo ajenos al ajuste solicitado ni se afirma que toda la aplicación supere la prueba al 200 %. Se retiran todos los estilos temporales de prueba y se restaura el viewport. Sigue sin realizarse una prueba con lector de pantalla. No se publica en Sites.
+
+## 24 de octubre: tooltips y pegatinas de las etapas
+
+Cada una de las siete etiquetas incluye una definición breve en español e inglés. Trainee describe formación para un puesto o una nueva área y no presupone falta de estudios. Becario describe prácticas. Entry Level identifica puestos de acceso con poca o ninguna experiencia. Junior alude a tareas con apoyo. Mid Level destaca autonomía. Semi-Senior se presenta como una denominación habitual de nivel intermedio. Senior destaca complejidad, criterio y orientación a otros profesionales. Las definiciones no fijan años ni equivalencias obligatorias.
+
+Los tooltips aparecen al pasar el puntero y su contenido también es accesible mediante teclado y dispositivos táctiles. Las cápsulas conservan su aspecto de pegatina con radio completo de `9999px` y acabado plano sin sombra ni borde blanco inferior. Son etiquetas estáticas dentro de los cuatro botones compartidos. Conservan Google Sans Flex a 13 px mediante `--font-meta` y peso 300. Sus colores de texto, fondo y borde permanecen fijos y no tienen hover ni estado activo propios. Se conservan los cuatro grupos, sus números y la activación y persistencia compartidas.
+
+## 24 de octubre: nombres en cápsulas dentro de cuatro grupos de etapa
+
+El selector conserva cuatro botones y sus itinerarios compartidos. Cada botón muestra un único número del 1 al 4. Los nombres se presentan en cápsulas redondeadas dentro del botón: `Trainee` y `Becario` en el primero, `Entry Level` y `Junior` en el segundo, `Mid Level` y `Semi-Senior` en el tercero y `Senior` en el cuarto. En inglés `Becario` se presenta como `Intern`. Las cápsulas sustituyen las etiquetas unidas por barras o punto medio.
+
+Los nombres de las cápsulas comparten con los números del 1 al 4 la familia Google Sans Flex, el tamaño `--font-meta` de `.8125rem` (13 px a escala normal) y el peso 300.
+
+Pulsar cualquier cápsula activa el mismo botón y el itinerario de su grupo. Se mantienen los IDs `foundation`, `junior`, `mid` y `senior`, los 20 paneles derivados de cinco perfiles y cuatro etapas y la persistencia de selección o cierre. Senior conserva la unión anterior con `advanced`. La separación visual de los siete nombres no crea etapas ni IDs adicionales. No se añaden rangos de años. La petición posterior de tooltips habilita las definiciones breves de cada etiqueta.
+
+## 24 de octubre: punto medio en las etiquetas de etapa — histórico
+
+En ese ajuste las etiquetas de Home fueron `Trainee · Becario`, `Entry Level · Junior`, `Mid Level · Semi-Senior` y `Senior`. En inglés la primera fue `Trainee · Intern`. El punto medio sustituyó las barras de las etiquetas documentadas el 23 de octubre. Se conservaron las cuatro etapas y sus IDs. Esa petición cambió únicamente el separador y mantuvo las agrupaciones editoriales anteriores. La decisión posterior de mostrar los nombres en cápsulas dentro de los cuatro botones sustituye este estado.
+
+## 24 de octubre: cabeceras de estadísticas de Home
+
+Cada estadística coloca el contador a la izquierda del título en la misma fila y la subdescripción debajo. Los títulos capitalizan sus palabras principales en ES/EN. Los contadores mantienen `--green` y pasan a peso 400 sin cambiar su tamaño. El inventario sigue derivándose de los datos y la lista descriptiva conserva su semántica. En pantallas estrechas el título puede ocupar más de una línea junto al contador sin recortes.
+
+## 24 de octubre: etiquetas de etapa alineadas a la izquierda
+
+El texto de cada botón de etapa se alinea a la izquierda en ambos idiomas. El cambio se limita a `text-align` de las etiquetas. Se conservan las columnas de escritorio y el layout responsive en columna. Los círculos mantienen su posición izquierda y sus medidas. Esta decisión sustituye el centrado anterior de las etiquetas y no modifica la pregunta que identifica el selector.
+
+## 24 de octubre: descripciones breves de los perfiles
+
+Las cinco descripciones bajo los nombres de perfil en Elige tu Dirección se presentan sin punto final en español e inglés. DevOps se acorta a «Automatiza la entrega y operación» y «Automates delivery and operations». Los demás textos conservan su redacción. Esta excepción de puntuación se limita al campo `purpose` mostrado en esos controles.
+
+## 24 de octubre: espacio exterior del contenido
+
+El contenedor `main` aplica `--space-page` en sus cuatro lados. Home y estudio no añaden padding superior propio y el pie Siguiente módulo no repite el padding inferior. Se conserva el margen interior que separa ese pie de las tarjetas. Home y búsqueda obtienen así separación inferior compartida sin alterar los gaps entre secciones. Esta decisión sustituye el padding vertical localizado en Home.
+
+## 24 de octubre: cerrar el panel de etapa
+
+Pulsar de nuevo la etapa activa de Home la desmarca y oculta el panel de recomendaciones. Elegir otra etapa muestra su contenido y volver a elegir la etapa cerrada lo abre. Cambiar perfil o idioma conserva el estado cerrado. La etapa seleccionada o el cierre explícito se guardan en `tech-training:career-stage:v1` y se restauran al recargar. Sin preferencia guardada se mantiene la selección inicial existente. El cierre se anuncia de forma accesible en español e inglés.
+
+## 24 de octubre: simplificación de textos de Home
+
+También se retiran el desplegable Cómo interpretar estos niveles con sus referencias y la sección completa de rutas disponibles. Las rutas siguen accesibles desde la navegación. La sección de perfiles se titula Elige tu Dirección con IBM Plex Mono 400 y capitalización solo en palabras principales. Se conservan los datos de fuentes profesionales como respaldo interno.
+
+Por petición expresa se retiran de la portada el título visible Fundamentos para entrevistas técnicas y su párrafo introductorio. También se eliminan la explicación de selección de perfil y etapa y la nota sobre la variación de títulos entre organizaciones. Inicio conserva un h1 solo accesible. Esta decisión sustituye la instrucción anterior de mostrar esos textos. No se alteran perfiles, etapas ni recomendaciones.
+
 ## 24 de octubre: presentación de las guías
 
 Copiar código comparte el estilo sin borde ni fondo de Anterior y Siguiente y cambia solo el color al hover. Lleva el icono Copy de Lucide a la izquierda del texto. Ver código completo conserva un gap inferior hasta el separador del pie.
@@ -51,7 +105,7 @@ El usuario autoriza expresamente subir a GitHub el lote acumulado del glosario, 
 
 Las cinco tarjetas para elegir perfil incluyen una frase breve bajo el nombre que resume el trabajo del rol. El campo `purpose` vive en `career-paths.ts` y se traduce en `i18n.ts`. `CareerProfileOption.astro` recibe perfil, índice y selección por parámetros. La descripción usa 13 px/peso 300 y se conecta al botón con `aria-describedby`. Por petición posterior expresa la frase de Frontend es «Construye interfaces web». Su versión inglesa es «Builds web interfaces». No se enumeran criterios de calidad en esta descripción breve.
 
-## 23 de octubre: cuatro etapas de Home
+## 23 de octubre: cuatro etapas de Home — histórico
 
 Las etiquetas definitivas pedidas por el usuario son `Trainee / Becario`, `Entry Level / Junior`, `Mid Level / Semi-Senior` y `Senior`. En inglés `Becario` se presenta como `Intern`. El selector recupera fondo y borde exteriores redondeados y conserva los botones con radio completo. Sustituye el selector anterior de cinco etapas y la retirada temporal del marco. `careerStages` define los cuatro nombres compartidos. Se conservan IDs de las etapas restantes y las áreas de la antigua transición se unen a Senior sin duplicados. Las plantillas anteriores permanecen en el catálogo fuente como referencia. Home tiene ahora veinte combinaciones de perfil y etapa. Son etiquetas editoriales reconocibles y no se presentan como una clasificación universal ni como equivalencias contractuales exactas entre trainee y becario.
 
@@ -86,7 +140,7 @@ La marca del sidebar es exactamente **Tech Interview Prep**. El usuario retiró 
 | Interfaz completa, texto, controles y encabezados | `Google Sans Flex Variable`, fallback `sans-serif` |
 | Marca del sidebar | `IBM Plex Mono`, fallback `monospace`; 500, 20 px |
 | Títulos | `--font-title` / `--font-section: .9375rem` (15 px por defecto), peso 500 |
-| Subtítulos y controles | `--font-small: .875rem` (14 px), peso 400; navegación con línea 24 px |
+| Subtítulos y controles | `--font-small: .875rem` (14 px), peso 400; navegación con línea 16 px |
 | Texto y metadatos | `--font-body` / `--font-meta: .8125rem` (13 px por defecto), peso 300 |
 
 `src/pages/index.astro` importa `@fontsource-variable/google-sans-flex` y `@fontsource/ibm-plex-mono/500.css`. Las fuentes se incluyen en los assets de la web; no dependen de una petición a Google Fonts en ejecución. En `src/styles/tokens.css`, `--body` contiene Google Sans Flex, `--display` referencia `var(--body)` y `--brand` contiene IBM Plex Mono. Solo `.brand` usa `--brand` y peso 500. No declares familias distintas en componentes ni mezcles tipografías según la sección. Controles, diálogos y encabezados heredan la familia general.
@@ -95,7 +149,7 @@ Referencias pedidas por el usuario: [Google Sans Flex](https://fonts.google.com/
 
 Error que no debe repetirse: antes se importaba Google Sans Flex pero `--body` seguía apuntando a Inter. No basta con instalar o importar la fuente: comprueba `getComputedStyle(element).fontFamily` en menú, contenido, inputs, select y botones, además de `document.fonts.ready` y la carga efectiva de la familia. Inter y Manrope ya no son dependencias.
 
-La jerarquía tipográfica usa tamaños de 15, 14 y 13 px expresados en `rem` para respetar el tamaño de fuente del navegador: títulos a 15 px/peso 500, subtítulos y controles a 14 px/peso 400 y texto y metadatos a 13 px/peso 300. Por petición posterior, la marca del sidebar usa 20 px/peso 500, definido mediante `--font-brand`. WCAG no establece una familia tipográfica ni un tamaño mínimo universal. Las líneas de navegación usan proporciones que equivalen a 24 px a escala normal y crecen al ampliar el texto. No reduzcas el cuerpo de lectura en móvil.
+La jerarquía tipográfica usa tamaños de 15, 14 y 13 px expresados en `rem` para respetar el tamaño de fuente del navegador: títulos a 15 px/peso 500, subtítulos y controles a 14 px/peso 400 y texto y metadatos a 13 px/peso 300. Por petición posterior, la marca del sidebar usa 20 px/peso 500, definido mediante `--font-brand`. WCAG no establece una familia tipográfica ni un tamaño mínimo universal. Las líneas de navegación usan 1rem que equivale a 16 px a escala normal y crecen al ampliar el texto. No reduzcas el cuerpo de lectura en móvil.
 
 ## 3. Colores y superficies
 
@@ -165,7 +219,7 @@ El buscador conserva el borde completamente redondeado (`9999px`). No muestra un
 
 El filtro de niveles es un control horizontal transparente y sin borde propio. Muestra el nivel entre flechas izquierda y derecha, sin desplegable. Mantiene el orden Todos los niveles, Esencial, Intermedio y Avanzado, pero solo incluye los niveles que tienen tarjetas filtrables en el módulo o resultados actuales. Si una búsqueda o navegación deja sin contenido el nivel seleccionado, vuelve a Todos los niveles. En los extremos desactiva la flecha que ya no tiene dirección disponible. Al pasar el ratón sobre una flecha habilitada, aparece un círculo de 24 px con relleno `--surface-tinted` y borde de 1 px `--border-strong`; el icono cambia a `--ink` y el área del botón permanece en 40 px. `.level-step-visual` contiene el borde circular y el SVG de 16 px en una misma caja sin padding con centrado grid. El chevron se compensa ópticamente 0.5 px hacia su punta en cada dirección. La caja se alinea al borde exterior del botón sin pseudoelementos ni grandes desplazamientos separados. El selector se alinea a la derecha también cuando ocupa una segunda fila en pantallas estrechas. El botón deshabilitado no recibe hover. Los botones tienen nombres accesibles y el nivel actual se anuncia al cambiar. Conserva el foco visible en escritorio y móvil.
 
-Las páginas de estudio tienen una única fila sobre las tarjetas: contador dinámico de conceptos a la izquierda (`5 CONCEPTS`) y selector de niveles a la derecha, en la misma línea también en móvil con el tamaño de texto normal. Con texto ampliado pueden pasar a dos líneas para conservar toda la información. El contador usa `--body` (Google Sans Flex Variable), 13 px, peso 300, línea de 18 px, `--text-count` (`#657357`) y mayúsculas. Se retiraron de esa cabecera el área y número de módulo, el título visible, la descripción, el botón «Repasar conceptos», el punto decorativo y «At your pace». La ubicación se identifica mediante el breadcrumb; el título semántico de la sección se conserva solo para lectores de pantalla. El código y diálogo de repaso se conservan, sin acceso desde esta cabecera.
+Las páginas de estudio tienen una única fila sobre las tarjetas: contador dinámico de conceptos a la izquierda (`5 CONCEPTS`) y selector de niveles a la derecha, en la misma línea también en móvil con el tamaño de texto normal. Con texto ampliado pueden pasar a dos líneas para conservar toda la información. El contador usa `--body` (Google Sans Flex Variable), 13 px, peso 300, línea de 16 px, `--text-count` (`#657357`) y mayúsculas. Se retiraron de esa cabecera el área y número de módulo, el título visible, la descripción, el botón «Repasar conceptos», el punto decorativo y «At your pace». La ubicación se identifica mediante el breadcrumb; el título semántico de la sección se conserva solo para lectores de pantalla. El código y diálogo de repaso se conservan, sin acceso desde esta cabecera.
 
 El final de las páginas de estudio muestra únicamente «Siguiente módulo», alineado a la derecha en escritorio y móvil y acompañado por una flecha `ArrowRight` de Lucide a 13 px, más pequeña que la flecha original de 18 px; no se utiliza un chevron. Se retiraron el consejo «Hazlo tuyo. Explica el concepto en voz alta, sin mirar la definición.» y el pie común con la marca, el lema y «Fuentes y recursos». El enlace sigue calculando su destino a partir de los módulos; no aparece en búsqueda ni cuando no hay conceptos visibles. Las fuentes primarias y el diálogo de fuentes se conservan, sin el acceso del pie retirado.
 
@@ -181,7 +235,7 @@ La armonización del 20 de octubre agrupa las vistas en una superficie suave con
 
 El seleccionado tiene fondo blanco y borde `--control-border`, además de `aria-pressed`, y permanece estático al hover. Los deshabilitados conservan `--disabled` sin opacidad reducida. El pie usa una rejilla con columnas `minmax(0, 1fr) auto`, y `.concept-card` es un contenedor de consulta. Por debajo de 32 rem de ancho útil, el selector ocupa una fila completa y «Lo entiendo» otra, a la derecha. Por debajo de 18 rem las vistas se disponen en columna y mantienen el padding horizontal. El grupo usa `width: fit-content` y `max-width: 100%`: conserva su ancho natural y queda limitado por la columna del pie en lugar de estirar el fondo y los botones por todo el espacio sobrante. Las opciones pueden replegarse sin cortar palabras cuando se personaliza el espaciado. Al ampliar el texto, el selector de niveles envuelve su etiqueta y la cabecera puede separar título y nivel en filas. No se usa recorte para esconder desbordamientos.
 
-Los radios compartidos son `--radius-card: 12px`, `--radius-control: 8px` y `--radius-inset: 6px`. Home y las tarjetas usan esos tokens. El selector de vistas es la excepción solicitada por el usuario con radios interior/exterior de 24/29 px a tamaño normal; el bloque de fuente sigue sin esquinas redondeadas. Los encabezados de 15 px conservan peso 500, tracking normal y línea 1.4. Se retiraron valores de tracking de hasta -2 px heredados de títulos mayores. El hover de una tarjeta cambia solo el borde; las acciones se reconocen por sus propios controles. La revisión, las fuentes y las limitaciones de la evidencia están en [ACCESSIBILITY_REVIEW.md](ACCESSIBILITY_REVIEW.md).
+Los radios compartidos son `--radius-card: 12px`, `--radius-control: 8px` y `--radius-inset: 6px`. Home y las tarjetas usan esos tokens. El selector de vistas es la excepción solicitada por el usuario con radios interior/exterior de 24/29 px a tamaño normal; el bloque de fuente sigue sin esquinas redondeadas. Los encabezados de 15 px conservan peso 500, tracking normal y línea de 1rem. Se retiraron valores de tracking de hasta -2 px heredados de títulos mayores. El hover de una tarjeta cambia solo el borde; las acciones se reconocen por sus propios controles. La revisión, las fuentes y las limitaciones de la evidencia están en [ACCESSIBILITY_REVIEW.md](ACCESSIBILITY_REVIEW.md).
 
 Igualar gaps no alinea el texto si los elementos anteriores tienen distinto ancho. Título y autor comienzan en una misma columna. Bombilla y check miden 20 px. `--card-number-size` deriva de `20px + --gap-card`, con diámetros de 32/34/30 px según el breakpoint. Título y autor empiezan en `20px + 2 × --gap-card` desde el borde interior de la tarjeta. La raya de la fuente es una sombra interior de 2 px que no consume ancho de layout. No compenses esta columna con márgenes fijos que solo coincidan en un breakpoint. La petición del 20 de octubre mueve «Lo entiendo» a la derecha y sustituye su anterior alineación en esa columna.
 
@@ -198,7 +252,7 @@ En el sidebar se corrigió un problema concreto: sumar gap + padding + márgenes
 | Ancho del sidebar | Intrínseco al texto más largo de todos los subniveles renderizados mediante `--sidebar-width`; móvil `min(var(--sidebar-width), 100vw)` |
 | Padding exterior | 16 px en los cuatro lados |
 | Marca | `min-height: 48px`, texto a 20 px, padding vertical/horizontal 9/18 px |
-| Etiqueta y filas de navegación de todos los niveles | `min-height: 48px`, `line-height: 24px`, padding vertical de 12 px y horizontal de 18 px |
+| Etiqueta y filas de navegación de todos los niveles | `min-height: 48px`, `line-height: 1rem`, padding vertical de 12 px y horizontal de 18 px |
 | Gaps/márgenes verticales entre filas | 0 |
 | Padding horizontal de las filas | 18 px en ambos lados, alineado con el texto de la marca |
 | Gap entre icono y texto | 9 px; mitad del padding horizontal |
