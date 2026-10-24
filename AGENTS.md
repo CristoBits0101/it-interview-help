@@ -1,5 +1,12 @@
 # Tech Interview Prep — instrucciones para agentes
 
+## 24 de octubre de 2026 — trabajo exclusivo en main
+
+Por orden expresa del usuario la IA trabaja siempre sobre `main` en `C:\Workspace\tech-training`. No crea ramas ni worktrees ni desarrolla en copias auxiliares. Solo una nueva instrucción explícita del usuario que revoque esta regla permite cambiar este flujo. Esta decisión sustituye la pauta anterior de crear ramas `codex/…`. Antes de editar comprueba carpeta, rama y cambios pendientes. Conserva los cambios ajenos y el historial. El resultado local se muestra en `http://localhost:4321/` y ese servidor se mantiene disponible. No hagas push ni publiques en Sites por esta petición.
+
+Home y el ajuste del chevron de idiomas ya están integrados en el checkout habitual. Las referencias anteriores a 4322/4327 y a cambios presentes solo en worktrees describen el estado histórico previo a esta integración.
+
+
 ## 24 de octubre de 2026 — espaciado y justificación exclusivos de Home
 
 Por petición expresa del usuario los espacios entre bloques y tarjetas del contenido principal de Home usan `--space-home: 42px`, constante también en móvil. Los separadores visibles dejan 42 px desde el contenido anterior y otros 42 px hasta el siguiente. Entre «Elige tu Dirección» y sus tarjetas también hay 42 px efectivos. Cada separación tiene un único origen, preferentemente `gap`, sin sumar márgenes ni paddings. Esta excepción sustituye los gaps anteriores de Home y la relación general de mitad del padding únicamente en esos espacios. Se conservan el padding exterior responsive de `main` y los paddings e insets internos funcionales de los controles.
@@ -99,7 +106,7 @@ Lee [docs/PROJECT_GUIDE.md](docs/PROJECT_GUIDE.md) antes de modificar el proyect
 - Pauta permanente solicitada el 23 de octubre: desarrollar por componentes y responsabilidades con propiedades tipadas y datos como parámetros. Reutilizar las plantillas existentes antes de copiar marcado o comportamiento. `src/pages/index.astro` compone la pantalla y `src/layouts/AppLayout.astro` contiene el marco común. Los componentes de estudio, controles, diálogos y Home viven en sus carpetas de `src/components/`. El catálogo disponible se configura en `src/data/published-catalog.ts`. El comportamiento de tarjetas, menú móvil, repaso y diálogos está separado en `src/scripts/`; `app.ts` coordina navegación, filtros e idioma. No crear archivos gigantes ni fragmentar cada etiqueta sin una responsabilidad útil. Mantener estables los IDs, atributos de integración, claves de almacenamiento y contratos de accesibilidad. Consultar [docs/COMPONENT_ARCHITECTURE.md](docs/COMPONENT_ARCHITECTURE.md).
 - Los desplegables conservan sus estados abiertos y cerrados en almacenamiento local, incluidos los hijos de una rama cerrada. Mantener la restauración al recargar y al cambiar idioma, sin abrir ramas automáticamente ni sustituir esta preferencia por cookies. Este almacenamiento se limita a recordar las elecciones de interfaz del usuario.
 
-- Comprueba `git status` antes de trabajar y conserva cambios ajenos. Si necesitas una rama nueva, usa `codex/…`.
+- Comprueba `git status` antes de trabajar y conserva cambios ajenos. Trabaja siempre en `main` y en `C:\Workspace\tech-training`. No crees ramas ni worktrees salvo revocación explícita posterior del usuario.
 - Node.js **>=22.22.0**; Node 22.13.0 no sirve para esta versión. Comandos: `npm ci`, `npm run dev`, `npm run check`, `npm run build`, `npm run preview`. No hay `npm test`.
 - Mantén estables y únicos los IDs de conceptos y módulos; se usan en enlaces, selección y progreso. Renombrar etiquetas de ramas también afecta a sus claves de persistencia. Las áreas recomendadas de `career-paths.ts` deben coincidir con las etiquetas de `navigation.ts` para resolver enlaces y estados pendientes.
 - Para cambios de código, ejecuta las comprobaciones pertinentes. Para cambios visuales, revisa el resultado en navegador: carga y familia computada de fuentes, procedencia Lucide de SVG, colores derivados de tokens, relación padding/gap, alineaciones y móvil. Un build correcto no confirma el diseño. Conserva la retícula de 48 px del sidebar al comprobar los demás contenedores. Para documentación solamente, revisa enlaces y `git diff --check`.

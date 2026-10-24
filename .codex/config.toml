@@ -1,0 +1,2 @@
+[plugins."codex-app-tools@openai-bundled".mcp_servers.codex_app]
+disabled_tools = ["create_worktree"]

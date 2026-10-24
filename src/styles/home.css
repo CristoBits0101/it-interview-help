@@ -21,7 +21,7 @@
   .home-section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-home); }
   .home-section-heading > div { flex: 1.4; min-width: 0; }
   .home-section-heading h2 { font-size: var(--font-section); line-height: var(--line-body); letter-spacing: normal; margin: 0; font-weight: 500; }
-  #career-title, #growth-title { font-family: var(--brand); font-weight: 400; }
+  #career-title, #growth-title { font-family: var(--brand); font-size: var(--font-title); font-weight: 500; text-transform: uppercase; padding: 0 var(--space-compact); border-inline-start: 2px solid var(--accent); }
   .home-section-heading > p { flex: 1; max-width: 350px; font-size: var(--font-body); line-height: var(--line-body); color: var(--text-soft); }
   .career-profile-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); gap: var(--space-home); }
   .career-profile-options button { overflow-wrap: normal; position: relative; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-control); text-align: left; min-height: 104px; padding: var(--space-control); background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-profile); font-size: var(--font-small); line-height: var(--line-body); font-weight: 400; transition: border-color .15s, background .15s; }

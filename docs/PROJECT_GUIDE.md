@@ -1,8 +1,15 @@
 # Memoria de producto, diseño y desarrollo
 
+## 24 de octubre de 2026 — trabajo exclusivo en main
+
+Por orden expresa del usuario la IA trabaja siempre sobre `main` en `C:\Workspace\tech-training`. No crea ramas ni worktrees ni desarrolla en copias auxiliares. Solo una nueva instrucción explícita del usuario que revoque esta regla permite cambiar este flujo. Esta decisión sustituye la pauta anterior de crear ramas `codex/…`. Antes de editar comprueba carpeta, rama y cambios pendientes. Conserva los cambios ajenos y el historial. El resultado local se muestra en `http://localhost:4321/` y ese servidor se mantiene disponible. No hagas push ni publiques en Sites por esta petición.
+
+Home y el ajuste del chevron de idiomas ya están integrados en el checkout habitual. Las referencias anteriores a 4322/4327 y a cambios presentes solo en worktrees describen el estado histórico previo a esta integración.
+
+
 ## 24 de octubre de 2026 — espacio interior del selector de idiomas
 
-El chevron del selector de idiomas se desplaza 2 px hacia el borde derecho mediante `inset-inline-end: calc(var(--language-padding) - 2px)`. Compensa el margen transparente del SVG Lucide para equilibrar sus extremos visuales. Se conservan el select nativo, sus opciones, padding, dimensiones, tipografía, colores, foco y funcionamiento. El ajuste queda únicamente en el worktree `C:\Users\reuda\.codex\worktrees\6727\tech-training`, disponible en `http://127.0.0.1:4327/`. Esta petición mantiene el servidor local disponible y no autoriza commit, push ni publicación en Sites.
+El chevron del selector de idiomas se desplaza 2 px hacia el borde derecho mediante `inset-inline-end: calc(var(--language-padding) - 2px)`. Compensa el margen transparente del SVG Lucide para equilibrar sus extremos visuales. Se conservan el select nativo, sus opciones, padding, dimensiones, tipografía, colores, foco y funcionamiento. El ajuste está integrado en `main` en `C:\Workspace\tech-training` y se revisa en `http://localhost:4321/`. Esta petición mantiene el servidor local disponible y no autoriza commit, push ni publicación en Sites.
 
 ## 24 de octubre de 2026 — espaciado y justificación exclusivos de Home
 
