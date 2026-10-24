@@ -46,22 +46,22 @@ public class Main {
     steps: [
       {
         title: { es: "Define el contrato de pago", en: "Define the payment contract" },
-        why: { es: "Primero define pay para que todas las formas de pago se puedan usar del mismo modo.", en: "First define pay so every payment method can be used in the same way." },
+        why: { es: "Primero define pay para que todas las formas de pago se puedan usar del mismo modo", en: "First define pay so every payment method can be used in the same way" },
         from: 1, to: 3, focus: [2],
       },
       {
         title: { es: "Implementa las dos variantes", en: "Implement both variants" },
-        why: { es: "Cada clase cumple el contrato con su propia forma de pagar.", en: "Each class fulfills the contract with its own payment behavior." },
+        why: { es: "Cada clase cumple el contrato con su propia forma de pagar", en: "Each class fulfills the contract with its own payment behavior" },
         from: 5, to: 15, focus: [7,13],
       },
       {
         title: { es: "Crea el contexto que delega", en: "Create the delegating context" },
-        why: { es: "Ahora el contexto recibe una estrategia y le encarga el pago sin conocer su clase concreta.", en: "The context now receives a strategy and delegates payment without knowing its concrete class." },
+        why: { es: "Ahora el contexto recibe una estrategia y le encarga el pago sin conocer su clase concreta", en: "The context now receives a strategy and delegates payment without knowing its concrete class" },
         from: 17, to: 31, focus: [18,25,29],
       },
       {
         title: { es: "Cambia la estrategia al usarlo", en: "Switch the strategy when using it" },
-        why: { es: "Usa el mismo contexto con ambas estrategias para comprobar que cambia el comportamiento.", en: "Use the same context with both strategies to verify that its behavior changes." },
+        why: { es: "Usa el mismo contexto con ambas estrategias para comprobar que cambia el comportamiento", en: "Use the same context with both strategies to verify that its behavior changes" },
         from: 33, to: 40, focus: [35,37],
       },
     ],
@@ -110,22 +110,22 @@ public class Main {
     steps: [
       {
         title: { es: "Define la acción de los estados", en: "Define the states' action" },
-        why: { es: "El contrato recibe el teléfono para que cada estado pueda decidir la siguiente transición.", en: "The contract receives the phone so each state can choose the next transition." },
+        why: { es: "El contrato recibe el teléfono para que cada estado pueda decidir la siguiente transición", en: "The contract receives the phone so each state can choose the next transition" },
         from: 1, to: 3, focus: [2],
       },
       {
         title: { es: "Crea el teléfono con un estado", en: "Create the phone with a state" },
-        why: { es: "El teléfono guarda su estado actual y le delega cada pulsación.", en: "The phone stores its current state and delegates each button press to it." },
+        why: { es: "El teléfono guarda su estado actual y le delega cada pulsación", en: "The phone stores its current state and delegates each button press to it" },
         from: 5, to: 15, focus: [6,9,13],
       },
       {
         title: { es: "Implementa las transiciones", en: "Implement the transitions" },
-        why: { es: "Cada estado define la respuesta y deja preparado el estado que recibirá la próxima pulsación.", en: "Each state defines the response and prepares the state that will receive the next button press." },
+        why: { es: "Cada estado define la respuesta y deja preparado el estado que recibirá la próxima pulsación", en: "Each state defines the response and prepares the state that will receive the next button press" },
         from: 17, to: 29, focus: [19,26],
       },
       {
         title: { es: "Pulsa el mismo botón tres veces", en: "Press the same button three times" },
-        why: { es: "La llamada no cambia pero su resultado depende del estado actual del teléfono.", en: "The call stays the same but its result depends on the phone's current state." },
+        why: { es: "La llamada no cambia pero su resultado depende del estado actual del teléfono", en: "The call stays the same but its result depends on the phone's current state" },
         from: 31, to: 38, focus: [34,35,36],
       },
     ],
@@ -200,27 +200,27 @@ public class Main {
     steps: [
       {
         title: { es: "Define los dos contratos", en: "Define both contracts" },
-        why: { es: "La figura acepta visitantes y cada visitante declara una operación para cada tipo de figura.", en: "A shape accepts visitors and each visitor declares an operation for every shape type." },
+        why: { es: "La figura acepta visitantes y cada visitante declara una operación para cada tipo de figura", en: "A shape accepts visitors and each visitor declares an operation for every shape type" },
         from: 1, to: 8, focus: [2,6,7],
       },
       {
         title: { es: "Haz que el círculo acepte visitas", en: "Let the circle accept visitors" },
-        why: { es: "Dentro de Circle la llamada visit(this) selecciona la operación que recibe un círculo.", en: "Inside Circle the call to visit(this) selects the operation that receives a circle." },
+        why: { es: "Dentro de Circle la llamada visit(this) selecciona la operación que recibe un círculo", en: "Inside Circle the call to visit(this) selects the operation that receives a circle" },
         from: 10, to: 20, focus: [11,18],
       },
       {
         title: { es: "Conecta también el rectángulo", en: "Connect the rectangle too" },
-        why: { es: "Repite accept en Rectangle para que esta figura seleccione su propia operación del visitante.", en: "Repeat accept in Rectangle so this shape selects its own visitor operation." },
+        why: { es: "Repite accept en Rectangle para que esta figura seleccione su propia operación del visitante", en: "Repeat accept in Rectangle so this shape selects its own visitor operation" },
         from: 22, to: 34, focus: [23,24,32],
       },
       {
         title: { es: "Añade las operaciones en visitantes", en: "Add operations through visitors" },
-        why: { es: "Ahora cada visitante reúne los cálculos de una operación sin modificar las figuras.", en: "Each visitor now groups the calculations for one operation without changing the shapes." },
+        why: { es: "Ahora cada visitante reúne los cálculos de una operación sin modificar las figuras", en: "Each visitor now groups the calculations for one operation without changing the shapes" },
         from: 36, to: 52, focus: [36,45],
       },
       {
         title: { es: "Aplica ambas operaciones", en: "Apply both operations" },
-        why: { es: "Recorre las mismas figuras y pásales cada visitante para obtener los dos resultados.", en: "Iterate over the same shapes and pass each visitor to obtain both results." },
+        why: { es: "Recorre las mismas figuras y pásales cada visitante para obtener los dos resultados", en: "Iterate over the same shapes and pass each visitor to obtain both results" },
         from: 54, to: 64, focus: [56,60,61],
       },
     ],
@@ -277,22 +277,22 @@ public class Main {
     steps: [
       {
         title: { es: "Crea el iterador con su posición", en: "Create the iterator with its position" },
-        why: { es: "Implementa Iterator de Java y guarda una posición propia para que cada recorrido avance de forma independiente.", en: "Implement Java's Iterator and store a separate position so each traversal advances independently." },
+        why: { es: "Implementa Iterator y guarda una posición propia para que cada recorrido avance de forma independiente", en: "Implement Iterator and store a separate position so each traversal advances independently" },
         from: 1, to: 11, focus: [5,7],
       },
       {
         title: { es: "Añade el avance a BookIterator", en: "Add traversal to BookIterator" },
-        why: { es: "hasNext comprueba el límite y next devuelve el libro actual antes de avanzar.", en: "hasNext checks the limit and next returns the current book before advancing." },
+        why: { es: "hasNext comprueba el límite y next devuelve el libro actual antes de avanzar", en: "hasNext checks the limit and next returns the current book before advancing" },
         from: 13, to: 23, focus: [14,19,21],
       },
       {
         title: { es: "Haz que la estantería entregue iteradores", en: "Let the shelf provide iterators" },
-        why: { es: "La colección implementa Iterable y devuelve un iterador nuevo en cada llamada.", en: "The collection implements Iterable and returns a new iterator on every call." },
+        why: { es: "La colección implementa Iterable y devuelve un iterador nuevo en cada llamada", en: "The collection implements Iterable and returns a new iterator on every call" },
         from: 25, to: 35, focus: [25,33],
       },
       {
         title: { es: "Recorre y vuelve a empezar", en: "Traverse and start again" },
-        why: { es: "Consume un iterador y pide otro para comprobar que empieza de nuevo por el primer libro.", en: "Consume one iterator and request another to verify that it starts again at the first book." },
+        why: { es: "Consume un iterador y pide otro para comprobar que empieza de nuevo por el primer libro", en: "Consume one iterator and request another to verify that it starts again at the first book" },
         from: 37, to: 46, focus: [41,42,44],
       },
     ],
@@ -356,27 +356,27 @@ public class Main {
     steps: [
       {
         title: { es: "Define cómo recibe avisos un suscriptor", en: "Define how a subscriber receives updates" },
-        why: { es: "Declara update para que la agencia pueda avisar a cualquier suscriptor mediante el mismo contrato.", en: "Declare update so the agency can notify any subscriber through the same contract." },
+        why: { es: "Declara update para que la agencia pueda avisar a cualquier suscriptor mediante el mismo contrato", en: "Declare update so the agency can notify any subscriber through the same contract" },
         from: 1, to: 6, focus: [5],
       },
       {
         title: { es: "Crea el lector que recibe noticias", en: "Create the reader that receives news" },
-        why: { es: "El lector implementa update y guarda cada noticia recibida para poder comprobar el resultado.", en: "The reader implements update and stores each received news item so the result can be checked." },
+        why: { es: "El lector implementa update y guarda cada noticia recibida para poder comprobar el resultado", en: "The reader implements update and stores each received news item so the result can be checked" },
         from: 8, to: 18, focus: [8,12],
       },
       {
         title: { es: "Registra las suscripciones", en: "Register subscriptions" },
-        why: { es: "La agencia guarda suscriptores y permite añadirlos o retirarlos sin conocer sus clases concretas.", en: "The agency stores subscribers and lets them join or leave without knowing their concrete classes." },
+        why: { es: "La agencia guarda suscriptores y permite añadirlos o retirarlos sin conocer sus clases concretas", en: "The agency stores subscribers and lets them join or leave without knowing their concrete classes" },
         from: 20, to: 31, focus: [21,25,30],
       },
       {
         title: { es: "Añade el aviso a la agencia", en: "Add notification to the agency" },
-        why: { es: "Al publicar una noticia recorre los suscriptores actuales y llama a update en cada uno.", en: "When publishing a news item iterate over the current subscribers and call update on each one." },
+        why: { es: "Al publicar una noticia recorre los suscriptores actuales y llama a update en cada uno", en: "When publishing a news item iterate over the current subscribers and call update on each one" },
         from: 33, to: 38, focus: [34,35],
       },
       {
         title: { es: "Publica y da de baja a un lector", en: "Publish and unsubscribe one reader" },
-        why: { es: "Publica dos noticias y retira a Luis entre ambas para comprobar que deja de recibir avisos.", en: "Publish two news items and unsubscribe Luis between them to verify that he stops receiving updates." },
+        why: { es: "Publica dos noticias y retira a Luis entre ambas para comprobar que deja de recibir avisos", en: "Publish two news items and unsubscribe Luis between them to verify that he stops receiving updates" },
         from: 40, to: 53, focus: [47,48,49],
       },
     ],
@@ -442,22 +442,22 @@ public class Main {
     steps: [
       {
         title: { es: "Crea la sala que coordina los mensajes", en: "Create the room that coordinates messages" },
-        why: { es: "La sala registra usuarios y entrega cada mensaje a todos salvo al emisor.", en: "The room registers users and delivers each message to everyone except its sender." },
+        why: { es: "La sala registra usuarios y entrega cada mensaje a todos salvo al emisor", en: "The room registers users and delivers each message to everyone except its sender" },
         from: 1, to: 18, focus: [8,13,14],
       },
       {
         title: { es: "Conecta cada usuario con la sala", en: "Connect each user to the room" },
-        why: { es: "El usuario recibe su sala y se registra en ella sin guardar referencias a los demás usuarios.", en: "Each user receives its room and registers with it without storing references to other users." },
+        why: { es: "El usuario recibe su sala y se registra en ella sin guardar referencias a los demás usuarios", en: "Each user receives its room and registers with it without storing references to other users" },
         from: 20, to: 29, focus: [22,28],
       },
       {
         title: { es: "Añade el envío y la recepción al usuario", en: "Add sending and receiving to the user" },
-        why: { es: "El usuario encarga el envío a la sala y conserva los mensajes que esta le entrega.", en: "The user delegates sending to the room and stores the messages that the room delivers." },
+        why: { es: "El usuario encarga el envío a la sala y conserva los mensajes que esta le entrega", en: "The user delegates sending to the room and stores the messages that the room delivers" },
         from: 31, to: 42, focus: [34,38],
       },
       {
         title: { es: "Envía un mensaje al grupo", en: "Send a message to the group" },
-        why: { es: "Ana envía un mensaje y la sala lo entrega a Luis y Eva sin devolvérselo a ella.", en: "Ana sends a message and the room delivers it to Luis and Eva without sending it back to her." },
+        why: { es: "Ana envía un mensaje y la sala lo entrega a Luis y Eva sin devolvérselo a ella", en: "Ana sends a message and the room delivers it to Luis and Eva without sending it back to her" },
         from: 44, to: 55, focus: [46,50,51],
       },
     ],

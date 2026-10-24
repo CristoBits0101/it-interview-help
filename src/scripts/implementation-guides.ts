@@ -6,11 +6,12 @@ export function initializeImplementationGuides(library: HTMLElement, getLanguage
     const current = Math.max(0, Math.min(index, steps.length - 1));
     dialog.dataset.currentStep = String(current);
     steps.forEach((step, position) => { step.hidden = position !== current; });
+    dialog.querySelectorAll<HTMLElement>('[data-guide-heading]').forEach((heading, position) => { heading.hidden = position !== current; });
+    dialog.querySelectorAll<HTMLElement>('[data-guide-why]').forEach((description, position) => { description.hidden = position !== current; });
     dialog.querySelectorAll<HTMLButtonElement>('[data-guide-go]').forEach((button, position) => {
       if (position === current) button.setAttribute('aria-current', 'step');
       else button.removeAttribute('aria-current');
     });
-    dialog.querySelector<HTMLElement>('[data-guide-current]')!.textContent = String(current + 1);
     dialog.querySelector<HTMLButtonElement>('[data-guide-previous]')!.disabled = current === 0;
     dialog.querySelector<HTMLButtonElement>('[data-guide-next]')!.disabled = current === steps.length - 1;
     dialog.querySelector<HTMLElement>('.implementation-body')!.scrollTop = 0;

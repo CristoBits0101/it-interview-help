@@ -1,5 +1,37 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 24 de octubre de 2026 — retirada de información redundante
+
+Por petición expresa se retiran el contador de pasos y Líneas clave. Se conserva el paginado con su estado activo y el resaltado de código. La descripción centrada ocupa el ancho disponible sin reservar columnas para el contador eliminado. Se retira también su actualización del script. Tipos y compilación correctos. Navegación comprobada a 1440, 390 y 320 px.
+
+## 24 de octubre de 2026 — descripción centrada junto al contador
+
+Se traslada implementation-why a la fila del contador con centrado horizontal estable y alineación vertical. La navegación mantiene sincronizados título, descripción y código. Se conservan los últimos ajustes del h3 centrado y de Líneas clave con peso 400 y puntos intermedios. Tipos y build correctos. Comprobada alineación y cambio de paso a 1440, 390 y 320 px.
+
+## 24 de octubre de 2026 — títulos de paso en cabecera
+
+Se trasladan los h3 de los pasos a la cabecera del diálogo con IBM Plex Mono 500 y mayúsculas. La navegación actualiza el único título visible y mantiene el enlace accesible de cada sección. Se conserva la traducción por nodos. Tipos y compilación correctos. Verificados cambio de paso, fuente cargada y ausencia de desbordamiento a 1440, 390 y 320 px. También se conserva la retirada solicitada del punto final en Líneas clave.
+
+## 24 de octubre de 2026 — simetría vertical del diálogo
+
+Se elimina la acumulación de márgenes usando el gap compartido en el flujo del cuerpo y los pasos. Se iguala la separación hasta el código y a ambos lados del bloque Ver código completo. Se oculta el espacio de estado de copia cuando está vacío. El padding vertical de cabecera y pie usa el mismo gap. Compilación correcta y siete separaciones consecutivas medidas en navegador: 12 px en escritorio y 8 px a 390 y 320 px. Captura móvil revisada.
+
+## 24 de octubre de 2026 — cabecera y espaciado de las guías
+
+Se retira «Implementación · Java» y se redondea completamente el hover de cierre. Se igualan los espacios de Líneas clave hasta el código y el separador y se derivan los espacios compactos del gap de la tarjeta. Verificado en navegador a 1440, 390 y 320 px: 12/12 px en escritorio y 8/8 px en móvil. Hover circular y ausencia de la etiqueta comprobados. Tipos y compilación correctos.
+
+## 24 de octubre de 2026 — paginado redondeado y gap del paso
+
+Se aplica radio completo a los botones numerados y el mismo gap compartido entre contador, título y descripción del paso. Se conserva el espacio completo hasta el código y el resto del diseño.
+
+## 24 de octubre de 2026 — controles y radios de implementación
+
+Se intercambian el contador superior y los botones numerados del pie. Se retiran borde y fondo del hover de Anterior y Siguiente. El diálogo y los bloques de código usan radio de 16 px. Tipos y compilación correctos. Navegación y medidas comprobadas en navegador a 1440, 390 y 320 px sin desbordamiento. Capturas revisadas. Se conservan los cambios anteriores en casos de uso.
+
+## 24 de octubre de 2026 — precisión de cuatro casos de uso
+
+Por la revisión del usuario se concretan únicamente los casos de uso de Simple Factory, Builder, Singleton y Factory Method con traducción inglesa. Se aclara la opción de notificación elegida por el usuario. Builder configura las propiedades del vehículo por pasos. Singleton comparte un objeto con datos de conexión. Factory Method comparte la validación entre servicios de email y SMS. Las explicaciones conceptuales y el código de las guías se conservan. Los ejemplos de código siguen siendo demostraciones mínimas del patrón.
+
 ## 24 de octubre de 2026 — integración para entrega autorizada
 
 El usuario solicita subir el código a GitHub. Se integran las guías Java del commit remoto cfcf21c con las descripciones restauradas y las pautas de alcance estricto y código sin comentarios. Se preserva el caso de uso solicitado de Prototipo en el catálogo compartido de guías para evitar que la composición de datos lo sustituya. Esta autorización sustituye las notas anteriores de cambios locales pendientes de subir.

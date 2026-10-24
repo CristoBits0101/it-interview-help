@@ -1,5 +1,23 @@
 # Memoria de producto, diseño y desarrollo
 
+## 24 de octubre: presentación de las guías
+
+Copiar código comparte el estilo sin borde ni fondo de Anterior y Siguiente y cambia solo el color al hover. Lleva el icono Copy de Lucide a la izquierda del texto. Ver código completo conserva un gap inferior hasta el separador del pie.
+
+Decisión vigente posterior: se eliminan el contador de pasos y el texto Líneas clave porque el paginado y el resaltado del código ya comunican esa información. La descripción permanece centrada y aprovecha todo el ancho del cuerpo. Las notas siguientes sobre su contador, pesos y separadores describen ajustes históricos sustituidos por esta retirada.
+
+Las descripciones de los pasos explican la implementación sin mencionar el lenguaje en que se realiza y omiten el punto final por petición expresa. Esta pauta se aplica a ambos idiomas de la interfaz y no altera el código ni los datos de sus ejemplos.
+
+La descripción `implementation-why` comparte fila con el contador de pasos y se centra respecto al ancho del cuerpo con columnas laterales iguales. Cambia junto al título y al código del paso activo. Las etiquetas Líneas clave y Paso y los dos puntos usan peso 300. Los valores de líneas con puntos intermedios y el contador numérico con barra diagonal usan peso 400 mediante la clase compartida `implementation-value`.
+
+Los h3 de los pasos aparecen en la misma fila de la cabecera centrados respecto al ancho total del diálogo. Las columnas laterales tienen el mismo ancho para que el nombre del patrón no desplace el centro. Solo se muestra el correspondiente al paso activo y conserva su ID accesible y traducción. Usan IBM Plex Mono mediante `--brand` a 15 px/peso 500 y mayúsculas por CSS. Es una excepción tipográfica expresa solicitada por el usuario. Líneas clave no lleva punto final.
+
+La cabecera muestra únicamente el nombre del patrón y la X de cierre con hover circular. Se elimina la etiqueta «Implementación · Java». «Líneas clave» conserva la misma separación por encima y por debajo hasta el separador. Los espacios compactos del diálogo derivan de `--gap-card` y su mitad para mantener la proporción al cambiar de tamaño.
+
+Por ajuste posterior los botones numerados tienen radio completo. La separación vertical de contador, título, descripción, código, líneas clave y separadores usa un único `--gap-card` sin acumular márgenes. El diálogo conserva padding horizontal completo y vertical de la mitad. El bloque Ver código completo tiene la misma separación superior e inferior. Esta decisión sustituye el espacio doble anterior hasta el código.
+
+El diálogo de implementación y los contenedores de código usan radio 2XL de 16 px mediante el token compartido. El contador de pasos se sitúa al principio del cuerpo. Los botones numerados de paginado ocupan el pie entre Anterior y Siguiente y pasan a una fila propia en móvil. Anterior y Siguiente no tienen borde ni fondo y su hover cambia únicamente el color. Conservan el foco y los estados deshabilitados.
+
 ## Sincronización del 24 de octubre
 
 La entrega autorizada integra las guías de implementación ya existentes en GitHub con las tres descripciones restauradas y la retirada de comentarios. El caso de uso de Prototipo conserva la frase solicitada «Clonar un objeto de configuración de servidor y modificar solo los valores necesarios» en el catálogo compartido de guías con su traducción. Las referencias históricas a Implementación deshabilitada quedan sustituidas por las guías disponibles. Se mantiene la pauta de consultar antes de cambiar algo fuera del alcance solicitado.

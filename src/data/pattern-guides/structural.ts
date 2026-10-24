@@ -39,24 +39,24 @@ public class Main {
       {
         title: { es: 'Crea los componentes', en: 'Create the components' },
         why: {
-          es: 'Primero define las operaciones que la fachada tendrá que coordinar.',
-          en: 'First define the operations that the facade will coordinate.',
+          es: 'Primero define las operaciones que la fachada tendrá que coordinar',
+          en: 'First define the operations that the facade will coordinate',
         },
         from: 1, to: 11, focus: [2, 8],
       },
       {
         title: { es: 'Reúne las llamadas en la fachada', en: 'Bring the calls together in the facade' },
         why: {
-          es: 'Crea una clase que use ambos componentes para ofrecer una operación común.',
-          en: 'Create a class that uses both components to provide one shared operation.',
+          es: 'Crea una clase que use ambos componentes para ofrecer una operación común',
+          en: 'Create a class that uses both components to provide one shared operation',
         },
         from: 13, to: 22, focus: [17, 18, 19],
       },
       {
         title: { es: 'Usa la operación común', en: 'Use the shared operation' },
         why: {
-          es: 'El cliente llama a watchMovie porque la fachada ya conoce los componentes y su orden.',
-          en: 'The client calls watchMovie because the facade already knows the components and their order.',
+          es: 'El cliente llama a watchMovie porque la fachada ya conoce los componentes y su orden',
+          en: 'The client calls watchMovie because the facade already knows the components and their order',
         },
         from: 24, to: 29, focus: [27],
       },
@@ -102,32 +102,32 @@ public class Main {
       {
         title: { es: 'Define la interfaz del cliente', en: 'Define the client interface' },
         why: {
-          es: 'Define primero turnOn para que el cliente pueda encender cualquier objeto con ese contrato.',
-          en: 'First define turnOn so the client can turn on any object with that contract.',
+          es: 'Define primero turnOn para que el cliente pueda encender cualquier objeto con ese contrato',
+          en: 'First define turnOn so the client can turn on any object with that contract',
         },
         from: 1, to: 3, focus: [2],
       },
       {
         title: { es: 'Identifica la interfaz existente', en: 'Identify the existing interface' },
         why: {
-          es: 'El LED recibe un voltaje mediante connect. Conserva esa clase para adaptar su uso desde fuera.',
-          en: 'The LED receives a voltage through connect. Keep this class and adapt its use from outside.',
+          es: 'El LED recibe un voltaje mediante connect. Conserva esa clase para adaptar su uso desde fuera',
+          en: 'The LED receives a voltage through connect. Keep this class and adapt its use from outside',
         },
         from: 5, to: 9, focus: [6],
       },
       {
         title: { es: 'Traduce la llamada', en: 'Translate the call' },
         why: {
-          es: 'Implementa turnOn delegando en connect con 5 V para conectar ambas interfaces.',
-          en: 'Implement turnOn by delegating to connect with 5 V to connect both interfaces.',
+          es: 'Implementa turnOn delegando en connect con 5 V para conectar ambas interfaces',
+          en: 'Implement turnOn by delegating to connect with 5 V to connect both interfaces',
         },
         from: 11, to: 22, focus: [11, 20],
       },
       {
         title: { es: 'Usa el adaptador', en: 'Use the adapter' },
         why: {
-          es: 'Declara la variable como Switchable para usar el adaptador mediante el contrato del cliente.',
-          en: 'Declare the variable as Switchable to use the adapter through the client contract.',
+          es: 'Declara la variable como Switchable para usar el adaptador mediante el contrato del cliente',
+          en: 'Declare the variable as Switchable to use the adapter through the client contract',
         },
         from: 24, to: 29, focus: [26, 27],
       },
@@ -193,32 +193,32 @@ public class Main {
       {
         title: { es: 'Define el contrato y el café base', en: 'Define the contract and plain coffee' },
         why: {
-          es: 'Define el precio en céntimos para que el café y sus decoradores compartan la misma operación.',
-          en: 'Define the price in cents so the coffee and its decorators share the same operation.',
+          es: 'Define el precio en céntimos para que el café y sus decoradores compartan la misma operación',
+          en: 'Define the price in cents so the coffee and its decorators share the same operation',
         },
         from: 1, to: 10, focus: [2, 8],
       },
       {
         title: { es: 'Crea la base del decorador', en: 'Create the decorator base' },
         why: {
-          es: 'Guarda un Coffee dentro de otro Coffee para poder envolver tanto cafés simples como decorados.',
-          en: 'Store a Coffee inside another Coffee so both plain and decorated coffees can be wrapped.',
+          es: 'Guarda un Coffee dentro de otro Coffee para poder envolver tanto cafés simples como decorados',
+          en: 'Store a Coffee inside another Coffee so both plain and decorated coffees can be wrapped',
         },
         from: 12, to: 18, focus: [12, 13, 16],
       },
       {
         title: { es: 'Añade cada extra por separado', en: 'Add each extra separately' },
         why: {
-          es: 'Cada decorador consulta el precio del objeto envuelto y suma su propio coste.',
-          en: 'Each decorator asks the wrapped object for its price and adds its own cost.',
+          es: 'Cada decorador consulta el precio del objeto envuelto y suma su propio coste',
+          en: 'Each decorator asks the wrapped object for its price and adds its own cost',
         },
         from: 20, to: 40, focus: [27, 38],
       },
       {
         title: { es: 'Combina los decoradores', en: 'Combine the decorators' },
         why: {
-          es: 'Envuelve el café con leche y después con azúcar. El café original conserva su precio.',
-          en: 'Wrap the coffee with milk and then sugar. The original coffee keeps its price.',
+          es: 'Envuelve el café con leche y después con azúcar. El café original conserva su precio',
+          en: 'Wrap the coffee with milk and then sugar. The original coffee keeps its price',
         },
         from: 42, to: 49, focus: [45, 46, 47],
       },
