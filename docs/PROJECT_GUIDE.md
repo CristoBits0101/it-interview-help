@@ -2,7 +2,7 @@
 
 ## 24 de octubre de 2026 — etapas sin ordinales y experiencia orientativa
 
-Los cuatro botones de etapa retiran los ordinales 1–4. El rango de años se alinea en la misma fila que los nombres con estilo secundario discreto. Solo se permite reflujo cuando falta ancho. Conservan nombres e IDs y muestran experiencia orientativa compartida por todos los perfiles: Trainee/Becario 0 años, Entry Level/Junior 0-2 años, Mid-Level/Semi-Senior 2-5 años y Senior 5+ años. Es una propuesta editorial de orientación y no una equivalencia oficial ni un filtro obligatorio. Una nota visible bilingüe aclara que los años dependen del rol y la empresa. Se mantienen los gaps aprobados y los tooltips de las etiquetas. Esta petición sustituye la prohibición anterior de mostrar años en estas etapas.
+Los cuatro botones de etapa retiran los ordinales 1–4. El rango de años se alinea en la misma fila que los nombres con estilo secundario discreto. Solo se permite reflujo cuando falta ancho. Conservan nombres e IDs y muestran experiencia orientativa compartida por todos los perfiles: Trainee/Becario 0 años, Entry Level/Junior 0 - 2 años, Mid-Level/Semi-Senior 2 - 5 años y Senior 5+ años. Es una propuesta editorial de orientación y no una equivalencia oficial ni un filtro obligatorio. Una nota visible bilingüe aclara que los años dependen del rol y la empresa. Se mantienen los gaps aprobados y los tooltips de las etiquetas. Esta petición sustituye la prohibición anterior de mostrar años en estas etapas.
 
 
 ## 24 de octubre de 2026 — favicon minimalista reutilizable

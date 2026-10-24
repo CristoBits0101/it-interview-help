@@ -81,8 +81,8 @@ const careerProfileTemplates: CareerProfile[] = [
 
 export const careerStages = [
   { id: 'foundation', label: 'Trainee · Becario', terms: ['Trainee', 'Becario'], experience: '0 años' },
-  { id: 'junior', label: 'Entry Level · Junior', terms: ['Entry Level', 'Junior'], experience: '0-2 años' },
-  { id: 'mid', label: 'Mid-Level · Semi-Senior', terms: ['Mid-Level', 'Semi-Senior'], experience: '2-5 años' },
+  { id: 'junior', label: 'Entry Level · Junior', terms: ['Entry Level', 'Junior'], experience: '0 - 2 años' },
+  { id: 'mid', label: 'Mid-Level · Semi-Senior', terms: ['Mid-Level', 'Semi-Senior'], experience: '2 - 5 años' },
   { id: 'senior', label: 'Senior', terms: ['Senior'], experience: '5+ años' },
 ] as const;
 
