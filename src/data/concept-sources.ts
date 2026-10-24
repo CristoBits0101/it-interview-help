@@ -4,8 +4,6 @@ export type ConceptSource = {
   url: string;
 };
 
-// Reviewed on 2026-10-19. Link to the actual concept, never a search or home page.
-// Design-pattern references selected by the user on 2026-10-20.
 const source = (publisher: string, title: string, url: string): ConceptSource => ({ publisher, title, url });
 const refactoringGuru = (title: string, slug: string) => source('Refactoring.Guru', `${title} — Patrones de diseño`, `https://refactoring.guru/es/design-patterns/${slug}`);
 
@@ -107,7 +105,6 @@ export const conceptSources = {
   cost: source('LangSmith', 'Cost tracking across an application', 'https://docs.langchain.com/langsmith/cost-tracking'),
 } satisfies Record<string, ConceptSource>;
 
-// Applied AI glossary references. Reviewed separately from historical unpublished modules.
 const reference = (publisher: string, title: string, url: string): ConceptSource => ({ publisher, title, url });
 export const glossarySources = {
   context: conceptSources.context,

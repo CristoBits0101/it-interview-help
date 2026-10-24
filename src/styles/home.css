@@ -1,5 +1,4 @@
 @layer components {
-  /* Keep each local inset and its derived gap together across container sizes. */
   .career-panel { --gap-panel: calc(var(--space-panel) / 2); }
   .home-stats, .career-outcome, .career-branches, .career-methodology, .home-route-grid { --gap-card: calc(var(--space-card) / 2); }
   .career-profile-options, .career-stage-options { --gap-control: calc(var(--space-control) / 2); }

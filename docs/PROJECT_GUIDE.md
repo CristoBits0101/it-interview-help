@@ -1,5 +1,9 @@
 # Memoria de producto, diseño y desarrollo
 
+## Sincronización del 24 de octubre
+
+La entrega autorizada integra las guías de implementación ya existentes en GitHub con las tres descripciones restauradas y la retirada de comentarios. El caso de uso de Prototipo conserva la frase solicitada «Clonar un objeto de configuración de servidor y modificar solo los valores necesarios» en el catálogo compartido de guías con su traducción. Las referencias históricas a Implementación deshabilitada quedan sustituidas por las guías disponibles. Se mantiene la pauta de consultar antes de cambiar algo fuera del alcance solicitado.
+
 ## 24 de octubre: casos de uso mínimos e implementación por pasos
 
 Cada patrón incorpora un caso de uso de una frase y una guía Java de 3 a 5 pasos manuales. El caso de uso contiene el escenario concreto. La implementación empieza directamente por las piezas del programa y explica su orden de construcción con una frase breve por paso. No repite el problema ni añade teoría extensa. Los ejemplos no llevan comentarios internos.
@@ -9,6 +13,17 @@ La acción Implementación abre un diálogo amplio con pasos numerados y navegac
 Los datos bilingües viven en `src/data/pattern-guides/`. Sus rangos se interpretan sobre el código completo y las traducciones se integran con el motor existente. `ImplementationGuide.astro` y `implementation-guides.ts` contienen la presentación y la interacción reutilizables. La vista de código usa el token `--code` basado en IBM Plex Mono. Se conservan los IDs de conceptos y módulos y el progreso. La navegación del diálogo es manual y permite cerrar con Escape. Explicación y Caso de uso siguen alternando dentro de la tarjeta.
 
 Esta petición habilita esas dos vistas en los 14 patrones y sustituye las restricciones históricas que indicaban dejarlas vacías. No modifica las definiciones existentes ni añade ejemplos a SOLID o al glosario.
+## 24 de octubre: alcance estricto y restauración de descripciones
+
+El usuario exige cambiar exactamente lo solicitado y preguntar antes de modificar algo no especificado. No se realizan mejoras editoriales, visuales o técnicas ajenas a la petición por iniciativa propia. Se restauran literalmente las explicaciones anteriores al 22 de octubre de Simple Factory, Builder y Factory Method. Sus traducciones existentes se conservan. Las frases de cabecera de categorías y el caso de uso de Prototipo no cambian. Esta decisión sustituye las reformulaciones de esas tres tarjetas documentadas anteriormente.
+
+## 24 de octubre: código sin comentarios
+
+El usuario solicita retirar todos los comentarios del código y conservar esta pauta para futuros cambios. El código fuente, los scripts y la configuración no incorporan comentarios de línea, bloque, JSDoc ni HTML. Las explicaciones se mantienen en la documentación. Se priorizan nombres claros, tipos y componentes pequeños sin alterar el comportamiento de la aplicación.
+
+## 24 de octubre: caso de uso de Prototipo
+
+Por petición expresa Prototipo añade un caso de uso breve: «Clonar un objeto de configuración de servidor y modificar solo los valores necesarios». Tiene traducción inglesa. El botón «Caso de uso» cambia únicamente el contenido del cuerpo de su tarjeta mediante `useCase` y el comportamiento compartido de `study-cards.ts`. La definición original permanece en Explicación y sigue siendo la fuente de búsqueda y repaso. Implementación permanece deshabilitada porque no tiene contenido. No se añaden casos a otros conceptos. El ejemplo ilustra la clonación de objetos configurados descrita en la fuente específica de Refactoring.Guru y no una copia de infraestructura completa.
 
 ## Entrega de la sesión — 23 de octubre de 2026
 

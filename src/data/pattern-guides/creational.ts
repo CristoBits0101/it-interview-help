@@ -144,7 +144,7 @@ public class Main {
     output: "Primero: Toyota / 4 puertas / rojo\nSegundo: Toyota / 2 puertas / rojo",
   },
   "prototype": {
-    useCase: {"es":"Crear otro servidor con la misma configuración y cambiar su IP.","en":"Create another server with the same configuration and change its IP."},
+    useCase: {"es":"Clonar un objeto de configuración de servidor y modificar solo los valores necesarios.","en":"Clone a server configuration object and change only the necessary values."},
     code: `final class ServerConfig {
     private String ip;
     private final int port;

@@ -7,6 +7,13 @@ El usuario solicita un caso de uso mínimo y una implementación explicada por p
 `src/data/pattern-guides/` conserva el código Java completo y los rangos que forman los pasos. Los fragmentos se derivan de ese código para evitar versiones distintas. Prototype copia la configuración de un servidor y cambia la IP de la copia sin alterar el original. Hay salida esperada y código completo copiable. Las explicaciones originales y el progreso se mantienen. Los textos nuevos se publican en ES/EN mediante `patternGuideTranslations` e `i18n.ts`. El código usa IBM Plex Mono mediante el token `--code`. Esta excepción tipográfica es para el código solicitado.
 
 Esta petición sustituye la restricción de no completar los casos de uso y las implementaciones de los patrones. Los otros conceptos conservan sus vistas existentes. La implementación abre un diálogo con `aria-haspopup` y devuelve el foco al cerrarse. Explicación y Caso de uso siguen cambiando solo el cuerpo de la tarjeta.
+## Alcance estricto de los cambios — 24 de octubre de 2026
+
+Limita cada cambio exactamente a lo que pide el usuario. No reformules otros textos ni ajustes diseño, datos, comportamiento o arquitectura por iniciativa propia. Si consideras necesario cambiar algo no especificado, explica el cambio concreto y pregunta antes de aplicarlo. Conserva los cambios anteriores y las decisiones vigentes. Esta pauta se aplica a todas las intervenciones futuras. Se restauran literalmente las descripciones de Simple Factory, Builder y Factory Method anteriores al 22 de octubre; no vuelvas a reformularlas sin petición expresa.
+
+## Código sin comentarios — 24 de octubre de 2026
+
+Por petición expresa del usuario no añadas comentarios al código de la aplicación ni a sus scripts o configuración. Esto incluye comentarios de línea, bloque, JSDoc y HTML. Usa nombres claros, tipos y componentes pequeños. Conserva las explicaciones y decisiones en la documentación del proyecto. Esta pauta se aplica también a futuros cambios.
 
 ## Entrega en GitHub — 23 de octubre de 2026
 
@@ -28,6 +35,8 @@ Lee [docs/PROJECT_GUIDE.md](docs/PROJECT_GUIDE.md) antes de modificar el proyect
 - Trabaja sobre `src/`, `public/` y los archivos de configuración. No edites `dist/` como fuente ni recrees copias de `index.astro` o `app.ts` en la raíz.
 
 ## Decisiones que debes conservar
+
+- Petición del 24 de octubre: Prototipo incorpora un `useCase` en español e inglés sobre clonar un objeto de configuración de servidor y modificar solo los valores necesarios. «Caso de uso» sustituye el texto del cuerpo de esa tarjeta mediante el comportamiento compartido existente. Explicación conserva su definición original y vuelve a mostrarla al seleccionarla. Las demás vistas vacías siguen deshabilitadas. Esta petición sustituye para Prototipo el estado histórico de solo explicación y no autoriza rellenar otras tarjetas por iniciativa propia.
 
 - Home usa cuatro etapas por petición del 23 de octubre: `Trainee / Becario`, `Entry Level / Junior`, `Mid Level / Semi-Senior` y `Senior`. En inglés la primera es `Trainee / Intern`. Los IDs siguen siendo `foundation`, `junior`, `mid` y `senior`. Se retira la etapa visible `advanced`; sus áreas se incorporan a Senior sin duplicados y sus plantillas históricas se conservan en los datos. No confundir estas etiquetas editoriales con una escala laboral oficial universal. Los cuatro botones tienen radio completo y el fondo y borde exteriores del grupo también son redondeados. Esta decisión sustituye la retirada temporal del fondo y los cinco niveles anteriores. El patrón común está en `careerStages` y se aplica a todos los perfiles.
 

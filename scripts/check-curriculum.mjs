@@ -3,7 +3,6 @@ import { readFileSync } from 'node:fs';
 import { registerHooks } from 'node:module';
 import ts from 'typescript';
 
-// Exercise the actual TypeScript data without generating another build tree.
 registerHooks({
   resolve(specifier, context, nextResolve) {
     try { return nextResolve(specifier, context); }

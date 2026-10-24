@@ -6,13 +6,10 @@ export interface NavigationNode {
   icon?: IconName;
   href?: string;
   module?: string;
-  /** A contextual reference to a foundation defined once in sharedFoundations. */
   shared?: boolean;
   children?: NavigationNode[];
 }
 
-// Shared knowledge is not owned by a single professional field.
-// Reuse the same definition instead of copying or assigning it a false parent.
 export const sharedFoundations: Record<string, NavigationNode> = Object.fromEntries([
   'Programming Fundamentals', 'Discrete Mathematics', 'Algebra and Functions',
   'Linear Algebra', 'Calculus', 'Probability Theory', 'Statistics',
@@ -27,9 +24,6 @@ const quantitativeFoundations = (): NavigationNode => ({
   children: ['Algebra and Functions', 'Linear Algebra', 'Probability Theory', 'Statistics', 'Calculus'].map(foundation),
 });
 
-// Product groupings, mapped to CS2023/SWEBOK in docs/NAVIGATION_REVIEW.md.
-// Sibling order guides study; a sibling is not automatically a prerequisite.
-// Icons belong to their subject, never to an item's position in the menu.
 export const navigation: (NavigationNode & { icon: IconName })[] = [
   { label: 'Computer Systems', icon: 'cpu', children: [
     { label: 'Computing Fundamentals' },

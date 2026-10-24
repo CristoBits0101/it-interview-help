@@ -27,14 +27,14 @@ export const designPatterns: Concept[] = [
   {
     id: 'factory',
     title: 'Simple Factory',
-    description: 'Centraliza la creación de objetos y elige qué clase instanciar según los datos recibidos.',
+    description: 'Devuelve un objeto según el argumento recibido con un método común de interfaz o clase abstracta.',
     source: conceptSources.factory,
     level: 'Esencial',
   },
   {
     id: 'builder',
     title: 'Builder',
-    description: 'Construye objetos complejos paso a paso y separa ese proceso de la representación del resultado.',
+    description: 'Simplifica la creación de objetos para evitar la sobrecarga de constructores o demasiados parámetros.',
     source: conceptSources.builder,
     level: 'Esencial',
   },
@@ -76,7 +76,7 @@ export const designPatterns: Concept[] = [
   {
     id: 'factory-method',
     title: 'Factory Method',
-    description: 'Una clase padre define un método de creación que las subclases pueden redefinir para elegir el tipo de objeto.',
+    description: 'Una clase padre define un método de creación común que cada subclase implementa para devolver un objeto.',
     source: conceptSources.factoryMethod,
     level: 'Intermedio',
   },

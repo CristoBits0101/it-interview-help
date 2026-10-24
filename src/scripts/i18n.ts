@@ -17,6 +17,7 @@ const spanishToEnglish: Record<string, string> = {
   'Código copiado.': 'Code copied.',
   'Selecciona el código para copiarlo.': 'Select the code to copy it.',
   'Salida esperada': 'Expected output',
+  'Clonar un objeto de configuración de servidor y modificar solo los valores necesarios.': 'Clone a server configuration object and change only the necessary values.',
   'Construye interfaces web.': 'Builds web interfaces.',
   'Implementa la lógica de negocio.': 'Implements business logic.',
   'Conecta interfaces y servicios web.': 'Connects web interfaces and services.',
@@ -289,7 +290,6 @@ const navigationEnglishToSpanish: Record<string, string> = {
   'Data Engineering': 'Ingeniería de datos', Cybersecurity: 'Ciberseguridad', 'Application Security': 'Seguridad de aplicaciones', 'Network Security': 'Seguridad de redes', 'Cloud Security': 'Seguridad en la nube', 'Data Security': 'Seguridad de datos', 'Data Science': 'Ciencia de datos', 'Data Analytics': 'Analítica de datos', 'Data Mining': 'Minería de datos', 'Data Visualization': 'Visualización de datos', 'Artificial Intelligence': 'Inteligencia artificial', 'Machine Learning': 'Aprendizaje automático', 'Deep Learning': 'Aprendizaje profundo', 'Natural Language Processing': 'Procesamiento del lenguaje natural', 'Computer Vision': 'Visión artificial', 'Generative Artificial Intelligence': 'Inteligencia artificial generativa', 'Applied Artificial Intelligence': 'Inteligencia artificial aplicada',
 };
 
-// Capitalize meaningful title words; keep articles, prepositions and conjunctions lowercase.
 const smallTitleWords = new Set(['a', 'al', 'ante', 'bajo', 'con', 'contra', 'de', 'del', 'desde', 'durante', 'en', 'entre', 'hacia', 'hasta', 'mediante', 'para', 'por', 'según', 'sin', 'sobre', 'tras', 'el', 'la', 'las', 'lo', 'los', 'un', 'una', 'unos', 'unas', 'y', 'e', 'o', 'u', 'ni', 'que']);
 const titleCase = (value: string) => {
   let firstWord = true;
@@ -339,7 +339,6 @@ type OriginalValue = { source: string; rendered: string };
 const originalText = new WeakMap<Text, OriginalValue>();
 const originalAttributes = new WeakMap<Element, Map<string, OriginalValue>>();
 
-// Store original nodes and attributes so switching languages never translates a previous translation.
 export function applyStaticTranslations(language: Language) {
   document.documentElement.lang = language;
   document.querySelectorAll<HTMLElement>('[lang]').forEach(element => {
@@ -431,5 +430,5 @@ export function getSavedLanguage(): Language {
 }
 
 export function saveLanguage(language: Language) {
-  try { localStorage.setItem('tech-training:language:v1', language); } catch { /* The selector remains usable for this visit. */ }
+  try { localStorage.setItem('tech-training:language:v1', language); } catch {}
 }

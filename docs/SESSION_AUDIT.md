@@ -1,5 +1,9 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 24 de octubre de 2026 — integración para entrega autorizada
+
+El usuario solicita subir el código a GitHub. Se integran las guías Java del commit remoto cfcf21c con las descripciones restauradas y las pautas de alcance estricto y código sin comentarios. Se preserva el caso de uso solicitado de Prototipo en el catálogo compartido de guías para evitar que la composición de datos lo sustituya. Esta autorización sustituye las notas anteriores de cambios locales pendientes de subir.
+
 ## 24 de octubre de 2026 — casos de uso mínimos y guías Java
 
 El usuario concreta que el problema se explica en Caso de uso mediante un ejemplo mínimo y que Implementación presenta el código por pasos de construcción con explicaciones breves y líneas clave. Se añaden 14 casos de uso de una frase y 58 pasos repartidos en guías de 3 a 5 pasos. Las frases que explican los pasos tienen como máximo 17 palabras en español. Los fragmentos se derivan de un único ejemplo completo por patrón. Prototype copia una configuración de servidor y cambia la IP de la copia.
@@ -13,6 +17,13 @@ El navegador de pruebas usa HTTP y verifica la alternativa de selección manual 
 Para la vista previa se retira el argumento redundante de host del script dev para que admita el host aportado por el entorno. Astro mantiene su host local por defecto. Se permite únicamente `terminal.local` como host adicional de desarrollo. No se desactiva la comprobación de hosts ni se alteran dependencias. La página temporal de pruebas responsive se retira antes de empaquetar.
 
 La versión publicada de Sites está por detrás de GitHub. La entrega anterior documenta subir a GitHub sin publicar Sites. Se prepara el cambio completo y comprobable y se deja la publicación pendiente de confirmación antes de incorporar también los cambios anteriores del sitio.
+## 24 de octubre de 2026 — restauración y alcance estricto
+
+Tras revisar el historial se restauran las descripciones literales de Simple Factory, Builder y Factory Method anteriores al commit 49ade66 del 22 de octubre. Las traducciones correspondientes ya existen. Se conservan las cabeceras de categorías y el caso de uso solicitado de Prototipo. Se registra en AGENTS y PROJECT_GUIDE la instrucción permanente de cambiar únicamente lo pedido y consultar antes de modificar algo no especificado.
+
+## 24 de octubre de 2026 — caso de uso de Prototipo
+
+Se añade a Prototipo el campo `useCase` con una frase sobre clonar un objeto de configuración de servidor y ajustar los valores necesarios. Se actualiza la traducción inglesa. La selección de vistas ya estaba implementada y solo faltaba contenido que habilitara el botón. No se modifica la explicación ni otros conceptos. Se conserva la fuente específica de [Refactoring.Guru](https://refactoring.guru/es/design-patterns/prototype) que respalda clonar objetos previamente configurados. Los cambios de esta petición quedan locales sin una nueva orden de subida.
 
 ## 23 de octubre de 2026 — entrega autorizada en GitHub
 
@@ -355,3 +366,12 @@ Redacción posterior del 23 de octubre: Comportamiento muestra «DEFINE CÓMO CO
 Petición posterior expresa: la descripción de Frontend se simplifica a «Construye interfaces web». Se actualiza también la traducción inglesa. Esta instrucción sustituye el texto que mencionaba accesibilidad.
 
 23 de octubre: el usuario elige para Backend «Implementa la lógica de negocio». Se actualizan purpose y traducción inglesa. Las alternativas anteriores eran un debate y no se aplicaron.
+
+Validación del caso de uso de Prototipo: tipos sin errores, advertencias ni sugerencias. Currículo y compilación correctos. En navegador a 1440, 390 y 320 px en ES/EN se comprueba que Caso de uso sustituye el cuerpo solo de Prototipo, Explicación recupera el original, Implementación permanece deshabilitada y la búsqueda mantiene la explicación como referencia. El texto cabe en tres líneas sin desbordamiento. El cambio de idioma conserva la vista seleccionada. Sin errores de ejecución. Captura revisada en móvil. Servidor temporal de prueba detenido al finalizar.
+
+Corrección posterior del 24 de octubre: el usuario prefiere el infinitivo. La frase queda «Clonar un objeto de configuración de servidor y modificar solo los valores necesarios». Se actualiza la clave de traducción y se conserva su versión inglesa.
+## 24 de octubre de 2026 — retirada de comentarios de código
+
+Se retiran los comentarios de código de los datos, estilos y scripts. Se conserva la documentación y se registra en AGENTS y PROJECT_GUIDE la pauta permanente de no introducir nuevos comentarios. La retirada en TypeScript y JavaScript conserva la representación del código sin comentarios para comprobar que no cambia su comportamiento.
+
+Validación: comprobación de tipos sin errores ni advertencias. Auditoría del currículo y compilación correctas. No se modifica el diseño ni se suben los cambios.

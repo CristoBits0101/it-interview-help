@@ -14,8 +14,6 @@ export interface CareerProfile {
   stages: CareerStage[];
 }
 
-// Editorial study recommendations, not a universal career ladder or certification.
-// Repeated areas mean deeper practice as autonomy and responsibility increase.
 const careerProfileTemplates: CareerProfile[] = [
   {
     id: 'frontend', label: 'Frontend Engineer',
@@ -79,8 +77,6 @@ const careerProfileTemplates: CareerProfile[] = [
   },
 ];
 
-// Shared study stages are recognizable labels rather than a universal job ladder.
-// Keep legacy IDs stable. The former transition stage contributes its areas to Senior.
 export const careerStages = [
   { id: 'foundation', label: 'Trainee / Becario' },
   { id: 'junior', label: 'Entry Level / Junior' },
@@ -100,8 +96,6 @@ export const careerProfiles: CareerProfile[] = careerProfileTemplates.map(profil
   }),
 }));
 
-// Dependencies describe useful prior knowledge, not hard admission requirements.
-// Keep labels identical to navigation.ts so existing lessons can be resolved.
 export const areaGuidance: Record<string, { focus: string; prerequisites: string[] }> = {
   'Computing Fundamentals': { focus: 'Comprende el hardware y el software. Trabaja con archivos y herramientas básicas antes de profundizar en los sistemas.', prerequisites: [] },
   'Security Fundamentals': { focus: 'Identifica amenazas y protege la confidencialidad y la integridad de la información. Aplica el mínimo privilegio.', prerequisites: [] },

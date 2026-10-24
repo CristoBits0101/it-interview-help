@@ -1,8 +1,6 @@
 import type { Track, Concept } from './curriculum';
 import { glossarySources } from './concept-sources';
 
-// Inventory: the 100 glossary entries in the local rag-agentic-ai-toolkit README.
-// Names identify concepts or concrete products. They are not all interview prerequisites.
 type Entry = [id: string, es: string, en: string, explanation: string, english: string, source: keyof typeof glossarySources, level?: Concept['level']];
 type Topic = { id: string; es: string; en: string; entries: Entry[] };
 export const glossaryTopics: Topic[] = [
@@ -136,14 +134,12 @@ export const glossaryTranslations = Object.fromEntries(glossaryTopics.flatMap(to
   [topic.es, topic.en], ...topic.entries.flatMap(([, es, en, text, english]) => [[es, en], [text, english]]),
 ]));
 
-// Preserve the inventory's spelling independently from localized UI labels.
 const originalNames: Record<string, string> = {
   'ai-agents': 'Agentes de IA', 'ai-tokenizacion': 'Tokenizacion',
   'ai-templates': 'Prompting Templates', 'ai-lemmatization': 'Lematizacion',
   'ai-multimodal': 'IA Multimodal', 'ai-visual-prompt': 'Prompt Engineering Visual',
   'ai-dalle': 'DALL-E', 'ai-qwen': 'Qwen2.5VL',
 };
-// Four model basics were explicitly discussed alongside the README inventory.
 const supplementalIds = new Set(['ai-inferencia', 'ai-tokens', 'ai-contexto', 'ai-alucinacion']);
 export const glossaryInventory = glossaryTopics.flatMap(topic => topic.entries.filter(([id]) => !supplementalIds.has(id)).map(([id, , en]) => ({
   id, term: originalNames[id] ?? en, topic: topic.en,

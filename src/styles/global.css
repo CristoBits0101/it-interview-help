@@ -137,7 +137,6 @@
     .card-footer button:focus-visible { outline: 2px solid var(--green); outline-offset: -3px; }
     .card-views[hidden] + .learn-button { grid-column: 1 / -1; }
   .learn-button { display: flex; align-items: center; justify-content: center; justify-self: end; min-width: 0; max-width: 100%; gap: var(--gap-card); min-height: 44px; font-size: var(--font-small); font-weight: 400; line-height: 1.4; color: var(--text-soft); padding: calc(var(--gap-card) / 2) 0 calc(var(--gap-card) / 2) var(--gap-card); border: 0; border-radius: var(--radius-control); background: transparent; }
-  /* Compensate the final glyph's ink overhang without insetting the footer. */
   .learn-label { padding-inline-end: .05em; }
   .learn-button:not([aria-pressed='true']) { transition: color .16s; }
   .learn-button:not([aria-pressed='true']):hover { color: var(--accent-hover); }
@@ -199,7 +198,6 @@
     .mobile-backdrop { position: fixed; inset: 0; background: color-mix(in srgb, var(--ink) 40%, transparent); backdrop-filter: blur(3px); z-index: 25; }
     .toast { left: 50%; }
   }
-  /* Also use the drawer when enlarged labels leave too little reading space. */
   :root.sidebar-drawer {
     .sidebar { transform: translateX(-100%); transition: transform .2s; width: min(var(--sidebar-width), 100vw); }
     .sidebar.mobile-open { transform: translateX(0); }

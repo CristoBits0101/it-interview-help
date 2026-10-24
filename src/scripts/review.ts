@@ -34,7 +34,6 @@ function drawReview() {
 function startReview() {
   const available = cards.filter(card => !card.hidden && !card.closest<HTMLElement>('.concept-section')!.hidden);
   if (!available.length) { onNotice(translate('Elige primero algún concepto para repasar.', getLanguage())); return; }
-  // Prioritize pending concepts; shuffle within each group for varied practice.
   const shuffle = (list: HTMLElement[]) => {
     const copy = [...list];
     for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; }
