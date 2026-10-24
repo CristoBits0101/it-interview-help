@@ -1,8 +1,29 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 24 de octubre de 2026 — espacio interior del selector de idiomas
+
+Se modifica únicamente el inset derecho del chevron de idiomas de 16 a 14 px. Su margen transparente añadía unos 3 px hasta el trazo visible. La distancia desde el borde exterior al inicio de la caja de texto conserva 17 px y la distancia al trazo visible de la flecha pasa de aproximadamente 19,02 a 17,02 px. El select conserva 106 × 44 px, padding de 8/38/8/16 px, Google Sans Flex a 14 px/peso 400 e interlineado de 16 px.
+
+Verificado en navegador en ES/EN a 1440, 390 y 320 px sin desbordamiento. Cambio de idioma por teclado, foco visible y persistencia tras recarga correctos. Sin errores ni avisos de consola. Astro check sobre 57 archivos sin errores, advertencias ni sugerencias y build correcto. El cambio está solo en `C:\Users\reuda\.codex\worktrees\6727\tech-training`; su servidor queda disponible en `http://127.0.0.1:4327/`. Se conserva la modificación previa de esta auditoría. No se realiza commit, push ni publicación en Sites.
+
+## 24 de octubre de 2026 — Home con separaciones de 42 px y prosa justificada
+
+La petición se limita al contenido principal de Home. `--space-home: 42px` centraliza las distancias entre bloques y tarjetas sin reducirlas en móvil. Se retiran los márgenes y paddings que se acumulaban en esas separaciones. Los separadores son elementos del flujo sin margen ni padding y reciben 42 px a cada lado mediante el gap del contenedor. El separador anterior a las recomendaciones se oculta junto con el panel al cerrar la etapa. Se conservan los insets funcionales de los controles, el padding exterior de `main`, los textos, la tipografía, los colores y `--line-body`.
+
+La prosa de Home usa justificación con última línea al inicio y `hyphens: none`, `word-break: normal` y `overflow-wrap: normal`. Las estadísticas reducen el número de columnas cuando falta ancho. El bloque de objetivos pasa a una columna en pantallas estrechas. Con texto ampliado y muy poco ancho disponible los números y títulos se distribuyen en filas y se reduce el padding de los paneles informativos anidados para conservar las palabras completas. Los controles mantienen su padding funcional.
+
+La implementación queda en `C:\Users\reuda\.codex\worktrees\6576\tech-training`. Antes de modificar se confirma que este worktree y `C:\Workspace\tech-training` comparten HEAD y el mismo cambio pendiente en esta auditoría. Se conserva ese cambio anterior. El resultado se sirve en `http://127.0.0.1:4322/#home` y se mantiene disponible para revisión. El checkout habitual y su servidor de 4321 permanecen intactos. No se hace commit, push ni publicación en Sites.
+
+Validación con Node 22.23.2: `npm run check` sobre 57 archivos sin errores, advertencias ni sugerencias y `npm run build` correcto. `git diff --check` correcto. En navegador se miden 42 px desde el título hasta las tarjetas y entre bloques. Cada separador del flujo mide 1 px y deja 42 px a ambos lados. Se revisan ES/EN a 1440, 1251, 1255, 1475, 390 y 320 px y los 40 estados de perfil y etapa a 320 px. Otros 40 estados se recorren con texto al 200 % y se corrigen los tres objetivos con palabras que excedían su caja. Tras las correcciones no se detectan desbordamientos de página ni de esos textos. El espaciado personalizado funciona a 1440, 390 y 320 px en ambos idiomas. Se comparan 52 elementos con el checkout original y conservan texto, familia, tamaño, peso, color e interlineado. El cierre del panel retira también su separador. Se revisan capturas de escritorio y móvil, se restauran Español, Frontend y Trainee y se eliminan las páginas temporales de prueba. Estas comprobaciones se limitan a Home.
+
 ## 24 de octubre de 2026 — interlineado global de 16 px
 
 Por petición expresa del usuario todas las interfaces usan un interlineado compartido de 1rem (16 px a tamaño normal) mediante --line-body. Incluye Home, navegación, búsqueda, selectores, tarjetas, diálogos y código en ambos idiomas y todos los estados responsive. Esta decisión sustituye únicamente los valores anteriores de line-height y el factor proporcional. Se conservan familias, tamaños, pesos, colores, padding y alturas mínimas de controles y filas. El interlineado escala con el tamaño raíz y permite las preferencias de espaciado del usuario.
+
+Validación en el checkout habitual C:\Workspace\tech-training: npm run check sobre 57 archivos sin errores, advertencias ni sugerencias y npm run build correcto. git diff --check correcto. En navegador los 3.766 elementos de texto y controles inspeccionados usan 16 px sin excepciones, incluidos selectores, diálogos ocultos y código. Home, patrones y glosario se revisan en ES/EN a 1440, 390 y 320 px sin desbordamiento de página. Se conservan las fuentes, filas de navegación de 48 px y controles de guía de 44 px. Escape devuelve el foco a Implementación y no hay errores de consola.
+
+Con raíz al 200 % el interlineado escala a 32 px. Persisten las limitaciones previas a 320 px en números de círculos, ancho del botón Implementación y títulos de cabecera de las guías. No se alteran dimensiones ajenas a la petición. El espaciado personalizado se aplica sin desbordamiento de página. Se retiran las páginas temporales de prueba y se detiene solo su servidor de preview. El servidor habitual se conserva. El cambio está aplicado localmente también en la carpeta habitual y conserva todos sus cambios previos. No se realiza commit, push ni publicación en Sites para este ajuste.
+
 
 ## 24 de octubre de 2026 — interlineado proporcional compartido — histórico
 

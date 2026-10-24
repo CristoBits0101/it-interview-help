@@ -69,7 +69,7 @@
   .topbar-actions { display: flex; flex-shrink: 0; flex-wrap: wrap; max-width: 100%; align-items: center; gap: var(--space-gap); }
   .language-selector { --language-padding: 16px; position: relative; flex: 0 0 auto; max-width: 100%; margin-inline-start: auto; color: var(--text-soft); }
   .language-selector select { min-height: 44px; max-width: 100%; padding: calc(var(--language-padding) / 2) calc(var(--language-padding) * 1.5 + 14px) calc(var(--language-padding) / 2) var(--language-padding); appearance: none; border: 1px solid var(--control-border); border-radius: 9999px; background: var(--surface-soft); color: var(--text-secondary); font-size: var(--font-small); font-weight: 400; }
-  .language-selector > svg { position: absolute; inset-inline-end: var(--language-padding); top: 50%; transform: translateY(-50%); pointer-events: none; }
+  .language-selector > svg { position: absolute; inset-inline-end: calc(var(--language-padding) - 2px); top: 50%; transform: translateY(-50%); pointer-events: none; }
   .language-selector select:hover, .language-selector select:focus-visible { background: var(--surface-tinted); color: var(--ink); }
   .language-selector select:focus { outline: none; box-shadow: none; }
   .language-selector:has(select:hover) > svg, .language-selector:has(select:focus-visible) > svg { color: var(--ink); }

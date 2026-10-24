@@ -1,5 +1,15 @@
 # Memoria de producto, diseño y desarrollo
 
+## 24 de octubre de 2026 — espacio interior del selector de idiomas
+
+El chevron del selector de idiomas se desplaza 2 px hacia el borde derecho mediante `inset-inline-end: calc(var(--language-padding) - 2px)`. Compensa el margen transparente del SVG Lucide para equilibrar sus extremos visuales. Se conservan el select nativo, sus opciones, padding, dimensiones, tipografía, colores, foco y funcionamiento. El ajuste queda únicamente en el worktree `C:\Users\reuda\.codex\worktrees\6727\tech-training`, disponible en `http://127.0.0.1:4327/`. Esta petición mantiene el servidor local disponible y no autoriza commit, push ni publicación en Sites.
+
+## 24 de octubre de 2026 — espaciado y justificación exclusivos de Home
+
+Los espacios entre bloques y tarjetas del contenido principal de Home usan `--space-home: 42px`, definido en `tokens.css` y constante también en móvil. Los separadores visibles tienen 42 px efectivos desde el contenido anterior y otros 42 px hasta el siguiente. Entre «Elige tu Dirección» y sus tarjetas también hay 42 px. Cada separación tiene un único origen, preferentemente `gap`, sin acumular márgenes y paddings. Esta petición sustituye los gaps anteriores de Home y la proporción de mitad del padding únicamente para esos espacios. Se mantienen el padding exterior responsive de `main` y los paddings e insets internos funcionales de los controles.
+
+La prosa de Home se justifica con la última línea al inicio mediante `text-align: justify`, `text-align-last: start`, `hyphens: none`, `word-break: normal` y `overflow-wrap: normal`. Se conservan textos, fuentes, tamaños, colores, interlineado `--line-body`, otras páginas y comportamientos. El resultado se revisa en localhost y su servidor queda disponible al terminar. Esta petición local no requiere commit, push ni publicación en Sites.
+
 ## 24 de octubre de 2026 — interlineado global de 16 px
 
 Por petición expresa del usuario todas las interfaces usan un interlineado compartido de 1rem (16 px a tamaño normal) mediante --line-body. Incluye Home, navegación, búsqueda, selectores, tarjetas, diálogos y código en ambos idiomas y todos los estados responsive. Esta decisión sustituye únicamente los valores anteriores de line-height y el factor proporcional. Se conservan familias, tamaños, pesos, colores, padding y alturas mínimas de controles y filas. El interlineado escala con el tamaño raíz y permite las preferencias de espaciado del usuario.
@@ -201,19 +211,19 @@ Tarjetas con borde de 1 px y radio compartido de 12 px; controles de 8 px e inte
 
 ## 4. Espaciado y navegación visual
 
-Preferencia general del usuario: separación visual simétrica y gaps iguales a la mitad del padding de su contenedor. Los pares compartidos se declaran en `tokens.css`:
+Preferencia general del usuario: separación visual simétrica y gaps iguales a la mitad del padding de su contenedor, con la excepción de 42 px constantes entre bloques y tarjetas de Home. Los valores compartidos se declaran en `tokens.css`:
 
 | Ámbito | Padding o margen de referencia | Gap derivado |
 | --- | --- | --- |
 | Página base | `--space-page: 42px` | `--space-gap: calc(var(--space-page) / 2)` = 21 px |
 | Página hasta 1250 px | 28 px | 14 px |
 | Página hasta 640 px | 20 px | 10 px |
-| Panel de Home | `--space-panel: 32px` | `--gap-panel` = 16 px |
+| Bloques y tarjetas de Home | `--space-home: 42px`, independiente del padding | 42 px constantes |
 | Tarjeta | `--space-card: 24px` | `--gap-card` = 12 px |
 | Control | `--space-control: 16px` | `--gap-control` = 8 px |
 | Elemento compacto | `--space-compact: 12px` | `--gap-compact` = 6 px |
 
-Topbar y contenido principal comparten alineación horizontal y el mismo padding de página, incluso cuando el contenido alcanza su ancho máximo de 1500 px. La raíz de Home usa el padding de página y su gap derivado, la mitad de ese padding, entre sus bloques.
+Topbar y contenido principal comparten alineación horizontal y el mismo padding de página, incluso cuando el contenido alcanza su ancho máximo de 1500 px. El padding exterior pertenece a `main`. La raíz de Home usa `--space-home` entre sus bloques y no añade padding exterior propio.
 
 El buscador conserva el borde completamente redondeado (`9999px`). No muestra una etiqueta «Ctrl K» o «⌘ K», pero mantiene el atajo Ctrl/Cmd + K para enfocarlo. Al enfocarlo conserva el borde y el texto de lectura normales, aplica un fondo suave `--surface-tinted` y cambia el icono a `--green` con una transición breve. Al escribir, muestra un botón X de Lucide para borrar la consulta. El navegador no muestra su X nativa. La X usa los colores de la paleta y al hover o foco aparece sobre un círculo de 32 px con fondo `--surface-tinted` y borde `--border-strong`. En colores forzados se muestra el contorno del sistema. El texto y el placeholder usan `--font-small` (14 px), igual que los enlaces del sidebar. La auditoría de accesibilidad sustituyó el atajo de un solo carácter `/` por Ctrl/Cmd + K para no interferir con el control por voz.
 
@@ -223,7 +233,7 @@ Las páginas de estudio tienen una única fila sobre las tarjetas: contador din�
 
 El final de las páginas de estudio muestra únicamente «Siguiente módulo», alineado a la derecha en escritorio y móvil y acompañado por una flecha `ArrowRight` de Lucide a 13 px, más pequeña que la flecha original de 18 px; no se utiliza un chevron. Se retiraron el consejo «Hazlo tuyo. Explica el concepto en voz alta, sin mirar la definición.» y el pie común con la marca, el lema y «Fuentes y recursos». El enlace sigue calculando su destino a partir de los módulos; no aparece en búsqueda ni cuando no hay conceptos visibles. Las fuentes primarias y el diálogo de fuentes se conservan, sin el acceso del pie retirado.
 
-Las tarjetas tienen padding uniforme de 24 px de base, 28 px desde 1600 px y 20 px hasta 1050 px. La separación entre tarjetas y la barra de niveles usa su mitad: 12/14/10 px. Ambos valores se declaran juntos en `.concept-grid`. El espacio en torno a los separadores y entre descripción y fuente usa el padding completo. En el pie se mide hasta las superficies visibles de los controles, sin la compensación fija del antiguo botón de texto. El selector de vistas usa su propia escala anidada de 4/2 px. Las tarjetas visibles conservan igual altura con `grid-auto-rows: 1fr` y descripción flexible; no se fija la altura ni se recorta el texto. La fuente no usa margen automático. Home deriva sus espacios locales en cada container query. En las estadísticas, el padding exterior y el de cada celda suman el padding de tarjeta y separan el texto de las divisiones.
+Las tarjetas tienen padding uniforme de 24 px de base, 28 px desde 1600 px y 20 px hasta 1050 px. La separación entre tarjetas y la barra de niveles usa su mitad: 12/14/10 px. Ambos valores se declaran juntos en `.concept-grid`. El espacio en torno a los separadores y entre descripción y fuente usa el padding completo. En el pie se mide hasta las superficies visibles de los controles, sin la compensación fija del antiguo botón de texto. El selector de vistas usa su propia escala anidada de 4/2 px. Las tarjetas visibles conservan igual altura con `grid-auto-rows: 1fr` y descripción flexible; no se fija la altura ni se recorta el texto. La fuente no usa margen automático. Home mantiene 42 px entre sus bloques y tarjetas en todas las container queries. Sus estadísticas no acumulan padding exterior y de celda para definir una misma separación.
 
 La cabecera de cada tarjeta muestra el número dentro de un círculo con borde, seguido inmediatamente por el título; el nivel queda a la derecha. Una línea separa esta cabecera de la descripción y conserva el padding completo por encima y por debajo. Los gaps entre número, título y nivel usan la mitad de ese padding. La etiqueta de nivel tiene fondo completamente redondeado (`9999px`) y conserva los colores de Esencial, Intermedio y Avanzado. Muestra únicamente el nombre del nivel, sin punto ni icono delante. La última petición del usuario retira el punto y sustituye la anterior que pedía conservarlo. No muestra borde al pasar el cursor. Los elementos de la cabecera se alinean verticalmente.
 
@@ -239,7 +249,7 @@ Los radios compartidos son `--radius-card: 12px`, `--radius-control: 8px` y `--r
 
 Igualar gaps no alinea el texto si los elementos anteriores tienen distinto ancho. Título y autor comienzan en una misma columna. Bombilla y check miden 20 px. `--card-number-size` deriva de `20px + --gap-card`, con diámetros de 32/34/30 px según el breakpoint. Título y autor empiezan en `20px + 2 × --gap-card` desde el borde interior de la tarjeta. La raya de la fuente es una sombra interior de 2 px que no consume ancho de layout. No compenses esta columna con márgenes fijos que solo coincidan en un breakpoint. La petición del 20 de octubre mueve «Lo entiendo» a la derecha y sustituye su anterior alineación en esa columna.
 
-Al sobrescribir una variable de espacio en un contenedor o breakpoint, vuelve a declarar allí su gap como `calc(var(--space-...) / 2)`. Una variable derivada heredada puede haberse resuelto con el valor del ancestro; no presupongas que cambiar solo el padding local recalcula el gap. Mantén juntos ambos tokens y comprueba sus píxeles computados. Bordes, radios, alturas de controles y pequeños ajustes de línea no son gaps estructurales.
+Al sobrescribir una variable de espacio con gap derivado en un contenedor o breakpoint, vuelve a declarar allí su gap como `calc(var(--space-...) / 2)`. Una variable derivada heredada puede haberse resuelto con el valor del ancestro; no presupongas que cambiar solo el padding local recalcula el gap. Mantén juntos ambos tokens y comprueba sus píxeles computados. El espacio constante `--space-home` es independiente del padding. Bordes, radios, alturas de controles y pequeños ajustes de línea no son gaps estructurales.
 
 La descripción de cada tarjeta ocupa un único párrafo sin listas y un máximo de tres líneas a tamaño normal desde 320 px. Usa todo el ancho interior de la tarjeta, sin un límite de ancho que cree margen derecho. Las respuestas son resumidas de una o dos frases y se justifican con la última línea alineada al inicio. Declara `overflow-wrap: normal`, `word-break: normal` y `hyphens: none` para conservar las palabras completas. No se corta el contenido con `line-clamp`, altura fija, overflow oculto ni puntos suspensivos. Al ampliar la fuente se permite que el texto ocupe más líneas para mantener la lectura completa. La separación entre el bloque de descripción y el enlace de fuente usa `--space-card`, igual al padding interior y al espacio junto a los separadores, no `--gap-card`. Son 24 px de base, 28 px desde 1600 px y 20 px hasta 1050 px. El párrafo no añade otro margen que duplique esa separación.
 
@@ -266,7 +276,7 @@ La barra vertical pertenece al aside completo y ocupa toda su altura junto al bo
 
 Los chevrons son de 14 px, con `margin-inline-start: auto` y centrado vertical. La indentación solo cambia la izquierda; añadir márgenes o padding derecho a cada subárbol rompe su columna común. Los iconos de área son de 18 px. `Icon.astro` centraliza Lucide con trazo 1.65 y SVG decorativos `aria-hidden`.
 
-Los contenedores mantienen lados opuestos iguales. El padding horizontal puede duplicar el vertical; el gap siempre es la mitad del padding que lo define. En el header, página/gap es 42/21 px, y en las filas del sidebar el padding horizontal/vertical es 24/12 px con gap 12 px. Revisa las sumas de margin, padding y gap para no duplicar separaciones. Verifica medidas reales y captura visual, no solo números del CSS.
+Los contenedores mantienen lados opuestos iguales. El padding horizontal puede duplicar el vertical; el gap derivado es la mitad del padding que lo define, salvo los espacios constantes entre bloques y tarjetas de Home. En el header, página/gap es 42/21 px, y en las filas del sidebar el padding horizontal/vertical es 24/12 px con gap 12 px. Revisa las sumas de margin, padding y gap para no duplicar separaciones. Verifica medidas reales y captura visual, no solo números del CSS.
 
 ### Iconos de las áreas principales
 

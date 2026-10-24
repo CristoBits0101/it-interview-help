@@ -18,6 +18,7 @@ const stages = profiles[0].stages;
       {profiles.map((profile, index) => <CareerProfileOption profile={profile} index={index} selected={index === 0} />)}
     </div>
 
+    <hr class="home-separator" />
     <div class="career-stage-section">
       <p class="career-control-label" id="career-stage-label">¿En qué etapa quieres trabajar?</p>
       <ol class="career-stage-options" aria-labelledby="career-stage-label">
@@ -27,6 +28,7 @@ const stages = profiles[0].stages;
 
     <p id="career-selection-status" class="sr-only" role="status" aria-live="polite"></p>
     <div id="career-panels">
+      <hr class="home-separator" />
       {profiles.map((profile, profileIndex) => profile.stages.map((stage, stageIndex) => <CareerPanel profile={profile} stage={stage} initial={profileIndex === 0 && stageIndex === 0} tracks={tracks} areas={areas} guidanceByArea={guidanceByArea} />))}
     </div>
   </section>
