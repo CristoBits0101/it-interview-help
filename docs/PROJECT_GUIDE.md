@@ -1,5 +1,25 @@
 # Memoria de producto, diseño y desarrollo
 
+## 24 de octubre de 2026 — inglés por defecto con preferencia local
+
+Sin preferencia válida la interfaz arranca en inglés. Una elección guardada de español o inglés se conserva entre visitas; valores inválidos o almacenamiento inaccesible usan inglés. No se detecta el idioma del navegador. El botón permite cambiar manualmente y guarda solo la clave de idioma existente. Los metadatos y lang iniciales usan inglés. El catálogo estático conserva sus textos fuente y se traduce mediante la inicialización existente antes de revelar el cuerpo; una liberación a los 1500 ms evita dejar una página vacía si falla el arranque. Sin JavaScript la barrera no se activa y se conserva el contenido estático de respaldo. No se añaden otros idiomas.
+
+
+## 24 de octubre de 2026 — cambio directo de idioma
+
+El control de idioma pasa de select desplegable a botón nativo que alterna directamente Español e English mediante clic, Enter o Espacio. Muestra el idioma actual y su nombre accesible indica el idioma de destino. El chevron se sustituye por ArrowRightLeft de Lucide como indicador decorativo de intercambio, en el mismo inset derecho y sin abrir menú. Conserva el tratamiento exterior, padding, altura mínima de 44 px y un ancho mínimo estable de 6.625rem equivalente a los 106 px del control anterior a tamaño normal. Conserva la preferencia guardada y la actualización compartida de traducciones sin navegación ni reinicio de progreso. Esta decisión sustituye las reglas previas sobre select y chevron de idiomas.
+
+
+## 24 de octubre de 2026 — números de patrones sin círculo
+
+Las 14 tarjetas de Design Patterns muestran su numeración sin círculo ni borde y un punto intermedio decorativo antes del título mediante el icono Lucide compartido dot. Por aclaración posterior el título se alinea con el inicio del autor de la fuente. El prefijo número/punto ocupa `--card-leading-size + 2 × --gap-card`, igual a icono de fuente más padding y gap. Una cuadrícula reserva el ancho natural del número y 3 px para el punto y divide el resto en dos columnas iguales a ambos lados del punto. La fila no añade otro gap. El inicio del título queda a 40/44/48 px según el padding responsive. Se conservan la altura del número y la tipografía. La excepción se aplica mediante la propiedad existente isPattern del componente compartido. SOLID y glosario conservan el círculo. Esta decisión sustituye la pauta anterior únicamente para patrones.
+
+
+## 24 de octubre de 2026 — retirada de Producción y Desarrollo
+
+Por petición expresa del usuario se retiran el switch Producción/Desarrollo y toda su funcionalidad de filtrado, eventos y persistencia. Navegación y Home muestran siempre el catálogo completo. Las hojas sin contenido conservan su estado deshabilitado y las ramas siguen desplegables. La antigua preferencia de disponibilidad ya no se lee ni escribe y no puede ocultar contenido al cargar. Se conservan estados de ramas, progreso, títulos, gaps de 21 px, rangos de experiencia, favicon y orden de API. Esta decisión sustituye los apartados anteriores sobre el switch. También se retira por petición posterior la nota auxiliar visible sobre años orientativos en ES/EN y su referencia accesible. Se conservan nombres y rangos de los botones.
+
+
 ## 24 de octubre de 2026 — etapas sin ordinales y experiencia orientativa
 
 Los cuatro botones de etapa retiran los ordinales 1–4. El rango de años se alinea en la misma fila que los nombres con estilo secundario discreto. Solo se permite reflujo cuando falta ancho. Conservan nombres e IDs y muestran experiencia orientativa compartida por todos los perfiles: Trainee/Becario 0 años, Entry Level/Junior 0 - 2 años, Mid-Level/Semi-Senior 2 - 5 años y Senior 5+ años. Es una propuesta editorial de orientación y no una equivalencia oficial ni un filtro obligatorio. Una nota visible bilingüe aclara que los años dependen del rol y la empresa. Se mantienen los gaps aprobados y los tooltips de las etiquetas. Esta petición sustituye la prohibición anterior de mostrar años en estas etapas.

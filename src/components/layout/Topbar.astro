@@ -1,12 +1,13 @@
 ---
+import { t } from '../../lib/translations';
 import Icon from '../Icon.astro';
 import SearchControl from '../controls/SearchControl.astro';
 import LanguageSelector from '../controls/LanguageSelector.astro';
 
 ---
 <header class="topbar">
-        <button class="icon-button mobile-toggle" id="mobile-toggle" aria-label="Abrir menú de rutas" aria-controls="sidebar" aria-expanded="false"><Icon name="menu" /></button>
-        <nav class="breadcrumb" aria-label="Ruta actual"><a href="#home" data-home-link aria-current="page" lang="en">Home</a><span class="breadcrumb-path" id="breadcrumb-path" hidden></span></nav>
+        <button class="icon-button mobile-toggle" id="mobile-toggle" aria-label={t('Abrir menú de rutas')} aria-controls="sidebar" aria-expanded="false"><Icon name="menu" /></button>
+        <nav class="breadcrumb" aria-label={t('Ruta actual')}><a href="#home" data-home-link aria-current="page" lang="en">{t('Home')}</a><span class="breadcrumb-path" id="breadcrumb-path" hidden></span></nav>
         <div class="topbar-actions">
           <SearchControl />
           <LanguageSelector />

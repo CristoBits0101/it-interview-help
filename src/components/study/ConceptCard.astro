@@ -1,11 +1,12 @@
 ---
+import { t, translatePatternTitle } from '../../lib/translations';
 import ConceptSource from './ConceptSource.astro';
+import Icon from '../Icon.astro';
 import LearnButton from './LearnButton.astro';
 import ConceptViewTabs from './ConceptViewTabs.astro';
 import ImplementationGuide from './ImplementationGuide.astro';
 import { patternGuides } from '../../data/pattern-guides/index';
 import { createConceptViews } from '../../lib/concept-views';
-import { translatePatternTitle } from '../../scripts/i18n';
 import type { Concept } from '../../data/curriculum';
 interface Props { concept: Concept; index: number; isPattern?: boolean; searchAliases?: string; hideEmptyViews?: boolean }
 const { concept, index, isPattern = false, searchAliases, hideEmptyViews = false } = Astro.props;
@@ -14,9 +15,9 @@ const guide = isPattern ? patternGuides[concept.id] : undefined;
 const implementationDialogId = guide ? `implementation-${concept.id}` : undefined;
 ---
 <article class="concept-card" id={`concept-${concept.id}`} data-concept-id={concept.id} data-level={concept.level} data-search-aliases={searchAliases}>
-                <div class="card-top"><div class="card-heading"><span class="concept-number">{String(index + 1).padStart(2, '0')}</span><h3 data-pattern-title={isPattern ? concept.title : undefined} lang={isPattern ? 'es' : undefined} translate={isPattern ? 'no' : undefined}>{isPattern ? translatePatternTitle(concept.title, 'es') : concept.title}</h3></div><span class={`level-badge level-${concept.level.toLowerCase()}`}>{concept.level}</span></div>
+                <div class="card-top"><div class:list={["card-heading", { "card-heading-pattern": isPattern }]}><span class:list={["concept-number", { "concept-number-plain": isPattern }]}>{isPattern ? <><span>{String(index + 1).padStart(2, '0')}</span><Icon name="dot" size={3} /></> : String(index + 1).padStart(2, '0')}</span><h3 data-i18n-source={isPattern ? undefined : concept.title} data-pattern-title={isPattern ? concept.title : undefined} lang={isPattern ? 'en' : undefined} translate={isPattern ? 'no' : undefined}>{isPattern ? translatePatternTitle(concept.title, 'en') : t(concept.title)}</h3></div><span class={`level-badge level-${concept.level.toLowerCase()}`}>{t(concept.level)}</span></div>
                 <div class="concept-description" aria-live="polite" aria-atomic="true">
-                  {views.filter(view => !(guide && view.id === 'example')).map(view => <div id={`concept-${concept.id}-${view.id}`} data-card-panel={view.id} hidden={!view.active}><p>{view.content}</p></div>)}
+                  {views.filter(view => !(guide && view.id === 'example')).map(view => <div id={`concept-${concept.id}-${view.id}`} data-card-panel={view.id} hidden={!view.active}><p data-i18n-es={guide && view.id === 'use-case' ? guide.useCase.es : undefined} data-i18n-en={guide && view.id === 'use-case' ? guide.useCase.en : undefined}>{guide && view.id === 'use-case' ? guide.useCase.en : t(view.content)}</p></div>)}
                 </div>
                 <ConceptSource source={concept.source} conceptTitle={concept.title} />
                 <div class="card-footer">

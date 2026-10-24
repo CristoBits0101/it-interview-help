@@ -1,5 +1,5 @@
 @layer components {
-  .implementation-dialog { --space-compact: var(--gap-card); --gap-compact: calc(var(--space-compact) / 2); padding: 0; width: min(52rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); text-align: start; border-radius: var(--radius-profile); overflow-wrap: normal; word-break: normal; }
+  .implementation-dialog { container: implementation-guide / inline-size; --space-compact: var(--gap-card); --gap-compact: calc(var(--space-compact) / 2); padding: 0; width: min(52rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); text-align: start; border-radius: var(--radius-profile); overflow-wrap: normal; word-break: normal; }
   .implementation-dialog[open] { display: flex; flex-direction: column; }
   .implementation-header, .implementation-footer { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-card); padding: var(--gap-card) var(--space-card); flex-shrink: 0; }
   .implementation-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr); border-bottom: 1px solid var(--line); }
@@ -38,6 +38,12 @@
   .implementation-back { transform: rotate(180deg); }
 }
 @layer responsive {
+  @container implementation-guide (max-width: 18rem) {
+    .implementation-dialog .implementation-header { grid-template-columns: minmax(0, 1fr) auto; }
+    .implementation-headings { grid-column: 1 / -1; grid-row: 2; }
+    .implementation-header .icon-button { grid-column: 2; grid-row: 1; }
+    .implementation-body { overflow: visible; flex-shrink: 0; }
+  }
   @media (max-width: 480px) {
     .implementation-dialog { width: calc(100vw - 1rem); max-height: calc(100dvh - 1rem); --space-card: 16px; --gap-card: calc(var(--space-card) / 2); }
     .implementation-header { grid-template-columns: repeat(3, minmax(0, 1fr)); }

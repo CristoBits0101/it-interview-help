@@ -4,26 +4,6 @@ Web estática responsive para preparar entrevistas técnicas y repasar ingenier�
 
 El contenido se centra en fundamentos para entrevistas de distintos perfiles y empresas. No pretende enseñar exhaustivamente todas las áreas desde cero ni sustituir una formación completa.
 
-## Desarrollo
-
-Requiere Node.js 22.22 o superior (también compatible con Node.js 24).
-
-```bash
-npm ci
-npm run dev
-```
-
-Abre la dirección que imprime Astro, normalmente `http://localhost:4321`.
-
-```bash
-npm run check
-npm run check:curriculum
-npm run build
-npm run preview
-```
-
-El build genera `dist/`, listo para cualquier alojamiento de archivos estáticos. Si cambia el dominio, actualiza `site` en `astro.config.mjs`. La raíz y `#home` abren la portada; los módulos usan fragmentos (`#ruta/modulo`), sin requerir reglas de reescritura en el servidor.
-
 ## Home y contenido
 
 Home resume la aplicación y permite elegir un perfil —Frontend Engineer, Backend Engineer, Full Stack Engineer, DevOps Engineer o Artificial Intelligence Engineer— y una etapa, desde Fundamentos hasta Senior. Cada selección recomienda áreas relacionadas, conocimientos previos y un objetivo práctico. La progresión posterior distingue especialización, liderazgo y gestión; no representa una jerarquía profesional universal.
@@ -43,21 +23,13 @@ El catálogo fuente conserva estas rutas. La navegación publicada permite abrir
 
 Cada tarjeta publicada muestra una explicación breve en un párrafo y su fuente concreta. Las referencias están centralizadas en `src/data/concept-sources.ts`. Las vistas Caso de Uso e Implementación solo se habilitan cuando existe contenido. Los ejemplos y recordatorios históricos de las rutas no publicadas se conservan en los datos. Al final de cada módulo aparece únicamente «Siguiente módulo» cuando existe un destino posterior.
 
-Edita `src/data/curriculum.ts`, `src/data/design-patterns.ts`, `src/data/system-design.ts` y `src/data/ai-glossary.ts` para ampliar las lecciones; `src/data/navigation.ts` define el árbol y sus enlaces. Las fuentes se centralizan en `src/data/concept-sources.ts`. `src/data/career-paths.ts` contiene perfiles, etapas, prerrequisitos orientativos y fuentes primarias. Los IDs deben ser únicos y estables para conservar los enlaces y el progreso. `src/pages/index.astro` monta la página; `HomeOverview.astro`, `home.ts` y `home.css` implementan Home junto con la navegación general de `app.ts` y los estilos compartidos de `global.css`.
-
-## Uso y privacidad
-
-Busca en los conceptos publicados con `Ctrl/Cmd + K`, filtra por nivel y marca los conceptos que comprendes. Al vaciar la búsqueda o limpiar filtros vuelves a Home o al módulo desde el que buscaste. La cabecera de estudio muestra únicamente el contador de conceptos y el selector de niveles en una misma línea a tamaño de texto normal. El breadcrumb identifica la página también en móvil.
+## Privacidad
 
 El progreso se almacena solo en `localStorage` del navegador (`tech-training:v1`). El menú empieza cerrado y recuerda las ramas abiertas con `tech-training:navigation:v1`. No se comparten entre dispositivos. Si el almacenamiento no está disponible, se mantienen durante la sesión. Las tipografías se sirven desde la propia web.
 
 La aplicación genera HTML estático. JavaScript habilita la selección de perfil y etapa, la navegación entre módulos, búsqueda, progreso y repaso. Sin JavaScript se pueden consultar el resumen y el primer itinerario de Home. La selección de perfil y etapa no se guarda entre recargas.
 
 Las dependencias Python del material de referencia son contexto para la ruta Generative AI Applications; no son necesarias para ejecutar esta web.
-
-## Validación
-
-Para validar cambios, ejecuta check:curriculum, tipos y build; comprueba Home, selección de perfil/etapa, enlaces disponibles, búsqueda y retorno a la vista de origen, progreso tras recargar, repaso y menú móvil. Usa 390 y 1440 píxeles como referencias visuales. La [guía del proyecto](docs/PROJECT_GUIDE.md) distingue las comprobaciones históricas de las necesarias para el rediseño actual.
 
 ## Memoria del proyecto
 

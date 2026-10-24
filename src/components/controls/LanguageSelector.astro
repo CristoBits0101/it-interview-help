@@ -1,11 +1,7 @@
 ---
 import Icon from '../Icon.astro';
-
 ---
 <div class="language-selector">
-            <label class="sr-only" for="language-select">Idioma</label>
-            <select id="language-select" autocomplete="language">
-              <option value="es" lang="es">Español</option>
-              <option value="en" lang="en">English</option>
-            </select>
-            <Icon name="down" size={14} /></div>
+  <button type="button" id="language-toggle" aria-label="Switch to Spanish" lang="en" translate="no">English</button>
+  <Icon name="swap" size={14} />
+</div>

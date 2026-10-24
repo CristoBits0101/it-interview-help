@@ -1,13 +1,13 @@
 @layer components {
   .career-panel { --gap-panel: calc(var(--space-panel) / 2); }
-  .home-stats, .career-outcome, .career-branches, .career-methodology, .home-route-grid { --gap-card: calc(var(--space-card) / 2); }
+  .home-stats, .career-outcome, .career-branches, .career-methodology { --gap-card: calc(var(--space-card) / 2); }
   .career-profile-options, .career-stage-options { --gap-control: calc(var(--space-control) / 2); }
   #home-view { display: flex; flex-direction: column; gap: var(--space-home); min-width: 0; container-type: inline-size; overflow-wrap: normal; word-break: normal; hyphens: none; }
   #home-view :is(p, .home-stat-detail, .career-option-description, .career-outcome h4, .career-branch li) { text-align: justify; text-align-last: start; overflow-wrap: normal; word-break: normal; hyphens: none; }
   .home-separator { flex: 0 0 auto; align-self: stretch; width: 100%; height: 1px; margin: 0; padding: 0; border: 0; border-top: 1px solid var(--line); }
   #career-panels { display: flex; flex-direction: column; gap: var(--space-home); }
-  .home-introduction { display: flex; flex-direction: column; gap: var(--gap-compact); }
-  .home-introduction h1 { font-size: var(--font-section); line-height: var(--line-body); font-weight: 500; letter-spacing: normal; }
+  .home-introduction { display: flex; flex-direction: column; gap: var(--space-home); }
+  .home-introduction h1 { margin: 0; font-size: var(--font-section); line-height: var(--line-body); font-weight: 500; letter-spacing: normal; }
   .home-introduction p { font-size: var(--font-body); line-height: var(--line-body); color: var(--text-soft); }
   .home-kicker { display: flex; align-items: center; gap: var(--gap-compact); font-size: var(--font-meta); line-height: var(--line-body); font-weight: 300; letter-spacing: 1.35px; color: var(--text-soft); text-transform: uppercase; }
   .home-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--paper); padding: 0; margin: 0; }
@@ -21,7 +21,7 @@
   .home-section-heading { display: flex; align-items: flex-end; justify-content: space-between; row-gap: var(--space-home); column-gap: var(--space-gap); }
   .home-section-heading > div { flex: 1.4; min-width: 0; }
   .home-section-heading h2 { font-size: var(--font-section); line-height: var(--line-body); letter-spacing: normal; margin: 0; font-weight: 500; }
-  #career-title, #growth-title { font-family: var(--brand); font-size: var(--font-title); font-weight: 500; text-transform: uppercase; padding: 0 var(--space-compact); border-inline-start: 2px solid var(--accent); }
+  #home-title, #career-title, #growth-title { font-family: var(--brand); font-size: var(--font-title); font-weight: 500; text-transform: uppercase; padding: 0 var(--space-compact); border-inline-start: 2px solid var(--accent); }
   .home-section-heading > p { flex: 1; max-width: 350px; font-size: var(--font-body); line-height: var(--line-body); color: var(--text-soft); }
   .career-profile-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); row-gap: var(--space-home); column-gap: var(--gap-control); }
   .career-profile-options button { overflow-wrap: normal; position: relative; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-control); text-align: left; min-height: 104px; padding: var(--space-control); background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-profile); font-size: var(--font-small); line-height: var(--line-body); font-weight: 400; transition: border-color .15s, background .15s; }
@@ -106,14 +106,6 @@
   .career-methodology ul { padding-left: var(--space-control); margin: 8px 0 0; }
   .career-methodology a { display: inline-block; min-height: 24px; color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
   .career-methodology a svg { margin-left: 4px; }
-  .home-route-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap-card); }
-  .home-route-card { padding: var(--space-card); min-width: 0; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-card); display: flex; flex-direction: column; gap: var(--gap-card); transition: background .15s, border-color .15s; }
-  .home-route-card:hover { background: var(--sidebar); border-color: var(--border-accent); }
-  .home-route-meta { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-card); color: var(--text-soft); }
-  .home-route-meta > span { font-size: var(--font-meta); font-weight: 300; letter-spacing: 1px; }
-  .home-route-card h3 { font-size: var(--font-title); line-height: var(--line-body); letter-spacing: normal; font-weight: 500; }
-  .home-route-card p { margin-top: auto; font-size: var(--font-body); color: var(--text-soft); }
-  .home-route-card p span { padding: 0 4px; }
 }
 
 @layer responsive {
@@ -141,7 +133,7 @@
     .career-profile-options button { min-height: 100px; }
     .career-panel { --space-panel: 24px; }
     .career-area-count { display: none; }
-    .career-branches, .home-route-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .career-branches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @container (max-width: 26.875rem) {
     .home-stats { grid-template-columns: 1fr; }
@@ -150,7 +142,7 @@
     .career-outcome .home-kicker { margin-block-start: var(--gap-card); }
     .career-outcome .home-kicker { align-self: stretch; }
     .home-section-heading h2 { font-size: var(--font-section); }
-    .home-stats, .career-outcome, .career-branches, .career-methodology, .home-route-grid { --space-card: 20px; }
+    .home-stats, .career-outcome, .career-branches, .career-methodology { --space-card: 20px; }
     .home-stat-value { font-size: var(--font-section); }
     .home-stat-detail { font-size: var(--font-body); }
     .career-profile-options { grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); }
@@ -161,7 +153,7 @@
     .career-stage-options button { min-height: 72px; font-size: var(--font-small); }
     .career-panel { --space-panel: 20px; }
     .career-panel-heading h3 { font-size: var(--font-title); }
-    .career-area-grid, .career-branches, .home-route-grid { grid-template-columns: 1fr; }
+    .career-area-grid, .career-branches { grid-template-columns: 1fr; }
     .career-area-heading a, .career-area-heading strong { font-size: var(--font-small); }
     .career-outcome h4 { font-size: var(--font-small); }
   }

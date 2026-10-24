@@ -1,4 +1,5 @@
 ---
+import { t } from '../../lib/translations';
 import type { CareerStage } from '../../data/career-paths';
 
 interface Props {
@@ -12,13 +13,13 @@ const terms = stage.terms ?? [stage.label];
 const tooltipId = `career-tooltip-${stage.id}`;
 ---
 <li data-career-stage-option>
-  <button type="button" data-career-stage={stage.id} aria-label={stage.label} aria-pressed={selected} aria-controls="career-panels" aria-describedby={`${tooltipId} career-experience-${stage.id} career-experience-note`}>
+  <button type="button" data-career-stage={stage.id} aria-label={t(stage.label)} aria-pressed={selected} aria-controls="career-panels" aria-describedby={`${tooltipId} career-experience-${stage.id}`}>
     <span class="career-stage-labels">
-      {terms.map(term => <span class="career-stage-term" data-career-term={term}>{term}</span>)}
+      {terms.map(term => <span class="career-stage-term" data-career-term={term}>{t(term)}</span>)}
     </span>
-    <span class="career-stage-experience" id={`career-experience-${stage.id}`}>{stage.experience}</span>
+    <span class="career-stage-experience" id={`career-experience-${stage.id}`}>{t(stage.experience ?? '')}</span>
   </button>
   <div id={tooltipId} class="career-stage-tooltip" role="tooltip" hidden>
-    {terms.map(term => <p data-career-term-description={term}><strong>{term}</strong><span>{descriptions[term]}</span></p>)}
+    {terms.map(term => <p data-career-term-description={term}><strong>{t(term)}</strong><span>{t(descriptions[term])}</span></p>)}
   </div>
 </li>

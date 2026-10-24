@@ -55,7 +55,7 @@ export const designPatterns: Concept[] = [
   {
     id: 'decorator',
     title: 'Decorator',
-    description: 'Decorator añade funciones envolviendo un objeto con otro que conserva su interfaz sin cambiar su clase.',
+    description: 'Envuelve un objeto con otro para añadirle funcionalidades sin tener que tocar su clase.',
     source: conceptSources.decorator,
     level: 'Intermedio',
   },

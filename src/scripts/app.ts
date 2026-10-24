@@ -1,3 +1,4 @@
+import { preferenceKeys, readJsonPreference, restoreLearnedIds, writePreference } from '../lib/preferences';
 import { $, $$ } from './dom';
 import { initializeNavigationDrawer } from './navigation-drawer';
 import { initializeStudyCards } from './study-cards';
@@ -5,17 +6,15 @@ import { initializeImplementationGuides } from './implementation-guides';
 import { initializeReview } from './review';
 import { initializeDialogs } from './dialogs';
 import { initializeNavigation } from './navigation';
-import { initializeAvailability } from './availability';
 import { initializeCareerPaths } from './home';
 import { initializeCareerTooltips } from './career-tooltips';
 import { applyStaticTranslations, getSavedLanguage, saveLanguage, translate, translatePatternTitle, type Language } from './i18n';
 
+let language: Language = getSavedLanguage();
+applyStaticTranslations(language);
 initializeNavigation();
 const refreshCareerSelection = initializeCareerPaths();
 initializeCareerTooltips();
-let language: Language = getSavedLanguage();
-applyStaticTranslations(language);
-const refreshAvailability = initializeAvailability();
 refreshCareerSelection?.();
 
 const search = $<HTMLInputElement>('#search');
@@ -38,7 +37,6 @@ const reviewModuleButton = document.querySelector<HTMLButtonElement>('#review-mo
 const sections = $$<HTMLElement>('.concept-section');
 const cards = $$<HTMLElement>('.concept-card');
 const validIds = new Set(cards.map(card => card.dataset.conceptId!));
-const storageKey = 'tech-training:v1';
 const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 function setLevel(index: number) {
   currentLevelIndex = Math.max(0, Math.min(levelOptions.length - 1, index));
@@ -47,13 +45,7 @@ function setLevel(index: number) {
   levelPrevious.disabled = currentLevelIndex === 0;
   levelNext.disabled = currentLevelIndex === levelOptions.length - 1;
 }
-let learned = new Set<string>();
-let storageAvailable = true;
-try {
-  const state = JSON.parse(localStorage.getItem(storageKey) || '{}');
-  const validList = (value: unknown) => Array.isArray(value) ? value.filter((id): id is string => typeof id === 'string' && validIds.has(id)) : [];
-  learned = new Set(validList(state?.learned));
-} catch { storageAvailable = false; }
+const learned = new Set(restoreLearnedIds(readJsonPreference(preferenceKeys.progress), validIds));
 
 let currentModule = sections[0].dataset.moduleId!;
 let currentTrack = sections[0].dataset.trackId!;
@@ -68,9 +60,9 @@ const say = (message: string) => {
   toastTimer = setTimeout(() => toast.classList.remove('visible'), 5000);
 };
 const persist = () => {
-  try { localStorage.setItem(storageKey, JSON.stringify({ learned: [...learned] })); }
-  catch { storageAvailable = false; }
-  if (!storageAvailable) say(translate('El progreso se mantendrá durante esta sesión. El almacenamiento local no está disponible.', language));
+  if (!writePreference(preferenceKeys.progress, JSON.stringify({ learned: [...learned] }))) {
+    say(translate('El progreso se mantendrá durante esta sesión. El almacenamiento local no está disponible.', language));
+  }
 };
 
 function refreshProgress() {
@@ -266,15 +258,14 @@ initializeStudyCards($('#concept-library'), learnId => {
 });
 
 initializeReview({ cards, learned, getLanguage: () => language, onChange: () => { persist(); refreshProgress(); }, onNotice: say, trigger: reviewModuleButton });
-const languageSelect = $<HTMLSelectElement>('#language-select');
-languageSelect.addEventListener('change', () => {
-  language = languageSelect.value === 'en' ? 'en' : 'es';
+const languageToggle = $<HTMLButtonElement>('#language-toggle');
+languageToggle.addEventListener('click', () => {
+  language = language === 'es' ? 'en' : 'es';
   saveLanguage(language);
   applyStaticTranslations(language);
   refreshView();
   refreshProgress();
   refreshCareerSelection?.();
-  refreshAvailability?.();
   if ($('#results-status').textContent || mode === 'search') announceResults();
 });
 initializeDialogs();

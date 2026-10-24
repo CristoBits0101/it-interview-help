@@ -1,4 +1,5 @@
 ---
+import { t } from '../../lib/translations';
 import CareerPanel from './CareerPanel.astro';
 import CareerProfileOption from './CareerProfileOption.astro';
 import CareerStageOption from './CareerStageOption.astro';
@@ -11,20 +12,19 @@ const stages = profiles[0].stages;
 ---
 <section class="home-section" id="career-paths" aria-labelledby="career-title">
     <header class="home-section-heading">
-      <h2 id="career-title">Elige tu Dirección</h2>
+      <h2 id="career-title">{t('Elige tu Dirección')}</h2>
     </header>
 
-    <div class="career-profile-options" role="group" aria-label="Perfil profesional">
+    <div class="career-profile-options" role="group" aria-label={t('Perfil profesional')}>
       {profiles.map((profile, index) => <CareerProfileOption profile={profile} index={index} selected={index === 0} />)}
     </div>
 
     <hr class="home-separator" />
     <div class="career-stage-section">
-      <p class="career-control-label" id="career-stage-label">¿En qué etapa quieres trabajar?</p>
+      <p class="career-control-label" id="career-stage-label">{t('¿En qué etapa quieres trabajar?')}</p>
       <ol class="career-stage-options" aria-labelledby="career-stage-label">
         {stages.map((stage, index) => <CareerStageOption stage={stage} selected={index === 0} descriptions={termDescriptions} />)}
       </ol>
-      <p class="career-stage-note" id="career-experience-note">Años orientativos según el rol y la empresa. No son requisitos obligatorios.</p>
     </div>
 
     <p id="career-selection-status" class="sr-only" role="status" aria-live="polite"></p>

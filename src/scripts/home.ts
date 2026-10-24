@@ -1,3 +1,4 @@
+import { preferenceKeys, readJsonPreference, restoreCareerStage, writePreference } from '../lib/preferences';
 import { translate } from './i18n';
 
 export function initializeCareerPaths() {
@@ -8,15 +9,8 @@ export function initializeCareerPaths() {
   if (!profiles.length || !stages.length) return;
 
   let profileId = profiles[0].dataset.careerProfile!;
-  let stageId: string | null = stages[0].dataset.careerStage!;
-  const stageStorageKey = 'tech-training:career-stage:v1';
-  try {
-    const savedStage = localStorage.getItem(stageStorageKey);
-    if (savedStage !== null) {
-      const storedStage: unknown = JSON.parse(savedStage);
-      if (storedStage === null || typeof storedStage === 'string' && stages.some(button => button.dataset.careerStage === storedStage)) stageId = storedStage;
-    }
-  } catch {}
+  const validStageIds = new Set(stages.map(button => button.dataset.careerStage!));
+  let stageId = restoreCareerStage(readJsonPreference(preferenceKeys.careerStage), validStageIds, stages[0].dataset.careerStage!);
   const update = () => {
     profiles.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.careerProfile === profileId)));
     stages.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.careerStage === stageId)));
@@ -31,7 +25,7 @@ export function initializeCareerPaths() {
   profiles.forEach(button => button.addEventListener('click', () => { profileId = button.dataset.careerProfile!; update(); }));
   stages.forEach(button => button.addEventListener('click', () => {
     stageId = stageId === button.dataset.careerStage ? null : button.dataset.careerStage!;
-    try { localStorage.setItem(stageStorageKey, JSON.stringify(stageId)); } catch {}
+    writePreference(preferenceKeys.careerStage, JSON.stringify(stageId));
     update();
   }));
   return update;

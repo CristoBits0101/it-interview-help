@@ -1,8 +1,9 @@
 ---
+import { t, sourceDescription } from '../../lib/translations';
 import Icon from '../Icon.astro';
 import type { ConceptSource } from '../../data/concept-sources';
 interface Props { source: ConceptSource; conceptTitle: string }
 const { source, conceptTitle } = Astro.props;
 ---
-<a class="concept-source" href={source.url} target="_blank" rel="noopener noreferrer" title={source.title} aria-label={`${source.publisher}. Fuente original. ${source.title}. Sobre ${conceptTitle}. Se abre en una pestaña nueva.`}>
-                  <Icon name="bulb" size={20} /><span class="source-publisher">{source.publisher}</span><Icon name="link" size={16} /></a>
+<a class="concept-source" href={source.url} target="_blank" rel="noopener noreferrer" title={t(source.title)} aria-label={sourceDescription(t(source.publisher), t(source.title), t(conceptTitle), 'en')}>
+                  <Icon name="bulb" size={20} /><span class="source-publisher">{t(source.publisher)}</span><Icon name="link" size={16} /></a>

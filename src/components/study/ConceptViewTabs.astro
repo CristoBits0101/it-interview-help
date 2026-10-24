@@ -1,10 +1,11 @@
 ---
+import { t } from '../../lib/translations';
 import type { ConceptView } from '../../lib/concept-views';
 interface Props { views: ConceptView[]; conceptId: string; title: string; hidden?: boolean; implementationDialogId?: string }
 const { views, conceptId, title, hidden = false, implementationDialogId } = Astro.props;
 ---
-<div class="card-views" role="group" aria-label={`Contenido de ${title}`} hidden={hidden}>
+<div class="card-views" role="group" aria-label={`${t('Contenido de')} ${t(title)}`} hidden={hidden}>
                     {views.map(view => {
                       const dialogId = view.id === 'example' ? implementationDialogId : undefined;
-                      return <button type="button" class="card-view-button" data-card-view={view.id} data-guide-open={dialogId} aria-haspopup={dialogId ? 'dialog' : undefined} aria-controls={dialogId ?? `concept-${conceptId}-${view.id}`} aria-pressed={dialogId ? undefined : view.active ? 'true' : 'false'} disabled={!view.content}>{view.label}</button>;
+                      return <button type="button" class="card-view-button" data-card-view={view.id} data-guide-open={dialogId} aria-haspopup={dialogId ? 'dialog' : undefined} aria-controls={dialogId ?? `concept-${conceptId}-${view.id}`} aria-pressed={dialogId ? undefined : view.active ? 'true' : 'false'} disabled={!view.content}>{t(view.label)}</button>;
                     })}</div>

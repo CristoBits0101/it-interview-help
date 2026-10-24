@@ -1,11 +1,12 @@
 ---
+import { t } from '../lib/translations';
 import type { Track } from '../data/curriculum';
 import { publishedNavigation as navigation } from '../data/published-catalog';
 import { careerProfiles, areaGuidance, careerBranches, careerTermDescriptions } from '../data/career-paths';
 import HomeStats from './home/HomeStats.astro';
 import CareerPaths from './home/CareerPaths.astro';
 import CareerGrowth from './home/CareerGrowth.astro';
-import { flattenNavigation, countConcepts, hasPublishedContent } from '../lib/catalog';
+import { flattenNavigation, countConcepts } from '../lib/catalog';
 import '../styles/home.css';
 
 interface Props { tracks: Track[] }
@@ -14,7 +15,7 @@ const catalog = flattenNavigation(navigation);
 const areas = new Map(catalog.map(node => [node.label, node]));
 const totalConcepts = tracks.reduce((total, track) => total + countConcepts(track), 0);
 const stats = [
-  { value: navigation.length, publishedValue: navigation.filter(hasPublishedContent).length, label: 'Áreas Principales', detail: 'Temas para repasar' },
+  { value: navigation.length, label: 'Áreas Principales', detail: 'Temas para repasar' },
   { value: tracks.length, label: 'Rutas con Contenido', detail: 'Disponibles para estudiar' },
   { value: totalConcepts, label: 'Conceptos', detail: 'Breves y conectados' },
   { value: careerProfiles.length, label: 'Perfiles Profesionales', detail: 'Un camino para cada objetivo' },
@@ -22,7 +23,10 @@ const stats = [
 ---
 
 <section id="home-view" aria-labelledby="home-title">
-  <h1 id="home-title" class="sr-only">Inicio</h1>
+  <header class="home-introduction">
+    <h1 id="home-title">{t('Prepara tu próxima entrevista técnica')}</h1>
+    <p>{t('Reúne en un solo lugar los fundamentos esenciales de cada área relevante para tu puesto. Ofrece una base mínima para preparar entrevistas técnicas con conocimientos que suelen estar dispersos por internet. Las preguntas de pruebas reales se incorporarán con fuentes verificadas.')}</p>
+  </header>
 
   <HomeStats stats={stats} />
   <hr class="home-separator" />

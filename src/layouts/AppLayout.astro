@@ -1,5 +1,6 @@
 ---
 import '@fontsource-variable/google-sans-flex';
+import { t } from '../lib/translations';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '../styles/global.css';
@@ -12,24 +13,28 @@ import type { NavigationNode } from '../data/navigation';
 import type { ConceptSource } from '../data/concept-sources';
 interface Props { navigation: NavigationNode[]; sources: Pick<ConceptSource, 'title' | 'url'>[] }
 const { navigation, sources } = Astro.props;
+const canonicalUrl = Astro.site?.href;
 const canvasColor = designTokens.match(/--canvas:\s*(#[\da-fA-F]{6})\s*;/)?.[1];
 if (!canvasColor) throw new Error('The canvas design token must define a six-digit hex color.');
 ---
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Repasa conceptos clave y prepara tus respuestas para entrevistas técnicas de distintos perfiles y empresas." />
+    <meta name="description" content="Review key concepts and prepare your answers for technical interviews across different roles and companies." />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
     <meta name="theme-color" content={canvasColor} />
-    <meta property="og:title" content="Tech Interview Prep · Fundamentos para entrevistas técnicas" />
-    <meta property="og:description" content="Repasa conceptos clave y prepara tus respuestas para entrevistas técnicas de distintos perfiles y empresas." />
+    <meta property="og:title" content="Tech Interview Prep · Foundations for technical interviews" />
+    <meta property="og:description" content="Review key concepts and prepare your answers for technical interviews across different roles and companies." />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Tech Interview Prep · Inicio</title>
+    <title>Tech Interview Prep · Home</title>
   </head>
-  <body>
-    <a href="#main" class="skip-link">Saltar al contenido</a>
+  <body lang="en">
+    <a href="#main" class="skip-link">{t('Saltar al contenido')}</a>
     <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
     <Sidebar nodes={navigation} />
 
@@ -39,7 +44,7 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
       <main id="main" tabindex="-1">
         <slot />
 
-        <noscript><p class="noscript-note">Puedes consultar el resumen y el primer itinerario. Activa JavaScript para elegir otro perfil, navegar entre módulos, buscar y guardar tu progreso.</p></noscript>
+        <noscript><p class="noscript-note">{t('Puedes consultar el resumen y el primer itinerario. Activa JavaScript para elegir otro perfil, navegar entre módulos, buscar y guardar tu progreso.')}</p></noscript>
       </main>
     </div>
 

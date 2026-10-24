@@ -1,6 +1,5 @@
+import { preferenceKeys, readJsonPreference, restoreKnownIds, writePreference } from '../lib/preferences';
 import { migrateBranchId } from '../data/navigation-migrations';
-
-const navigationStorageKey = 'tech-training:navigation:v1';
 
 function fitSidebarToLabels() {
   const sidebar = document.querySelector<HTMLElement>('#sidebar');
@@ -40,7 +39,6 @@ function fitSidebarToLabels() {
   document.fonts.ready.then(schedule);
   document.fonts.addEventListener('loadingdone', schedule);
   window.addEventListener('resize', schedule);
-  window.addEventListener('catalog-availability-change', schedule);
   measure();
 }
 
@@ -48,25 +46,13 @@ export function initializeNavigation() {
   fitSidebarToLabels();
   const branches = Array.from(document.querySelectorAll<HTMLDetailsElement>('[data-nav-branch]'));
   const validIds = new Set(branches.map(branch => branch.dataset.navBranch!));
-  let expanded = new Set<string>();
-
-  try {
-    const stored: unknown = JSON.parse(localStorage.getItem(navigationStorageKey) ?? '[]');
-    if (Array.isArray(stored)) {
-      expanded = new Set(stored.filter((id): id is string => typeof id === 'string')
-        .map(migrateBranchId).filter(id => validIds.has(id)));
-    }
-  } catch {
-  }
+  const expanded = new Set(restoreKnownIds(readJsonPreference(preferenceKeys.navigation), validIds, migrateBranchId));
 
   branches.forEach(branch => { branch.open = expanded.has(branch.dataset.navBranch!); });
 
   const persistNavigation = () => {
     const openIds = branches.filter(branch => branch.open).map(branch => branch.dataset.navBranch!);
-    try {
-      localStorage.setItem(navigationStorageKey, JSON.stringify(openIds));
-    } catch {
-    }
+    writePreference(preferenceKeys.navigation, JSON.stringify(openIds));
   };
 
   branches.forEach(branch => branch.addEventListener('toggle', persistNavigation));

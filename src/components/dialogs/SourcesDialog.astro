@@ -1,7 +1,8 @@
 ---
+import { t } from '../../lib/translations';
 import Icon from '../Icon.astro';
 import type { ConceptSource } from '../../data/concept-sources';
 interface Props { sources: Pick<ConceptSource, 'title' | 'url'>[] }
 const { sources } = Astro.props;
 ---
-<dialog class="sources-dialog" id="sources-dialog" aria-labelledby="sources-title"><div class="dialog-top"><h2 id="sources-title">Sigue aprendiendo</h2><button class="icon-button" data-close-dialog aria-label="Cerrar fuentes"><Icon name="close" /></button></div><p>Una definición es el comienzo. Profundiza con documentación y referencias originales.</p><div class="source-list">{sources.map(source => <a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}<Icon name="arrow" size={17} /></a>)}</div><p class="privacy-note">Tu progreso y el estado del menú se almacenan únicamente en este navegador.</p></dialog>
+<dialog class="sources-dialog" id="sources-dialog" aria-labelledby="sources-title"><div class="dialog-top"><h2 id="sources-title">{t('Sigue aprendiendo')}</h2><button class="icon-button" data-close-dialog aria-label={t('Cerrar fuentes')}><Icon name="close" /></button></div><p>{t('Una definición es el comienzo. Profundiza con documentación y referencias originales.')}</p><div class="source-list">{sources.map(source => <a href={source.url} target="_blank" rel="noopener noreferrer">{t(source.title)}<Icon name="arrow" size={17} /></a>)}</div><p class="privacy-note">{t('Tu progreso y el estado del menú se almacenan únicamente en este navegador.')}</p></dialog>
