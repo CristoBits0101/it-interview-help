@@ -3,7 +3,7 @@ import Icon from '../Icon.astro';
 import type { Track } from '../../data/curriculum';
 import type { NavigationNode } from '../../data/navigation';
 import type { CareerProfile, CareerStage } from '../../data/career-paths';
-import { countConcepts } from '../../lib/catalog';
+import { countConcepts, firstPublishedDestination, hasPublishedContent } from '../../lib/catalog';
 interface Props { profile: CareerProfile; stage: CareerStage; initial: boolean; tracks: Track[]; areas: ReadonlyMap<string, NavigationNode>; guidanceByArea: Record<string, { focus: string; prerequisites: string[] }> }
 const { profile, stage, initial, tracks, areas, guidanceByArea } = Astro.props;
 ---
@@ -20,10 +20,11 @@ const { profile, stage, initial, tracks, areas, guidanceByArea } = Astro.props;
                 {stage.areas.map((label, index) => {
                   const area = areas.get(label);
                   const guidance = guidanceByArea[label];
-                  const linkedTrack = area?.href ? tracks.find(track => area.href?.startsWith(`#${track.id}/`)) : undefined;
-                  return <li class="career-area-card">
+                  const destination = area ? firstPublishedDestination(area) : undefined;
+                  const linkedTrack = destination ? tracks.find(track => destination.startsWith(`#${track.id}/`)) : undefined;
+                  return <li class="career-area-card" data-catalog-published={Boolean(area && hasPublishedContent(area))}>
                     <div class="career-area-heading"><span class="career-area-number">{String(index + 1).padStart(2, '0')}</span>
-                      <div>{linkedTrack && area?.href ? <a href={area.href} data-route={linkedTrack.id}><span data-area-translation={label}>{label}</span><Icon name="arrow" size={14} /></a> : <strong data-area-translation={label}>{label}</strong>}
+                      <div>{linkedTrack && destination ? <a href={destination} data-route={linkedTrack.id}><span data-area-translation={label}>{label}</span><Icon name="arrow" size={14} /></a> : <strong data-area-translation={label}>{label}</strong>}
                         {linkedTrack ? <span class="career-content-status is-available">{countConcepts(linkedTrack)} conceptos disponibles</span> : <span class="career-content-status">Contenido no disponible ahora</span>}
                       </div>
                     </div>
@@ -31,6 +32,7 @@ const { profile, stage, initial, tracks, areas, guidanceByArea } = Astro.props;
                   </li>;
                 })}
               </ol>
+              <p class="career-availability-note" data-career-empty hidden>No hay áreas con contenido publicado en esta etapa.</p>
             </div>
             <div class="career-outcome" role="group" aria-label="Objetivo y práctica de esta etapa">
               <span class="career-outcome-symbol"><Icon name="target" size={24} /></span>

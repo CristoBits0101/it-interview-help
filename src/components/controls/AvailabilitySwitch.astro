@@ -1,0 +1,8 @@
+---
+import Icon from '../Icon.astro';
+---
+<button type="button" class="availability-switch" id="availability-switch" role="switch" aria-checked="true" aria-label="Mostrar áreas en desarrollo" aria-describedby="availability-help" aria-controls="course-navigation home-view" title="Desarrollo. Mostrar todas las áreas.">
+  <span title="Producción" aria-hidden="true"><Icon name="rocket" size={16} /></span>
+  <span title="Desarrollo" aria-hidden="true"><Icon name="programming" size={16} /></span>
+</button>
+<span class="sr-only" id="availability-help">Izquierda Producción. Solo contenido publicado. Derecha Desarrollo. Todas las áreas.</span>

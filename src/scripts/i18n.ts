@@ -4,6 +4,13 @@ export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
   ...patternGuideTranslations,
+  'Producción': 'Production',
+  'Desarrollo': 'Development',
+  'Mostrar áreas en desarrollo': 'Show areas in development',
+  'Desarrollo. Mostrar todas las áreas.': 'Development. Show all areas.',
+  'Producción. Mostrar solo contenido publicado.': 'Production. Show published content only.',
+  'Izquierda Producción. Solo contenido publicado. Derecha Desarrollo. Todas las áreas.': 'Left Production. Published content only. Right Development. All areas.',
+  'No hay áreas con contenido publicado en esta etapa.': 'No areas have published content at this stage.',
   'Cerrar implementación': 'Close implementation',
   'Pasos de implementación': 'Implementation steps',
   'Paso': 'Step',

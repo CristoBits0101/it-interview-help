@@ -40,6 +40,7 @@ function fitSidebarToLabels() {
   document.fonts.ready.then(schedule);
   document.fonts.addEventListener('loadingdone', schedule);
   window.addEventListener('resize', schedule);
+  window.addEventListener('catalog-availability-change', schedule);
   measure();
 }
 

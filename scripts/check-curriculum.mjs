@@ -47,7 +47,7 @@ const catalog = [...tracks, systemDesign, appliedAI];
 for (const node of all) {
   const es = translate(node.label, 'es');
   assert.equal(translate(es, 'en'), node.label, `Translation round trip: ${node.label}`);
-  if (!['REST', 'MVC', 'SQL', 'Hexagonal'].includes(node.label)) assert.notEqual(es, node.label, `Missing Spanish: ${node.label}`);
+  if (!['REST', 'MVC', 'SQL', 'Hexagonal', 'SOAP', 'GraphQL', 'gRPC', 'Webhook', 'WebSocket'].includes(node.label)) assert.notEqual(es, node.label, `Missing Spanish: ${node.label}`);
   if (node.href) {
     const [trackId, moduleId] = node.href.slice(1).split('/');
     const track = catalog.find(t => t.id === trackId);

@@ -5,6 +5,7 @@ import { initializeImplementationGuides } from './implementation-guides';
 import { initializeReview } from './review';
 import { initializeDialogs } from './dialogs';
 import { initializeNavigation } from './navigation';
+import { initializeAvailability } from './availability';
 import { initializeCareerPaths } from './home';
 import { initializeCareerTooltips } from './career-tooltips';
 import { applyStaticTranslations, getSavedLanguage, saveLanguage, translate, translatePatternTitle, type Language } from './i18n';
@@ -14,6 +15,7 @@ const refreshCareerSelection = initializeCareerPaths();
 initializeCareerTooltips();
 let language: Language = getSavedLanguage();
 applyStaticTranslations(language);
+const refreshAvailability = initializeAvailability();
 refreshCareerSelection?.();
 
 const search = $<HTMLInputElement>('#search');
@@ -272,6 +274,7 @@ languageSelect.addEventListener('change', () => {
   refreshView();
   refreshProgress();
   refreshCareerSelection?.();
+  refreshAvailability?.();
   if ($('#results-status').textContent || mode === 'search') announceResults();
 });
 initializeDialogs();

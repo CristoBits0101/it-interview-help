@@ -1,10 +1,41 @@
 # Memoria de producto, diseño y desarrollo
 
+## 24 de octubre de 2026 — separación vertical de Home reducida a 21 px
+
+Por petición posterior del usuario todos los espacios estructurales verticales de Home antes fijados en 42 px pasan a 21 px mediante `--space-home: 21px`. Incluye títulos y subtítulos respecto a sus bloques, pregunta de etapa respecto al grupo de niveles, filas de tarjetas y ambos lados de los separadores. Se conservan los gaps internos compactos y horizontales, el padding exterior, los demás tokens y las otras páginas. Las referencias a 42 px de las entradas anteriores describen el estado histórico sustituido por esta decisión. Se mantienen la geometría aceptada del selector y el orden de Diseño de API.
+
+
+## 24 de octubre de 2026 — separaciones estructurales y orden de Diseño de API
+
+La aclaración final aplica 42 px a la separación vertical estructural entre títulos, subtítulos, separadores y tarjetas de Home. Incluye la pregunta de etapa y su grupo de niveles. Se conservan los gaps compactos dentro de tarjetas y controles, incluido el interior del grupo de niveles, y los espacios horizontales.
+
+Diseño de API ordena sus hojas como API REST, Webhook, GraphQL, SOAP, WebSocket y gRPC. Es un recorrido pedagógico de carga inicial creciente: peticiones HTTP, notificaciones HTTP, consultas tipadas, contratos XML, conexiones persistentes y contratos binarios con generación de clientes. No representa una clasificación universal de dificultad. Solo cambia el orden compartido ES/EN; las hojas conservan etiquetas, identidad, disponibilidad y ausencia de contenido.
+
+
+## 24 de octubre de 2026 — aclaración de espaciado vertical y geometría del switch
+
+Los 42 px de `--space-home` se aplican únicamente a la separación vertical entre bloques y tarjetas y a ambos lados de los separadores. No se aplican al espacio interno entre textos ni a la separación horizontal entre tarjetas o controles. Esos espacios recuperan los tokens compactos anteriores. Esta aclaración sustituye la interpretación amplia del apartado de espaciado de Home. Se conservan la justificación y los demás estilos.
+
+El switch Producción/Desarrollo mantiene su posición y funcionamiento. Su pulgar tiene ancho y alto iguales de 1.75rem y la pista deriva sus dimensiones del pulgar y un inset de `calc(.125rem + .5px)` por la petición posterior de añadir 0.5 px interiores. A tamaño normal el pulgar mide 28 × 28 px y la pista 61 × 33 px. Los iconos comparten los centros de las dos posiciones.
+
+
+## 24 de octubre de 2026 — cabeceras de Home y disponibilidad del catálogo
+
+Los h2 de Home `#career-title` y `#growth-title` usan el mismo tratamiento visual que las cabeceras de patrones: IBM Plex Mono mediante `--brand` a 15 px/peso 500, mayúsculas por CSS, línea izquierda de 2 px con `--accent` y padding vertical de 0 y horizontal de 12 px mediante `--space-compact`. Se conservan sus textos ES/EN, interlineado y separaciones de Home. Esta decisión sustituye el peso 400 y la capitalización visible anteriores de esos dos títulos.
+
+Junto a «Fundamentos por Área» hay un switch compacto. A la izquierda Producción muestra solo los destinos publicados según `publishedNavigation` y conserva sus ancestros. A la derecha Desarrollo muestra el árbol completo, incluidas ramas sin contenido y hojas deshabilitadas. Desarrollo es el estado inicial. La preferencia se guarda en `tech-training:availability:v1`. El cambio filtra la navegación y las tarjetas y contadores de Home sin cambiar la ruta ni abrir o cerrar ramas; sus estados se conservan. No publica contenido ni crea destinos para hojas pendientes.
+
+## 24 de octubre de 2026 — estructura pendiente de Diseño de API
+
+API Design / Diseño de API incorpora SOAP, GraphQL, gRPC, Webhook y WebSocket junto a REST API / API REST. Las cinco nuevas hojas conservan esos nombres técnicos en ES/EN y no tienen enlace ni página publicada. Se ven deshabilitadas en Desarrollo y se omiten en Producción mientras no tengan contenido disponible.
+
 ## 24 de octubre de 2026 — trabajo exclusivo en main
 
 Por orden expresa del usuario la IA trabaja siempre sobre `main` en `C:\Workspace\tech-training`. No crea ramas ni worktrees ni desarrolla en copias auxiliares. Solo una nueva instrucción explícita del usuario que revoque esta regla permite cambiar este flujo. Esta decisión sustituye la pauta anterior de crear ramas `codex/…`. Antes de editar comprueba carpeta, rama y cambios pendientes. Conserva los cambios ajenos y el historial. El resultado local se muestra en `http://localhost:4321/` y ese servidor se mantiene disponible. No hagas push ni publiques en Sites por esta petición.
 
-Home y el ajuste del chevron de idiomas ya están integrados en el checkout habitual. Las referencias anteriores a 4322/4327 y a cambios presentes solo en worktrees describen el estado histórico previo a esta integración.
+Home y el ajuste del chevron de idiomas ya están integrados en `main` en el checkout habitual. Los servidores auxiliares de 4322/4327 están detenidos. Las referencias anteriores a esos puertos y a cambios presentes solo en worktrees describen el estado histórico previo a esta integración. No se borran worktrees manualmente; la limpieza mediante archivo de los chats la coordina el chat principal.
+
+La configuración local [config.toml](../.codex/config.toml) deshabilita `create_worktree` del plugin `codex-app-tools@openai-bundled`. [main-only.rules](../.codex/rules/main-only.rules) prohíbe los prefijos cubiertos de creación de worktrees y ramas y `git branch`, conservando `git commit`. Las consultas de rama usan `git symbolic-ref --short HEAD` o `git for-each-ref`. Se verificaron decisiones con `codex execpolicy check` sin ejecutar los comandos evaluados. La carga requiere un proyecto confiable y reiniciar Codex. Las listas por herramienta y los prefijos son barreras parciales y no garantizan bloquear la interfaz de la aplicación, scripts, variantes de comandos u otras herramientas. No sustituyen la instrucción permanente de usar el checkout original y `main`. Véanse las [reglas oficiales](https://learn.chatgpt.com/docs/agent-configuration/rules) y la [configuración de herramientas MCP](https://learn.chatgpt.com/docs/config-file/config-reference).
 
 
 ## 24 de octubre de 2026 — espacio interior del selector de idiomas
@@ -67,7 +98,7 @@ Pulsar de nuevo la etapa activa de Home la desmarca y oculta el panel de recomen
 
 ## 24 de octubre: simplificación de textos de Home
 
-También se retiran el desplegable Cómo interpretar estos niveles con sus referencias y la sección completa de rutas disponibles. Las rutas siguen accesibles desde la navegación. La sección de perfiles se titula Elige tu Dirección con IBM Plex Mono 400 y capitalización solo en palabras principales. Se conservan los datos de fuentes profesionales como respaldo interno.
+También se retiran el desplegable Cómo interpretar estos niveles con sus referencias y la sección completa de rutas disponibles. Las rutas siguen accesibles desde la navegación. La sección de perfiles conserva el texto Elige tu Dirección. Su presentación posterior del 24 de octubre usa IBM Plex Mono 500 y mayúsculas por CSS, como Amplía tu Alcance. Se conservan los datos de fuentes profesionales como respaldo interno.
 
 Por petición expresa se retiran de la portada el título visible Fundamentos para entrevistas técnicas y su párrafo introductorio. También se eliminan la explicación de selección de perfil y etapa y la nota sobre la variación de títulos entre organizaciones. Inicio conserva un h1 solo accesible. Esta decisión sustituye la instrucción anterior de mostrar esos textos. No se alteran perfiles, etapas ni recomendaciones.
 
@@ -309,7 +340,7 @@ El sidebar es fijo en escritorio. A 850 px o menos pasa a un panel móvil con ba
 
 ## 5. Taxonomía y contenido
 
-El árbol completo y su orden se definen en `src/data/navigation.ts`. Las siete áreas principales aparecen en el mismo orden que la tabla de iconos. Por petición del 21 de octubre, todas las ramas con hijos se pueden desplegar aunque no tengan páginas disponibles. Sus descendientes se renderizan y conservan el árbol completo. Las hojas sin destino siguen como filas deshabilitadas sin enlace. Esta decisión sustituye el bloqueo recursivo de ramas sin contenido. Abrirlas no publica páginas ni cambia las rutas disponibles.
+El árbol completo y su orden se definen en `src/data/navigation.ts`. Las siete áreas principales aparecen en el mismo orden que la tabla de iconos. En Desarrollo, por petición del 21 de octubre, todas las ramas con hijos se pueden desplegar aunque no tengan páginas disponibles. Sus descendientes conservan el árbol completo. Producción muestra únicamente los destinos publicados y sus ancestros por la petición posterior del 24 de octubre. Las hojas sin destino siguen como filas deshabilitadas sin enlace. Esta decisión sustituye el bloqueo recursivo de ramas sin contenido. Abrirlas no publica páginas ni cambia las rutas disponibles.
 
 Por petición del usuario, dentro de Software Development aparece primero Frontend Development y después Backend Development.
 
@@ -348,7 +379,7 @@ Los 113 conceptos se revisaron con fuentes primarias o documentación del organi
 
 Las referencias apuntan al concepto específico. Por petición del usuario del 20 de octubre de 2026, los 14 patrones enlazan a sus páginas específicas de Refactoring.Guru. Factory Method usa su página en español y Simple Factory usa la sección específica de Factory Comparison en inglés y muestran Refactoring.Guru como organismo. Esta decisión sustituye los enlaces anteriores a UNC y Addison-Wesley y constituye una excepción a la preferencia general por fuentes primarias. SOLID enlaza a Martin y a Liskov y Wing. Otras referencias incluyen IETF, W3C, NASA, NIST, los proyectos Apache, documentación de los proveedores y artículos originales de investigación. Una institución no es una garantía absoluta: comprueba que el pasaje respalda la explicación y vuelve a revisar las referencias cuando cambie el contenido. No presentes una fuente como «la mejor del mundo» mediante una clasificación no verificable.
 
-Ese mismo día, el usuario pidió integrar los patrones de `C:\Workspace\design-pattern-practices` en Software Design. Esta área muestra `SOLID Principles` y el desplegable `Design Patterns`, que contiene las subpáginas `Creational`, `Structural` y `Behavioral`. El antiguo módulo de APIs REST y sus cinco conceptos siguen retirados de las páginas, búsqueda y repaso. El 22 de octubre se añade únicamente la estructura `API Design` → `REST API` dentro de Software Design, después de Design Patterns. Sus traducciones son `Diseño de API` → `API REST`. La rama se puede desplegar y la hoja permanece deshabilitada sin href hasta publicar contenido. Su `href` de área sigue apuntando a SOLID para las recomendaciones y las tarjetas de Home; el sidebar renderiza sus hijos. Se mantienen los IDs `solid`, `patrones` y los IDs de los conceptos conservados para mantener enlaces y progreso. Creational conserva el ID y la ruta anteriores `patrones`; las otras páginas usan `patrones-estructurales` y `patrones-comportamiento`.
+Ese mismo día, el usuario pidió integrar los patrones de `C:\Workspace\design-pattern-practices` en Software Design. Esta área muestra `SOLID Principles` y el desplegable `Design Patterns`, que contiene las subpáginas `Creational`, `Structural` y `Behavioral`. El antiguo módulo de APIs REST y sus cinco conceptos siguen retirados de las páginas, búsqueda y repaso. El 22 de octubre se añade únicamente la estructura `API Design` → `REST API` dentro de Software Design, después de Design Patterns. Sus traducciones son `Diseño de API` → `API REST`. La rama se puede desplegar en Desarrollo y la hoja permanece deshabilitada sin href hasta publicar contenido. La petición posterior del 24 de octubre añade SOAP, GraphQL, gRPC, Webhook y WebSocket con el mismo estado pendiente. Su `href` de área sigue apuntando a SOLID para las recomendaciones y las tarjetas de Home; el sidebar renderiza sus hijos. Se mantienen los IDs `solid`, `patrones` y los IDs de los conceptos conservados para mantener enlaces y progreso. Creational conserva el ID y la ruta anteriores `patrones`; las otras páginas usan `patrones-estructurales` y `patrones-comportamiento`.
 
 `src/data/design-patterns.ts` reúne 14 patrones: Facade, Adapter, Iterator, Simple Factory, Factory Method, Builder, Prototype, Strategy, Decorator, Observer, Singleton, State, Mediator y Visitor. `designPatternPages` los distribuye en las categorías GoF: Creational (Simple Factory, Factory Method, Builder, Prototype y Singleton), Structural (Facade, Adapter y Decorator) y Behavioral (Iterator, Strategy, Observer, State, Mediator y Visitor). Cada tarjeta de patrones muestra el nombre y la explicación conceptual con su fuente, además del nivel y el control de progreso compartidos. Actualmente no tienen casos de uso ni ejemplos, por lo que esos botones están deshabilitados. No se muestran frases de recuerdo. Búsqueda y repaso utilizan el párrafo de Explicación aunque se seleccione otro apartado con contenido.
 

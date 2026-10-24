@@ -1,6 +1,7 @@
 ---
 import Icon from '../Icon.astro';
 import NavigationTree from '../NavigationTree.astro';
+import AvailabilitySwitch from '../controls/AvailabilitySwitch.astro';
 import type { NavigationNode } from '../../data/navigation';
 interface Props { nodes: NavigationNode[] }
 const { nodes } = Astro.props;
@@ -11,8 +12,8 @@ const { nodes } = Astro.props;
         <button class="icon-button sidebar-close" id="sidebar-close" aria-label="Cerrar menú de rutas"><Icon name="close" /></button>
       </div>
       <div class="navigation-section">
-        <p class="nav-eyebrow" id="navigation-heading" lang="en">FOUNDATIONS BY AREA</p>
-        <nav class="course-nav" aria-labelledby="navigation-heading" lang="en">
+        <div class="navigation-heading-row"><p class="nav-eyebrow" id="navigation-heading" lang="en">FOUNDATIONS BY AREA</p><AvailabilitySwitch /></div>
+        <nav id="course-navigation" class="course-nav" aria-labelledby="navigation-heading" lang="en">
           <NavigationTree nodes={nodes} />
         </nav>
       </div>

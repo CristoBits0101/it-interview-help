@@ -61,7 +61,9 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
           { label: 'Behavioral', module: 'patrones-comportamiento', href: '#software-design/patrones-comportamiento' },
       ] },
       { label: 'API Design', children: [
-        { label: 'REST API' },
+        { label: 'REST API' }, { label: 'Webhook' },
+        { label: 'GraphQL' }, { label: 'SOAP' },
+        { label: 'WebSocket' }, { label: 'gRPC' },
       ] },
     ] },
     { label: 'Software Testing' }, { label: 'Software Quality' },

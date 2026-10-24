@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { hasPublishedContent } from '../lib/catalog';
 import type { NavigationNode } from '../data/navigation';
 interface Props { nodes: NavigationNode[]; depth?: number; parentPath?: string }
 const { nodes, depth = 0, parentPath = '' } = Astro.props;
@@ -7,7 +8,7 @@ const branchId = (label: string) => [parentPath, encodeURIComponent(label)].filt
 ---
 <ul class:list={['navigation-tree', { 'navigation-root': depth === 0 }]}>
   {nodes.map(node => (
-    <li>
+    <li data-catalog-published={hasPublishedContent(node)}>
       {!node.children?.length && !node.href ? (
         <span class="navigation-row navigation-disabled" aria-disabled="true">
           {depth === 0 && node.icon && <Icon name={node.icon} size={18} class="navigation-icon" />}

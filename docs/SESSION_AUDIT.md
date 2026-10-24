@@ -1,12 +1,53 @@
 # Auditoría de peticiones y continuidad de la sesión
 
-## 24 de octubre de 2026 — espacio interior del selector de idiomas
+## 24 de octubre de 2026 — separación vertical de Home reducida a 21 px
+
+Por petición posterior del usuario todos los espacios estructurales verticales de Home antes fijados en 42 px pasan a 21 px mediante `--space-home: 21px`. Incluye títulos y subtítulos respecto a sus bloques, pregunta de etapa respecto al grupo de niveles, filas de tarjetas y ambos lados de los separadores. Se conservan los gaps internos compactos y horizontales, el padding exterior, los demás tokens y las otras páginas. Las referencias a 42 px de las entradas anteriores describen el estado histórico sustituido por esta decisión. Se mantienen la geometría aceptada del selector y el orden de Diseño de API.
+
+
+## 24 de octubre de 2026 — separaciones estructurales y orden de Diseño de API
+
+La aclaración final aplica 42 px a la separación vertical estructural entre títulos, subtítulos, separadores y tarjetas de Home. Incluye la pregunta de etapa y su grupo de niveles. Se conservan los gaps compactos dentro de tarjetas y controles, incluido el interior del grupo de niveles, y los espacios horizontales.
+
+Diseño de API ordena sus hojas como API REST, Webhook, GraphQL, SOAP, WebSocket y gRPC. Es un recorrido pedagógico de carga inicial creciente: peticiones HTTP, notificaciones HTTP, consultas tipadas, contratos XML, conexiones persistentes y contratos binarios con generación de clientes. No representa una clasificación universal de dificultad. Solo cambia el orden compartido ES/EN; las hojas conservan etiquetas, identidad, disponibilidad y ausencia de contenido.
+
+
+Validación posterior: check de 59 archivos sin errores, advertencias ni sugerencias; currículo validado y build correcto. La pregunta de etapa usa de nuevo `--space-home` y el grupo conserva su gap compacto interno. El usuario confirma la separación visual y no se modifica después de esa aceptación. El orden de API está definido una sola vez en navigation.ts y conserva seis hojas sin href.
+
+## 24 de octubre de 2026 — aclaración de espaciado vertical y geometría del switch
+
+Los 42 px de `--space-home` se aplican únicamente a la separación vertical entre bloques y tarjetas y a ambos lados de los separadores. No se aplican al espacio interno entre textos ni a la separación horizontal entre tarjetas o controles. Esos espacios recuperan los tokens compactos anteriores. Esta aclaración sustituye la interpretación amplia del apartado de espaciado de Home. Se conservan la justificación y los demás estilos.
+
+El switch Producción/Desarrollo mantiene su posición y funcionamiento. Su pulgar tiene ancho y alto iguales de 1.75rem y la pista deriva sus dimensiones del pulgar y un inset de `calc(.125rem + .5px)` por la petición posterior de añadir 0.5 px interiores. A tamaño normal el pulgar mide 28 × 28 px y la pista 61 × 33 px. Los iconos comparten los centros de las dos posiciones.
+
+
+Validación de esta corrección: Astro check sobre 59 archivos sin errores, advertencias ni sugerencias. Build y git diff --check correctos. HTTP 200 en localhost:4321. En navegador integrado se miden pulgar 28 × 28 px, pista 61 × 33 px e inset de 2.5 px; los centros de iconos coinciden con ambas posiciones del pulgar. Se comprueba el cambio Producción/Desarrollo y se restaura Desarrollo. Home revisada en escritorio y a 390 px en inglés y 320 px en español sin desbordamiento de página. Los separadores visibles medidos mantienen 42 px a ambos lados y los gaps horizontales y de texto vuelven a valores compactos. No se realiza una nueva auditoría completa de accesibilidad.
+
+## 24 de octubre de 2026 — cabeceras de Home, disponibilidad y hojas de API
+
+Los títulos Elige tu Dirección y Amplía tu Alcance adoptan el tratamiento de las cabeceras de patrones: IBM Plex Mono 15 px/peso 500, mayúsculas por CSS, línea izquierda `--accent` de 2 px y padding horizontal de 12 px. Conservan textos ES/EN, interlineado y separaciones de Home.
+
+El switch junto a Fundamentos por Área presenta Producción a la izquierda y Desarrollo a la derecha. Producción filtra por `publishedNavigation` y conserva los ancestros de los destinos publicados. Desarrollo muestra todo y es el estado inicial. La selección se guarda en `tech-training:availability:v1`, afecta a navegación y tarjetas y contadores de Home y conserva la ruta y los estados de las ramas. SOAP, GraphQL, gRPC, Webhook y WebSocket se añaden bajo API Design / Diseño de API como hojas sin enlace en ambos idiomas. Solo están visibles en Desarrollo mientras sigan pendientes.
+
+Validación: `npm run check` sobre 59 archivos sin errores, advertencias ni sugerencias, comprobación de currículo y build correctos. Se reinicia el servidor habitual de `http://localhost:4321/` para retirar el estado anterior de la caché SSR. En el navegador integrado se comprueban ES/EN a 1440, 390 y 320 px sin desbordamiento de página. Los títulos calculados usan IBM Plex Mono a 15 px/peso 500, línea de 16 px, borde de 2 px y padding de 0/12 px. El chevron de idioma conserva el inset de 14 px. Las filas de navegación mantienen 48 px y el switch mide 60 × 44 px para quedar completo a 320 px. Sus iconos proceden de Lucide.
+
+Producción muestra dos áreas principales y oculta todas las ramas sin contenido. Desarrollo recupera siete áreas y las cinco hojas nuevas permanecen deshabilitadas. Se comprueban una etapa sin contenido y otra con una tarjeta publicada. Los contadores y la numeración se actualizan en ambos idiomas. Alternar conserva SOLID como ruta y los estados abiertos, incluida la rama API mientras está oculta. La recarga conserva idioma, modo y ramas. Funcionan clic, Espacio, Enter, flechas, Inicio y Fin, con foco visible. A 320 px se revisan ambos idiomas con raíz al 200 % y con espaciado personalizado sin desbordamiento de página; el menú mantiene su scroll horizontal interno. Se corrige la especificidad del color del indicador en colores forzados y se conserva la regla de movimiento reducido. Estas dos preferencias se revisan en CSS, sin emulación visual ni lector de pantalla.
+
+Sin errores de consola tras reiniciar. Se retiran las dos páginas temporales de prueba y se restauran Español, Frontend, Trainee y Desarrollo. El control automático de Google Chrome no estuvo disponible por permisos; la verificación visual se realiza en el navegador integrado, sin afirmar una recarga de Chrome. El servidor habitual queda disponible. No se realiza push ni publicación en Sites.
+
+## 24 de octubre de 2026 — integración local y límites de las barreras de main
+
+Los ajustes de Home antes revisados en 4322 y del selector de idiomas antes revisados en 4327 ya están incorporados en `C:\Workspace\tech-training`, rama `main`. Los servidores auxiliares están detenidos y el resultado actual se revisa en `http://localhost:4321/`. Las dos entradas siguientes conservan la evidencia histórica anterior a esa integración. No se han borrado worktrees manualmente; el chat principal coordina su limpieza mediante archivo de chats. El estado previo confirmado externamente no se atribuye a un commit realizado por esta intervención.
+
+La instrucción permanente exige el checkout original y `main`, sin nuevas ramas ni worktrees salvo revocación explícita del usuario. `.codex/config.toml` deshabilita `create_worktree` del plugin y `.codex/rules/main-only.rules` prohíbe los prefijos cubiertos de creación y `git branch` sin prohibir `git commit`. Se comprobaron decisiones mediante `codex execpolicy check` sin ejecutar los comandos evaluados. Requieren la configuración de proyecto confiable y reiniciar Codex. No son un bloqueo absoluto de la interfaz, scripts, variantes de comandos u otras herramientas.
+
+## 24 de octubre de 2026 — espacio interior del selector de idiomas — histórico previo a integración
 
 Se modifica únicamente el inset derecho del chevron de idiomas de 16 a 14 px. Su margen transparente añadía unos 3 px hasta el trazo visible. La distancia desde el borde exterior al inicio de la caja de texto conserva 17 px y la distancia al trazo visible de la flecha pasa de aproximadamente 19,02 a 17,02 px. El select conserva 106 × 44 px, padding de 8/38/8/16 px, Google Sans Flex a 14 px/peso 400 e interlineado de 16 px.
 
 Verificado en navegador en ES/EN a 1440, 390 y 320 px sin desbordamiento. Cambio de idioma por teclado, foco visible y persistencia tras recarga correctos. Sin errores ni avisos de consola. Astro check sobre 57 archivos sin errores, advertencias ni sugerencias y build correcto. El cambio está solo en `C:\Users\reuda\.codex\worktrees\6727\tech-training`; su servidor queda disponible en `http://127.0.0.1:4327/`. Se conserva la modificación previa de esta auditoría. No se realiza commit, push ni publicación en Sites.
 
-## 24 de octubre de 2026 — Home con separaciones de 42 px y prosa justificada
+## 24 de octubre de 2026 — Home con separaciones de 42 px y prosa justificada — histórico previo a integración
 
 La petición se limita al contenido principal de Home. `--space-home: 42px` centraliza las distancias entre bloques y tarjetas sin reducirlas en móvil. Se retiran los márgenes y paddings que se acumulaban en esas separaciones. Los separadores son elementos del flujo sin margen ni padding y reciben 42 px a cada lado mediante el gap del contenedor. El separador anterior a las recomendaciones se oculta junto con el panel al cerrar la etapa. Se conservan los insets funcionales de los controles, el padding exterior de `main`, los textos, la tipografía, los colores y `--line-body`.
 

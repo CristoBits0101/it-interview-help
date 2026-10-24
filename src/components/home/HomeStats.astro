@@ -1,8 +1,8 @@
 ---
 
-interface Props { stats: { value: number; label: string; detail: string }[] }
+interface Props { stats: { value: number; publishedValue?: number; label: string; detail: string }[] }
 const { stats } = Astro.props;
 ---
 <dl class="home-stats" aria-label="Resumen del catálogo">
-    {stats.map(stat => <div class="home-stat"><dt>{stat.label}</dt><dd class="home-stat-value">{stat.value}</dd><dd class="home-stat-detail">{stat.detail}</dd></div>)}
+    {stats.map(stat => <div class="home-stat"><dt>{stat.label}</dt><dd class="home-stat-value" data-home-total={stat.value} data-home-published={stat.publishedValue ?? stat.value}>{stat.value}</dd><dd class="home-stat-detail">{stat.detail}</dd></div>)}
   </dl>

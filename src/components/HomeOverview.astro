@@ -1,11 +1,11 @@
 ---
 import type { Track } from '../data/curriculum';
-import { navigation } from '../data/navigation';
+import { publishedNavigation as navigation } from '../data/published-catalog';
 import { careerProfiles, areaGuidance, careerBranches, careerTermDescriptions } from '../data/career-paths';
 import HomeStats from './home/HomeStats.astro';
 import CareerPaths from './home/CareerPaths.astro';
 import CareerGrowth from './home/CareerGrowth.astro';
-import { flattenNavigation, countConcepts } from '../lib/catalog';
+import { flattenNavigation, countConcepts, hasPublishedContent } from '../lib/catalog';
 import '../styles/home.css';
 
 interface Props { tracks: Track[] }
@@ -14,7 +14,7 @@ const catalog = flattenNavigation(navigation);
 const areas = new Map(catalog.map(node => [node.label, node]));
 const totalConcepts = tracks.reduce((total, track) => total + countConcepts(track), 0);
 const stats = [
-  { value: navigation.length, label: 'Áreas Principales', detail: 'Temas para repasar' },
+  { value: navigation.length, publishedValue: navigation.filter(hasPublishedContent).length, label: 'Áreas Principales', detail: 'Temas para repasar' },
   { value: tracks.length, label: 'Rutas con Contenido', detail: 'Disponibles para estudiar' },
   { value: totalConcepts, label: 'Conceptos', detail: 'Breves y conectados' },
   { value: careerProfiles.length, label: 'Perfiles Profesionales', detail: 'Un camino para cada objetivo' },

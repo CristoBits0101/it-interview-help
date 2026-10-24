@@ -46,7 +46,7 @@
     --space-navigation-indent: 24px;
     --gap-navigation-indent: calc(var(--space-navigation-indent) / 2);
     --space-page: 42px;
-    --space-home: 42px;
+    --space-home: 21px;
     --space-gap: calc(var(--space-page) / 2);
     --space-panel: 32px;
     --gap-panel: calc(var(--space-panel) / 2);
