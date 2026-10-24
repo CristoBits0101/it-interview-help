@@ -22,6 +22,8 @@ La composición conserva el marcado útil existente para evitar cambios visuales
 
 ## Comportamiento
 
+`ImplementationGuide.astro` presenta los ejemplos Java de los patrones en un diálogo. Recibe un `PatternGuide` tipado y deriva los fragmentos de sus rangos sobre el código completo. `implementation-guides.ts` gestiona apertura y navegación manual y copia. El cierre reutiliza `dialogs.ts`. `ConceptViewTabs.astro` identifica esta acción mediante `aria-haspopup="dialog"` y conserva la semántica de selección de las otras dos vistas.
+
 `app.ts` coordina ruta, búsqueda, niveles, idioma y progreso. Delega funciones delimitadas:
 
 - `navigation.ts` mide el sidebar y persiste las ramas abiertas.

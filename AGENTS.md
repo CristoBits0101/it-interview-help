@@ -1,5 +1,13 @@
 # Tech Interview Prep — instrucciones para agentes
 
+## Guías de patrones — 24 de octubre de 2026
+
+El usuario solicita un caso de uso mínimo y una implementación explicada por pasos. Los 14 patrones tienen un caso de uso de una frase. La vista Implementación abre una guía manual de 3 a 5 pasos en un diálogo amplio. Cada paso explica qué pieza crear y por qué va en ese orden con una frase breve fuera del código y de 1 a 3 líneas clave resaltadas. El problema pertenece a Caso de uso y no se repite como paso de implementación. No añadir teoría extensa ni comentarios que narren cada línea.
+
+`src/data/pattern-guides/` conserva el código Java completo y los rangos que forman los pasos. Los fragmentos se derivan de ese código para evitar versiones distintas. Prototype copia la configuración de un servidor y cambia la IP de la copia sin alterar el original. Hay salida esperada y código completo copiable. Las explicaciones originales y el progreso se mantienen. Los textos nuevos se publican en ES/EN mediante `patternGuideTranslations` e `i18n.ts`. El código usa IBM Plex Mono mediante el token `--code`. Esta excepción tipográfica es para el código solicitado.
+
+Esta petición sustituye la restricción de no completar los casos de uso y las implementaciones de los patrones. Los otros conceptos conservan sus vistas existentes. La implementación abre un diálogo con `aria-haspopup` y devuelve el foco al cerrarse. Explicación y Caso de uso siguen cambiando solo el cuerpo de la tarjeta.
+
 ## Entrega en GitHub — 23 de octubre de 2026
 
 El usuario autoriza subir los cambios acumulados a GitHub y detener los servidores locales al finalizar la sesión. Esta petición sustituye el bloqueo anterior de mantener este lote pendiente de subir. No autoriza publicar en Sites ni apagar el ordenador de nuevo. El estado de entrega se comprueba con Git y las auditorías anteriores de «pendiente de subir» describen el estado previo a esta autorización.

@@ -2,20 +2,26 @@
 import ConceptSource from './ConceptSource.astro';
 import LearnButton from './LearnButton.astro';
 import ConceptViewTabs from './ConceptViewTabs.astro';
+import ImplementationGuide from './ImplementationGuide.astro';
+import { patternGuides } from '../../data/pattern-guides/index';
 import { createConceptViews } from '../../lib/concept-views';
 import { translatePatternTitle } from '../../scripts/i18n';
 import type { Concept } from '../../data/curriculum';
 interface Props { concept: Concept; index: number; isPattern?: boolean; searchAliases?: string; hideEmptyViews?: boolean }
 const { concept, index, isPattern = false, searchAliases, hideEmptyViews = false } = Astro.props;
 const views = createConceptViews(concept);
+const guide = isPattern ? patternGuides[concept.id] : undefined;
+const implementationDialogId = guide ? `implementation-${concept.id}` : undefined;
 ---
 <article class="concept-card" id={`concept-${concept.id}`} data-concept-id={concept.id} data-level={concept.level} data-search-aliases={searchAliases}>
                 <div class="card-top"><div class="card-heading"><span class="concept-number">{String(index + 1).padStart(2, '0')}</span><h3 data-pattern-title={isPattern ? concept.title : undefined} lang={isPattern ? 'es' : undefined} translate={isPattern ? 'no' : undefined}>{isPattern ? translatePatternTitle(concept.title, 'es') : concept.title}</h3></div><span class={`level-badge level-${concept.level.toLowerCase()}`}>{concept.level}</span></div>
                 <div class="concept-description" aria-live="polite" aria-atomic="true">
-                  {views.map(view => <div id={`concept-${concept.id}-${view.id}`} data-card-panel={view.id} hidden={!view.active}><p>{view.content}</p></div>)}
+                  {views.filter(view => !(guide && view.id === 'example')).map(view => <div id={`concept-${concept.id}-${view.id}`} data-card-panel={view.id} hidden={!view.active}><p>{view.content}</p></div>)}
                 </div>
                 <ConceptSource source={concept.source} conceptTitle={concept.title} />
                 <div class="card-footer">
-                  <ConceptViewTabs views={views} conceptId={concept.id} title={concept.title} hidden={hideEmptyViews && !concept.useCase?.trim() && !concept.example?.trim()} />
+                  <ConceptViewTabs views={views} conceptId={concept.id} title={concept.title} implementationDialogId={implementationDialogId} hidden={hideEmptyViews && !concept.useCase?.trim() && !concept.example?.trim()} />
                   <LearnButton conceptId={concept.id} />
-                </div></article>
+                </div>
+                {guide && <ImplementationGuide guide={guide} conceptId={concept.id} title={concept.title} />}
+              </article>

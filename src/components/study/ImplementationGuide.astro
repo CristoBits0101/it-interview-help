@@ -1,0 +1,49 @@
+---
+import Icon from '../Icon.astro';
+import { translatePatternTitle } from '../../scripts/i18n';
+import type { PatternGuide } from '../../data/pattern-guides/types';
+import '../../styles/implementation-guide.css';
+
+interface Props { guide: PatternGuide; conceptId: string; title: string }
+const { guide, conceptId, title } = Astro.props;
+const id = `implementation-${conceptId}`;
+const lines = guide.code.split('\n');
+---
+<dialog class="implementation-dialog" id={id} aria-labelledby={`${id}-title`} data-implementation>
+  <header class="implementation-header">
+    <div>
+      <p class="implementation-label"><span>Implementación</span> · Java</p>
+      <h2 id={`${id}-title`} data-pattern-title={title} lang="es" translate="no" tabindex="-1">{translatePatternTitle(title, 'es')}</h2>
+    </div>
+    <button class="icon-button" type="button" data-close-dialog aria-label="Cerrar implementación"><Icon name="close" size={20} /></button>
+  </header>
+
+  <div class="implementation-body">
+    <ol class="implementation-index" aria-label="Pasos de implementación">
+      {guide.steps.map((step, index) => <li><button type="button" data-guide-go={index} aria-current={index === 0 ? 'step' : undefined} aria-controls={`${id}-step-${index}`} title={step.title.es}>{index + 1}<span class="sr-only"> {step.title.es}</span></button></li>)}
+    </ol>
+
+    {guide.steps.map((step, index) => <section data-guide-step={index} id={`${id}-step-${index}`} aria-labelledby={`${id}-heading-${index}`} hidden={index !== 0}>
+      <h3 id={`${id}-heading-${index}`}>{step.title.es}</h3>
+      <p class="implementation-why">{step.why.es}</p>
+      <div class="implementation-code" tabindex="0" role="region" aria-label="Código de este paso">
+        <pre translate="no"><code>{lines.slice(step.from - 1, step.to).map((line, offset) => <span class:list={['implementation-code-line', { 'is-key': step.focus.includes(step.from + offset) }]}><span class="implementation-line-number">{step.from + offset}</span>{line || ' '}</span>)}</code></pre>
+      </div>
+      <p class="implementation-hint"><span>Líneas clave</span>: {step.focus.join(', ')}.</p>
+      {index === guide.steps.length - 1 && <div class="implementation-output"><p>Salida esperada</p><pre translate="no"><code>{guide.output}</code></pre></div>}
+    </section>)}
+
+    <details class="implementation-complete">
+      <summary>Ver código completo</summary>
+      <div class="implementation-copy-row"><span translate="no">Main.java</span><button type="button" class="implementation-control" data-guide-copy>Copiar código</button></div>
+      <div class="implementation-code" tabindex="0" role="region" aria-label="Código completo"><pre translate="no"><code data-guide-code>{guide.code}</code></pre></div>
+      <p class="implementation-copy-status" data-copy-status role="status"></p>
+    </details>
+  </div>
+
+  <footer class="implementation-footer">
+    <button type="button" class="implementation-control" data-guide-previous disabled><Icon name="chevron" size={16} class="implementation-back" /><span>Anterior</span></button>
+    <p class="implementation-position" role="status" aria-live="polite" aria-atomic="true"><span>Paso</span> <span data-guide-current>1</span> / {guide.steps.length}</p>
+    <button type="button" class="implementation-control" data-guide-next disabled={guide.steps.length < 2}><span>Siguiente</span><Icon name="chevron" size={16} /></button>
+  </footer>
+</dialog>

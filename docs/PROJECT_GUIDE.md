@@ -1,5 +1,15 @@
 # Memoria de producto, diseño y desarrollo
 
+## 24 de octubre: casos de uso mínimos e implementación por pasos
+
+Cada patrón incorpora un caso de uso de una frase y una guía Java de 3 a 5 pasos manuales. El caso de uso contiene el escenario concreto. La implementación empieza directamente por las piezas del programa y explica su orden de construcción con una frase breve por paso. No repite el problema ni añade teoría extensa. Los ejemplos no llevan comentarios internos.
+
+La acción Implementación abre un diálogo amplio con pasos numerados y navegación Anterior/Siguiente. Cada paso muestra un fragmento del mismo código completo y resalta entre una y tres líneas clave. La salida se identifica como esperada y se muestra en el último paso. El código completo está disponible para consulta y copia. No se ejecuta Java en el navegador. Prototype utiliza la copia de una configuración de servidor con una IP diferente y conserva la configuración original.
+
+Los datos bilingües viven en `src/data/pattern-guides/`. Sus rangos se interpretan sobre el código completo y las traducciones se integran con el motor existente. `ImplementationGuide.astro` y `implementation-guides.ts` contienen la presentación y la interacción reutilizables. La vista de código usa el token `--code` basado en IBM Plex Mono. Se conservan los IDs de conceptos y módulos y el progreso. La navegación del diálogo es manual y permite cerrar con Escape. Explicación y Caso de uso siguen alternando dentro de la tarjeta.
+
+Esta petición habilita esas dos vistas en los 14 patrones y sustituye las restricciones históricas que indicaban dejarlas vacías. No modifica las definiciones existentes ni añade ejemplos a SOLID o al glosario.
+
 ## Entrega de la sesión — 23 de octubre de 2026
 
 El usuario autoriza expresamente subir a GitHub el lote acumulado del glosario, componentes y ajustes de interfaz. Sustituye la instrucción anterior de mantenerlo pendiente de subir. La web de Sites requiere una publicación independiente y no se despliega con esta petición. Se detienen los servidores locales al terminar. No se repite el apagado solicitado en la sesión del día anterior.

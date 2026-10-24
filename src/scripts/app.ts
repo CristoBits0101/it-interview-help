@@ -1,6 +1,7 @@
 import { $, $$ } from './dom';
 import { initializeNavigationDrawer } from './navigation-drawer';
 import { initializeStudyCards } from './study-cards';
+import { initializeImplementationGuides } from './implementation-guides';
 import { initializeReview } from './review';
 import { initializeDialogs } from './dialogs';
 import { initializeNavigation } from './navigation';
@@ -184,6 +185,7 @@ function refreshView() {
 }
 
 function goToHash(initial = false) {
+  document.querySelectorAll<HTMLDialogElement>('[data-implementation][open]').forEach(dialog => dialog.close());
   const route = location.hash.slice(1);
   if (route === 'main' && !initial) return;
   if (route === 'study' && routeMode === 'module') return;
@@ -251,6 +253,7 @@ const moveLevel = (step: number) => {
 levelPrevious.addEventListener('click', () => moveLevel(-1));
 levelNext.addEventListener('click', () => moveLevel(1));
 
+initializeImplementationGuides($('#concept-library'), () => language);
 initializeStudyCards($('#concept-library'), learnId => {
   if (learned.has(learnId)) learned.delete(learnId);
   else learned.add(learnId);

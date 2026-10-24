@@ -1,7 +1,22 @@
 import { glossaryTranslations } from '../data/ai-glossary';
+import { patternGuideTranslations } from '../data/pattern-guides/index';
 export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
+  ...patternGuideTranslations,
+  'Cerrar implementación': 'Close implementation',
+  'Pasos de implementación': 'Implementation steps',
+  'Paso': 'Step',
+  'Anterior': 'Previous',
+  'Siguiente': 'Next',
+  'Código de este paso': 'Code for this step',
+  'Líneas clave': 'Key lines',
+  'Ver código completo': 'View complete code',
+  'Código completo': 'Complete code',
+  'Copiar código': 'Copy code',
+  'Código copiado.': 'Code copied.',
+  'Selecciona el código para copiarlo.': 'Select the code to copy it.',
+  'Salida esperada': 'Expected output',
   'Construye interfaces web.': 'Builds web interfaces.',
   'Implementa la lógica de negocio.': 'Implements business logic.',
   'Conecta interfaces y servicios web.': 'Connects web interfaces and services.',

@@ -1,5 +1,6 @@
 import { conceptSources } from './concept-sources';
 import type { Concept } from './curriculum';
+import { patternGuides } from './pattern-guides/index';
 
 export const designPatterns: Concept[] = [
   {
@@ -100,7 +101,12 @@ export const designPatterns: Concept[] = [
     source: conceptSources.visitor,
     level: 'Avanzado',
   },
-];
+].map(concept => ({
+  ...concept,
+  level: concept.level as Concept['level'],
+  useCase: patternGuides[concept.id].useCase.es,
+  example: patternGuides[concept.id].code,
+}));
 
 const patternPages = [
   {

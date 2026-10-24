@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev --host 127.0.0.1",
+    "dev": "astro dev",
     "check": "astro check",
     "check:curriculum": "node scripts/check-curriculum.mjs",
     "build": "astro build",

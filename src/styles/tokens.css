@@ -27,6 +27,7 @@
     --body: 'Google Sans Flex Variable', sans-serif;
     --display: var(--body);
     --brand: 'IBM Plex Mono', monospace;
+    --code: var(--brand);
     --font-brand: 1.25rem;
     --font-count: .8125rem;
     --font-meta: .8125rem;

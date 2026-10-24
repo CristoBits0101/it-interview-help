@@ -1,5 +1,19 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 24 de octubre de 2026 — casos de uso mínimos y guías Java
+
+El usuario concreta que el problema se explica en Caso de uso mediante un ejemplo mínimo y que Implementación presenta el código por pasos de construcción con explicaciones breves y líneas clave. Se añaden 14 casos de uso de una frase y 58 pasos repartidos en guías de 3 a 5 pasos. Las frases que explican los pasos tienen como máximo 17 palabras en español. Los fragmentos se derivan de un único ejemplo completo por patrón. Prototype copia una configuración de servidor y cambia la IP de la copia.
+
+Las guías se abren en un diálogo con navegación manual y acceso al código completo. Se conservan las explicaciones originales y la selección de las otras vistas. El código usa IBM Plex Mono mediante el token compartido `--code`. Todos los textos de interfaz y de explicación tienen versión ES/EN. No hay ejecución Java dentro de la web.
+
+Verificación realizada: los 14 programas compilan con Java 17 y producen la salida documentada. Se validan cobertura de los 14 IDs y los 58 rangos y resaltados y sus traducciones. Astro check informa cero errores y advertencias. La comprobación del currículo y el build terminan correctamente. En navegador se comprueban las 14 aperturas y cierres y sus últimos pasos y salidas. Prototype verifica cambio de paso y código completo y traducción y cierre con Escape con retorno de foco. Volver a la ruta anterior cierra el diálogo antes de mover el foco a main. Se revisan marcos de 320 y 390 px y texto al 200 % sin desbordamiento horizontal de página. El código conserva desplazamiento horizontal interno. Se corrige el reflujo de los controles con texto ampliado.
+
+El navegador de pruebas usa HTTP y verifica la alternativa de selección manual cuando Clipboard API no está disponible. El botón usa Clipboard API cuando está disponible. No se ha afirmado una prueba de copia en HTTPS.
+
+Para la vista previa se retira el argumento redundante de host del script dev para que admita el host aportado por el entorno. Astro mantiene su host local por defecto. Se permite únicamente `terminal.local` como host adicional de desarrollo. No se desactiva la comprobación de hosts ni se alteran dependencias. La página temporal de pruebas responsive se retira antes de empaquetar.
+
+La versión publicada de Sites está por detrás de GitHub. La entrega anterior documenta subir a GitHub sin publicar Sites. Se prepara el cambio completo y comprobable y se deja la publicación pendiente de confirmación antes de incorporar también los cambios anteriores del sitio.
+
 ## 23 de octubre de 2026 — entrega autorizada en GitHub
 
 El usuario pide detener el servidor y subir el código a GitHub. Se prepara la entrega del lote acumulado con el glosario bilingüe, componentes reutilizables y últimos ajustes de Home y patrones. Esta autorización sustituye la retención local de las entradas históricas. Se comprueban tipos, currículo, compilación y diferencias antes de crear el commit y subirlo. No se publica Sites ni se apaga el ordenador. El resultado real de la sincronización se verifica con Git.
