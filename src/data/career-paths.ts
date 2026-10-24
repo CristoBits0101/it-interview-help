@@ -1,3 +1,5 @@
+import { additionalAreaGuidance, additionalCareerProfileTemplates, additionalCareerSources } from './career-additional-profiles';
+
 export interface CareerStage {
   id: string;
   label: string;
@@ -96,7 +98,7 @@ export const careerTermDescriptions: Record<string, string> = {
   Senior: 'Aborda problemas complejos con criterio y orienta a otros profesionales.',
 };
 
-export const careerProfiles: CareerProfile[] = careerProfileTemplates.map(profile => ({
+export const careerProfiles: CareerProfile[] = [...careerProfileTemplates, ...additionalCareerProfileTemplates].map(profile => ({
   ...profile,
   stages: careerStages.map(({ id, label, terms, experience }) => {
     const stage = profile.stages.find(stage => stage.id === id)!;
@@ -109,6 +111,7 @@ export const careerProfiles: CareerProfile[] = careerProfileTemplates.map(profil
 }));
 
 export const areaGuidance: Record<string, { focus: string; prerequisites: string[] }> = {
+  ...additionalAreaGuidance,
   'Computing Fundamentals': { focus: 'Comprende el hardware y el software. Trabaja con archivos y herramientas básicas antes de profundizar en los sistemas.', prerequisites: [] },
   'Security Fundamentals': { focus: 'Identifica amenazas y protege la confidencialidad y la integridad de la información. Aplica el mínimo privilegio.', prerequisites: [] },
   'Artificial Intelligence Fundamentals': { focus: 'Representa problemas y razona sobre posibles soluciones. Distingue búsqueda y aprendizaje a partir de datos.', prerequisites: ['Programming Fundamentals'] },
@@ -169,6 +172,7 @@ export const careerBranches: { title: string; description: string; sequence: str
 ];
 
 export const careerSources = [
+  ...additionalCareerSources,
   { title: 'MDN · fundamentos de desarrollo web', url: 'https://developer.mozilla.org/en-US/curriculum/core/' },
   { title: 'MDN · primeros pasos en backend', url: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps' },
   { title: 'Google · prerrequisitos de Machine Learning', url: 'https://developers.google.com/machine-learning/crash-course/prereqs-and-prework' },

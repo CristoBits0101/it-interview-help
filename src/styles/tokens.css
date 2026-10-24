@@ -37,6 +37,9 @@
     --font-section: .9375rem;
     --line-body: 1rem;
     --control-border: var(--text-soft);
+    --motion-fast: 160ms;
+    --motion-duration: 200ms;
+    --motion-ease: ease-out;
     --radius-card: 12px;
     --radius-control: 8px;
     --radius-profile: 1rem;

@@ -1,7 +1,15 @@
 import { glossaryTranslations } from '../data/ai-glossary';
+import { careerDirectionTranslations } from '../data/career-directions-translations';
 export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
+  ...careerDirectionTranslations,
+  'Elige un área profesional': 'Choose a professional area',
+  'Elige un puesto': 'Choose a role',
+  'Área anterior': 'Previous area',
+  'Área siguiente': 'Next area',
+  'Puestos anteriores': 'Previous roles',
+  'Puestos siguientes': 'Next roles',
   'Prepara tu próxima entrevista técnica': 'Prepare for your next technical interview',
   'Reúne en un solo lugar los fundamentos esenciales de cada área relevante para tu puesto. Ofrece una base mínima para preparar entrevistas técnicas con conocimientos que suelen estar dispersos por internet. Las preguntas de pruebas reales se incorporarán con fuentes verificadas.': 'Bring together the essential fundamentals of each area relevant to your role in one place. Build a minimum foundation for technical interviews with knowledge often scattered across the internet. Questions from real assessments will be added with verified sources.',
   '0 años': '0 years',

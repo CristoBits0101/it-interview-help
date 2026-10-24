@@ -3,6 +3,7 @@ import { t } from '../lib/translations';
 import type { Track } from '../data/curriculum';
 import { publishedNavigation as navigation } from '../data/published-catalog';
 import { careerProfiles, areaGuidance, careerBranches, careerTermDescriptions } from '../data/career-paths';
+import { careerDirections } from '../data/career-directions';
 import HomeStats from './home/HomeStats.astro';
 import CareerPaths from './home/CareerPaths.astro';
 import CareerGrowth from './home/CareerGrowth.astro';
@@ -31,7 +32,7 @@ const stats = [
   <HomeStats stats={stats} />
   <hr class="home-separator" />
 
-  <CareerPaths profiles={careerProfiles} tracks={tracks} areas={areas} guidanceByArea={areaGuidance} termDescriptions={careerTermDescriptions} />
+  <CareerPaths profiles={careerProfiles} directions={careerDirections} tracks={tracks} areas={areas} guidanceByArea={areaGuidance} termDescriptions={careerTermDescriptions} />
   <hr class="home-separator" />
 
   <CareerGrowth branches={careerBranches} />

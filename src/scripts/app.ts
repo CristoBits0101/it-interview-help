@@ -204,14 +204,14 @@ function goToHash(initial = false) {
   if (homeAnchor) requestAnimationFrame(() => homeAnchor.scrollIntoView({ block: 'start' }));
   else if (!initial) {
     $('#main').focus({ preventScroll: true });
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
   }
 }
 window.addEventListener('hashchange', () => goToHash());
 $('.skip-link').addEventListener('click', event => {
   event.preventDefault();
   $('#main').focus({ preventScroll: true });
-  window.scrollTo({ top: 0, behavior: 'instant' });
+  window.scrollTo({ top: 0, behavior: 'auto' });
 });
 $$<HTMLAnchorElement>('[data-route], [data-nav-link], [data-home-link], .brand').forEach(link => {
   link.addEventListener('click', event => {
