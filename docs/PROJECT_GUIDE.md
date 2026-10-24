@@ -1,5 +1,15 @@
 # Memoria de producto, diseño y desarrollo
 
+## 24 de octubre de 2026 — etapas sin ordinales y experiencia orientativa
+
+Los cuatro botones de etapa retiran los ordinales 1–4. El rango de años se alinea en la misma fila que los nombres con estilo secundario discreto. Solo se permite reflujo cuando falta ancho. Conservan nombres e IDs y muestran experiencia orientativa compartida por todos los perfiles: Trainee/Becario 0 años, Entry Level/Junior 0-2 años, Mid-Level/Semi-Senior 2-5 años y Senior 5+ años. Es una propuesta editorial de orientación y no una equivalencia oficial ni un filtro obligatorio. Una nota visible bilingüe aclara que los años dependen del rol y la empresa. Se mantienen los gaps aprobados y los tooltips de las etiquetas. Esta petición sustituye la prohibición anterior de mostrar años en estas etapas.
+
+
+## 24 de octubre de 2026 — favicon minimalista reutilizable
+
+Tech Interview Prep conserva CodeXml de Lucide como símbolo de código minimalista. El alias `brand` de Icon.astro permite reutilizarlo sin vincularlo al área de programación. El favicon SVG de 32 px utiliza el token verde y un trazo de 2.25 unidades para mejorar su definición en pestañas pequeñas. Icon.astro conserva el trazo anterior de 1.65 por defecto para los otros pictogramas. El recurso se genera en src/pages/favicon.svg.ts y no añade icono a la marca visible ni altera Home.
+
+
 ## 24 de octubre de 2026 — separación vertical de Home reducida a 21 px
 
 Por petición posterior del usuario todos los espacios estructurales verticales de Home antes fijados en 42 px pasan a 21 px mediante `--space-home: 21px`. Incluye títulos y subtítulos respecto a sus bloques, pregunta de etapa respecto al grupo de niveles, filas de tarjetas y ambos lados de los separadores. Se conservan los gaps internos compactos y horizontales, el padding exterior, los demás tokens y las otras páginas. Las referencias a 42 px de las entradas anteriores describen el estado histórico sustituido por esta decisión. Se mantienen la geometría aceptada del selector y el orden de Diseño de API.

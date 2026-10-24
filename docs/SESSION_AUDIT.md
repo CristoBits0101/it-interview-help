@@ -1,5 +1,15 @@
 # Auditoría de peticiones y continuidad de la sesión
 
+## 24 de octubre de 2026 — etapas sin ordinales y experiencia orientativa
+
+Los cuatro botones de etapa retiran los ordinales 1–4. El rango de años se alinea en la misma fila que los nombres con estilo secundario discreto. Solo se permite reflujo cuando falta ancho. Conservan nombres e IDs y muestran experiencia orientativa compartida por todos los perfiles: Trainee/Becario 0 años, Entry Level/Junior 0-2 años, Mid-Level/Semi-Senior 2-5 años y Senior 5+ años. Es una propuesta editorial de orientación y no una equivalencia oficial ni un filtro obligatorio. Una nota visible bilingüe aclara que los años dependen del rol y la empresa. Se mantienen los gaps aprobados y los tooltips de las etiquetas. Esta petición sustituye la prohibición anterior de mostrar años en estas etapas.
+
+
+## 24 de octubre de 2026 — favicon minimalista reutilizable
+
+Tech Interview Prep conserva CodeXml de Lucide como símbolo de código minimalista. El alias `brand` de Icon.astro permite reutilizarlo sin vincularlo al área de programación. El favicon SVG de 32 px utiliza el token verde y un trazo de 2.25 unidades para mejorar su definición en pestañas pequeñas. Icon.astro conserva el trazo anterior de 1.65 por defecto para los otros pictogramas. El recurso se genera en src/pages/favicon.svg.ts y no añade icono a la marca visible ni altera Home.
+
+
 ## 24 de octubre de 2026 — separación vertical de Home reducida a 21 px
 
 Por petición posterior del usuario todos los espacios estructurales verticales de Home antes fijados en 42 px pasan a 21 px mediante `--space-home: 21px`. Incluye títulos y subtítulos respecto a sus bloques, pregunta de etapa respecto al grupo de niveles, filas de tarjetas y ambos lados de los separadores. Se conservan los gaps internos compactos y horizontales, el padding exterior, los demás tokens y las otras páginas. Las referencias a 42 px de las entradas anteriores describen el estado histórico sustituido por esta decisión. Se mantienen la geometría aceptada del selector y el orden de Diseño de API.
@@ -539,3 +549,7 @@ Corrección posterior del 24 de octubre: el usuario prefiere el infinitivo. La f
 Se retiran los comentarios de código de los datos, estilos y scripts. Se conserva la documentación y se registra en AGENTS y PROJECT_GUIDE la pauta permanente de no introducir nuevos comentarios. La retirada en TypeScript y JavaScript conserva la representación del código sin comentarios para comprobar que no cambia su comportamiento.
 
 Validación: comprobación de tipos sin errores ni advertencias. Auditoría del currículo y compilación correctas. No se modifica el diseño ni se suben los cambios.
+
+Verificación posterior de etapas y favicon: check de 59 archivos sin errores ni advertencias, currículo y build correctos. Se comprueban los cuatro rangos ES/EN y la ausencia de ordinales en el HTML generado. El endpoint favicon.svg responde 200 con MIME image/svg+xml y se inspeccionan renderizados de 16 y 32 px. No había sesión de navegador disponible para una nueva prueba interactiva de etapas.
+
+Auditoría de patrones: 14 de 14 guías completas en datos e integración (5 creacionales, 3 estructurales y 6 de comportamiento). Casos de uso ES/EN no vacíos, 3–5 pasos bilingües, rangos válidos y 1–3 líneas clave por paso, código Main completo, salida esperada y vínculo de cada tarjeta con su diálogo verificados. Copia de código conectada a clipboard. No se ejecutan los ejemplos Java en esta auditoría.

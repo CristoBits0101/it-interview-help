@@ -4,6 +4,11 @@ export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
   ...patternGuideTranslations,
+  '0 años': '0 years',
+  '0-2 años': '0-2 years',
+  '2-5 años': '2-5 years',
+  '5+ años': '5+ years',
+  'Años orientativos según el rol y la empresa. No son requisitos obligatorios.': 'Indicative years depending on the role and company. These are not mandatory requirements.',
   'Producción': 'Production',
   'Desarrollo': 'Development',
   'Mostrar áreas en desarrollo': 'Show areas in development',

@@ -7,7 +7,7 @@ import {
 } from 'lucide-astro';
 
 const icons = {
-  arrow: ArrowRight, link: Link2, check: Check, circle: Circle, dot: Circle,
+  brand: CodeXml, arrow: ArrowRight, link: Link2, check: Check, circle: Circle, dot: Circle,
   chevron: ChevronRight, down: ChevronDown,
   bulb: Lightbulb, target: Target, menu: Menu,
   search: Search, close: X, copy: Copy, rocket: Rocket,
@@ -16,8 +16,8 @@ const icons = {
   workflow: Workflow, shield: ShieldCheck, science: FlaskConical, brain: BrainCircuit,
 };
 export type IconName = keyof typeof icons;
-interface Props { name: IconName; size?: number; class?: string; color?: string }
-const { name, size = 20, class: className = '', color } = Astro.props;
+interface Props { name: IconName; size?: number; class?: string; color?: string; strokeWidth?: number }
+const { name, size = 20, class: className = '', color, strokeWidth = 1.65 } = Astro.props;
 const Glyph = icons[name];
 ---
-<Glyph size={size} class={className} color={color} fill={name === 'dot' ? 'currentColor' : 'none'} stroke-width={1.65} aria-hidden="true" focusable="false" />
+<Glyph size={size} class={className} color={color} fill={name === 'dot' ? 'currentColor' : 'none'} stroke-width={strokeWidth} aria-hidden="true" focusable="false" />

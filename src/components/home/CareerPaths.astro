@@ -22,8 +22,9 @@ const stages = profiles[0].stages;
     <div class="career-stage-section">
       <p class="career-control-label" id="career-stage-label">¿En qué etapa quieres trabajar?</p>
       <ol class="career-stage-options" aria-labelledby="career-stage-label">
-        {stages.map((stage, index) => <CareerStageOption stage={stage} index={index} selected={index === 0} descriptions={termDescriptions} />)}
+        {stages.map((stage, index) => <CareerStageOption stage={stage} selected={index === 0} descriptions={termDescriptions} />)}
       </ol>
+      <p class="career-stage-note" id="career-experience-note">Años orientativos según el rol y la empresa. No son requisitos obligatorios.</p>
     </div>
 
     <p id="career-selection-status" class="sr-only" role="status" aria-live="polite"></p>
