@@ -5,7 +5,7 @@
   .career-carousel-heading > .career-control-label { flex: 1 1 auto; min-width: 0; }
   .career-carousel-heading > .career-carousel-range { margin-inline-start: auto; }
   .career-carousel-range { color: var(--text-soft); font-size: var(--font-body); white-space: nowrap; }
-  .career-carousel-row { display: flex; flex-direction: column; gap: var(--gap-control); min-width: 0; }
+  .career-carousel-row { display: flex; flex-direction: column; gap: var(--space-home); min-width: 0; }
   .career-carousel-viewport { --carousel-item-width: min(var(--carousel-max-width), calc((100% - (var(--carousel-columns) - 1) * var(--gap-control)) / var(--carousel-columns))); display: grid; grid-auto-flow: column; grid-auto-columns: var(--carousel-item-width); max-inline-size: calc(5 * var(--carousel-max-width) + 4 * var(--gap-control)); gap: var(--gap-control); min-width: 0; overflow-x: auto; overscroll-behavior-inline: contain; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .career-carousel-viewport::-webkit-scrollbar { display: none; }
   .career-carousel-viewport > [data-carousel-item] { scroll-snap-align: start; scroll-margin: 0; min-width: 0; }
@@ -18,9 +18,16 @@
   .career-carousel-controls button { display: grid; place-items: center; width: var(--carousel-arrow-size); height: var(--carousel-arrow-size); min-width: var(--carousel-arrow-size); min-height: var(--carousel-arrow-size); padding: 0; border: 1px solid var(--control-border); border-radius: 9999px; background: transparent; color: var(--green); }
   .career-carousel-controls button:hover:not(:disabled) { background: var(--surface-tinted); }
   .career-carousel-controls button:disabled { color: var(--disabled); border-color: var(--border-soft); cursor: default; }
+  .career-carousel-positions { --carousel-position-diameter: calc(var(--line-body) + var(--gap-control) + 2px); --carousel-position-width: max(var(--carousel-position-diameter), calc((var(--carousel-arrow-size) + var(--carousel-position-diameter)) / 2)); justify-content: center; flex-wrap: wrap; column-gap: 0; }
+  .career-carousel-viewport > .is-carousel-page-hidden { display: none; }
+  .career-carousel-positions button { width: var(--carousel-position-width); min-width: var(--carousel-position-width); font-size: var(--font-small); line-height: var(--line-body); border: 0; border-radius: 50%; }
+  .career-carousel-positions button > span { box-sizing: content-box; display: grid; place-items: center; width: var(--line-body); height: var(--line-body); padding: calc(var(--gap-control) / 2); border: 1px solid var(--control-border); border-radius: 50%; }
+  .career-carousel-positions button:hover:not(:disabled) { background: transparent; }
+  .career-carousel-positions button:hover > span, .career-carousel-positions button[aria-current='page'] > span { background: var(--surface-tinted); }
+  .career-carousel-positions button[aria-current='page'] { font-weight: 500; }
   .career-carousel[data-carousel-selection] { max-inline-size: calc(5 * var(--carousel-max-width) + 6 * var(--gap-control) + 2 * var(--carousel-arrow-size)); }
   .career-carousel[data-carousel-selection] .career-carousel-row { display: grid; grid-template-columns: var(--carousel-arrow-size) minmax(0, 1fr) var(--carousel-arrow-size); align-items: center; }
-  .career-carousel[data-carousel-selection] .career-carousel-viewport { grid-column: 2; grid-row: 1; }
+  .career-carousel[data-carousel-selection] .career-carousel-viewport { grid-column: 2; grid-row: 1; padding-inline: calc(var(--gap-control) / 4); scroll-padding-inline: calc(var(--gap-control) / 4); }
   .career-carousel[data-carousel-selection] .career-carousel-controls { display: contents; }
   .career-carousel[data-carousel-selection] .career-carousel-controls button { grid-row: 1; border-color: var(--line); background: var(--paper); color: var(--text-secondary); }
   .career-carousel[data-carousel-selection] [data-carousel-previous] { grid-column: 1; }
@@ -43,6 +50,7 @@
   @container career-carousel (min-width: calc(47.5rem + 104px)) { .career-carousel[data-carousel-selection] .career-carousel-viewport { --carousel-columns: 5; } }
   @container career-carousel (max-width: calc(9rem + 104px)) { .career-area-option { overflow-wrap: anywhere; } }
   @media (forced-colors: active) {
+    .career-carousel-positions button[aria-current='page'] > span { outline: 2px solid Highlight; outline-offset: -3px; }
     .career-area-option[aria-pressed='true'] { outline: 2px solid Highlight; outline-offset: -3px; }
     .career-carousel-controls button:disabled, .career-carousel[data-carousel-selection] .career-carousel-controls button:disabled { color: GrayText; border-color: GrayText; }
   }

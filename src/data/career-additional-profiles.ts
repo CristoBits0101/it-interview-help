@@ -2,6 +2,42 @@ import type { CareerProfile } from './career-paths';
 
 export const additionalCareerProfileTemplates: CareerProfile[] = [
   {
+    id: 'data-scientist',
+    label: 'Data Scientist',
+    purpose: 'Analiza datos y contrasta hipótesis',
+    summary: 'Utiliza estadística y modelos para responder preguntas con datos. Comunica resultados y sus límites para orientar decisiones.',
+    stages: [
+      {
+        id: 'foundation',
+        label: 'Fundamentos',
+        goal: 'Comprende la programación y la incertidumbre antes de interpretar datos.',
+        areas: ['Programming Fundamentals', 'Algebra and Functions', 'Probability Theory', 'Statistics'],
+        milestone: 'Resume una muestra y explica qué conclusiones no permite obtener.',
+      },
+      {
+        id: 'junior',
+        label: 'Junior',
+        goal: 'Explora datos y comunica resultados reproducibles con acompañamiento.',
+        areas: ['Relational Databases', 'Data Analytics', 'Data Quality and Governance'],
+        milestone: 'Analiza un conjunto de datos y presenta una conclusión con sus limitaciones.',
+      },
+      {
+        id: 'mid',
+        label: 'Mid-Level',
+        goal: 'Compara modelos con criterios de evaluación adecuados para la pregunta.',
+        areas: ['Linear Algebra', 'Machine Learning', 'Software Testing', 'Data Security'],
+        milestone: 'Compara un modelo con una referencia simple y explica su rendimiento en datos separados.',
+      },
+      {
+        id: 'senior',
+        label: 'Senior',
+        goal: 'Guía decisiones basadas en evidencia y revisa la validez de los análisis.',
+        areas: ['Statistics', 'Data Analytics', 'Machine Learning', 'Data Quality and Governance', 'Software Quality'],
+        milestone: 'Propón cómo evaluar una decisión y comunica la incertidumbre y los posibles sesgos.',
+      },
+    ],
+  },
+  {
     id: 'mobile',
     label: 'Mobile Engineer',
     purpose: 'Desarrolla aplicaciones móviles',

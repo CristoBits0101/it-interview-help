@@ -44,19 +44,21 @@
   .sidebar-header::before { content: ''; position: absolute; inset: calc(-1 * var(--sidebar-padding)) calc(-1 * var(--sidebar-padding)) 0; z-index: -1; background: var(--sidebar); pointer-events: none; }
   .sidebar-header .brand { min-width: 0; flex-shrink: 1; white-space: nowrap; overflow-x: auto; }
   .icon-button.sidebar-close { display: none; flex-shrink: 0; }
-  .nav-eyebrow { color: var(--text-soft); font-size: var(--font-meta); letter-spacing: .125em; font-weight: 300; display: flex; flex-shrink: 0; align-items: center; padding: 12px var(--space-navigation-row); min-width: max-content; min-height: 48px; line-height: var(--line-body); white-space: nowrap; }
+  .nav-eyebrow { color: var(--text-soft); font-size: var(--font-small); letter-spacing: .125em; font-weight: 400; display: flex; flex-shrink: 0; align-items: center; padding: 12px var(--space-navigation-row); min-width: max-content; min-height: 48px; line-height: var(--line-body); white-space: nowrap; }
   .navigation-section { display: flex; flex-direction: column; flex: 0 0 auto; min-width: 0; overflow-x: auto; scrollbar-width: thin; }
   .course-nav { flex-shrink: 0; min-width: max-content; }
   .navigation-tree { list-style: none; margin: 0; padding: 0; }
   .navigation-tree > li { min-width: 0; }
   .navigation-root { --navigation-end-inset: var(--space-navigation-row); }
-  .navigation-row { display: flex; align-items: center; gap: var(--gap-navigation-row); padding: 12px var(--space-navigation-row); padding-inline-end: var(--navigation-end-inset); min-height: 48px; border-radius: 9999px; font-size: var(--font-small); font-weight: 400; line-height: var(--line-body); color: var(--text-soft); }
-  summary.navigation-row { list-style: none; cursor: pointer; font-weight: 400; }
+  .navigation-separator { height: 1px; margin: var(--gap-navigation-row) var(--space-navigation-row); padding: 0; border: 0; border-top: 1px solid var(--line); }
+  .navigation-row { display: flex; align-items: center; gap: var(--gap-navigation-row); padding: 12px var(--space-navigation-row); padding-inline-end: var(--navigation-end-inset); min-height: 48px; border-radius: 9999px; font-size: var(--font-meta); font-weight: 300; line-height: var(--line-body); color: var(--text-soft); }
+  summary.navigation-row { list-style: none; cursor: pointer; font-weight: 300; }
   summary::-webkit-details-marker { display: none; }
   .navigation-icon { width: 18px; height: 18px; flex: 0 0 18px; color: var(--accent); }
   .navigation-label { flex: 0 0 auto; white-space: nowrap; overflow-wrap: normal; word-break: normal; hyphens: none; }
   .navigation-chevron { width: 14px; height: 14px; flex: 0 0 14px; align-self: center; margin-inline-start: auto; color: var(--text-soft); transform: rotate(-90deg); transition: transform var(--motion-duration) var(--motion-ease), color var(--motion-fast) var(--motion-ease); }
   .navigation-branch[open] > .navigation-row > .navigation-chevron { transform: rotate(0); }
+  .navigation-branch:has(.navigation-link[aria-current='page']) > summary.navigation-row { font-weight: 400; }
   .navigation-link[aria-current='page'] { color: var(--ink); font-weight: 400; }
   .navigation-branch:has(.navigation-link[aria-current='page']) > summary.navigation-row, summary.navigation-row:hover, .navigation-link:hover { color: var(--ink); }
   .navigation-branch:has(.navigation-link[aria-current='page']) > summary.navigation-row > svg, summary.navigation-row:hover > svg, .navigation-link:is(:hover, [aria-current='page']) > svg { color: inherit; }

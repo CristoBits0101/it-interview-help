@@ -1,4 +1,5 @@
 import { additionalAreaGuidance, additionalCareerProfileTemplates, additionalCareerSources } from './career-additional-profiles';
+import { softwareCareerProfileTemplates } from './career-software-profiles';
 
 export interface CareerStage {
   id: string;
@@ -98,7 +99,7 @@ export const careerTermDescriptions: Record<string, string> = {
   Senior: 'Aborda problemas complejos con criterio y orienta a otros profesionales.',
 };
 
-export const careerProfiles: CareerProfile[] = [...careerProfileTemplates, ...additionalCareerProfileTemplates].map(profile => ({
+export const careerProfiles: CareerProfile[] = [...careerProfileTemplates, ...additionalCareerProfileTemplates, ...softwareCareerProfileTemplates].map(profile => ({
   ...profile,
   stages: careerStages.map(({ id, label, terms, experience }) => {
     const stage = profile.stages.find(stage => stage.id === id)!;

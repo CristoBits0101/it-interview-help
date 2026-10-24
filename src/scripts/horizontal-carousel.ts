@@ -1,4 +1,5 @@
-import { calculateCarouselLayout, formatCarouselRange, formatCarouselSelection, getCarouselSelectionState, getCarouselFocusIndex, getCarouselPageTarget, getCarouselRange, getNearestCarouselScroll, type CarouselLayout } from '../lib/horizontal-carousel';
+import { calculateCarouselLayout, formatCarouselRange, formatCarouselSelection, getCarouselSelectionState, getCarouselFocusIndex, getCarouselPage, getCarouselRange, getNearestCarouselScroll, type CarouselLayout } from '../lib/horizontal-carousel';
+import { initializeCarouselPositions } from './carousel-position-controls';
 
 type CarouselController = { refresh(): void; destroy(): void };
 
@@ -14,19 +15,32 @@ function initializeCarousel(root: HTMLElement): CarouselController | undefined {
   const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
   const controls = root.querySelector<HTMLElement>('[data-carousel-controls]');
   const range = root.querySelector<HTMLElement>('[data-carousel-range]');
-  if (!viewport || !previous || !next || !controls || !range) return;
+  if (!viewport || !controls || !range) return;
   const selectionMode = root.hasAttribute('data-carousel-selection');
+  if (selectionMode && (!previous || !next)) return;
   const events = new AbortController();
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let items: HTMLElement[] = [];
   let layout: CarouselLayout = { slots: 0, itemWidth: 0 };
   let gap = 0;
+  let insetStart = 0;
+  let insetEnd = 0;
   let frame = 0;
   let needsLayout = false;
+  let availableItems: HTMLElement[] = [];
+  let pageIndex = 0;
+
+  const positions = selectionMode ? undefined : initializeCarouselPositions(controls, viewport.id, index => {
+    pageIndex = index;
+    refresh();
+    viewport.scrollTo({ left: 0, behavior: 'instant' });
+    updateState();
+  }, events.signal);
 
   const maximumScroll = () => Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+  const contentWidth = () => viewport.clientWidth - insetStart - insetEnd;
   const bounds = (item: HTMLElement) => {
-    const origin = viewport.getBoundingClientRect().left + viewport.clientLeft;
+    const origin = viewport.getBoundingClientRect().left + viewport.clientLeft + insetStart;
     const rectangle = item.getBoundingClientRect();
     return { left: rectangle.left - origin, right: rectangle.right - origin };
   };
@@ -36,16 +50,15 @@ function initializeCarousel(root: HTMLElement): CarouselController | undefined {
     if (selectionMode) {
       const selection = getCarouselSelectionState(selectedIndex(), items.length);
       controls.hidden = !selection.controlsVisible;
-      previous.disabled = selection.previousDisabled;
-      next.disabled = selection.nextDisabled;
+      if (previous) previous.disabled = selection.previousDisabled;
+      if (next) next.disabled = selection.nextDisabled;
       label = formatCarouselSelection(selection.index, items.length, document.documentElement.lang);
     } else {
-      const maximum = maximumScroll();
-      const overflows = viewport.clientWidth > 0 && maximum > 1 && items.length > 1;
-      controls.hidden = !overflows;
-      previous.disabled = !overflows || viewport.scrollLeft <= 1;
-      next.disabled = !overflows || viewport.scrollLeft >= maximum - 1;
-      label = formatCarouselRange(getCarouselRange(viewport.clientWidth, items.map(bounds), layout.slots || 1), document.documentElement.lang);
+      const page = getCarouselPage(availableItems.length, pageIndex);
+      controls.hidden = page.pages <= 1;
+      const visibleRange = getCarouselRange(contentWidth(), items.map(bounds), layout.slots || 1);
+      positions?.update(pageIndex);
+      label = formatCarouselRange({ start: visibleRange.start ? page.start + visibleRange.start : 0, end: visibleRange.end ? page.start + visibleRange.end : 0, total: availableItems.length }, document.documentElement.lang);
     }
     if (range.textContent !== label) range.textContent = label;
   };
@@ -54,17 +67,27 @@ function initializeCarousel(root: HTMLElement): CarouselController | undefined {
     viewport.scrollTo({ left, top: viewport.scrollTop, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
   };
   const reveal = (item: HTMLElement) => {
-    scrollTo(getNearestCarouselScroll(viewport.scrollLeft, viewport.clientWidth, bounds(item), maximumScroll()));
+    scrollTo(getNearestCarouselScroll(viewport.scrollLeft, contentWidth(), bounds(item), maximumScroll()));
   };
   const refresh = () => {
     if (events.signal.aborted) return;
     const allItems = Array.from(viewport.children).filter((item): item is HTMLElement => item instanceof HTMLElement && item.matches('[data-carousel-item]'));
     const active = document.activeElement instanceof HTMLElement ? document.activeElement.closest<HTMLElement>('[data-carousel-item]') : null;
-    items = allItems.filter(item => !item.hidden);
+    const nextItems = allItems.filter(item => !item.hidden);
+    if (availableItems.length !== nextItems.length || availableItems.some((item, index) => item !== nextItems[index])) pageIndex = 0;
+    availableItems = nextItems;
+    const page = getCarouselPage(availableItems.length, pageIndex);
+    pageIndex = page.index;
+    items = selectionMode ? availableItems : availableItems.slice(page.start, page.end);
+    if (!selectionMode) allItems.forEach(item => item.classList.toggle('is-carousel-page-hidden', !items.includes(item)));
+    positions?.refresh(availableItems);
     const rootSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
     const styles = getComputedStyle(root);
-    gap = Number.parseFloat(getComputedStyle(viewport).columnGap) || 0;
-    layout = calculateCarouselLayout(viewport.clientWidth, items.length, cssLength(styles.getPropertyValue('--carousel-min-width'), rootSize, 9 * rootSize), cssLength(styles.getPropertyValue('--carousel-max-width'), rootSize, 18 * rootSize), gap);
+    const viewportStyles = getComputedStyle(viewport);
+    gap = Number.parseFloat(viewportStyles.columnGap) || 0;
+    insetStart = Number.parseFloat(viewportStyles.paddingInlineStart) || 0;
+    insetEnd = Number.parseFloat(viewportStyles.paddingInlineEnd) || 0;
+    layout = calculateCarouselLayout(contentWidth(), items.length, cssLength(styles.getPropertyValue('--carousel-min-width'), rootSize, 9 * rootSize), cssLength(styles.getPropertyValue('--carousel-max-width'), rootSize, 18 * rootSize), gap);
     const itemWidth = `${layout.itemWidth}px`;
     if (layout.slots && viewport.style.getPropertyValue('--carousel-item-width') !== itemWidth) viewport.style.setProperty('--carousel-item-width', itemWidth);
     if (active && allItems.includes(active) && !items.includes(active)) {
@@ -99,15 +122,11 @@ function initializeCarousel(root: HTMLElement): CarouselController | undefined {
     updateState();
   };
   const turnPage = (direction: -1 | 1) => {
-    if (selectionMode) {
-      const index = getCarouselFocusIndex(direction < 0 ? 'ArrowLeft' : 'ArrowRight', selectedIndex(), items.length);
-      if (index !== undefined) activate(index);
-    } else {
-      scrollTo(getCarouselPageTarget(viewport.scrollLeft, direction, layout.slots, layout.itemWidth, gap, maximumScroll()));
-    }
+    const index = getCarouselFocusIndex(direction < 0 ? 'ArrowLeft' : 'ArrowRight', selectedIndex(), items.length);
+    if (index !== undefined) activate(index);
   };
-  previous.addEventListener('click', () => turnPage(-1), { signal: events.signal });
-  next.addEventListener('click', () => turnPage(1), { signal: events.signal });
+  previous?.addEventListener('click', () => turnPage(-1), { signal: events.signal });
+  next?.addEventListener('click', () => turnPage(1), { signal: events.signal });
   viewport.addEventListener('scroll', () => schedule(), { passive: true, signal: events.signal });
   viewport.addEventListener('focusin', event => {
     const item = event.target instanceof HTMLElement ? event.target.closest<HTMLElement>('[data-carousel-item]') : null;

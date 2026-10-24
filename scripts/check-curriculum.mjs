@@ -14,7 +14,7 @@ const all = [];
 function visit(nodes, parent = []) {
   assert.equal(new Set(nodes.map(n => n.label)).size, nodes.length, `Duplicate siblings: ${parent}`);
   for (const node of nodes) {
-    const path = [...parent, node.label];
+    const path = [...parent, node.id ?? node.label];
     all.push({ ...node, path });
     assert(!/\b(Engineer|Architect|Manager|Director|Lead)\b/.test(node.label), `Job title in menu: ${node.label}`);
     if (node.children) { assert(node.children.length); visit(node.children, path); }
@@ -28,7 +28,7 @@ const catalog = [...tracks, systemDesign, appliedAI];
 for (const node of all) {
   const es = translate(node.label, 'es');
   assert.equal(translate(es, 'en'), node.label, `Translation round trip: ${node.label}`);
-  if (!['REST', 'MVC', 'SQL', 'Hexagonal', 'SOAP', 'GraphQL', 'gRPC', 'Webhook', 'WebSocket'].includes(node.label)) assert.notEqual(es, node.label, `Missing Spanish: ${node.label}`);
+  if (!['Big Data', 'REST', 'MVC', 'SQL', 'Hexagonal', 'SOAP', 'GraphQL', 'gRPC', 'Webhook', 'WebSocket'].includes(node.label)) assert.notEqual(es, node.label, `Missing Spanish: ${node.label}`);
   if (node.href) {
     const [trackId, moduleId] = node.href.slice(1).split('/');
     const track = catalog.find(t => t.id === trackId);

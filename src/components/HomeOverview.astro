@@ -16,7 +16,7 @@ const catalog = flattenNavigation(navigation);
 const areas = new Map(catalog.map(node => [node.label, node]));
 const totalConcepts = tracks.reduce((total, track) => total + countConcepts(track), 0);
 const stats = [
-  { value: navigation.length, label: 'Áreas Principales', detail: 'Temas para repasar' },
+  { value: navigation.reduce((total, node) => total + (node.group ? node.children?.filter(child => child.overviewArea !== false).length ?? 0 : 1), 0), label: 'Áreas Principales', detail: 'Temas para repasar' },
   { value: tracks.length, label: 'Rutas con Contenido', detail: 'Disponibles para estudiar' },
   { value: totalConcepts, label: 'Conceptos', detail: 'Breves y conectados' },
   { value: careerProfiles.length, label: 'Perfiles Profesionales', detail: 'Un camino para cada objetivo' },
@@ -26,7 +26,7 @@ const stats = [
 <section id="home-view" aria-labelledby="home-title">
   <header class="home-introduction">
     <h1 id="home-title">{t('Prepara tu próxima entrevista técnica')}</h1>
-    <p>{t('Reúne en un solo lugar los fundamentos esenciales de cada área relevante para tu puesto. Ofrece una base mínima para preparar entrevistas técnicas con conocimientos que suelen estar dispersos por internet. Las preguntas de pruebas reales se incorporarán con fuentes verificadas.')}</p>
+    <p>{t('Reúne en un solo lugar los fundamentos esenciales de cada área relevante para tu puesto, a menudo dispersos por internet, para construir una base mínima que te ayude a preparar entrevistas técnicas y que se ampliará en el futuro con preguntas de pruebas reales respaldadas por fuentes verificadas.')}</p>
   </header>
 
   <HomeStats stats={stats} />

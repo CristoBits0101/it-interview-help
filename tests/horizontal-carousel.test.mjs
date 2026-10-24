@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { calculateCarouselLayout, formatCarouselRange, formatCarouselSelection, getCarouselSelectionState, getCarouselFocusIndex, getCarouselPageTarget, getCarouselRange, getNearestCarouselScroll } from '../src/lib/horizontal-carousel.ts';
+import { calculateCarouselLayout, formatCarouselRange, formatCarouselSelection, getCarouselSelectionState, getCarouselFocusIndex, getCarouselPage, getCarouselRange, getNearestCarouselScroll } from '../src/lib/horizontal-carousel.ts';
 
 const rectangles = (count, itemWidth, gap, scroll = 0) => Array.from({ length: count }, (_, index) => ({ left: index * (itemWidth + gap) - scroll, right: index * (itemWidth + gap) + itemWidth - scroll }));
 
@@ -36,15 +36,24 @@ test('empty, hidden and partially visible single items have bounded truthful ran
   assert.equal(formatCarouselRange({ start: 1, end: 4, total: 4 }, 'es'), '1 - 4 de 4');
 });
 
-test('page navigation clamps the first and last page and handles resized capacity', () => {
-  assert.equal(getCarouselPageTarget(0, -1, 5, 152, 8, 480), 0);
-  assert.equal(getCarouselPageTarget(0, 1, 5, 152, 8, 480), 480);
-  assert.equal(getCarouselPageTarget(480, 1, 5, 152, 8, 480), 480);
-  assert.equal(getCarouselPageTarget(480, -1, 5, 152, 8, 480), 0);
-  assert.equal(getCarouselPageTarget(0, 1, 2, 156, 8, 984), 328);
-  assert.equal(getCarouselPageTarget(0, 1, 1, 288, 8, 0), 0);
+test('pagination groups five roles and retains a partial final group', () => {
+  assert.deepEqual(getCarouselPage(8, 0), { index: 0, pages: 2, start: 0, end: 5 });
+  assert.deepEqual(getCarouselPage(8, 1), { index: 1, pages: 2, start: 5, end: 8 });
+  assert.deepEqual(getCarouselPage(8, 99), getCarouselPage(8, 1));
+  for (const count of [1, 5]) assert.deepEqual(getCarouselPage(count, 1), { index: 0, pages: 1, start: 0, end: count });
+  assert.deepEqual(getCarouselPage(0, 1), { index: 0, pages: 0, start: 0, end: 0 });
+  for (const width of [120, 320, 792]) {
+    for (const index of [0, 1]) {
+      const page = getCarouselPage(8, index);
+      const count = page.end - page.start;
+      const layout = calculateCarouselLayout(width, count, 144, 288, 8);
+      assert.ok(layout.slots >= 1 && layout.slots <= count);
+      const lastScroll = Math.max(0, count * (layout.itemWidth + 8) - 8 - width);
+      const range = getCarouselRange(width, rectangles(count, layout.itemWidth, 8, lastScroll));
+      assert.equal(page.start + range.end, page.end);
+    }
+  }
 });
-
 test('focus destinations never wrap and activation keys remain native', () => {
   assert.equal(getCarouselFocusIndex('ArrowLeft', 0, 8), 0);
   assert.equal(getCarouselFocusIndex('ArrowRight', 7, 8), 7);

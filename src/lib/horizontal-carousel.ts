@@ -33,8 +33,11 @@ export function getCarouselRange(width: number, items: readonly CarouselItemBoun
   return { start: index, end: index, total };
 }
 
-export function getCarouselPageTarget(current: number, direction: -1 | 1, slots: number, itemWidth: number, gap: number, maximumScroll: number): number {
-  return clamp(current + direction * Math.max(1, slots) * (itemWidth + Math.max(0, gap)), 0, Math.max(0, maximumScroll));
+export function getCarouselPage(count: number, requested: number) {
+  const total = Math.max(0, Math.floor(count));
+  const pages = Math.ceil(total / 5);
+  const index = clamp(Math.floor(requested), 0, Math.max(0, pages - 1));
+  return { index, pages, start: index * 5, end: Math.min(total, (index + 1) * 5) };
 }
 
 export function getNearestCarouselScroll(current: number, width: number, item: CarouselItemBounds, maximumScroll: number): number {

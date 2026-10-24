@@ -3,10 +3,14 @@ import { glossaryTopics } from './ai-glossary';
 
 export interface NavigationNode {
   label: string;
+  id?: string;
   icon?: IconName;
   href?: string;
   module?: string;
   shared?: boolean;
+  separatorBefore?: boolean;
+  group?: boolean;
+  overviewArea?: boolean;
   children?: NavigationNode[];
 }
 
@@ -32,7 +36,13 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
     { label: 'Distributed Systems', href: '#distributed-systems/fundamentos' },
     { label: 'Cloud Computing' },
   ] },
-  { label: 'Human-Computer Interaction', icon: 'interaction', children: [
+  { label: 'Cybersecurity', icon: 'shield', children: [
+    { label: 'Security Fundamentals' },
+    { label: 'Cryptography', children: [foundation('Discrete Mathematics')] },
+    { label: 'Application Security' }, { label: 'Network Security' },
+    { label: 'Data Security' }, { label: 'Cloud Security' },
+  ] },
+  { label: 'Human-Computer Interaction', icon: 'interaction', separatorBefore: true, children: [
     { label: 'Interaction Fundamentals' },
     { label: 'User Experience Design', href: '#ux-design/arquitectura-informacion', children: [
       { label: 'User Research' },
@@ -82,44 +92,41 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
     { label: 'System Design', href: '#system-design/sd-fundamentals' },
     { label: 'Software Engineering Operations' }, { label: 'Software Maintenance' },
   ] },
-  { label: 'Data Management and Engineering', icon: 'workflow', children: [
-    { label: 'Data Management', children: [
-      { label: 'Databases', children: [
-        { label: 'Database Fundamentals' },
-        { label: 'Data Modeling' },
-        { label: 'Relational Databases', children: [
-          { label: 'SQL' },
+  { label: 'Data Technologies', id: 'Data', icon: 'database', separatorBefore: true, group: true, children: [
+    { label: 'Data Engineering', icon: 'workflow', children: [
+      { label: 'Database Management', children: [
+        { label: 'Databases', children: [
+          { label: 'Database Fundamentals' },
+          { label: 'Data Modeling' },
+          { label: 'Relational Databases', children: [
+            { label: 'SQL' },
+          ] },
+          { label: 'Non-Relational Databases', children: [
+            { label: 'Key-Value Databases' }, { label: 'Document Databases' },
+            { label: 'Wide-Column Databases' }, { label: 'Graph Databases' },
+          ] },
+          { label: 'Transactions' }, { label: 'Indexes and Query Optimization' },
+          { label: 'Vector Search' },
         ] },
-        { label: 'Non-Relational Databases', children: [
-          { label: 'Key-Value Databases' }, { label: 'Document Databases' },
-          { label: 'Wide-Column Databases' }, { label: 'Graph Databases' },
+      ] },
+      { label: 'Data Integration', children: [
+        { label: 'Data Ingestion' }, { label: 'Data Transformation' },
+        { label: 'Data Pipelines', children: [
+          { label: 'Batch Processing' }, { label: 'Stream Processing' },
         ] },
-        { label: 'Transactions' }, { label: 'Indexes and Query Optimization' },
-        { label: 'Vector Search' },
+        { label: 'Data Quality and Governance' },
       ] },
+      { label: 'Big Data' },
     ] },
-    { label: 'Data Engineering', children: [
-      { label: 'Data Ingestion' }, { label: 'Data Transformation' },
-      { label: 'Data Pipelines', children: [
-        { label: 'Batch Processing' }, { label: 'Stream Processing' },
-      ] },
-      { label: 'Data Quality and Governance' },
-    ] },
-  ] },
-  { label: 'Cybersecurity', icon: 'shield', children: [
-    { label: 'Security Fundamentals' },
-    { label: 'Cryptography', children: [foundation('Discrete Mathematics')] },
-    { label: 'Application Security' }, { label: 'Network Security' },
-    { label: 'Data Security' }, { label: 'Cloud Security' },
-  ] },
-  { label: 'Data Science', icon: 'science', children: [
-    foundation('Programming Fundamentals'),
-    quantitativeFoundations(),
-    { label: 'Data Analytics', children: [
+    { label: 'Data Analytics', overviewArea: false, children: [
       { label: 'Data Preparation' }, { label: 'Exploratory Data Analysis' },
       { label: 'Data Visualization' },
     ] },
-    { label: 'Data Mining' },
+    { label: 'Data Science', icon: 'science', children: [
+      foundation('Programming Fundamentals'),
+      quantitativeFoundations(),
+      { label: 'Data Mining' },
+    ] },
   ] },
   { label: 'Artificial Intelligence', icon: 'brain', children: [
     foundation('Programming Fundamentals'),
