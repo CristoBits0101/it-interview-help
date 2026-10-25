@@ -10,7 +10,7 @@
   .career-carousel-viewport::-webkit-scrollbar { display: none; }
   .career-carousel-viewport > [data-carousel-item] { scroll-snap-align: start; scroll-margin: 0; min-width: 0; }
   .career-carousel-viewport > [data-carousel-item]:focus-visible { outline-offset: -3px; }
-  .career-area-option { min-height: 3rem; padding: var(--gap-control) var(--space-control); border: 1px solid var(--line); border-radius: 9999px; background: var(--paper); color: var(--text-secondary); font-size: var(--font-small); font-weight: 400; line-height: var(--line-body); }
+  .career-area-option { min-height: 3rem; padding: var(--gap-control) var(--space-control); border: 1px solid var(--line); border-radius: 9999px; background: var(--paper); color: var(--text-secondary); font-size: var(--font-body); font-weight: 400; line-height: var(--line-body); }
   .career-area-option, .career-carousel-controls button { transition: border-color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease); }
   .career-area-option:hover { border-color: var(--border-accent); background: var(--surface-hover); }
   .career-area-option[aria-pressed='true'] { border-color: var(--control-border); background: var(--surface-selected); color: var(--green); }
