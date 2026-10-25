@@ -3,10 +3,11 @@ import { t } from '../../lib/translations';
 import type { CareerGrowthTarget } from '../../data/career-growth';
 import { careerGrowthGroups } from '../../data/career-growth';
 import CareerPreparationNotice from './CareerPreparationNotice.astro';
-import Icon from '../Icon.astro';
+import Icon, { type IconName } from '../Icon.astro';
 
 interface Props { targets: readonly CareerGrowthTarget[]; initialProfileId: string }
 const { targets, initialProfileId } = Astro.props;
+const groupIcons: Record<CareerGrowthTarget['group'], IconName> = { specialization: 'target', leadership: 'users', management: 'workflow', executive: 'chart' };
 ---
 <section class="home-section" id="career-growth" aria-labelledby="growth-title">
   <header class="home-section-heading">
@@ -15,7 +16,7 @@ const { targets, initialProfileId } = Astro.props;
   <p class="career-growth-introduction">{t('Elige el próximo paso en la trayectoria hacia tu progresión profesional.')}</p>
   <div class="career-branches">
     {careerGrowthGroups.map(group => <article class="career-branch" data-growth-group={group.id}>
-      <h3 id={`growth-${group.id}-title`}>{t(group.title)}</h3>
+      <h3 class="career-icon-heading" id={`growth-${group.id}-title`}><Icon name={groupIcons[group.id]} class="career-heading-icon" /><span>{t(group.title)}</span></h3>
       <hr class="career-growth-separator" />
       <p class="career-growth-question" id={`growth-${group.id}-question`}>{t(group.question)}</p>
       <ul class="career-growth-options" aria-labelledby={`growth-${group.id}-title growth-${group.id}-question`}>

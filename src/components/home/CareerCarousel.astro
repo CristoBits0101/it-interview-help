@@ -1,22 +1,23 @@
 ---
 import { t } from '../../lib/translations';
-import Icon from '../Icon.astro';
+import Icon, { type IconName } from '../Icon.astro';
 import '../../styles/career-carousel.css';
 
 interface Props {
   id: string;
   label: string;
+  icon?: IconName;
   previousLabel: string;
   nextLabel: string;
   class?: string;
   selection?: boolean;
 }
-const { id, label, previousLabel, nextLabel, class: className = '', selection = false } = Astro.props;
+const { id, label, icon, previousLabel, nextLabel, class: className = '', selection = false } = Astro.props;
 ---
 <div class="career-choice-group">
   <div class="career-carousel" data-carousel data-carousel-selection={selection || undefined}>
     <div class="career-carousel-heading">
-      <p class="career-control-label" id={`${id}-label`}>{t(label)}</p>
+      <p class:list={["career-control-label", { "career-icon-heading": icon }]} id={`${id}-label`}>{icon && <Icon name={icon} class="career-heading-icon" />}<span>{t(label)}</span></p>
       <span class="career-carousel-range" data-carousel-range role="status" aria-live="polite" aria-atomic="true"></span>
     </div>
     <div class="career-carousel-row">

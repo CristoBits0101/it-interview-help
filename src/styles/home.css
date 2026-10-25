@@ -35,6 +35,9 @@
   .career-selected-mark { position: absolute; top: var(--space-control); right: var(--space-control); display: none; width: 18px; height: 18px; place-items: center; background: var(--green); color: var(--paper); border-radius: 50%; }
   .career-profile-options button[aria-pressed='true'] .career-selected-mark { display: grid; }
   .career-stage-section { display: flex; flex-direction: column; gap: var(--space-home); }
+  .career-icon-heading { display: flex; align-items: center; gap: var(--gap-compact); min-width: 0; }
+  .career-icon-heading > span { min-width: 0; }
+  .career-heading-icon { flex: 0 0 auto; width: 1em; height: 1em; color: currentColor; }
   .career-control-label { font-family: var(--career-heading); font-size: var(--font-career-heading); line-height: var(--line-career-question); font-weight: 400; color: var(--text-secondary); }
   .career-stage-note { font-size: var(--font-body); line-height: var(--line-body); color: var(--text-soft); }
   .career-stage-options, [data-carousel-selection] .career-carousel-row { padding: var(--gap-control); gap: calc(var(--gap-control) / 2); background: var(--sidebar); border: 1px solid var(--line); border-radius: 9999px; }

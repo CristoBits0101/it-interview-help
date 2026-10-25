@@ -1,6 +1,7 @@
 ---
 import { t } from '../../lib/translations';
 import CareerPreparationNotice from './CareerPreparationNotice.astro';
+import Icon from '../Icon.astro';
 import CareerPanel from './CareerPanel.astro';
 import CareerProfileOption from './CareerProfileOption.astro';
 import CareerStageOption from './CareerStageOption.astro';
@@ -30,11 +31,11 @@ const profilesById = new Map(profiles.map(profile => [profile.id, profile]));
 
   <p>{t('Explora los puestos desde las bases compartidas hasta la integración y la especialización. El orden es orientativo y las especialidades son caminos paralelos con sus propias etapas.')}</p>
 
-  <CareerCarousel id="career-area-options" label="Elige un área profesional" previousLabel="Área anterior" nextLabel="Área siguiente" selection>
+  <CareerCarousel id="career-area-options" icon="compass" label="Elige un área profesional" previousLabel="Área anterior" nextLabel="Área siguiente" selection>
     {directions.map(direction => <button class="career-area-option" type="button" data-carousel-item data-career-direction={direction.id} aria-pressed={direction.id === initialDirection.id} aria-controls="career-profile-options">{t(direction.label)}</button>)}
   </CareerCarousel>
 
-  <CareerCarousel id="career-profile-options" label="Puestos habituales" previousLabel="Puestos anteriores" nextLabel="Puestos siguientes" class="career-profile-options">
+  <CareerCarousel id="career-profile-options" icon="briefcase" label="Puestos habituales" previousLabel="Puestos anteriores" nextLabel="Puestos siguientes" class="career-profile-options">
     {directions.map(direction => direction.profileIds.map((id, index) => {
       const profile = profilesById.get(id)!;
       return <CareerProfileOption profile={profile} index={index} directionId={direction.id} hidden={direction.id !== initialDirection.id} selected={profile.id === profiles[0].id} />;
@@ -42,7 +43,7 @@ const profilesById = new Map(profiles.map(profile => [profile.id, profile]));
   </CareerCarousel>
 
   <div class="career-stage-section">
-    <p class="career-control-label" id="career-stage-label">{t('¿En qué etapa quieres trabajar?')}</p>
+    <p class="career-control-label career-icon-heading" id="career-stage-label"><Icon name="route" class="career-heading-icon" /><span>{t('¿En qué etapa quieres trabajar?')}</span></p>
     <ol class="career-stage-options" aria-labelledby="career-stage-label">
       {stages.map((stage, index) => <CareerStageOption stage={stage} selected={index === 0} descriptions={termDescriptions} />)}
     </ol>
