@@ -2,11 +2,19 @@ import { glossaryTranslations } from '../data/ai-glossary';
 import { careerDirectionTranslations } from '../data/career-directions-translations';
 import { careerGrowthTranslations } from '../data/career-growth-translations';
 import { careerRoleTranslations } from '../data/career-role-translations';
+import { careerResearchTranslations } from '../data/career-research-translations';
+import { careerInteractionTranslations } from '../data/career-interaction-translations';
+import { careerContentTranslations } from '../data/career-content-translations';
 export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
   ...careerGrowthTranslations,
   ...careerRoleTranslations,
+  ...careerResearchTranslations,
+  ...careerInteractionTranslations,
+  ...careerContentTranslations,
+  'Ruta en desarrollo': 'Path in development',
+  'El contenido de preparación aún no está disponible.': 'Preparation content is not available yet.',
   'Contenido en preparación': 'Content coming soon',
   'Gestión de Servicios TI': 'IT Service Management',
   'Soporte TI': 'IT Support',
@@ -183,7 +191,7 @@ const spanishToEnglish: Record<string, string> = {
   'Automatiza la entrega y la operación de sistemas. Colabora con los equipos para mantener software fiable.': 'Automate software delivery and operations. Work with teams to keep systems reliable.',
   'Empieza por los servicios y los datos. Añade distribución y nube cuando entiendas sus costes.': 'Start with services and data. Explore distributed systems and cloud as you understand their tradeoffs.',
   'Conecta la interfaz con los servicios y los datos. Profundiza en una parte sin perder la visión completa.': 'Connect interfaces with services and data. Deepen one skill while keeping the full picture.',
-  'Aplica matemáticas e ingeniería al trabajo con datos. Evalúa los modelos antes de integrarlos en productos útiles.': 'Apply mathematics and engineering to data. Evaluate models before integrating them into useful products.',
+  'Integra modelos y servicios de IA en aplicaciones útiles. Evalúa su calidad y sus límites frente a las necesidades del producto.': 'Integrates AI models and services into useful applications. Evaluates their quality and limitations against product needs.',
   'Desarrollo frontend': 'Frontend Development', 'Desarrollo backend': 'Backend Development', 'Matemáticas': 'Mathematics', 'Estadística': 'Statistics', 'Programación': 'Programming', 'Sistemas informáticos': 'Computer Systems', 'Ingeniería de software': 'Software Engineering', 'Patrones de diseño': 'Design Patterns', 'Principios SOLID': 'SOLID Principles', 'Diseño de experiencia de usuario': 'User Experience Design',
   'Estudia álgebra y funciones. Desarrolla el razonamiento cuantitativo.': 'Study algebra and functions. Develop quantitative reasoning.',
   'Comprende los tipos de datos y las funciones. Estudia las estructuras de datos. Practica la depuración y el control de versiones.': 'Understand data types and functions. Study data structures. Practice debugging and version control.',

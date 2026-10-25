@@ -2,6 +2,7 @@
 import { t } from '../../lib/translations';
 import type { CareerGrowthTarget } from '../../data/career-growth';
 import { careerGrowthGroups } from '../../data/career-growth';
+import CareerPreparationNotice from './CareerPreparationNotice.astro';
 import Icon from '../Icon.astro';
 
 interface Props { targets: readonly CareerGrowthTarget[]; initialProfileId: string }
@@ -27,6 +28,7 @@ const { targets, initialProfileId } = Astro.props;
       </ul>
     </article>)}
   </div>
+  <CareerPreparationNotice kind="growth" />
   <div hidden>
     {targets.map(target => <div data-growth-copy={target.id}>
       <p data-growth-goal>{t(target.goal)}</p>

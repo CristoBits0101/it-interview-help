@@ -1,4 +1,5 @@
 export const careerRoleTranslations: Record<string, string> = {
+  'Explora los puestos desde las bases compartidas hasta la integración y la especialización. El orden es orientativo y las especialidades son caminos paralelos con sus propias etapas.': 'Explore roles from shared foundations to integration and specialization. The order is a guide and specialties are parallel paths with their own stages.',
   'Especialista de soporte TI': 'IT Support Specialist',
   'Resuelve problemas técnicos de usuarios': 'Resolves users’ technical issues',
   'Ayuda a las personas a usar equipos y aplicaciones corporativas. Diagnostica incidencias y documenta soluciones para recuperar el servicio.': 'Helps people use corporate devices and applications. Diagnoses incidents and documents solutions to restore service.',
@@ -93,7 +94,7 @@ export const careerRoleTranslations: Record<string, string> = {
   'Analiza alertas y evidencia de seguridad. Clasifica incidentes y coordina una respuesta proporcionada al riesgo.': 'Analyzes security alerts and evidence. Classifies incidents and coordinates a response proportionate to risk.',
   'Comprende sistemas, redes y los principios de una respuesta segura.': 'Understands systems, networks, and the principles of a safe response.',
   'Explica qué evidencia conservarías ante una alerta y por qué.': 'Explains what evidence to preserve for an alert and why.',
-  'Triar alertas definidas y documenta una investigación reproducible.': 'Triages defined alerts and documents a reproducible investigation.',
+  'Clasifica alertas definidas y documenta una investigación reproducible.': 'Triages defined alerts and documents a reproducible investigation.',
   'Clasifica una alerta de laboratorio y registra la evidencia y la decisión tomada.': 'Classifies a lab alert and records the evidence and decision made.',
   'Correlaciona señales y mejora los procedimientos de respuesta.': 'Correlates signals and improves response procedures.',
   'Relaciona varias señales de un incidente simulado y propone un paso de contención.': 'Relates several signals from a simulated incident and proposes a containment step.',

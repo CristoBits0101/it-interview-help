@@ -1,6 +1,8 @@
 import { additionalAreaGuidance, additionalCareerProfileTemplates, additionalCareerSources } from './career-additional-profiles';
 import { softwareCareerProfileTemplates } from './career-software-profiles';
 import { coreCareerProfileTemplates } from './career-core-profiles';
+import { researchCareerProfileTemplates } from './career-research-profiles';
+import { contentCareerProfileTemplates } from './career-content-profiles';
 
 export interface CareerStage {
   id: string;
@@ -72,7 +74,7 @@ const careerProfileTemplates: CareerProfile[] = [
   {
     id: 'artificial-intelligence', label: 'Ingeniero de IA',
     purpose: 'Aplica modelos de IA a problemas reales',
-    summary: 'Aplica matemáticas e ingeniería al trabajo con datos. Evalúa los modelos antes de integrarlos en productos útiles.',
+    summary: 'Integra modelos y servicios de IA en aplicaciones útiles. Evalúa su calidad y sus límites frente a las necesidades del producto.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Construye una base de programación y razonamiento matemático para trabajar con datos.', areas: ['Computing Fundamentals', 'Programming Fundamentals', 'Algebra and Functions', 'Linear Algebra', 'Probability Theory', 'Statistics'], milestone: 'Manipula un conjunto de datos y explica cómo lo representan los vectores. Describe sus distribuciones y su variabilidad.' },
       { id: 'junior', label: 'Junior', goal: 'Entrena y evalúa modelos sencillos con código reproducible y acompañamiento.', areas: ['Data Analytics', 'Artificial Intelligence Fundamentals', 'Machine Learning', 'Software Testing', 'Software Design'], milestone: 'Compara un modelo con una referencia simple usando datos de evaluación separados.' },
@@ -100,7 +102,7 @@ export const careerTermDescriptions: Record<string, string> = {
   Senior: 'Aborda problemas complejos con criterio y orienta a otros profesionales.',
 };
 
-export const careerProfiles: CareerProfile[] = [...careerProfileTemplates, ...additionalCareerProfileTemplates, ...softwareCareerProfileTemplates, ...coreCareerProfileTemplates].map(profile => ({
+export const careerProfiles: CareerProfile[] = [...careerProfileTemplates, ...additionalCareerProfileTemplates, ...softwareCareerProfileTemplates, ...coreCareerProfileTemplates, ...researchCareerProfileTemplates, ...contentCareerProfileTemplates].map(profile => ({
   ...profile,
   stages: careerStages.map(({ id, label, terms, experience }) => {
     const stage = profile.stages.find(stage => stage.id === id)!;

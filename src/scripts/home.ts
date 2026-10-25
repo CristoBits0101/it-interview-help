@@ -1,9 +1,8 @@
 import { preferenceKeys, readJsonPreference, restoreCareerStage, writePreference } from '../lib/preferences';
 import { resolveCareerSelection } from '../lib/career-selection';
-import { reconcileCareerScope, toggleCareerScope, type CareerScope } from '../lib/career-scope';
+import { reconcileCareerScope, type CareerScope } from '../lib/career-scope';
 import { initializeCareerGrowth } from './career-growth';
 import { initializeHorizontalCarousels } from './horizontal-carousel';
-import { translate } from './i18n';
 
 export function initializeCareerPaths() {
   const container = document.getElementById('career-paths');
@@ -26,15 +25,16 @@ export function initializeCareerPaths() {
   const validStageIds = new Set(stages.map(button => button.dataset.careerStage!));
   const savedStageId = restoreCareerStage(readJsonPreference(preferenceKeys.careerStage), validStageIds, stages[0].dataset.careerStage!);
   let scope: CareerScope = savedStageId === null ? null : { kind: 'stage', id: savedStageId };
+  let noticeKind: 'stage' | 'growth' | null = null;
   const carousels = initializeHorizontalCarousels(container);
   const growth = initializeCareerGrowth(id => {
-    scope = toggleCareerScope(scope, { kind: 'growth', id });
+    scope = { kind: 'growth', id };
+    noticeKind = 'growth';
     writePreference(preferenceKeys.careerStage, JSON.stringify(null));
     update();
   });
 
   const update = () => {
-    const previousScope = scope;
     scope = reconcileCareerScope(scope, selection.profileId, growth.options);
     const stageId = scope?.kind === 'stage' ? scope.id : null;
     directions.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.careerDirection === selection.directionId)));
@@ -44,17 +44,16 @@ export function initializeCareerPaths() {
     });
     stages.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.careerStage === stageId)));
     panels.forEach(panel => { panel.hidden = panel.dataset.careerPanel !== selection.profileId || panel.dataset.stage !== stageId; });
-    if (panelContainer) panelContainer.hidden = stageId === null;
-    const direction = directions.find(button => button.dataset.careerDirection === selection.directionId)!;
+    if (panelContainer) panelContainer.hidden = true;
+    document.querySelectorAll<HTMLElement>('[data-career-notice]').forEach(notice => {
+      notice.hidden = notice.dataset.careerNotice !== noticeKind || scope?.kind !== noticeKind;
+    });
     const profile = profiles.find(button => button.dataset.careerProfile === selection.profileId)!;
-    const stage = stages.find(button => button.dataset.careerStage === stageId);
-    const growthLabel = growth.update(scope, selection.profileId, profile.getAttribute('aria-label') ?? '', panels.find(panel => panel.dataset.careerPanel === selection.profileId && panel.dataset.stage === 'senior'));
-    const status = document.getElementById('career-selection-status');
-    const stageStatus = growthLabel ?? stage?.getAttribute('aria-label') ?? translate(previousScope?.kind === 'growth' && !scope ? 'Este objetivo no corresponde al nuevo puesto. Selecciona otra opción.' : 'Selecciona una etapa o un objetivo para ver su preparación.', document.documentElement.lang === 'en' ? 'en' : 'es');
-    if (status) status.textContent = `${direction.textContent} · ${profile.getAttribute('aria-label')} · ${stageStatus}`;
+    growth.update(scope, selection.profileId, profile.getAttribute('aria-label') ?? '', panels.find(panel => panel.dataset.careerPanel === selection.profileId && panel.dataset.stage === 'senior'));
     carousels.refresh();
   };
   directions.forEach(button => button.addEventListener('click', () => {
+    noticeKind = null;
     const previousDirection = selection.directionId;
     selection = resolveCareerSelection(directionOptions, profileIds, {
       ...selection,
@@ -64,6 +63,7 @@ export function initializeCareerPaths() {
     if (previousDirection !== selection.directionId) document.getElementById('career-profile-options')?.scrollTo({ left: 0, behavior: 'auto' });
   }));
   profiles.forEach(button => button.addEventListener('click', () => {
+    noticeKind = null;
     selection = resolveCareerSelection(directionOptions, profileIds, {
       directionId: button.dataset.profileDirection!,
       profileId: button.dataset.careerProfile!,
@@ -71,7 +71,8 @@ export function initializeCareerPaths() {
     update();
   }));
   stages.forEach(button => button.addEventListener('click', () => {
-    scope = toggleCareerScope(scope, { kind: 'stage', id: button.dataset.careerStage! });
+    scope = { kind: 'stage', id: button.dataset.careerStage! };
+    noticeKind = 'stage';
     writePreference(preferenceKeys.careerStage, JSON.stringify(scope?.id ?? null));
     update();
   }));

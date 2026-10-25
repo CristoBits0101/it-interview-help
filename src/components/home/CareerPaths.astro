@@ -1,5 +1,6 @@
 ---
 import { t } from '../../lib/translations';
+import CareerPreparationNotice from './CareerPreparationNotice.astro';
 import CareerPanel from './CareerPanel.astro';
 import CareerProfileOption from './CareerProfileOption.astro';
 import CareerStageOption from './CareerStageOption.astro';
@@ -27,6 +28,8 @@ const profilesById = new Map(profiles.map(profile => [profile.id, profile]));
     <h2 id="career-title">{t('Elige tu Dirección')}</h2>
   </header>
 
+  <p>{t('Explora los puestos desde las bases compartidas hasta la integración y la especialización. El orden es orientativo y las especialidades son caminos paralelos con sus propias etapas.')}</p>
+
   <CareerCarousel id="career-area-options" label="Elige un área profesional" previousLabel="Área anterior" nextLabel="Área siguiente" selection>
     {directions.map(direction => <button class="career-area-option" type="button" data-carousel-item data-career-direction={direction.id} aria-pressed={direction.id === initialDirection.id} aria-controls="career-profile-options">{t(direction.label)}</button>)}
   </CareerCarousel>
@@ -44,11 +47,11 @@ const profilesById = new Map(profiles.map(profile => [profile.id, profile]));
     <ol class="career-stage-options" aria-labelledby="career-stage-label">
       {stages.map((stage, index) => <CareerStageOption stage={stage} selected={index === 0} descriptions={termDescriptions} />)}
     </ol>
+    <CareerPreparationNotice kind="stage" />
   </div>
 
   <p id="career-selection-status" class="sr-only" role="status" aria-live="polite"></p>
-  <div id="career-panels">
-    <hr class="home-separator" />
+  <div id="career-panels" hidden>
     {profiles.map((profile, profileIndex) => profile.stages.map((stage, stageIndex) => <CareerPanel profile={profile} stage={stage} initial={profileIndex === 0 && stageIndex === 0} tracks={tracks} areas={areas} guidanceByArea={guidanceByArea} />))}
   </div>
 </section>

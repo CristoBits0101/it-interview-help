@@ -13,7 +13,7 @@
   .career-area-option { min-height: 3rem; padding: var(--gap-control) var(--space-control); border: 1px solid var(--line); border-radius: 9999px; background: var(--paper); color: var(--text-secondary); font-size: var(--font-small); font-weight: 400; line-height: var(--line-body); }
   .career-area-option, .career-carousel-controls button { transition: border-color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease); }
   .career-area-option:hover { border-color: var(--border-accent); background: var(--surface-hover); }
-  .career-area-option[aria-pressed='true'] { border-color: var(--control-border); background: var(--paper); color: var(--green); }
+  .career-area-option[aria-pressed='true'] { border-color: var(--control-border); background: var(--surface-selected); color: var(--green); }
   .career-carousel-controls { display: flex; align-items: center; justify-content: flex-end; gap: var(--gap-control); }
   .career-carousel-controls button { display: grid; place-items: center; width: var(--carousel-arrow-size); height: var(--carousel-arrow-size); min-width: var(--carousel-arrow-size); min-height: var(--carousel-arrow-size); padding: 0; border: 1px solid var(--control-border); border-radius: 9999px; background: transparent; color: var(--green); }
   .career-carousel-controls button:hover:not(:disabled) { background: var(--surface-tinted); }

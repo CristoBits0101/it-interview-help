@@ -72,5 +72,12 @@ test('growth choices have bilingual preparation and explicit role compatibility'
   assert(careerGrowthTargets.find(target => target.id === 'principal-data-analyst').profileIds.includes('data-analyst'));
   assert(careerGrowthTargets.find(target => target.id === 'chief-data-officer').profileIds.includes('data-analyst'));
   assert(careerGrowthTargets.find(target => target.id === 'chief-information-security-officer').profileIds.includes('soc-analyst'));
+  for (const id of ['ux-writer', 'information-architect', 'content-strategist', 'ux-strategist']) {
+    assert(!careerGrowthTargets.some(target => target.group === 'executive' && target.profileIds.includes(id)));
+    assert(!careerGrowthTargets.find(target => target.id === 'software-architect').profileIds.includes(id));
+  }
+  assert(careerGrowthTargets.find(target => target.id === 'content-strategist').profileIds.includes('information-architect'));
+  assert(!careerGrowthTargets.find(target => target.id === 'head-content-design').profileIds.includes('ux-writer'));
+  assert.equal(reconcileCareerScope({ kind: 'growth', id: 'ux-team-lead' }, 'ux-writer', careerGrowthTargets), null);
   assert.deepEqual(careerGrowthTargets.filter(target => target.group === 'executive').map(target => target.id), ['engineering-director', 'engineering-vp', 'cto', 'chief-data-officer', 'chief-information-security-officer']);
 });

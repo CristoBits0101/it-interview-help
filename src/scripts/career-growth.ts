@@ -26,7 +26,7 @@ export function initializeCareerGrowth(onSelect: (id: string) => void) {
       group.hidden = !Array.from(group.querySelectorAll<HTMLElement>('[data-growth-option]')).some(option => !option.hidden);
     });
     const active = scope?.kind === 'growth' ? buttons.find(button => button.dataset.careerGrowth === scope.id) : undefined;
-    if (preparation) preparation.hidden = !active;
+    if (preparation) preparation.hidden = true;
     if (!active) {
       foundations?.replaceChildren();
       return undefined;

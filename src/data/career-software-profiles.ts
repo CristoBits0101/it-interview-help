@@ -112,7 +112,7 @@ export const softwareCareerProfileTemplates: CareerProfile[] = [
   },
   {
     "id": "iot-developer",
-    "label": "Desarrollador IoT",
+    "label": "Desarrollador de Software IoT",
     "purpose": "Conecta dispositivos y servicios",
     "summary": "Integra dispositivos conectados con redes y servicios. Gestiona el intercambio de datos y el comportamiento ante pérdidas de conexión.",
     "stages": [

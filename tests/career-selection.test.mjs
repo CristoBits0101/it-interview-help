@@ -12,11 +12,6 @@ test('every role belongs to one nonempty professional area without publishing ne
   assert.equal(careerDirections.length, 6);
   assert.deepEqual(careerDirections.map(direction => direction.label), navigation.map(node => node.label));
   assert.equal(new Set(careerDirections.map(direction => direction.id)).size, careerDirections.length);
-  assert.deepEqual(careerDirections.find(direction => direction.id === 'infrastructure-platforms')?.profileIds, ['systems-administrator', 'it-support-specialist', 'network-engineer', 'cloud-engineer', 'devops', 'site-reliability-engineer', 'platform-engineer']);
-  assert.deepEqual(careerDirections.find(direction => direction.id === 'cybersecurity')?.profileIds, ['security-engineer', 'security-analyst', 'soc-analyst', 'grc-analyst', 'application-security-engineer', 'cloud-security-engineer', 'penetration-tester', 'detection-engineer']);
-  assert.deepEqual(careerDirections.find(direction => direction.id === 'ux-design')?.profileIds, ['product-designer', 'ux-designer', 'ui-designer', 'ux-researcher', 'ux-ui-designer']);
-  assert.deepEqual(careerDirections.find(direction => direction.id === 'data-engineering')?.profileIds, ['data-engineer', 'data-analyst', 'business-intelligence-developer', 'data-scientist', 'analytics-engineer']);
-  assert.deepEqual(careerDirections.find(direction => direction.id === 'data-ai')?.profileIds, ['machine-learning-engineer', 'mlops-engineer', 'artificial-intelligence']);
   assert.deepEqual(new Set(careerDirections.flatMap(direction => direction.profileIds)), new Set(profileIds));
   assert.equal(careerDirections.flatMap(direction => direction.profileIds).length, profileIds.length);
   for (const direction of careerDirections) {
@@ -65,4 +60,21 @@ test('all role and stage content remains bilingual with the four shared stage id
       assert.equal(translate(english, 'es'), spanish);
     }
   }
+});
+
+test('role exploration introduces shared foundations before integrated specializations', () => {
+  const roles = id => careerDirections.find(direction => direction.id === id).profileIds;
+  const software = roles('software-development');
+  assert(software.indexOf('frontend') < software.indexOf('backend'));
+  assert(software.indexOf('backend') < software.indexOf('full-stack'));
+  assert(software.indexOf('embedded-software') < software.indexOf('iot-developer'));
+  assert.equal(software.at(-1), 'software-architect');
+  assert.equal(roles('infrastructure-platforms')[0], 'it-support-specialist');
+  assert.equal(roles('cybersecurity')[0], 'security-analyst');
+  assert.equal(roles('data-engineering')[0], 'data-analyst');
+  for (const id of ['research-engineer', 'research-scientist']) {
+    assert(roles('data-ai').includes(id));
+    assert(careerProfiles.find(profile => profile.id === id).summary.includes('primeras etapas'));
+  }
+  assert.equal(translate(careerProfiles.find(profile => profile.id === 'ux-ui-designer').label, 'en'), 'Interaction Designer');
 });

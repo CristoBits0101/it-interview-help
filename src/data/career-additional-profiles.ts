@@ -128,7 +128,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     summary: 'Analiza alertas y evidencia de seguridad. Clasifica incidentes y coordina una respuesta proporcionada al riesgo.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende sistemas, redes y los principios de una respuesta segura.', areas: ['Operating Systems', 'Computer Networks', 'Security Fundamentals', 'Network Security'], milestone: 'Explica qué evidencia conservarías ante una alerta y por qué.' },
-      { id: 'junior', label: 'Junior', goal: 'Triar alertas definidas y documenta una investigación reproducible.', areas: ['Software Engineering Operations', 'Data Security', 'Software Testing'], milestone: 'Clasifica una alerta de laboratorio y registra la evidencia y la decisión tomada.' },
+      { id: 'junior', label: 'Junior', goal: 'Clasifica alertas definidas y documenta una investigación reproducible.', areas: ['Software Engineering Operations', 'Data Security', 'Software Testing'], milestone: 'Clasifica una alerta de laboratorio y registra la evidencia y la decisión tomada.' },
       { id: 'mid', label: 'Mid-Level', goal: 'Correlaciona señales y mejora los procedimientos de respuesta.', areas: ['Cloud Security', 'Data Analytics', 'Software Design'], milestone: 'Relaciona varias señales de un incidente simulado y propone un paso de contención.' },
       { id: 'senior', label: 'Senior', goal: 'Orienta la detección y la respuesta según el riesgo de los sistemas.', areas: ['System Design', 'Software Quality'], milestone: 'Revisa un escenario de incidente y define métricas para evaluar la respuesta.' },
     ],
@@ -435,7 +435,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
   },
   {
     id: 'desktop',
-    label: 'Ingeniero de Desarrollo de Escritorio',
+    label: 'Ingeniero de Software de Escritorio',
     purpose: 'Desarrolla aplicaciones de escritorio',
     summary: 'Construye aplicaciones que se integran con el sistema operativo. Cuida la respuesta de la interfaz y la conservación de los datos.',
     stages: [
