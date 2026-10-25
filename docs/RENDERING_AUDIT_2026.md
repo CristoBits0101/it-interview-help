@@ -23,6 +23,8 @@ Contrastes representativos calculados con tokens: texto suave/canvas 5.68:1, tex
 
 ## Verificación efectuada
 
+La aclaración posterior sobre volumen eliminó el ancho mínimo de 32 px del summary. En ES/EN a 1440, 390 y 320 px, details y summary miden 16 px, exactamente el SVG, tanto abiertos como cerrados. Padding, margen y borde son cero; la fila conserva 182 px y los gaps entre controles son 8 px. Se mantiene altura de interacción de 44 px, foco visible de 3 px y slider operativo. El panel absoluto no ensancha la fila. Fondo transparente en reposo, hover y abierto; cambia el color del icono. La inspección visual detectó que anclar el panel al pequeño grupo de sonido lo desplazaba fuera del borde izquierdo en móvil; se ancló al contenedor completo de controles y se comprobaron sus límites, no solo el scrollWidth de la página.
+
 Chromium 148.0.7778.96 e instalación local de Chrome 156.0.8078.47, ambos Blink. ES y EN con DPR emulado 1, 1.25 y 2: doce casos. Se usaron anchuras de 1440 y 390 px, ampliación de la fuente raíz al 125 % y 200 %, y una comprobación adicional con zoom CSS 1.25. Sin desbordamiento horizontal en estos casos. Esto no sustituye probar zoom nativo del navegador, otros motores o monitores físicos.
 
 Los navegadores temporales se lanzaron con perfil sRGB para comparar píxeles. No se cambiaron ajustes persistentes del navegador, ClearType, HDR, ICC, resolución o escala de Windows. Tras la corrección no hubo errores de carga de fuentes en ninguno de los dos navegadores; los avisos externos de CSP de Chrome se contabilizaron aparte.
