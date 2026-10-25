@@ -14,7 +14,7 @@
 @layer base {
   html { scroll-padding-top: 10rem; }
   html, .sidebar, .navigation-section, .career-carousel-viewport, .implementation-body, dialog { scroll-behavior: smooth; }
-  body { font-family: var(--body); font-size: var(--font-body); font-weight: 300; background: var(--canvas); color: var(--ink); line-height: var(--line-body); overflow-wrap: anywhere; -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--body); font-size: var(--font-body); font-weight: 300; background: var(--canvas); color: var(--ink); line-height: var(--line-body); overflow-wrap: anywhere; }
   ::selection { background: var(--lime); color: var(--ink); }
   :focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
   :where(a, button, input, select, summary) { scroll-margin-block: 10rem 2rem; }
@@ -37,7 +37,9 @@
 }
 @layer components {
   :where(.language-selector button, .language-selector > svg, .icon-button, .navigation-row, .navigation-icon, .next-module, .primary-button, .secondary-button, .implementation-control, .implementation-index button, .concept-source, .text-button, .search-clear, .level-step) { transition: color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease); }
+  :root.language-changing :is(.navigation-section, .topbar, main) { animation: language-content-change var(--motion-fast) var(--motion-ease); }
   :where(.concept-section, .career-panel, .mobile-backdrop):not([hidden]), dialog[open], dialog[open]::backdrop { animation: interface-appear var(--motion-duration) var(--motion-ease); }
+  @keyframes language-content-change { from { opacity: .82; } to { opacity: 1; } }
   @keyframes interface-appear { from { opacity: .7; } to { opacity: 1; } }
   .brand { display: flex; align-items: center; flex-shrink: 0; font-family: var(--brand); font-size: var(--font-brand); font-weight: 500; letter-spacing: -.05em; padding: 9px 18px; min-height: 48px; line-height: var(--line-body); }
   .sidebar-header { position: sticky; top: 0; z-index: 1; display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; background: var(--sidebar); }

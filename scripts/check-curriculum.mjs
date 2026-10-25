@@ -3,6 +3,8 @@ import { readFileSync } from 'node:fs';
 import './register-typescript.mjs';
 
 const { navigation, sharedFoundations } = await import('../src/data/navigation.ts');
+const { pendingPages } = await import('../src/data/published-catalog.ts');
+const pendingDestinations = new Set(pendingPages.map(page => page.href));
 const { careerProfiles, areaGuidance } = await import('../src/data/career-paths.ts');
 const { tracks } = await import('../src/data/curriculum.ts');
 const { systemDesign } = await import('../src/data/system-design.ts');
@@ -29,7 +31,7 @@ for (const node of all) {
   const es = translate(node.label, 'es');
   assert.equal(translate(es, 'en'), node.label, `Translation round trip: ${node.label}`);
   if (!['Big Data', 'REST', 'MVC', 'SQL', 'Hexagonal', 'SOAP', 'GraphQL', 'gRPC', 'Webhook', 'WebSocket'].includes(node.label)) assert.notEqual(es, node.label, `Missing Spanish: ${node.label}`);
-  if (node.href) {
+  if (node.href && !pendingDestinations.has(node.href)) {
     const [trackId, moduleId] = node.href.slice(1).split('/');
     const track = catalog.find(t => t.id === trackId);
     assert(track?.modules.some(m => m.id === moduleId), `Missing destination: ${node.href}`);

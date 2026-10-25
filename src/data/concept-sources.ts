@@ -78,7 +78,7 @@ export const conceptSources = {
   tokens: source('Hugging Face', 'Tokenizers', 'https://huggingface.co/learn/llm-course/chapter2/4'),
   context: source('Anthropic', 'Context windows', 'https://platform.claude.com/docs/en/build-with-claude/context-windows'),
   sampling: source('Hugging Face', 'Generation configuration · Sampling and temperature', 'https://huggingface.co/docs/transformers/main_classes/text_generation#transformers.GenerationConfig'),
-  hallucinations: source('NIST', 'Generative AI Profile · Confabulation · Section 2.2', 'https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf#page=10'),
+  hallucinations: source('NIST', 'Generative AI Profile · Confabulation · Section 2.2', 'https://doi.org/10.6028/NIST.AI.600-1'),
   prompting: source('Anthropic', 'Prompt engineering overview', 'https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview'),
   structured: source('LangChain', 'Structured output', 'https://docs.langchain.com/oss/python/langchain/structured-output'),
   embeddings: source('Nils Reimers y Iryna Gurevych', 'Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks', 'https://arxiv.org/abs/1908.10084'),
@@ -161,6 +161,6 @@ export const glossarySources = {
   tts: reference('Hugging Face', 'Text-to-speech', 'https://huggingface.co/docs/transformers/tasks/text-to-speech'),
   edge: reference('rany2', 'edge-tts README', 'https://github.com/rany2/edge-tts#readme'),
   edgeComputing: reference('Shi y colaboradores', 'Edge Computing: Vision and Challenges', 'https://ieeexplore.ieee.org/document/7488250'),
-  risk: reference('NIST', 'Generative AI Profile', 'https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf'),
-  explain: reference('NIST', 'Four Principles of Explainable Artificial Intelligence', 'https://nvlpubs.nist.gov/nistpubs/ir/2021/NIST.IR.8312.pdf'),
+  risk: reference('NIST', 'Generative AI Profile', 'https://doi.org/10.6028/NIST.AI.600-1'),
+  explain: reference('NIST', 'Four Principles of Explainable Artificial Intelligence', 'https://doi.org/10.6028/NIST.IR.8312'),
 } satisfies Record<string, ConceptSource>;

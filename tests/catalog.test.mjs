@@ -1,19 +1,21 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { navigation } from '../src/data/navigation.ts';
-import { publishedTracks, publishedNavigation, publishedSources } from '../src/data/published-catalog.ts';
+import { publishedTracks, publishedNavigation, publishedSources, pendingPages } from '../src/data/published-catalog.ts';
 import { createConceptViews } from '../src/lib/concept-views.ts';
 
 const flatten = nodes => nodes.flatMap(node => [node, ...flatten(node.children ?? [])]);
 const concepts = publishedTracks.flatMap(track => track.modules.flatMap(module => module.concepts));
 const routeIds = publishedTracks.flatMap(track => track.modules.map(module => `#${track.id}/${module.id}`));
+const pendingIds = pendingPages.map(page => page.href);
+const availableIds = [...routeIds, ...pendingIds];
 const publishedNodes = flatten(publishedNavigation);
 
 test('the published catalog has unique stable identifiers and every page is reachable', () => {
   assert.equal(new Set(publishedTracks.map(track => track.id)).size, publishedTracks.length);
   assert.equal(new Set(routeIds).size, routeIds.length);
   assert.equal(new Set(concepts.map(concept => concept.id)).size, concepts.length);
-  assert.deepEqual(new Set(publishedNodes.flatMap(node => node.href ? [node.href] : [])), new Set(routeIds));
+  assert.deepEqual(new Set(publishedNodes.flatMap(node => node.href ? [node.href] : [])), new Set(availableIds));
   for (const track of publishedTracks) {
     assert(track.modules.length, `Empty track: ${track.id}`);
     for (const module of track.modules) {
@@ -33,12 +35,30 @@ test('unpublished navigation retains its hierarchy without producing dead links'
     for (const [index, node] of source.entries()) {
       const result = available[index];
       assert.equal(result.label, node.label);
-      assert.equal(result.href, routeIds.includes(node.href) ? node.href : undefined);
+      assert.equal(result.href, availableIds.includes(node.href) ? node.href : undefined);
       if (node.children) compare(node.children, result.children);
       else assert.equal(result.children, undefined);
     }
   };
   compare(navigation, publishedNavigation);
+});
+
+test('pending destinations are distinct leaves and do not publish empty learning content', () => {
+  assert.equal(new Set(pendingIds).size, 7);
+  assert.equal(new Set(availableIds).size, availableIds.length);
+  for (const page of pendingPages) {
+    assert.match(page.href, /^#it-service-management\/[a-z-]+$/);
+    const nodes = publishedNodes.filter(node => node.href === page.href);
+    assert.equal(nodes.length, 1);
+    assert.equal(nodes[0].children, undefined);
+    assert.equal(nodes[0].label, page.label);
+    assert(!routeIds.includes(page.href));
+  }
+  assert.equal(concepts.length, 123);
+  assert.equal(publishedTracks.length, 2);
+  const methods = publishedNodes.find(node => node.label === 'Software Engineering Methods');
+  assert.deepEqual(methods.children.map(node => node.label), ['Heuristic Methods', 'Formal Methods', 'Prototyping Methods', 'Agile Methods']);
+  for (const node of methods.children) assert.equal(node.href, undefined);
 });
 
 test('published sources use safe direct HTTPS addresses and remain deduplicated', () => {

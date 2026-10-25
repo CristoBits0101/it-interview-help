@@ -1,18 +1,18 @@
 ---
 import {
-  ArrowRight, ArrowRightLeft, Link2, Check, ChevronDown, ChevronRight, Circle,
+  ArrowRight, Languages, Link2, Check, ChevronDown, ChevronRight, Circle,
   Lightbulb, Target, Menu, Copy,
-  Search, X, Zap, Sigma, ChartColumn, CodeXml, Cpu,
+  Search, X, Zap, Sigma, ChartColumn, CodeXml, Network,
   MousePointerClick, Blocks, Database, Workflow, ShieldCheck, FlaskConical, BrainCircuit,
 } from 'lucide-astro';
 
 const icons = {
-  brand: CodeXml, swap: ArrowRightLeft, arrow: ArrowRight, link: Link2, check: Check, circle: Circle, dot: Circle,
+  brand: CodeXml, languages: Languages, arrow: ArrowRight, link: Link2, check: Check, circle: Circle, dot: Circle,
   chevron: ChevronRight, down: ChevronDown,
   bulb: Lightbulb, target: Target, menu: Menu,
   search: Search, close: X, copy: Copy,
   flash: Zap, sigma: Sigma, chart: ChartColumn, programming: CodeXml,
-  cpu: Cpu, interaction: MousePointerClick, blocks: Blocks, database: Database,
+  cpu: Network, interaction: MousePointerClick, blocks: Blocks, database: Database,
   workflow: Workflow, shield: ShieldCheck, science: FlaskConical, brain: BrainCircuit,
 };
 export type IconName = keyof typeof icons;

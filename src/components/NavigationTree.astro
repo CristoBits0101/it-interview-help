@@ -13,13 +13,13 @@ const branchId = (label: string) => [parentPath, encodeURIComponent(label)].filt
       {!node.children?.length && !node.href ? (
         <span class="navigation-row navigation-disabled" aria-disabled="true">
           {depth === 0 && node.icon && <Icon name={node.icon} size={18} class="navigation-icon" />}
-          <span class="navigation-label" title={node.shared ? t('Base compartida entre áreas') : undefined}>{t(node.label)}</span>
+          <span class="navigation-label" data-i18n-source={node.label} title={node.shared ? t('Base compartida entre áreas') : undefined}>{t(node.label)}</span>
         </span>
       ) : node.children?.length ? (
         <details class="navigation-branch" data-nav-branch={branchId(node.id ?? node.label)}>
           <summary class="navigation-row">
             {depth === 0 && node.icon && <Icon name={node.icon} size={18} class="navigation-icon" />}
-            <span class="navigation-label">{t(node.label)}</span>
+            <span class="navigation-label" data-i18n-source={node.label}>{t(node.label)}</span>
             <Icon name="down" size={14} class="navigation-chevron" />
           </summary>
           <Astro.self nodes={node.children} depth={depth + 1} parentPath={branchId(node.id ?? node.label)} />
@@ -27,7 +27,7 @@ const branchId = (label: string) => [parentPath, encodeURIComponent(label)].filt
       ) : (
         <a class="navigation-row navigation-link" href={node.href} data-nav-link data-nav-module={node.module}>
           {depth === 0 && node.icon && <Icon name={node.icon} size={18} class="navigation-icon" />}
-          <span class="navigation-label">{t(node.label)}</span>
+          <span class="navigation-label" data-i18n-source={node.label}>{t(node.label)}</span>
         </a>
       )}
     </li>

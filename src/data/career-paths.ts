@@ -1,5 +1,6 @@
 import { additionalAreaGuidance, additionalCareerProfileTemplates, additionalCareerSources } from './career-additional-profiles';
 import { softwareCareerProfileTemplates } from './career-software-profiles';
+import { coreCareerProfileTemplates } from './career-core-profiles';
 
 export interface CareerStage {
   id: string;
@@ -21,7 +22,7 @@ export interface CareerProfile {
 
 const careerProfileTemplates: CareerProfile[] = [
   {
-    id: 'frontend', label: 'Frontend Engineer',
+    id: 'frontend', label: 'Ingeniero frontend',
     purpose: 'Construye interfaces web',
     summary: 'Combina la programación con la experiencia de usuario. Aplica criterios de calidad para construir interfaces accesibles.',
     stages: [
@@ -33,7 +34,7 @@ const careerProfileTemplates: CareerProfile[] = [
     ],
   },
   {
-    id: 'backend', label: 'Backend Engineer',
+    id: 'backend', label: 'Ingeniero backend',
     purpose: 'Implementa la lógica de negocio',
     summary: 'Empieza por los servicios y los datos. Añade distribución y nube cuando entiendas sus costes.',
     stages: [
@@ -45,7 +46,7 @@ const careerProfileTemplates: CareerProfile[] = [
     ],
   },
   {
-    id: 'full-stack', label: 'Full-Stack Engineer',
+    id: 'full-stack', label: 'Ingeniero full-stack',
     purpose: 'Conecta interfaces y servicios web',
     summary: 'Conecta la interfaz con los servicios y los datos. Profundiza en una parte sin perder la visión completa.',
     stages: [
@@ -57,7 +58,7 @@ const careerProfileTemplates: CareerProfile[] = [
     ],
   },
   {
-    id: 'devops', label: 'DevOps Engineer',
+    id: 'devops', label: 'Ingeniero DevOps',
     purpose: 'Automatiza la entrega y operación',
     summary: 'Automatiza la entrega y la operación de sistemas. Colabora con los equipos para mantener software fiable.',
     stages: [
@@ -69,7 +70,7 @@ const careerProfileTemplates: CareerProfile[] = [
     ],
   },
   {
-    id: 'artificial-intelligence', label: 'Artificial Intelligence Engineer',
+    id: 'artificial-intelligence', label: 'Ingeniero de IA',
     purpose: 'Aplica modelos de IA a problemas reales',
     summary: 'Aplica matemáticas e ingeniería al trabajo con datos. Evalúa los modelos antes de integrarlos en productos útiles.',
     stages: [
@@ -99,7 +100,7 @@ export const careerTermDescriptions: Record<string, string> = {
   Senior: 'Aborda problemas complejos con criterio y orienta a otros profesionales.',
 };
 
-export const careerProfiles: CareerProfile[] = [...careerProfileTemplates, ...additionalCareerProfileTemplates, ...softwareCareerProfileTemplates].map(profile => ({
+export const careerProfiles: CareerProfile[] = [...careerProfileTemplates, ...additionalCareerProfileTemplates, ...softwareCareerProfileTemplates, ...coreCareerProfileTemplates].map(profile => ({
   ...profile,
   stages: careerStages.map(({ id, label, terms, experience }) => {
     const stage = profile.stages.find(stage => stage.id === id)!;
@@ -153,24 +154,6 @@ export const areaGuidance: Record<string, { focus: string; prerequisites: string
   'Generative AI Applications': { focus: 'Integra modelos y recuperación de contexto en una aplicación. Evalúa su funcionamiento.', prerequisites: ['Generative Artificial Intelligence', 'Software Design'] },
   'Generative Artificial Intelligence': { focus: 'Estudia los modelos generativos y sus límites. Evalúa la calidad de sus respuestas.', prerequisites: ['Deep Learning'] },
 };
-
-export const careerBranches: { title: string; description: string; sequence: string[] }[] = [
-  {
-    title: 'Especialización técnica',
-    description: 'Amplía tu impacto entre equipos. Analyst y Architect son especialidades cuyo alcance depende de la empresa. No son grados obligatorios después de Senior.',
-    sequence: ['Senior Engineer', 'Staff Engineer', 'Principal Engineer'],
-  },
-  {
-    title: 'Liderazgo técnico',
-    description: 'Orienta las decisiones y acompaña al equipo. Coordina las entregas. Technical Lead es una responsabilidad que puede coexistir con distintos niveles técnicos.',
-    sequence: ['Senior Engineer', 'Technical Lead'],
-  },
-  {
-    title: 'Gestión y dirección',
-    description: 'Asume la gestión de personas y la estrategia de la organización. Chief Technology Officer exige visión de negocio. Los cargos y los pasos varían según la empresa.',
-    sequence: ['Engineering Manager', 'Director of Engineering', 'Vice President of Engineering', 'Chief Technology Officer'],
-  },
-];
 
 export const careerSources = [
   ...additionalCareerSources,

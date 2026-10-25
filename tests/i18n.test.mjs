@@ -4,6 +4,7 @@ import { defaultLanguage, t, translate, translatePatternTitle, stageAreaCount, a
 import { getSavedLanguage, saveLanguage, applyStaticTranslations } from '../src/scripts/i18n.ts';
 import { publishedTracks } from '../src/data/published-catalog.ts';
 import { preferenceKeys } from '../src/lib/preferences.ts';
+import { careerProfiles } from '../src/data/career-paths.ts';
 
 test('English is the deterministic default and persisted manual choices take precedence', () => {
   const original = Object.getOwnPropertyDescriptor(globalThis, 'localStorage');
@@ -41,6 +42,32 @@ test('published explanations retain their approved Spanish through English rende
   assert.equal(stageAreaCount(1, 'en'), '1 area at this stage');
   assert.equal(stageAreaCount(2, 'es'), '2 áreas en esta etapa');
   assert.equal(availableConceptCount(1, 'en'), '1 concept available');
+});
+
+test('professional role labels remain canonical Spanish and alternate without inversion', () => {
+  const expected = {
+    'data-analyst': ['Analista de datos', 'Data Analyst'],
+    'systems-administrator': ['Administrador de sistemas', 'Systems Administrator'],
+    'it-support-specialist': ['Especialista de soporte TI', 'IT Support Specialist'],
+    'network-engineer': ['Ingeniero de redes', 'Network Engineer'],
+    'cloud-engineer': ['Ingeniero de nube', 'Cloud Engineer'],
+    'site-reliability-engineer': ['Ingeniero de fiabilidad de sitios', 'Site Reliability Engineer'],
+    'platform-engineer': ['Ingeniero de plataforma', 'Platform Engineer'],
+    'penetration-tester': ['Especialista en pruebas de penetración', 'Penetration Tester'],
+    'soc-analyst': ['Analista SOC', 'SOC Analyst'],
+    'detection-engineer': ['Ingeniero de detección', 'Detection Engineer'],
+    'machine-learning-engineer': ['Ingeniero de aprendizaje automático', 'Machine Learning Engineer'],
+    'mlops-engineer': ['Ingeniero MLOps', 'MLOps Engineer'],
+    'artificial-intelligence': ['Ingeniero de IA', 'AI Engineer'],
+  };
+  for (const [id, [spanish, english]] of Object.entries(expected)) {
+    const profile = careerProfiles.find(candidate => candidate.id === id);
+    assert.equal(profile?.label, spanish);
+    for (const language of ['en', 'es', 'en', 'es']) {
+      assert.equal(translate(profile.label, language), language === 'en' ? english : spanish);
+    }
+    assert.equal(translate(english, 'es'), spanish);
+  }
 });
 
 class ElementFixture {

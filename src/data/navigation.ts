@@ -1,5 +1,6 @@
 import type { IconName } from '../components/Icon.astro';
 import { glossaryTopics } from './ai-glossary';
+import { itServiceManagement } from './pending-navigation';
 
 export interface NavigationNode {
   label: string;
@@ -35,6 +36,7 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
     { label: 'Computer Networks' }, { label: 'Parallel Computing' },
     { label: 'Distributed Systems', href: '#distributed-systems/fundamentos' },
     { label: 'Cloud Computing' },
+    itServiceManagement,
   ] },
   { label: 'Cybersecurity', icon: 'shield', children: [
     { label: 'Security Fundamentals' },
@@ -44,24 +46,33 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
   ] },
   { label: 'Human-Computer Interaction', icon: 'interaction', separatorBefore: true, children: [
     { label: 'Interaction Fundamentals' },
+    { label: 'Accessibility' },
     { label: 'User Experience Design', href: '#ux-design/arquitectura-informacion', children: [
       { label: 'User Research' },
       { label: 'Information Architecture', module: 'arquitectura-informacion', href: '#ux-design/arquitectura-informacion' },
       { label: 'Interaction Design' },
     ] },
     { label: 'User Interface Design' },
-    { label: 'Accessibility' },
     { label: 'Usability Evaluation' },
   ] },
   { label: 'Software Engineering', icon: 'blocks', children: [
     { label: 'Software Requirements' },
-    { label: 'Software Development', children: [
-      foundation('Programming Fundamentals'),
-      { label: 'Programming Languages' },
-      foundation('Discrete Mathematics'),
-      { label: 'Data Structures' },
-      { label: 'Algorithms' },
-      { label: 'Frontend Development' }, { label: 'Backend Development' }, { label: 'Mobile Development' },
+    { label: 'Software Engineering Methods', children: [
+      { label: 'Heuristic Methods' }, { label: 'Formal Methods' },
+      { label: 'Prototyping Methods' }, { label: 'Agile Methods' },
+    ] },
+    { label: 'System Design', href: '#system-design/sd-fundamentals' },
+    { label: 'Software Architecture', href: '#software-architecture/estilos-arquitectura', children: [
+      { label: 'Architectural Styles', children: [
+        { label: 'Monolithic' },
+        { label: 'REST' },
+        { label: 'Event-Driven' },
+        { label: 'Microservices' },
+      ] },
+      { label: 'Architectural Patterns', children: [
+        { label: 'MVC' },
+        { label: 'Hexagonal' },
+      ] },
     ] },
     { label: 'Software Design', href: '#software-design/solid', children: [
       { label: 'SOLID Principles', module: 'solid', href: '#software-design/solid' },
@@ -76,20 +87,15 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
         { label: 'WebSocket' }, { label: 'gRPC' },
       ] },
     ] },
-    { label: 'Software Testing' }, { label: 'Software Quality' },
-    { label: 'Software Architecture', href: '#software-architecture/estilos-arquitectura', children: [
-      { label: 'Architectural Styles', children: [
-        { label: 'Monolithic' },
-        { label: 'REST' },
-        { label: 'Event-Driven' },
-        { label: 'Microservices' },
-      ] },
-      { label: 'Architectural Patterns', children: [
-        { label: 'MVC' },
-        { label: 'Hexagonal' },
-      ] },
+    { label: 'Software Development', children: [
+      foundation('Programming Fundamentals'),
+      { label: 'Programming Languages' },
+      foundation('Discrete Mathematics'),
+      { label: 'Data Structures' },
+      { label: 'Algorithms' },
+      { label: 'Frontend Development' }, { label: 'Backend Development' }, { label: 'Mobile Development' },
     ] },
-    { label: 'System Design', href: '#system-design/sd-fundamentals' },
+    { label: 'Software Testing' }, { label: 'Software Quality' },
     { label: 'Software Engineering Operations' }, { label: 'Software Maintenance' },
   ] },
   { label: 'Data Technologies', id: 'Data', icon: 'database', separatorBefore: true, group: true, children: [
@@ -135,8 +141,8 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
       { label: 'Search and Planning' }, { label: 'Knowledge Representation and Reasoning' },
     ] },
     { label: 'Machine Learning', children: [
-      { label: 'Supervised Learning' }, { label: 'Unsupervised Learning' },
-      { label: 'Model Evaluation' }, { label: 'Deep Learning' },
+      { label: 'Supervised Learning' }, { label: 'Model Evaluation' },
+      { label: 'Unsupervised Learning' }, { label: 'Deep Learning' },
       { label: 'Reinforcement Learning' },
     ] },
     { label: 'Natural Language Processing' }, { label: 'Computer Vision' },

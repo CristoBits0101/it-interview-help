@@ -2,7 +2,8 @@
 import { t } from '../lib/translations';
 import type { Track } from '../data/curriculum';
 import { publishedNavigation as navigation } from '../data/published-catalog';
-import { careerProfiles, areaGuidance, careerBranches, careerTermDescriptions } from '../data/career-paths';
+import { careerProfiles, areaGuidance, careerTermDescriptions } from '../data/career-paths';
+import { careerGrowthTargets } from '../data/career-growth';
 import { careerDirections } from '../data/career-directions';
 import HomeStats from './home/HomeStats.astro';
 import CareerPaths from './home/CareerPaths.astro';
@@ -16,7 +17,7 @@ const catalog = flattenNavigation(navigation);
 const areas = new Map(catalog.map(node => [node.label, node]));
 const totalConcepts = tracks.reduce((total, track) => total + countConcepts(track), 0);
 const stats = [
-  { value: navigation.reduce((total, node) => total + (node.group ? node.children?.filter(child => child.overviewArea !== false).length ?? 0 : 1), 0), label: 'Áreas Principales', detail: 'Temas para repasar' },
+  { value: navigation.length, label: 'Áreas Principales', detail: 'Temas para repasar' },
   { value: tracks.length, label: 'Rutas con Contenido', detail: 'Disponibles para estudiar' },
   { value: totalConcepts, label: 'Conceptos', detail: 'Breves y conectados' },
   { value: careerProfiles.length, label: 'Perfiles Profesionales', detail: 'Un camino para cada objetivo' },
@@ -26,7 +27,7 @@ const stats = [
 <section id="home-view" aria-labelledby="home-title">
   <header class="home-introduction">
     <h1 id="home-title">{t('Prepara tu próxima entrevista técnica')}</h1>
-    <p>{t('Reúne en un solo lugar los fundamentos esenciales de cada área relevante para tu puesto, a menudo dispersos por internet, para construir una base mínima que te ayude a preparar entrevistas técnicas y que se ampliará en el futuro con preguntas de pruebas reales respaldadas por fuentes verificadas.')}</p>
+    <p>{t('Prepara tus entrevistas y pruebas técnicas con los fundamentos esenciales de las áreas relevantes para tu puesto reunidos en un solo lugar con contenido respaldado por fuentes verificadas.')}</p>
   </header>
 
   <HomeStats stats={stats} />
@@ -35,5 +36,5 @@ const stats = [
   <CareerPaths profiles={careerProfiles} directions={careerDirections} tracks={tracks} areas={areas} guidanceByArea={areaGuidance} termDescriptions={careerTermDescriptions} />
   <hr class="home-separator" />
 
-  <CareerGrowth branches={careerBranches} />
+  <CareerGrowth targets={careerGrowthTargets} initialProfileId={careerProfiles[0].id} />
 </section>

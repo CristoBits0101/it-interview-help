@@ -31,7 +31,7 @@ const profilesById = new Map(profiles.map(profile => [profile.id, profile]));
     {directions.map(direction => <button class="career-area-option" type="button" data-carousel-item data-career-direction={direction.id} aria-pressed={direction.id === initialDirection.id} aria-controls="career-profile-options">{t(direction.label)}</button>)}
   </CareerCarousel>
 
-  <CareerCarousel id="career-profile-options" label="Elige un puesto" previousLabel="Puestos anteriores" nextLabel="Puestos siguientes" class="career-profile-options">
+  <CareerCarousel id="career-profile-options" label="Puestos habituales" previousLabel="Puestos anteriores" nextLabel="Puestos siguientes" class="career-profile-options">
     {directions.map(direction => direction.profileIds.map((id, index) => {
       const profile = profilesById.get(id)!;
       return <CareerProfileOption profile={profile} index={index} directionId={direction.id} hidden={direction.id !== initialDirection.id} selected={profile.id === profiles[0].id} />;

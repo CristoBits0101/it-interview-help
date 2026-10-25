@@ -1,58 +1,40 @@
+import { navigation } from './navigation';
+
 export interface CareerDirection {
   id: string;
   label: string;
   profileIds: readonly string[];
 }
 
-export const careerDirections: readonly CareerDirection[] = [
-  {
-    id: 'software-development',
-    label: 'Software Development',
-    profileIds: ['frontend', 'backend', 'full-stack', 'mobile', 'desktop', 'game-developer', 'embedded-software', 'iot-developer'],
-  },
-  {
+const directionProfiles: Record<string, Omit<CareerDirection, 'label'>> = {
+  'Computer Systems': {
     id: 'infrastructure-platforms',
-    label: 'IT Infrastructure',
-    profileIds: ['devops'],
+    profileIds: ['systems-administrator', 'it-support-specialist', 'network-engineer', 'cloud-engineer', 'devops', 'site-reliability-engineer', 'platform-engineer'],
   },
-  {
-    id: 'data-ai',
-    label: 'Artificial Intelligence',
-    profileIds: ['artificial-intelligence'],
-  },
-  {
-    id: 'data-science',
-    label: 'Data Science',
-    profileIds: ['data-scientist'],
-  },
-  {
-    id: 'data-engineering',
-    label: 'Data Engineering',
-    profileIds: ['data-engineer'],
-  },
-  {
+  Cybersecurity: {
     id: 'cybersecurity',
-    label: 'Cybersecurity',
-    profileIds: ['security-engineer'],
+    profileIds: ['security-engineer', 'security-analyst', 'soc-analyst', 'grc-analyst', 'application-security-engineer', 'cloud-security-engineer', 'penetration-tester', 'detection-engineer'],
   },
-  {
-    id: 'software-quality',
-    label: 'Software Quality',
-    profileIds: ['qa-engineer'],
-  },
-  {
+  'Human-Computer Interaction': {
     id: 'ux-design',
-    label: 'UX Design',
-    profileIds: ['ux-designer'],
+    profileIds: ['product-designer', 'ux-designer', 'ui-designer', 'ux-researcher', 'ux-ui-designer'],
   },
-  {
-    id: 'architecture',
-    label: 'Software Architecture',
-    profileIds: ['software-architect'],
+  'Software Engineering': {
+    id: 'software-development',
+    profileIds: ['software-engineer', 'backend', 'full-stack', 'frontend', 'mobile', 'qa-engineer', 'desktop', 'game-developer', 'embedded-software', 'iot-developer', 'software-architect', 'business-analyst'],
   },
-  {
-    id: 'product-analysis',
-    label: 'Business Analysis',
-    profileIds: ['business-analyst'],
+  Data: {
+    id: 'data-engineering',
+    profileIds: ['data-engineer', 'data-analyst', 'business-intelligence-developer', 'data-scientist', 'analytics-engineer'],
   },
-];
+  'Artificial Intelligence': {
+    id: 'data-ai',
+    profileIds: ['machine-learning-engineer', 'mlops-engineer', 'artificial-intelligence'],
+  },
+};
+
+export const careerDirections: readonly CareerDirection[] = navigation.map(node => {
+  const direction = directionProfiles[node.id ?? node.label];
+  if (!direction) throw new Error(`Missing career profiles for navigation area: ${node.label}`);
+  return { ...direction, label: node.label };
+});

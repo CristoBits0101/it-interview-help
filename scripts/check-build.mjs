@@ -3,7 +3,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, extname, join, relative, resolve, sep } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
-import { publishedTracks } from '../src/data/published-catalog.ts';
+import { publishedTracks, pendingPages } from '../src/data/published-catalog.ts';
 import { patternGuides } from '../src/data/pattern-guides/index.ts';
 import { t } from '../src/lib/translations.ts';
 
@@ -61,6 +61,16 @@ for (const directive of ["default-src 'self'", "object-src 'none'", "base-uri 's
 
 const concepts = publishedTracks.flatMap(track => track.modules.flatMap(module => module.concepts));
 const routes = new Set(publishedTracks.flatMap(track => track.modules.map(module => `#${track.id}/${module.id}`)));
+const pendingSections = tags.filter(tag => 'data-pending-route' in tag.attributes);
+assert.deepEqual(new Set(pendingSections.map(tag => `#${tag.attributes['data-pending-route']}`)), new Set(pendingPages.map(page => page.href)));
+for (const page of pendingPages) {
+  const section = pendingSections.find(tag => tag.attributes.id === page.href.slice(1));
+  assert(section && 'hidden' in section.attributes);
+  assertRenderedText(tags.find(tag => tag.attributes.id === `${page.href.slice(1)}-title`), t(page.label), `Pending page title: ${page.href}`);
+  const content = withoutScriptBodies.slice(section.contentStart, withoutScriptBodies.indexOf('</section>', section.contentStart));
+  assert(content.includes(t('Contenido en preparación')));
+  assert(!content.includes('data-concept-id'));
+}
 assert.deepEqual(new Set(tags.filter(tag => 'data-concept-id' in tag.attributes).map(tag => tag.attributes['data-concept-id'])), new Set(concepts.map(concept => concept.id)));
 assert.deepEqual(new Set(tags.filter(tag => 'data-module-id' in tag.attributes).map(tag => `#${tag.attributes['data-track-id']}/${tag.attributes['data-module-id']}`)), routes);
 assert.deepEqual(new Set(tags.filter(tag => tag.name === 'dialog' && 'data-implementation' in tag.attributes).map(tag => tag.attributes.id)), new Set(Object.keys(patternGuides).map(id => `implementation-${id}`)));

@@ -2,10 +2,13 @@ import { navigation, type NavigationNode } from './navigation';
 import { tracks as coreTracks } from './curriculum';
 import { designPatterns, designPatternPages } from './design-patterns';
 import { aiGlossary, glossaryTopics, glossaryInventory } from './ai-glossary';
+import { itServiceManagement } from './pending-navigation';
+export const pendingPages = [...itServiceManagement.children];
+const pendingDestinations = new Set(pendingPages.map(page => page.href));
 export const publishedTracks = [...coreTracks.filter(track => track.id === 'software-design'), aiGlossary];
 const destinations = new Set(publishedTracks.flatMap(track => track.modules.map(module => `#${track.id}/${module.id}`)));
 const availableNavigation = (nodes: NavigationNode[]): NavigationNode[] => nodes.map(node => ({
-  ...node, href: node.href && destinations.has(node.href) ? node.href : undefined,
+  ...node, href: node.href && (destinations.has(node.href) || pendingDestinations.has(node.href)) ? node.href : undefined,
   children: node.children ? availableNavigation(node.children) : undefined,
 }));
 export const publishedNavigation = availableNavigation(navigation);

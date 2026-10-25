@@ -28,6 +28,11 @@ const { id, label, previousLabel, nextLabel, class: className = '', selection = 
           <button type="button" data-carousel-previous aria-label={t(previousLabel)} aria-controls={id} disabled><Icon name="chevron" size={16} class="career-carousel-back" /></button>
           <button type="button" data-carousel-next aria-label={t(nextLabel)} aria-controls={id} disabled><Icon name="chevron" size={16} /></button>
         </>}
+        {!selection && <>
+          <div data-carousel-position-list></div>
+          <button type="button" data-carousel-card-previous aria-label={t(previousLabel)} aria-controls={id} disabled><Icon name="chevron" size={16} class="career-carousel-back" /></button>
+          <button type="button" data-carousel-card-next aria-label={t(nextLabel)} aria-controls={id} disabled><Icon name="chevron" size={16} /></button>
+        </>}
       </div>
     </div>
   </div>

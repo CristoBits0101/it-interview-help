@@ -3,12 +3,20 @@ import test from 'node:test';
 import { resolveCareerSelection } from '../src/lib/career-selection.ts';
 import { careerDirections } from '../src/data/career-directions.ts';
 import { careerProfiles } from '../src/data/career-paths.ts';
+import { navigation } from '../src/data/navigation.ts';
 import { translate } from '../src/lib/translations.ts';
 
 const profileIds = careerProfiles.map(profile => profile.id);
 
 test('every role belongs to one nonempty professional area without publishing new concepts', () => {
+  assert.equal(careerDirections.length, 6);
+  assert.deepEqual(careerDirections.map(direction => direction.label), navigation.map(node => node.label));
   assert.equal(new Set(careerDirections.map(direction => direction.id)).size, careerDirections.length);
+  assert.deepEqual(careerDirections.find(direction => direction.id === 'infrastructure-platforms')?.profileIds, ['systems-administrator', 'it-support-specialist', 'network-engineer', 'cloud-engineer', 'devops', 'site-reliability-engineer', 'platform-engineer']);
+  assert.deepEqual(careerDirections.find(direction => direction.id === 'cybersecurity')?.profileIds, ['security-engineer', 'security-analyst', 'soc-analyst', 'grc-analyst', 'application-security-engineer', 'cloud-security-engineer', 'penetration-tester', 'detection-engineer']);
+  assert.deepEqual(careerDirections.find(direction => direction.id === 'ux-design')?.profileIds, ['product-designer', 'ux-designer', 'ui-designer', 'ux-researcher', 'ux-ui-designer']);
+  assert.deepEqual(careerDirections.find(direction => direction.id === 'data-engineering')?.profileIds, ['data-engineer', 'data-analyst', 'business-intelligence-developer', 'data-scientist', 'analytics-engineer']);
+  assert.deepEqual(careerDirections.find(direction => direction.id === 'data-ai')?.profileIds, ['machine-learning-engineer', 'mlops-engineer', 'artificial-intelligence']);
   assert.deepEqual(new Set(careerDirections.flatMap(direction => direction.profileIds)), new Set(profileIds));
   assert.equal(careerDirections.flatMap(direction => direction.profileIds).length, profileIds.length);
   for (const direction of careerDirections) {
@@ -37,6 +45,14 @@ test('legacy role identities restore their area and invalid selections recover w
   assert.equal(fallback.profileId, careerDirections[0].profileIds[0]);
   assert.equal(resolveCareerSelection(careerDirections, []), null);
   assert.deepEqual(resolveCareerSelection([{ id: 'empty', profileIds: ['missing'] }, { id: 'valid', profileIds: ['backend'] }], ['backend']), { directionId: 'valid', profileId: 'backend' });
+  for (const [directionId, profileId, expectedDirection] of [
+    ['data-science', 'data-scientist', 'data-engineering'],
+    ['software-quality', 'qa-engineer', 'software-development'],
+    ['architecture', 'software-architect', 'software-development'],
+    ['product-analysis', 'business-analyst', 'software-development'],
+  ]) {
+    assert.deepEqual(resolveCareerSelection(careerDirections, profileIds, { directionId, profileId }), { directionId: expectedDirection, profileId });
+  }
 });
 
 test('all role and stage content remains bilingual with the four shared stage identities', () => {

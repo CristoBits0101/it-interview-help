@@ -38,6 +38,7 @@
     --font-title: .9375rem;
     --font-section: .9375rem;
     --line-body: 1rem;
+    --line-career-question: 1.5625rem;
     --control-border: var(--text-soft);
     --motion-fast: 160ms;
     --motion-duration: 200ms;
@@ -45,6 +46,7 @@
     --radius-card: 12px;
     --radius-control: 8px;
     --radius-profile: 1rem;
+    --radius-full: 9999px;
     --radius-inset: 6px;
     --space-navigation-row: 18px;
     --gap-navigation-row: calc(var(--space-navigation-row) / 2);
@@ -59,6 +61,8 @@
     --gap-card: calc(var(--space-card) / 2);
     --space-control: 16px;
     --gap-control: calc(var(--space-control) / 2);
+    --space-micro: 4px;
+    --gap-micro: calc(var(--space-micro) / 2);
     --space-compact: 12px;
     --gap-compact: calc(var(--space-compact) / 2);
   }

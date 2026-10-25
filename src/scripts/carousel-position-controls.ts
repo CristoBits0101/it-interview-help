@@ -2,6 +2,8 @@ import { translate, type Language } from '../lib/translations';
 import { getCarouselPage } from '../lib/horizontal-carousel';
 
 export function initializeCarouselPositions(controls: HTMLElement, viewportId: string, navigate: (index: number) => void, signal: AbortSignal) {
+  const list = controls.querySelector<HTMLElement>('[data-carousel-position-list]');
+  if (!list) throw new Error('Missing carousel position list');
   let items: HTMLElement[] = [];
   let buttons: HTMLButtonElement[] = [];
   let language: Language = 'en';
@@ -29,7 +31,7 @@ export function initializeCarouselPositions(controls: HTMLElement, viewportId: s
           button.setAttribute('aria-controls', viewportId);
           return button;
         });
-        controls.replaceChildren(...buttons);
+        list.replaceChildren(...buttons);
       }
     },
     update(currentPage: number) {

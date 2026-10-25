@@ -1,13 +1,13 @@
 import { preferenceKeys, readJsonPreference, restoreKnownIds, writePreference } from '../lib/preferences';
 import { migrateBranchId } from '../data/navigation-migrations';
+import { translate, type Language } from '../lib/translations';
 
 function fitSidebarToLabels() {
   const sidebar = document.querySelector<HTMLElement>('#sidebar');
   if (!sidebar) return;
   let frame = 0;
 
-  const measure = () => {
-    frame = 0;
+  const measureLanguage = (language: Language) => {
     const probe = sidebar.cloneNode(true) as HTMLElement;
     probe.removeAttribute('id');
     probe.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
@@ -17,10 +17,20 @@ function fitSidebarToLabels() {
       width: 'max-content', maxWidth: 'none', visibility: 'hidden',
       pointerEvents: 'none', transform: 'none', transition: 'none', left: '-100000px',
     });
+    probe.querySelectorAll<HTMLElement>('[data-i18n-source]').forEach(label => {
+      label.textContent = translate(label.dataset.i18nSource!, language);
+      label.lang = language;
+    });
     probe.querySelectorAll('details').forEach(branch => { branch.open = true; });
     document.body.append(probe);
     const width = Math.ceil(probe.getBoundingClientRect().width);
     probe.remove();
+    return width;
+  };
+
+  const measure = () => {
+    frame = 0;
+    const width = Math.max(measureLanguage('en'), measureLanguage('es'));
     if (document.documentElement.style.getPropertyValue('--sidebar-width') !== `${width}px`) {
       document.documentElement.style.setProperty('--sidebar-width', `${width}px`);
     }

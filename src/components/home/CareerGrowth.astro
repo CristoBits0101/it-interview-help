@@ -1,13 +1,62 @@
 ---
 import { t } from '../../lib/translations';
-interface Props { branches: { title: string; description: string; sequence: string[] }[] }
-const { branches } = Astro.props;
+import type { CareerGrowthTarget } from '../../data/career-growth';
+import { careerGrowthGroups } from '../../data/career-growth';
+import Icon from '../Icon.astro';
+
+interface Props { targets: readonly CareerGrowthTarget[]; initialProfileId: string }
+const { targets, initialProfileId } = Astro.props;
 ---
-<section class="home-section" aria-labelledby="growth-title">
-    <header class="home-section-heading">
-      <h2 id="growth-title">{t('Amplía tu Alcance')}</h2>
+<section class="home-section" id="career-growth" aria-labelledby="growth-title">
+  <header class="home-section-heading">
+    <h2 id="growth-title">{t('Amplía tu Alcance')}</h2>
+  </header>
+  <p class="career-growth-introduction">{t('Elige el próximo paso en la trayectoria hacia tu progresión profesional.')}</p>
+  <div class="career-branches">
+    {careerGrowthGroups.map(group => <article class="career-branch" data-growth-group={group.id}>
+      <h3 id={`growth-${group.id}-title`}>{t(group.title)}</h3>
+      <hr class="career-growth-separator" />
+      <p class="career-growth-question" id={`growth-${group.id}-question`}>{t(group.question)}</p>
+      <ul class="career-growth-options" aria-labelledby={`growth-${group.id}-title growth-${group.id}-question`}>
+        {targets.filter(target => target.group === group.id).map(target => <li data-growth-option hidden={!target.profileIds.includes(initialProfileId)}>
+          <button type="button" data-career-growth={target.id} data-growth-profiles={target.profileIds.join(' ')} aria-pressed="false" aria-controls="growth-preparation" aria-label={t(target.label)}>
+            <span data-growth-label>{t(target.label)}</span>
+            <Icon name="check" size={16} class="career-growth-check" />
+          </button>
+        </li>)}
+      </ul>
+    </article>)}
+  </div>
+  <div hidden>
+    {targets.map(target => <div data-growth-copy={target.id}>
+      <p data-growth-goal>{t(target.goal)}</p>
+      <p data-growth-practice>{t(target.practice)}</p>
+    </div>)}
+  </div>
+  <section id="growth-preparation" class="career-panel" aria-labelledby="growth-preparation-title" hidden>
+    <header class="career-panel-heading">
+      <div>
+        <p class="home-kicker">{t('Preparación para el alcance seleccionado')}</p>
+        <h3 id="growth-preparation-title"></h3>
+        <p data-growth-profile-label></p>
+      </div>
     </header>
-    <div class="career-branches">
-      {branches.map(branch => <article class="career-branch"><h3>{t(branch.title)}</h3><p>{t(branch.description)}</p><ol aria-label={t(`Recorrido orientativo: ${branch.title}`)}>{branch.sequence.map((step, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{t(step)}</li>)}</ol></article>)}
+    <hr class="home-separator" />
+    <div class="career-plan-layout">
+      <div class="career-plan-content">
+        <p class="career-list-label">{t('Base técnica del puesto')}</p>
+        <div data-growth-foundations></div>
+      </div>
+      <div class="career-outcome">
+        <p class="home-kicker">{t('Qué preparar')}</p>
+        <p data-growth-selected-goal></p>
+        <hr class="home-separator" />
+        <div class="career-milestone">
+          <p>{t('Práctica propuesta')}</p>
+          <p data-growth-selected-practice></p>
+        </div>
+        <p class="career-outcome-note">{t('Estos ejercicios son propuestas de preparación y no pruebas atribuidas a una empresa.')}</p>
+      </div>
     </div>
   </section>
+</section>

@@ -1,0 +1,11 @@
+---
+import { t } from '../lib/translations';
+interface Props { pages: readonly { label: string; href: string }[] }
+const { pages } = Astro.props;
+---
+{pages.map(page => (
+  <section id={page.href.slice(1)} data-pending-route={page.href.slice(1)} data-pending-title={page.label} aria-labelledby={`${page.href.slice(1)}-title`} hidden>
+    <h1 class="study-title" id={`${page.href.slice(1)}-title`}>{t(page.label)}</h1>
+    <p>{t('Contenido en preparación')}</p>
+  </section>
+))}

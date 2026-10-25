@@ -3,7 +3,7 @@ import type { CareerProfile } from './career-paths';
 export const additionalCareerProfileTemplates: CareerProfile[] = [
   {
     id: 'data-scientist',
-    label: 'Data Scientist',
+    label: 'Científico de Datos',
     purpose: 'Analiza datos y contrasta hipótesis',
     summary: 'Utiliza estadística y modelos para responder preguntas con datos. Comunica resultados y sus límites para orientar decisiones.',
     stages: [
@@ -38,8 +38,152 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     ],
   },
   {
+    id: 'systems-administrator',
+    label: 'Administrador de sistemas',
+    purpose: 'Mantiene sistemas disponibles',
+    summary: 'Configura y mantiene sistemas y servicios. Diagnostica incidencias y protege el acceso a los recursos operativos.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Comprende procesos, archivos, permisos y conexiones de red.', areas: ['Computing Fundamentals', 'Operating Systems', 'Computer Networks', 'Security Fundamentals'], milestone: 'Configura una cuenta con permisos mínimos y comprueba el acceso a un servicio.' },
+      { id: 'junior', label: 'Junior', goal: 'Administra sistemas definidos y documenta cambios e incidencias.', areas: ['Operating Systems', 'Network Security', 'Software Engineering Operations'], milestone: 'Aplica una actualización en un entorno de prueba y registra cómo volver atrás.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Automatiza tareas repetibles y observa la salud de los servicios.', areas: ['Programming Fundamentals', 'Cloud Computing', 'Software Engineering Operations'], milestone: 'Automatiza una comprobación de servicio y crea una alerta útil para un fallo conocido.' },
+      { id: 'senior', label: 'Senior', goal: 'Diseña operaciones fiables para sistemas con dependencias compartidas.', areas: ['Distributed Systems', 'Cloud Security', 'System Design', 'Software Quality'], milestone: 'Define un plan de recuperación para un servicio crítico y valida sus objetivos de tiempo.' },
+    ],
+  },
+  {
+    id: 'it-support-specialist',
+    label: 'Especialista de soporte TI',
+    purpose: 'Resuelve problemas técnicos de usuarios',
+    summary: 'Ayuda a las personas a usar equipos y aplicaciones corporativas. Diagnostica incidencias y documenta soluciones para recuperar el servicio.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Comprende equipos, sistemas operativos, redes y prácticas básicas de seguridad.', areas: ['Computing Fundamentals', 'Operating Systems', 'Computer Networks', 'Security Fundamentals'], milestone: 'Registra una incidencia y explica una comprobación segura para aislar su causa.' },
+      { id: 'junior', label: 'Junior', goal: 'Resuelve solicitudes y problemas definidos con procedimientos y comunicación clara.', areas: ['Operating Systems', 'Software Requirements', 'Network Security'], milestone: 'Documenta la solución de una incidencia y comprueba que la persona puede volver a completar su tarea.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Analiza problemas recurrentes y automatiza tareas de soporte con controles adecuados.', areas: ['Programming Fundamentals', 'Software Engineering Operations', 'Cloud Computing'], milestone: 'Automatiza una comprobación de soporte y mide si reduce el tiempo de resolución.' },
+      { id: 'senior', label: 'Senior', goal: 'Orienta la mejora de los servicios internos según el impacto en las personas y los equipos.', areas: ['Software Design', 'Cloud Security', 'Software Quality'], milestone: 'Prioriza una mejora de servicio y define cómo comprobarías su efecto en usuarios y operación.' },
+    ],
+  },
+  {
+    id: 'network-engineer',
+    label: 'Ingeniero de redes',
+    purpose: 'Diseña y opera redes',
+    summary: 'Configura redes y resuelve problemas de conectividad. Automatiza cambios y protege los servicios que conectan los sistemas.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Comprende protocolos, direccionamiento y los sistemas que se comunican por la red.', areas: ['Computing Fundamentals', 'Operating Systems', 'Computer Networks', 'Security Fundamentals'], milestone: 'Explica el recorrido de una petición y localiza un fallo de conectividad en un entorno de prueba.' },
+      { id: 'junior', label: 'Junior', goal: 'Configura servicios de red definidos y documenta cambios comprobables.', areas: ['Computer Networks', 'Network Security', 'Software Testing'], milestone: 'Aplica un cambio de red en un laboratorio y verifica su efecto con pruebas de conexión.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Automatiza configuraciones y observa el rendimiento y los fallos de la red.', areas: ['Programming Fundamentals', 'Software Engineering Operations', 'Cloud Computing'], milestone: 'Automatiza una comprobación de red y define una alerta para una degradación conocida.' },
+      { id: 'senior', label: 'Senior', goal: 'Diseña redes fiables con capacidad, seguridad y recuperación explícitas.', areas: ['Distributed Systems', 'Cloud Security', 'System Design', 'Software Quality'], milestone: 'Justifica una evolución de red y valida cómo se recupera ante una interrupción.' },
+    ],
+  },
+  {
+    id: 'cloud-engineer',
+    label: 'Ingeniero de nube',
+    purpose: 'Construye infraestructura en la nube',
+    summary: 'Implementa recursos y servicios en la nube. Automatiza su configuración y controla acceso, coste y disponibilidad.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Comprende sistemas, redes y permisos antes de desplegar recursos en la nube.', areas: ['Operating Systems', 'Computer Networks', 'Security Fundamentals', 'Programming Fundamentals'], milestone: 'Describe los recursos de un servicio y limita el acceso de una cuenta de prueba.' },
+      { id: 'junior', label: 'Junior', goal: 'Despliega recursos definidos de forma repetible y verifica sus controles básicos.', areas: ['Cloud Computing', 'Cloud Security', 'Software Testing'], milestone: 'Despliega un servicio de prueba y comprueba su acceso y registro de actividad.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Automatiza infraestructura y opera servicios con observabilidad y recuperación.', areas: ['Software Engineering Operations', 'Software Design', 'Data Security'], milestone: 'Versiona una infraestructura y prueba la recuperación de un recurso eliminado.' },
+      { id: 'senior', label: 'Senior', goal: 'Diseña plataformas en la nube según capacidad, coste y riesgos de continuidad.', areas: ['Distributed Systems', 'Software Architecture', 'System Design', 'Software Quality'], milestone: 'Compara dos arquitecturas en la nube y define sus criterios de disponibilidad y coste.' },
+    ],
+  },
+  {
+    id: 'site-reliability-engineer',
+    label: 'Ingeniero de fiabilidad de sitios',
+    purpose: 'Mejora la fiabilidad de servicios',
+    summary: 'Automatiza la operación y mide la fiabilidad de servicios. Usa objetivos de servicio para priorizar mejoras y responder a incidentes.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Comprende sistemas, redes y programación para diagnosticar fallos de servicios.', areas: ['Operating Systems', 'Computer Networks', 'Programming Fundamentals', 'Security Fundamentals'], milestone: 'Identifica una señal de fallo de un servicio y registra la evidencia necesaria para investigarlo.' },
+      { id: 'junior', label: 'Junior', goal: 'Automatiza comprobaciones y participa en la respuesta a incidentes definidos.', areas: ['Software Engineering Operations', 'Software Testing', 'Cloud Computing'], milestone: 'Implementa una comprobación de disponibilidad y documenta cómo responder a una alerta.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Define observabilidad y reduce trabajo operativo repetitivo con seguridad.', areas: ['Software Design', 'Cloud Security', 'Data Security'], milestone: 'Propone un objetivo de servicio y automatiza una tarea que ayuda a mantenerlo.' },
+      { id: 'senior', label: 'Senior', goal: 'Orienta decisiones de fiabilidad entre servicios y equipos.', areas: ['Distributed Systems', 'Software Architecture', 'System Design', 'Software Quality'], milestone: 'Evalúa un riesgo de fiabilidad y acuerda una mejora con un criterio de recuperación.' },
+    ],
+  },
+  {
+    id: 'platform-engineer',
+    label: 'Ingeniero de plataforma',
+    purpose: 'Crea plataformas para equipos',
+    summary: 'Construye capacidades compartidas para que otros equipos entreguen y operen software con seguridad y autonomía.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Comprende sistemas, redes y automatización antes de crear capacidades compartidas.', areas: ['Operating Systems', 'Computer Networks', 'Programming Fundamentals', 'Security Fundamentals'], milestone: 'Explica qué necesita un equipo para desplegar un servicio sencillo de forma segura.' },
+      { id: 'junior', label: 'Junior', goal: 'Implementa una capacidad de plataforma definida y recoge feedback de sus usuarios internos.', areas: ['Cloud Computing', 'Software Engineering Operations', 'Software Testing'], milestone: 'Prepara una plantilla de despliegue y comprueba que otro equipo puede usarla.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Diseña interfaces de plataforma que reducen complejidad sin ocultar riesgos importantes.', areas: ['Software Design', 'Cloud Security', 'Data Security'], milestone: 'Entrega una capacidad compartida con controles y una guía de adopción verificable.' },
+      { id: 'senior', label: 'Senior', goal: 'Orienta la evolución de una plataforma según las necesidades de varios equipos.', areas: ['Software Architecture', 'Distributed Systems', 'System Design', 'Software Quality'], milestone: 'Compara dos evoluciones de plataforma y define cómo medirías su adopción y fiabilidad.' },
+    ],
+  },
+  {
+    id: 'penetration-tester',
+    label: 'Especialista en pruebas de penetración',
+    purpose: 'Evalúa defensas autorizadas',
+    summary: 'Prueba sistemas dentro de un alcance autorizado. Comunica hallazgos reproducibles y recomendaciones para reducir el riesgo.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Comprende redes, sistemas y principios de seguridad antes de evaluar un alcance autorizado.', areas: ['Operating Systems', 'Computer Networks', 'Security Fundamentals', 'Programming Fundamentals'], milestone: 'Define un alcance autorizado y describe una amenaza sin ejecutar acciones contra sistemas ajenos.' },
+      { id: 'junior', label: 'Junior', goal: 'Identifica vulnerabilidades en entornos de prueba y conserva evidencia clara.', areas: ['Network Security', 'Application Security', 'Software Testing'], milestone: 'Verifica una debilidad en un laboratorio y explica cómo reproducirla de forma segura.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Relaciona rutas de ataque con controles y prioriza los hallazgos por impacto.', areas: ['Cloud Security', 'Data Security', 'Software Design'], milestone: 'Entrega un informe con una cadena de ataque autorizada y una recomendación verificable.' },
+      { id: 'senior', label: 'Senior', goal: 'Diseña ejercicios ofensivos que mejoran la detección y la respuesta.', areas: ['Software Architecture', 'System Design', 'Software Engineering Operations'], milestone: 'Coordina un ejercicio autorizado y acuerda con defensa cómo comprobar las mejoras.' },
+    ],
+  },
+  {
+    id: 'soc-analyst',
+    label: 'Analista SOC',
+    purpose: 'Investiga alertas de seguridad',
+    summary: 'Analiza alertas y evidencia de seguridad. Clasifica incidentes y coordina una respuesta proporcionada al riesgo.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Comprende sistemas, redes y los principios de una respuesta segura.', areas: ['Operating Systems', 'Computer Networks', 'Security Fundamentals', 'Network Security'], milestone: 'Explica qué evidencia conservarías ante una alerta y por qué.' },
+      { id: 'junior', label: 'Junior', goal: 'Triar alertas definidas y documenta una investigación reproducible.', areas: ['Software Engineering Operations', 'Data Security', 'Software Testing'], milestone: 'Clasifica una alerta de laboratorio y registra la evidencia y la decisión tomada.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Correlaciona señales y mejora los procedimientos de respuesta.', areas: ['Cloud Security', 'Data Analytics', 'Software Design'], milestone: 'Relaciona varias señales de un incidente simulado y propone un paso de contención.' },
+      { id: 'senior', label: 'Senior', goal: 'Orienta la detección y la respuesta según el riesgo de los sistemas.', areas: ['System Design', 'Software Quality'], milestone: 'Revisa un escenario de incidente y define métricas para evaluar la respuesta.' },
+    ],
+  },
+  {
+    id: 'detection-engineer',
+    label: 'Ingeniero de detección',
+    purpose: 'Construye detecciones verificables',
+    summary: 'Diseña y mantiene detecciones para comportamientos relevantes. Ajusta reglas con evidencia y reduce señales que no aportan valor.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Comprende eventos de sistemas y redes junto con las amenazas que pueden reflejar.', areas: ['Operating Systems', 'Computer Networks', 'Security Fundamentals', 'Data Analytics'], milestone: 'Describe un evento de seguridad y el comportamiento que podría indicar.' },
+      { id: 'junior', label: 'Junior', goal: 'Implementa reglas sencillas y comprueba su comportamiento en un entorno controlado.', areas: ['Network Security', 'Software Testing', 'Software Engineering Operations'], milestone: 'Crea una detección de laboratorio y demuestra un caso que debe activar la alerta.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Relaciona telemetría con hipótesis de detección y controla los falsos positivos.', areas: ['Cloud Security', 'Data Security', 'Software Design'], milestone: 'Ajusta una regla con datos de prueba y explica el compromiso entre cobertura y ruido.' },
+      { id: 'senior', label: 'Senior', goal: 'Define una estrategia de detección alineada con sistemas y riesgos prioritarios.', areas: ['System Design', 'Software Quality'], milestone: 'Propón una cobertura de detección para un servicio y acuerda cómo validarla con ejercicios.' },
+    ],
+  },
+  {
+    id: 'data-analyst',
+    label: 'Analista de datos',
+    purpose: 'Convierte datos en información útil',
+    summary: 'Explora datos y comunica resultados para orientar decisiones. Comprueba la calidad de los datos y explica los límites de cada conclusión.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Comprende medidas, variabilidad y preguntas que los datos pueden responder.', areas: ['Programming Fundamentals', 'Algebra and Functions', 'Statistics', 'Data Analytics'], milestone: 'Resume un conjunto de datos y separa una observación de una conclusión.' },
+      { id: 'junior', label: 'Junior', goal: 'Consulta y prepara datos para responder preguntas definidas.', areas: ['Relational Databases', 'Data Analytics', 'Data Quality and Governance'], milestone: 'Construye una consulta y explica qué registros quedan fuera del análisis.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Diseña análisis reproducibles y comunica sus límites a las personas implicadas.', areas: ['Data Analytics', 'Software Testing', 'Data Security'], milestone: 'Presenta un análisis con una recomendación y una limitación verificable.' },
+      { id: 'senior', label: 'Senior', goal: 'Orienta decisiones con análisis que relacionan métricas y contexto de negocio.', areas: ['Statistics', 'Data Quality and Governance', 'Software Quality'], milestone: 'Define cómo medir una decisión y qué evidencia cambiaría tu recomendación.' },
+    ],
+  },
+  {
+    id: 'machine-learning-engineer',
+    label: 'Ingeniero de aprendizaje automático',
+    purpose: 'Lleva modelos a producción',
+    summary: 'Construye sistemas que entrenan y sirven modelos. Evalúa su comportamiento y opera sus dependencias de datos y software.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Construye una base de programación y matemáticas para trabajar con modelos.', areas: ['Programming Fundamentals', 'Linear Algebra', 'Probability Theory', 'Statistics'], milestone: 'Prepara datos para un modelo y explica qué representa cada variable.' },
+      { id: 'junior', label: 'Junior', goal: 'Entrena y evalúa modelos sencillos con código reproducible.', areas: ['Machine Learning', 'Data Analytics', 'Software Testing', 'Software Design'], milestone: 'Compara un modelo con una referencia y guarda la configuración de la prueba.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Integra modelos con datos y servicios que pueden evaluarse y mantenerse.', areas: ['Data Engineering', 'Backend Development', 'Deep Learning', 'Software Engineering Operations'], milestone: 'Publica una predicción mediante una API y mide calidad y latencia.' },
+      { id: 'senior', label: 'Senior', goal: 'Diseña la operación de modelos según sus riesgos y objetivos de producto.', areas: ['Cloud Computing', 'Data Security', 'System Design', 'Software Quality'], milestone: 'Define cómo monitorizar un modelo y cuándo retirarlo o volver a entrenarlo.' },
+    ],
+  },
+  {
+    id: 'mlops-engineer',
+    label: 'Ingeniero MLOps',
+    purpose: 'Opera ciclos de vida de modelos',
+    summary: 'Construye procesos reproducibles para entrenar, evaluar y desplegar modelos. Observa sus resultados y controla sus dependencias de datos.',
+    stages: [
+      { id: 'foundation', label: 'Fundamentos', goal: 'Comprende programación, datos y sistemas antes de automatizar el trabajo con modelos.', areas: ['Programming Fundamentals', 'Statistics', 'Operating Systems', 'Computer Networks'], milestone: 'Explica cómo un conjunto de datos llega a un entrenamiento y qué evidencia permite repetirlo.' },
+      { id: 'junior', label: 'Junior', goal: 'Prepara ejecuciones de modelos reproducibles con pruebas y registros.', areas: ['Machine Learning', 'Data Engineering', 'Software Testing', 'Software Engineering Operations'], milestone: 'Guarda una configuración de entrenamiento y comprueba que otra ejecución conserva sus resultados esperados.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Automatiza evaluación y despliegue de modelos con controles de datos y acceso.', areas: ['Cloud Computing', 'Data Security', 'Software Design', 'Deep Learning'], milestone: 'Publica un modelo evaluado y registra su versión, calidad y latencia.' },
+      { id: 'senior', label: 'Senior', goal: 'Diseña operaciones de modelos que equilibran fiabilidad, coste y riesgos de producto.', areas: ['Software Architecture', 'System Design', 'Software Quality', 'Generative Artificial Intelligence'], milestone: 'Define un proceso para detectar degradación y decidir cuándo volver a entrenar o retirar un modelo.' },
+    ],
+  },
+  {
     id: 'mobile',
-    label: 'Mobile Engineer',
+    label: 'Ingeniero de Desarrollo Móvil',
     purpose: 'Desarrolla aplicaciones móviles',
     summary: 'Construye aplicaciones adaptadas al dispositivo. Gestiona su ciclo de vida y su comportamiento sin conexión.',
     stages: [
@@ -75,7 +219,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
   },
   {
     id: 'data-engineer',
-    label: 'Data Engineer',
+    label: 'Ingeniero de Datos',
     purpose: 'Prepara datos fiables para otros equipos',
     summary: 'Integra datos de distintas fuentes. Construye procesos reproducibles y comprueba su calidad antes de entregarlos.',
     stages: [
@@ -111,7 +255,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
   },
   {
     id: 'security-engineer',
-    label: 'Security Engineer',
+    label: 'Ingeniero de Seguridad',
     purpose: 'Protege aplicaciones y sistemas',
     summary: 'Relaciona amenazas con controles verificables. Colabora con desarrollo y operación para reducir riesgos concretos.',
     stages: [
@@ -147,7 +291,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
   },
   {
     id: 'qa-engineer',
-    label: 'QA Engineer',
+    label: 'Ingeniero de Calidad de Software',
     purpose: 'Verifica la calidad del software',
     summary: 'Convierte expectativas en comprobaciones útiles. Combina exploración y automatización según el riesgo del producto.',
     stages: [
@@ -183,7 +327,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
   },
   {
     id: 'ux-designer',
-    label: 'UX Designer',
+    label: 'Diseñador de Experiencia de Usuario',
     purpose: 'Diseña experiencias comprensibles',
     summary: 'Investiga necesidades y prueba alternativas de interacción. Utiliza evidencia para mejorar la experiencia de las personas.',
     stages: [
@@ -219,7 +363,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
   },
   {
     id: 'software-architect',
-    label: 'Software Architect',
+    label: 'Arquitecto de Software',
     purpose: 'Orienta decisiones de arquitectura',
     summary: 'Relaciona requisitos con decisiones técnicas. Las primeras etapas preparan fundamentos para asumir responsabilidades de arquitectura.',
     stages: [
@@ -255,7 +399,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
   },
   {
     id: 'business-analyst',
-    label: 'Business Analyst',
+    label: 'Analista de Negocio',
     purpose: 'Conecta necesidades con soluciones',
     summary: 'Analiza necesidades y aclara resultados esperados. Conecta a las personas implicadas con el equipo que construye la solución.',
     stages: [
@@ -291,7 +435,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
   },
   {
     id: 'desktop',
-    label: 'Desktop Engineer',
+    label: 'Ingeniero de Desarrollo de Escritorio',
     purpose: 'Desarrolla aplicaciones de escritorio',
     summary: 'Construye aplicaciones que se integran con el sistema operativo. Cuida la respuesta de la interfaz y la conservación de los datos.',
     stages: [

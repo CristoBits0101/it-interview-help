@@ -2,10 +2,12 @@
 import AppLayout from '../layouts/AppLayout.astro';
 import HomeOverview from '../components/HomeOverview.astro';
 import StudyArea from '../components/study/StudyArea.astro';
-import { publishedTracks, publishedNavigation, publishedSources, patternIds, patternModuleIds, glossaryAliases } from '../data/published-catalog';
+import PendingContent from '../components/PendingContent.astro';
+import { publishedTracks, publishedNavigation, publishedSources, patternIds, patternModuleIds, glossaryAliases, pendingPages } from '../data/published-catalog';
 
 ---
 <AppLayout navigation={publishedNavigation} sources={publishedSources}>
   <HomeOverview tracks={publishedTracks} />
+  <PendingContent pages={pendingPages} />
   <StudyArea tracks={publishedTracks} purposeModuleIds={patternModuleIds} compactTrackIds={new Set(['applied-ai'])} patternIds={patternIds} aliases={glossaryAliases} />
 </AppLayout>

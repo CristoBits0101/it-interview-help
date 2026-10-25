@@ -1,11 +1,30 @@
 import { glossaryTranslations } from '../data/ai-glossary';
 import { careerDirectionTranslations } from '../data/career-directions-translations';
+import { careerGrowthTranslations } from '../data/career-growth-translations';
+import { careerRoleTranslations } from '../data/career-role-translations';
 export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
+  ...careerGrowthTranslations,
+  ...careerRoleTranslations,
+  'Contenido en preparación': 'Content coming soon',
+  'Gestión de Servicios TI': 'IT Service Management',
+  'Soporte TI': 'IT Support',
+  'Gestión de Incidencias': 'Incident Management',
+  'Gestión de Problemas': 'Problem Management',
+  'Gestión de Solicitudes de Servicio': 'Service Request Management',
+  'Gestión de Cambios': 'Change Management',
+  'Gestión de Niveles de Servicio': 'Service Level Management',
+  'Mejora Continua': 'Continual Improvement',
+  'Métodos de Ingeniería de Software': 'Software Engineering Methods',
+  'Métodos Heurísticos': 'Heuristic Methods',
+  'Métodos Formales': 'Formal Methods',
+  'Prototipado': 'Prototyping Methods',
+  'Métodos Ágiles': 'Agile Methods',
   ...careerDirectionTranslations,
   'Elige un área profesional': 'Choose a professional area',
   'Elige un puesto': 'Choose a role',
+  'Puestos habituales': 'Common roles',
   'Área anterior': 'Previous area',
   'Área siguiente': 'Next area',
   'Puestos anteriores': 'Previous roles',
@@ -14,7 +33,7 @@ const spanishToEnglish: Record<string, string> = {
   'Mostrar página': 'Show page',
   'Puestos': 'Roles',
   'Prepara tu próxima entrevista técnica': 'Prepare for your next technical interview',
-  'Reúne en un solo lugar los fundamentos esenciales de cada área relevante para tu puesto, a menudo dispersos por internet, para construir una base mínima que te ayude a preparar entrevistas técnicas y que se ampliará en el futuro con preguntas de pruebas reales respaldadas por fuentes verificadas.': 'Bring together the essential fundamentals of each area relevant to your role, often scattered across the internet, to build a minimum foundation that helps you prepare for technical interviews and will be expanded in the future with questions from real assessments backed by verified sources.',
+  'Prepara tus entrevistas y pruebas técnicas con los fundamentos esenciales de las áreas relevantes para tu puesto reunidos en un solo lugar con contenido respaldado por fuentes verificadas.': 'Prepare for your technical interviews and assessments with the essential knowledge from the areas relevant to your role gathered in one place with content backed by verified sources.',
   '0 años': '0 years',
   '0 - 2 años': '0 - 2 years',
   '2 - 5 años': '2 - 5 years',
@@ -151,8 +170,8 @@ const spanishToEnglish: Record<string, string> = {
   'SFIA · autonomía y responsabilidad profesional': 'SFIA · autonomy and responsibility',
   'GitLab · trayectorias de ingeniería': 'GitLab · engineering career paths',
   'Contenido de': 'Content for',
-  'Especialización técnica': 'Technical specialization', 'Liderazgo técnico': 'Technical leadership',
-  'Gestión y dirección': 'Management and leadership',
+  'Especialización Técnica': 'Technical Specialization', 'Liderazgo Técnico': 'Technical Leadership',
+  'Gestión y Dirección': 'Management and Leadership',
   'Amplía tu impacto entre equipos. Analyst y Architect son especialidades cuyo alcance depende de la empresa. No son grados obligatorios después de Senior.': 'Expand your impact across teams. Analyst and Architect are specialties whose scope varies by company. They are not required levels after Senior.',
   'Orienta las decisiones y acompaña al equipo. Coordina las entregas. Technical Lead es una responsabilidad que puede coexistir con distintos niveles técnicos.': 'Guide decisions and support the team. Coordinate delivery. Technical Lead is a responsibility that can coexist with different technical levels.',
   'Asume la gestión de personas y la estrategia de la organización. Chief Technology Officer exige visión de negocio. Los cargos y los pasos varían según la empresa.': 'Take responsibility for people management and organizational strategy. A Chief Technology Officer also needs business perspective. Titles and career steps vary by company.',

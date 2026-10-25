@@ -12,7 +12,7 @@ const { nodes } = Astro.props;
         <button class="icon-button sidebar-close" id="sidebar-close" aria-label={t('Cerrar menú de rutas')}><Icon name="close" /></button>
       </div>
       <div class="navigation-section">
-        <p class="nav-eyebrow" id="navigation-heading" lang="en">{t('FOUNDATIONS BY AREA')}</p>
+        <p class="nav-eyebrow" id="navigation-heading" lang="en" data-i18n-source="FOUNDATIONS BY AREA">{t('FOUNDATIONS BY AREA')}</p>
         <nav id="course-navigation" class="course-nav" aria-labelledby="navigation-heading" lang="en">
           <NavigationTree nodes={nodes} />
         </nav>

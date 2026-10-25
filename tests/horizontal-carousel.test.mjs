@@ -54,6 +54,12 @@ test('pagination groups five roles and retains a partial final group', () => {
     }
   }
 });
+test('card navigation remains meaningful when one pagination block overflows the viewport', () => {
+  for (const count of [3, 5]) {
+    assert.equal(getCarouselPage(count, 0).pages, 1);
+    assert.ok(calculateCarouselLayout(320, count, 144, 288, 8).slots < count);
+  }
+});
 test('focus destinations never wrap and activation keys remain native', () => {
   assert.equal(getCarouselFocusIndex('ArrowLeft', 0, 8), 0);
   assert.equal(getCarouselFocusIndex('ArrowRight', 7, 8), 7);
@@ -81,4 +87,11 @@ test('selection controls follow the chosen item even when all choices fit in the
   assert.equal(formatCarouselSelection(3, 8, 'es'), '4 de 8');
   assert.equal(formatCarouselSelection(7, 8, 'en'), '8 of 8');
   assert.equal(formatCarouselSelection(-1, 0, 'en'), '0 of 0');
+});
+
+test('selection updates arrow limits without requiring a scroll event', () => {
+  assert.deepEqual(getCarouselSelectionState(0, 3), { index: 0, controlsVisible: true, previousDisabled: true, nextDisabled: false });
+  assert.deepEqual(getCarouselSelectionState(1, 3), { index: 1, controlsVisible: true, previousDisabled: false, nextDisabled: false });
+  assert.deepEqual(getCarouselSelectionState(0, 3), { index: 0, controlsVisible: true, previousDisabled: true, nextDisabled: false });
+  assert.deepEqual(getCarouselSelectionState(2, 3), { index: 2, controlsVisible: true, previousDisabled: false, nextDisabled: true });
 });
