@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { resolveCareerSelection } from '../src/lib/career-selection.ts';
+import { resolveCareerSelection, restoreCareerSelectionState, toggleCareerSelection } from '../src/lib/career-selection.ts';
 import { careerDirections } from '../src/data/career-directions.ts';
 import { careerProfiles } from '../src/data/career-paths.ts';
 import { navigation } from '../src/data/navigation.ts';
@@ -77,4 +77,32 @@ test('role exploration introduces shared foundations before integrated specializ
     assert(careerProfiles.find(profile => profile.id === id).summary.includes('primeras etapas'));
   }
   assert.equal(translate(careerProfiles.find(profile => profile.id === 'ux-ui-designer').label, 'en'), 'Interaction Designer');
+});
+
+test('area and role selections clear their dependents without immediately restoring a default', () => {
+  for (const direction of careerDirections) {
+    const initial = resolveCareerSelection(careerDirections, profileIds, { directionId: direction.id });
+    const clearedRole = toggleCareerSelection(careerDirections, profileIds, initial, { kind: 'profile', id: initial.profileId });
+    assert.deepEqual(clearedRole, { directionId: direction.id, profileId: null });
+    assert.deepEqual(toggleCareerSelection(careerDirections, profileIds, clearedRole, { kind: 'profile', id: initial.profileId }), initial);
+    const clearedArea = toggleCareerSelection(careerDirections, profileIds, initial, { kind: 'direction', id: direction.id });
+    assert.deepEqual(clearedArea, { directionId: null, profileId: null });
+    assert.deepEqual(toggleCareerSelection(careerDirections, profileIds, clearedArea, { kind: 'direction', id: direction.id }), initial);
+    assert.deepEqual(toggleCareerSelection(careerDirections, profileIds, clearedArea, { kind: 'profile', id: initial.profileId }), clearedArea);
+    const other = careerDirections.find(item => item.id !== direction.id);
+    assert.deepEqual(toggleCareerSelection(careerDirections, profileIds, clearedRole, { kind: 'profile', id: other.profileIds[0] }), clearedRole);
+    assert.deepEqual(toggleCareerSelection(careerDirections, profileIds, initial, { kind: 'direction', id: other.id }), { directionId: other.id, profileId: other.profileIds[0] });
+  }
+});
+
+test('session restoration distinguishes absent selections from explicit empty and invalid hierarchies', () => {
+  const fallback = resolveCareerSelection(careerDirections, profileIds);
+  const restore = value => restoreCareerSelectionState(careerDirections, profileIds, value, fallback);
+  assert.deepEqual(restore(undefined), fallback);
+  assert.deepEqual(restore({ directionId: null, profileId: null }), { directionId: null, profileId: null });
+  assert.deepEqual(restore({ directionId: fallback.directionId, profileId: null }), { directionId: fallback.directionId, profileId: null });
+  assert.deepEqual(restore({ directionId: null, profileId: fallback.profileId }), { directionId: null, profileId: null });
+  const other = careerDirections.find(direction => direction.id !== fallback.directionId);
+  assert.deepEqual(restore({ directionId: fallback.directionId, profileId: other.profileIds[0] }), { directionId: fallback.directionId, profileId: null });
+  assert.deepEqual(restore({ directionId: 'removed', profileId: fallback.profileId }), { directionId: null, profileId: null });
 });

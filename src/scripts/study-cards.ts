@@ -4,15 +4,16 @@ library.addEventListener('click', event => {
   if (!button) return;
   if (button.dataset.guideOpen) return;
   if (button.dataset.cardView) {
-    if (button.disabled || button.getAttribute('aria-pressed') === 'true') return;
+    if (button.disabled) return;
+    const deselect = button.getAttribute('aria-pressed') === 'true';
     const card = button.closest<HTMLElement>('.concept-card')!;
     const panel = card.querySelector<HTMLElement>(`[data-card-panel="${button.dataset.cardView}"]`);
     if (!panel?.textContent?.trim()) return;
     card.querySelectorAll<HTMLButtonElement>('[data-card-view]:not([data-guide-open])').forEach(viewButton => {
-      viewButton.setAttribute('aria-pressed', String(viewButton === button));
+      viewButton.setAttribute('aria-pressed', String(!deselect && viewButton === button));
     });
     card.querySelectorAll<HTMLElement>('[data-card-panel]').forEach(viewPanel => {
-      viewPanel.hidden = viewPanel !== panel;
+      viewPanel.hidden = deselect || viewPanel !== panel;
     });
     return;
   }

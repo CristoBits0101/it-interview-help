@@ -48,3 +48,16 @@ export function restoreLearnedIds(value: unknown, validIds: ReadonlySet<string>)
 export function restoreCareerStage(value: unknown, validIds: ReadonlySet<string>, fallback: string): string | null {
   return value === null || typeof value === 'string' && validIds.has(value) ? value : fallback;
 }
+
+function browserSessionStorage(): PreferenceStorage | null {
+  try { return globalThis.sessionStorage ?? null; }
+  catch { return null; }
+}
+
+export function readSessionJsonPreference(key: string): unknown {
+  return readJsonPreference(key, browserSessionStorage());
+}
+
+export function writeSessionPreference(key: string, value: string): boolean {
+  return writePreference(key, value, browserSessionStorage());
+}
