@@ -11,17 +11,15 @@ export function restoreSoundPreference(value: unknown): SoundPreference {
 }
 
 export function createSoundGate() {
-  let last = -Infinity;
   let lastAction = -Infinity;
   const times = { type: -Infinity, scroll: -Infinity };
   return (cue: SoundCue, now: number) => {
-    if (now - last < 35) return false;
-    if (cue === 'type' || cue === 'scroll') {
-      if (now - times[cue] < (cue === 'type' ? 110 : 700)) return false;
-      if (cue === 'scroll' && now - lastAction < 400) return false;
-      times[cue] = now;
-    } else lastAction = now;
-    last = now;
+    if (cue !== 'type' && cue !== 'scroll') {
+      lastAction = now;
+      return true;
+    }
+    if (now - lastAction < 50 || now - times[cue] < (cue === 'type' ? 55 : 110)) return false;
+    times[cue] = now;
     return true;
   };
 }

@@ -12,10 +12,8 @@ export function initializeInteractionSounds() {
   if (!toggle || !slider || !output || !settings || !status) return;
   let preference = restoreSoundPreference(readJsonPreference(soundPreferenceKey));
   let unlocked = false;
-  let activation = 0;
   let scrollIntent = -Infinity;
   let suppressScrollUntil = 0;
-  let nextScrollCheck = 0;
   const language = () => document.documentElement.lang === 'es' ? 'es' : 'en';
   const persist = () => writePreference(soundPreferenceKey, JSON.stringify(preference));
   const render = () => {
@@ -34,7 +32,7 @@ export function initializeInteractionSounds() {
     unlocked = false;
     persist();
     render();
-    status.textContent = translate('El audio no está disponible. Puedes volver a intentarlo.', language());
+    status.textContent = translate('El audio no estÃ¡ disponible. Puedes volver a intentarlo.', language());
     status.hidden = false;
     settings.open = true;
   });
@@ -47,14 +45,13 @@ export function initializeInteractionSounds() {
   };
   toggle.addEventListener('click', () => {
     preference.enabled = !preference.enabled;
-    const currentActivation = ++activation;
-    const activatedAt = performance.now();
     status.hidden = true;
     persist();
     render();
     if (preference.enabled) {
       unlocked = true;
-      void player.enable().then(() => { if (preference.enabled && activation === currentActivation && performance.now() - activatedAt < 250) player.play('select'); });
+      void player.enable();
+      player.play('select');
     } else { unlocked = false; player.disable(); }
   });
   slider.addEventListener('input', () => {
@@ -77,63 +74,93 @@ export function initializeInteractionSounds() {
       drawer: document.getElementById('sidebar')?.classList.contains('mobile-open') ?? false,
       destination: [location.hash, document.documentElement.lang, guide?.dataset.currentStep,
         carousel?.querySelector('[aria-pressed="true"]')?.textContent,
-        viewport?.scrollLeft, carousel?.querySelector('[data-carousel-position-list] [aria-current]')?.textContent,
+        viewport?.scrollLeft, carousel?.contains(document.activeElement) ? document.activeElement?.textContent : '', carousel?.querySelector('[data-carousel-position-list] [aria-current]')?.textContent,
         (document.getElementById('search') as HTMLInputElement)?.value,
         document.getElementById('level-current')?.textContent,
         review?.textContent, (review?.querySelector('#review-answer') as HTMLElement | null)?.hidden, window.scrollY].join('|'),
     };
   };
-  const compareAfterAction = (control?: Element, navigation = false) => {
-    const before = snapshot(control);
-    setTimeout(() => {
-      if (!preference.enabled) return;
-      const cue = soundForChange(before, snapshot(control));
-      if (cue) player.play(navigation ? 'navigate' : cue);
-    }, 0);
+  type Action = { control?: Element; before: InteractionState; navigation?: boolean };
+  const actions = new WeakMap<Event, Action>();
+  const disclosures = new WeakMap<HTMLDetailsElement, boolean>();
+  const closing = new WeakSet<HTMLDialogElement>();
+  const begin = (event: Event, control?: Element, navigation = false) => {
+    unlock();
+    suppressScrollUntil = performance.now() + 250;
+    actions.set(event, { control, before: snapshot(control), navigation });
+  };
+  const finish = (event: Event) => {
+    const action = actions.get(event);
+    if (!action || !preference.enabled) return;
+    const cue = soundForChange(action.before, snapshot(action.control));
+    if (cue) {
+      player.play(action.navigation ? 'navigate' : cue);
+      document.querySelectorAll<HTMLDialogElement>('dialog').forEach(dialog => closing.delete(dialog));
+    }
+    else if (event.type === 'click' && !event.defaultPrevented && action.control instanceof HTMLAnchorElement && action.control.href && action.control.href !== location.href) player.play('navigate');
   };
   document.addEventListener('click', event => {
     if (!event.isTrusted || !preference.enabled || !(event.target instanceof Element)) return;
     const control = event.target.closest('button, summary, a, #mobile-backdrop, dialog');
     if (!control || control.closest('#sound-toggle, #sound-volume') || control.matches(':disabled, [aria-disabled="true"]')) return;
-    unlock();
-    suppressScrollUntil = performance.now() + 600;
-    compareAfterAction(control);
+    begin(event, control);
+    if (control instanceof HTMLElement && control.matches('summary') && control.parentElement instanceof HTMLDetailsElement) disclosures.set(control.parentElement, control.parentElement.open);
+  }, true);
+  document.addEventListener('click', finish);
+  document.addEventListener('toggle', event => {
+    const target = event.target;
+    if (!(target instanceof HTMLDetailsElement) || !disclosures.has(target)) return;
+    const before = disclosures.get(target);
+    disclosures.delete(target);
+    if (preference.enabled && before !== target.open) player.play(target.open ? 'open' : 'close');
   }, true);
   document.addEventListener('keydown', event => {
     if (!event.isTrusted || !preference.enabled) return;
     unlock();
     if (event.key === 'Escape') {
-      compareAfterAction(settings.open ? settings.querySelector('summary') ?? undefined : undefined);
+      begin(event, settings.open ? settings.querySelector('summary') ?? undefined : undefined);
       if (settings.open) settings.open = false;
+      const dialog = document.querySelector<HTMLDialogElement>('dialog[open]');
+      if (dialog) closing.add(dialog);
     }
-    if (event.target instanceof Element && event.target.closest('[data-carousel-viewport]') && ['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
-      suppressScrollUntil = performance.now() + 600;
-      compareAfterAction(event.target, true);
+    if (event.target instanceof Element && event.target.closest('[data-carousel-viewport]') && ['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) begin(event, event.target, true);
+    if (!(event.target instanceof Element && event.target.closest('input, textarea, button, summary, [contenteditable]')) && ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) {
+      scrollIntent = performance.now();
+      suppressScrollUntil = 0;
     }
-    if (!(event.target instanceof Element && event.target.closest('input, textarea, button, summary, [contenteditable]')) && ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) scrollIntent = performance.now();
   }, true);
+  document.addEventListener('keydown', finish);
+  document.addEventListener('close', event => {
+    if (event.target instanceof HTMLDialogElement && closing.delete(event.target) && preference.enabled) player.play('close');
+  }, true);
+  let searchValue = (document.getElementById('search') as HTMLInputElement | null)?.value;
   document.getElementById('search')?.addEventListener('input', event => {
     if (!event.isTrusted || !preference.enabled || event instanceof InputEvent && event.isComposing) return;
+    const value = (event.target as HTMLInputElement).value;
+    if (value === searchValue) return;
+    searchValue = value;
     unlock();
     player.play('type');
   });
   const markScrollIntent = (event: Event) => {
-    if (event.isTrusted && preference.enabled) scrollIntent = performance.now();
+    if (!event.isTrusted || !preference.enabled) return;
+    unlock();
+    scrollIntent = performance.now();
+    suppressScrollUntil = 0;
   };
   document.addEventListener('wheel', markScrollIntent, { passive: true, capture: true });
   document.addEventListener('touchmove', markScrollIntent, { passive: true, capture: true });
-  const positions = new WeakMap<object, number>();
+  document.addEventListener('pointermove', event => { if (event.buttons === 1) markScrollIntent(event); }, { passive: true, capture: true });
+  const positions = new WeakMap<Element, [number, number]>();
   document.addEventListener('scroll', event => {
-    if (!preference.enabled) return;
-    const now = performance.now();
-    if (now < nextScrollCheck || now < suppressScrollUntil || now - scrollIntent > 250) return;
-    nextScrollCheck = now + 100;
     const target = event.target === document ? document.scrollingElement : event.target;
     if (!(target instanceof Element)) return;
-    const position = target.scrollTop + target.scrollLeft;
-    const previous = positions.get(target) ?? 0;
-    if (Math.abs(position - previous) < 60) return;
+    const position: [number, number] = [target.scrollLeft, target.scrollTop];
+    const previous = positions.get(target);
     positions.set(target, position);
+    const now = performance.now();
+    if (!preference.enabled || now < suppressScrollUntil || now - scrollIntent > 700) return;
+    if (previous && Math.abs(position[0] - previous[0]) < 2 && Math.abs(position[1] - previous[1]) < 2) return;
     player.play('scroll');
   }, { passive: true, capture: true });
   document.addEventListener('interaction-feedback', event => {
