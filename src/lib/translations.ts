@@ -84,6 +84,7 @@ const spanishToEnglish: Record<string, string> = {
   'Saltar al contenido': 'Skip to content', 'Navegación de aprendizaje': 'Learning navigation',
   'Cerrar menú de rutas': 'Close learning paths menu', 'FUNDAMENTOS POR ÁREA': 'FOUNDATIONS BY AREA',
   'Ruta actual': 'Current path', 'Inicio': 'Home', 'Buscar conceptos': 'Search concepts',
+  'Buscar conceptos...': 'Search concepts...',
   'Creacionales': 'Creational', 'Estructurales': 'Structural', 'Comportamiento': 'Behavioral',
   'Borrar búsqueda': 'Clear search', 'Todos los niveles': 'All levels', Esencial: 'Essential',
   Intermedio: 'Intermediate', Avanzado: 'Advanced', 'Filtrar por nivel': 'Filter by level',
