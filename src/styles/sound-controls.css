@@ -1,15 +1,17 @@
 @layer components {
-  .locale-controls { display: flex; flex: 0 0 auto; align-items: center; gap: var(--gap-compact); margin-inline-start: auto; max-width: 100%; }
-  .topbar-actions { gap: var(--space-compact); }
-  .locale-controls .language-selector { flex: 0 1 auto; min-width: 0; }
+  .locale-controls { display: flex; flex: 0 0 auto; align-items: center; gap: var(--gap-control); margin-inline-start: 0; max-width: 100%; }
+  .topbar-actions { gap: var(--gap-control); }
+  .locale-controls .language-selector { flex: 0 1 auto; min-width: 0; margin-inline-start: 0; }
   .locale-controls .language-selector button { min-width: 0; width: 6.625rem; }
-  .sound-controls { position: relative; display: flex; align-items: center; gap: 0; }
+  .sound-controls { position: relative; display: flex; align-items: center; gap: var(--gap-control); }
   #sound-toggle { border: 1px solid var(--control-border); border-radius: 9999px; background: transparent; }
   #sound-toggle[aria-pressed='true'] { color: var(--green); }
   #sound-toggle:hover { background: transparent; color: var(--ink); }
   .sound-settings-toggle { display: grid; place-items: center; min-width: 32px; min-height: 44px; list-style: none; color: var(--text-soft); border-radius: var(--radius-control); }
   .sound-settings-toggle::-webkit-details-marker { display: none; }
-  .sound-settings-toggle:hover { color: var(--green); background: var(--surface-hover); }
+  .sound-settings-toggle { background: transparent; }
+  #sound-settings[open] .sound-settings-toggle { color: var(--green); }
+  .sound-settings-toggle:hover { color: var(--ink); background: transparent; }
   .sound-settings-panel { position: absolute; z-index: 30; inset-inline-end: 0; top: calc(100% + var(--gap-compact)); width: min(16rem, calc(100vw - 2 * var(--space-page))); display: flex; flex-direction: column; gap: var(--space-compact); padding: var(--space-compact); border: 1px solid var(--line); border-radius: var(--radius-control); background: var(--paper); color: var(--ink); box-shadow: 0 4px 12px color-mix(in srgb, var(--ink) 12%, transparent); font-size: var(--font-body); }
   .sound-volume-row { display: flex; align-items: center; gap: var(--gap-control); }
   #sound-volume { min-width: 0; width: 100%; min-height: 44px; accent-color: var(--green); cursor: pointer; }
