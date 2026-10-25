@@ -5,7 +5,7 @@ type Entry = [id: string, es: string, en: string, explanation: string, english: 
 type Topic = { id: string; es: string; en: string; entries: Entry[] };
 export const glossaryTopics: Topic[] = [
   { id: 'ai-fundamentos', es: 'Modelos y Lenguaje', en: 'Models and Language', entries: [
-    ['ai-llm', 'LLM', 'LLM', 'Un LLM genera texto según patrones aprendidos y el contexto recibido. Puede producir información falsa.', 'It is an LLM learns language patterns and generates text from the supplied context. It does not verify truth by itself.', 'llm'],
+    ['ai-llm', 'LLM', 'LLM', 'Un LLM genera texto según patrones aprendidos y el contexto recibido. Puede producir información falsa.', 'An LLM learns language patterns and generates text from the supplied context. It does not verify truth by itself.', 'llm'],
     ['ai-inferencia', 'Inferencia', 'Inference', 'Es el uso de un modelo ya entrenado para producir una salida a partir de una entrada.', 'It uses an already trained model to produce an output from an input.', 'llm'],
     ['ai-tokens', 'Tokens', 'Tokens', 'Son las unidades que procesa un modelo. Pueden ser palabras o partes de ellas y también signos.', 'Tokens are the units a model processes. They can include word fragments and punctuation.', 'token'],
     ['ai-contexto', 'Ventana de Contexto', 'Context Window', 'Limita la información que el modelo puede usar en una interacción. Más contexto no garantiza más precisión.', 'It limits the information a model can use in one interaction. More context does not guarantee greater accuracy.', 'context'],
