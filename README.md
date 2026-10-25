@@ -6,13 +6,13 @@ El contenido se centra en fundamentos para entrevistas de distintos perfiles y e
 
 ## Home y contenido
 
-Home resume la aplicación y permite elegir un perfil —Frontend Engineer, Backend Engineer, Full Stack Engineer, DevOps Engineer o Artificial Intelligence Engineer— y una etapa, desde Fundamentos hasta Senior. Cada selección recomienda áreas relacionadas, conocimientos previos y un objetivo práctico. La progresión posterior distingue especialización, liderazgo y gestión; no representa una jerarquía profesional universal.
+Home permite elegir un área profesional y uno de sus perfiles y una etapa desde Trainee o Becario hasta Senior. Las rutas de preparación por etapa y alcance muestran un aviso de contenido en desarrollo. Los datos de orientación conservan áreas relacionadas, conocimientos previos y objetivos prácticos. Las opciones de especialización, liderazgo y gestión no representan una jerarquía profesional universal.
 
-Home presenta el subtítulo «Fundamentos para entrevistas técnicas» y una orientación breve. Conserva los cuatro contadores y los selectores de profesión y etapa. El menú reúne siete grupos: Sistemas Informáticos, Interacción Persona-Computadora, Ingeniería de Software, Gestión e Ingeniería de Datos, Ciberseguridad, Ciencia de Datos e Inteligencia Artificial. Las bases se integran en sus ámbitos y se comparten cuando corresponda. El orden orienta el aprendizaje sin imponer una secuencia única entre especialidades.
+Home presenta el encabezado «Prepara tu próxima entrevista técnica» y una orientación breve. Conserva los cuatro contadores y los selectores de área, profesión y etapa. El menú reúne seis grupos: Sistemas Informáticos, Ciberseguridad, Interacción Persona-Computadora, Ingeniería de Software, Tecnologías de Datos e Inteligencia Artificial. Las bases se integran en sus ámbitos y se comparten cuando corresponda. El orden y los años de las etapas orientan el aprendizaje sin imponer una progresión profesional universal.
 
-El código local incluye Software Design con 19 conceptos en cuatro módulos y Aplicaciones de IA Generativa con 104 conceptos en diez páginas temáticas. El glosario recoge los cien términos del README de prácticas más cuatro fundamentos acordados. Este cambio está pendiente de subir y no modifica por sí mismo la web alojada. Las demás áreas mantienen sus ramas visibles y sus hojas sin contenido deshabilitadas.
+El catálogo publicado incluye Software Design con 19 conceptos en cuatro módulos y Aplicaciones de IA Generativa con 104 conceptos en diez páginas temáticas. El glosario recoge los cien términos del README de prácticas más cuatro fundamentos acordados. El contenido disponible se define en `src/data/published-catalog.ts`; subir cambios al repositorio no publica por sí mismo la web alojada. Las demás áreas mantienen sus ramas visibles y sus hojas sin contenido deshabilitadas.
 
-El catálogo fuente conserva estas rutas. La navegación publicada permite abrir Software Design:
+El catálogo fuente conserva estas rutas. La navegación publicada permite abrir Software Design y Generative AI Applications:
 
 1. User Experience Design: 6 conceptos de arquitectura de información y experiencia de usuario.
 2. Software Design: 19 conceptos. SOLID Principles contiene cinco principios en el orden S, O, L, I, D. Design Patterns contiene cinco creacionales, tres estructurales y seis de comportamiento.
@@ -27,7 +27,7 @@ Cada tarjeta publicada muestra una explicación breve en un párrafo y su fuente
 
 El progreso se almacena solo en `localStorage` del navegador (`tech-training:v1`). El menú empieza cerrado y recuerda las ramas abiertas con `tech-training:navigation:v1`. No se comparten entre dispositivos. Si el almacenamiento no está disponible, se mantienen durante la sesión. Las tipografías se sirven desde la propia web.
 
-La aplicación genera HTML estático. JavaScript habilita la selección de perfil y etapa, la navegación entre módulos, búsqueda, progreso y repaso. Sin JavaScript se pueden consultar el resumen y el primer itinerario de Home. La selección de perfil y etapa no se guarda entre recargas.
+La aplicación genera HTML estático. JavaScript habilita la selección de perfil y etapa, la navegación entre módulos, búsqueda, progreso y repaso. Sin JavaScript se puede consultar el resumen inicial de Home. El área y el perfil no se guardan entre recargas y la etapa se conserva localmente. El idioma y las preferencias de audio también se guardan localmente; los sonidos están desactivados por defecto y sus archivos se sirven desde la propia web.
 
 Las dependencias Python del material de referencia son contexto para la ruta Generative AI Applications; no son necesarias para ejecutar esta web.
 

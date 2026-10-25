@@ -1,5 +1,5 @@
 export const careerRoleTranslations: Record<string, string> = {
-  'Explora los puestos desde las bases compartidas hasta la integración y la especialización. El orden es orientativo y las especialidades son caminos paralelos con sus propias etapas.': 'Explore roles from shared foundations to integration and specialization. The order is a guide and specialties are parallel paths with their own stages.',
+  'Explora los puestos desde las bases compartidas hasta la integración y la especialización. El orden y los años de cada etapa son orientativos y las especialidades son caminos paralelos con sus propias etapas.': 'Explore roles from shared foundations to integration and specialization. The order and years for each stage are a guide and specialties are parallel paths with their own stages.',
   'Especialista de soporte TI': 'IT Support Specialist',
   'Resuelve problemas técnicos de usuarios': 'Resolves users’ technical issues',
   'Ayuda a las personas a usar equipos y aplicaciones corporativas. Diagnostica incidencias y documenta soluciones para recuperar el servicio.': 'Helps people use corporate devices and applications. Diagnoses incidents and documents solutions to restore service.',
