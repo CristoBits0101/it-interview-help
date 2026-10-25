@@ -81,3 +81,27 @@ test('growth choices have bilingual preparation and explicit role compatibility'
   assert.equal(reconcileCareerScope({ kind: 'growth', id: 'ux-team-lead' }, 'ux-writer', careerGrowthTargets), null);
   assert.deepEqual(careerGrowthTargets.filter(target => target.group === 'executive').map(target => target.id), ['engineering-director', 'engineering-vp', 'cto', 'chief-data-officer', 'chief-information-security-officer']);
 });
+
+test('growth destinations exclude the current profession while retaining distinct senior scopes', () => {
+  const profileIds = new Set(careerProfiles.map(profile => profile.id));
+  for (const target of careerGrowthTargets) {
+    if (target.destinationProfileId) assert(profileIds.has(target.destinationProfileId));
+    const destination = target.destinationProfileId ?? target.id;
+    assert(!target.profileIds.includes(destination), `${destination} must not lead to itself`);
+    if (profileIds.has(destination)) assert.equal(reconcileCareerScope({ kind: 'growth', id: target.id }, destination, careerGrowthTargets), null);
+  }
+  assert.equal(careerGrowthTargets.find(target => target.id === 'ai-research-scientist').destinationProfileId, 'research-scientist');
+  assert.equal(reconcileCareerScope({ kind: 'growth', id: 'software-architect' }, 'software-architect', careerGrowthTargets), null);
+  for (const [profileId, targetId] of [
+    ['frontend', 'software-architect'],
+    ['software-architect', 'principal-engineer'],
+    ['data-scientist', 'principal-data-scientist'],
+    ['data-analyst', 'principal-data-analyst'],
+    ['research-scientist', 'principal-research-scientist'],
+    ['research-engineer', 'ai-research-scientist'],
+    ['information-architect', 'content-strategist'],
+  ]) {
+    const scope = { kind: 'growth', id: targetId };
+    assert.deepEqual(reconcileCareerScope(scope, profileId, careerGrowthTargets), scope);
+  }
+});

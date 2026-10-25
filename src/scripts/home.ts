@@ -46,8 +46,6 @@ export function initializeCareerPaths() {
     if (profileCarousel) profileCarousel.hidden = !selection.directionId;
     const stageSection = container.querySelector<HTMLElement>('.career-stage-section');
     if (stageSection) stageSection.hidden = !selection.profileId;
-    const stageSeparator = stageSection?.previousElementSibling;
-    if (stageSeparator instanceof HTMLHRElement) stageSeparator.hidden = !selection.profileId;
     const growthSection = document.getElementById('career-growth');
     if (growthSection) growthSection.hidden = !selection.profileId;
     const growthSeparator = growthSection?.previousElementSibling;

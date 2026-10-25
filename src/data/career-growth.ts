@@ -1,6 +1,7 @@
 export interface CareerGrowthTarget {
   id: string;
   label: string;
+  destinationProfileId?: string;
   group: 'specialization' | 'leadership' | 'management' | 'executive';
   profileIds: readonly string[];
   goal: string;
@@ -29,12 +30,12 @@ const leadershipPractice = 'Explica cómo conducirías una decisión controverti
 const managementGoal = 'Relaciona las necesidades del equipo con los resultados esperados. Prepara decisiones sobre personas y capacidad de entrega sin perder el criterio técnico.';
 const managementPractice = 'Resuelve un caso con recursos limitados y compromisos incompatibles. Justifica las prioridades y explica cómo evaluarías al equipo y sus resultados.';
 
-export const careerGrowthTargets: readonly CareerGrowthTarget[] = [
+const careerGrowthTargetTemplates: readonly CareerGrowthTarget[] = [
   { id: 'ux-team-lead', label: 'UX Team Lead', group: 'leadership', profileIds: ['ux-strategist'], goal: 'Coordina investigación y diseño alrededor de una dirección de experiencia compartida. Ayuda al equipo a resolver prioridades con evidencia y criterios explícitos.', practice: 'Conduce una revisión de oportunidades con investigadores y diseñadores y acuerda qué evaluar antes de decidir.' },
   { id: 'content-strategist', label: 'Content Strategist', group: 'specialization', profileIds: ['ux-writer', 'information-architect'], goal: 'Amplía el trabajo con textos o estructuras hacia el gobierno del contenido. Conecta necesidades de usuarios con responsables y criterios de mantenimiento.', practice: 'Diseña un ciclo de revisión de contenido con responsables y una medida de utilidad para los usuarios.' },
   { id: 'lead-content-designer', label: 'Lead Content Designer', group: 'leadership', profileIds: ['ux-writer'], goal: 'Coordina decisiones de contenido y acompaña a otros profesionales. Revisa la coherencia y accesibilidad de los textos entre recorridos.', practice: 'Revisa un flujo con otro redactor y acuerda criterios de calidad que el equipo pueda comprobar.' },
   { id: 'head-content-design', label: 'Head of Content Design', group: 'management', profileIds: ['content-strategist'], goal: 'Prepara responsabilidades de gestión de una función de contenido. Planifica personas y recursos para sostener la estrategia y el desarrollo del equipo.', practice: 'Propón un plan de capacidad y acompañamiento para un equipo de contenido con prioridades en conflicto.' },
-  { id: 'ai-research-scientist', label: 'AI Research Scientist', group: 'specialization', profileIds: ['research-engineer'], goal: 'Explora la investigación científica como una rama opcional. Prepara preguntas originales y evidencia reproducible para contrastarlas.', practice: 'Formula una hipótesis y diseña un experimento con una referencia y criterios de refutación.' },
+  { id: 'ai-research-scientist', destinationProfileId: 'research-scientist', label: 'AI Research Scientist', group: 'specialization', profileIds: ['research-engineer'], goal: 'Explora la investigación científica como una rama opcional. Prepara preguntas originales y evidencia reproducible para contrastarlas.', practice: 'Formula una hipótesis y diseña un experimento con una referencia y criterios de refutación.' },
   { id: 'principal-research-scientist', label: 'Principal Research Scientist', group: 'specialization', profileIds: ['research-scientist'], goal: 'Orienta una agenda científica de amplio alcance con contribuciones originales. Revisa la validez y los límites de la evidencia de varios proyectos.', practice: 'Propón una agenda de investigación y justifica sus preguntas abiertas con evidencia y experimentos reproducibles.' },
   { id: 'systems-analyst', label: 'Systems Analyst', group: 'specialization', profileIds: [...softwareProfiles, 'business-analyst'], goal: 'Convierte necesidades en requisitos comprobables. Analiza procesos e integraciones y detecta contradicciones antes de proponer una solución.', practice: 'Analiza una petición ambigua de tu especialidad. Define requisitos y criterios de aceptación y explica el impacto de un cambio.' },
   { id: 'software-architect', label: 'Software Architect', group: 'specialization', profileIds: softwareProfiles, goal: architectureGoal, practice: architecturePractice },
@@ -66,3 +67,8 @@ export const careerGrowthTargets: readonly CareerGrowthTarget[] = [
   { id: 'chief-data-officer', label: 'Chief Data Officer', group: 'executive', profileIds: ['data-analyst', 'data-engineer', 'data-scientist'], goal: 'Define gobierno y capacidades de datos para decisiones de la organización. Equilibra calidad y acceso con privacidad y valor para los equipos.', practice: 'Presenta una prioridad de gobierno de datos para varias áreas. Define una medida de calidad y un control para gestionar un riesgo de uso.' },
   { id: 'chief-information-security-officer', label: 'Chief Information Security Officer', group: 'executive', profileIds: securityProfiles, goal: 'Dirige la gestión de riesgos de seguridad con objetivos y recursos claros. Conecta controles y respuesta ante incidentes con las prioridades de la organización.', practice: 'Explica una prioridad de seguridad ante dirección. Relaciona el riesgo con una inversión y define cómo comprobarías que reduce la exposición.' },
 ];
+
+export const careerGrowthTargets: readonly CareerGrowthTarget[] = careerGrowthTargetTemplates.map(target => ({
+  ...target,
+  profileIds: target.profileIds.filter(profileId => profileId !== (target.destinationProfileId ?? target.id)),
+}));
