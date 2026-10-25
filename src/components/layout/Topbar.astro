@@ -3,6 +3,7 @@ import { t } from '../../lib/translations';
 import Icon from '../Icon.astro';
 import SearchControl from '../controls/SearchControl.astro';
 import LanguageSelector from '../controls/LanguageSelector.astro';
+import SoundControls from '../controls/SoundControls.astro';
 
 ---
 <header class="topbar">
@@ -10,5 +11,5 @@ import LanguageSelector from '../controls/LanguageSelector.astro';
         <nav class="breadcrumb" aria-label={t('Ruta actual')}><a href="#home" data-home-link aria-current="page" lang="en">{t('Home')}</a><span class="breadcrumb-path" id="breadcrumb-path" hidden></span></nav>
         <div class="topbar-actions">
           <SearchControl />
-          <LanguageSelector />
+          <div class="locale-controls"><LanguageSelector /><SoundControls /></div>
         </div></header>

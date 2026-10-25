@@ -6,6 +6,7 @@ import { initializeImplementationGuides } from './implementation-guides';
 import { initializeReview } from './review';
 import { initializeDialogs } from './dialogs';
 import { initializeNavigation } from './navigation';
+import { initializeInteractionSounds } from './interaction-sounds';
 import { initializeCareerPaths } from './home';
 import { initializeCareerTooltips } from './career-tooltips';
 import { applyStaticTranslations, getSavedLanguage, saveLanguage, translate, translatePatternTitle, type Language } from './i18n';
@@ -288,3 +289,5 @@ languageToggle.addEventListener('click', () => {
 initializeDialogs();
 refreshProgress();
 goToHash(true);
+
+initializeInteractionSounds();

@@ -12,7 +12,7 @@ export default defineConfig({
         "object-src 'none'",
         "base-uri 'self'",
         "form-action 'none'",
-        "connect-src 'none'",
+        "connect-src 'self'",
         "frame-src 'none'",
       ],
     },

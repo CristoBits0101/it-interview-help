@@ -55,7 +55,7 @@ assert(idSet.has('home-view') && idSet.has('study'));
 const csp = tags.find(tag => tag.name === 'meta' && tag.attributes['http-equiv']?.toLowerCase() === 'content-security-policy')?.attributes.content;
 assert(csp, 'The built document must carry the static CSP.');
 assert(!/'unsafe-(?:inline|eval)'/.test(csp), 'The CSP must not allow unsafe inline or eval scripts.');
-for (const directive of ["default-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'none'", "connect-src 'none'", "frame-src 'none'"]) {
+for (const directive of ["default-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'none'", "connect-src 'self'", "frame-src 'none'"]) {
   assert(csp.includes(directive), `Missing CSP restriction: ${directive}`);
 }
 

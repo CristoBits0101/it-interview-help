@@ -1,0 +1,40 @@
+{
+  "source": "https://kenney.nl/assets/interface-sounds",
+  "download": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "author": "Kenney",
+  "files": [
+    {
+      "file": "click_002.ogg",
+      "bytes": 4275,
+      "sha256": "adcd1f4adc35f1b41bc1b5bbefeff7aa44f2f3f0d96d3199b544140c7c1e761c"
+    },
+    {
+      "file": "close_001.ogg",
+      "bytes": 9915,
+      "sha256": "44af8249b933e0fd35ec957a638bb1a0b01f85b53fbe9674bf77bd3ca3168ef4"
+    },
+    {
+      "file": "open_001.ogg",
+      "bytes": 9834,
+      "sha256": "a27c6bb0df7da1e6af5dd5937593c98bc58b6e513f42fe6a3254cd6a6949c648"
+    },
+    {
+      "file": "select_001.ogg",
+      "bytes": 5468,
+      "sha256": "aec0c31ea934a35936ae0d2ab8fac8123c93aa5647f935853a58dbaf90278b7a"
+    },
+    {
+      "file": "select_002.ogg",
+      "bytes": 5463,
+      "sha256": "4cc6ac5341b9b2c86fef80c347de028e9ab9f2e037586ac7d9fa59a403a1c012"
+    },
+    {
+      "file": "tick_001.ogg",
+      "bytes": 4497,
+      "sha256": "9d057b918024c787bbe6c00beed13a7ef72a3fa0c259add3cef36582792f4230"
+    }
+  ],
+  "changes": "Original Ogg files unchanged. Playback applies gain, low-pass filtering, short envelopes and fixed pitch by action."
+}
