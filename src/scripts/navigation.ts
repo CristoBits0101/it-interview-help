@@ -1,27 +1,24 @@
 import { preferenceKeys, readJsonPreference, restoreKnownIds, writePreference } from '../lib/preferences';
 import { migrateBranchId } from '../data/navigation-migrations';
-import { translate, type Language } from '../lib/translations';
 
 function fitSidebarToLabels() {
   const sidebar = document.querySelector<HTMLElement>('#sidebar');
   if (!sidebar) return;
   let frame = 0;
 
-  const measureLanguage = (language: Language) => {
+  const measureVisibleContent = () => {
     const probe = sidebar.cloneNode(true) as HTMLElement;
     probe.removeAttribute('id');
     probe.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
+    probe.querySelectorAll('details:not([open])').forEach(branch => {
+      Array.from(branch.children).filter(child => child.tagName !== 'SUMMARY').forEach(child => child.remove());
+    });
     probe.setAttribute('aria-hidden', 'true');
     probe.inert = true;
     Object.assign(probe.style, {
       width: 'max-content', maxWidth: 'none', visibility: 'hidden',
       pointerEvents: 'none', transform: 'none', transition: 'none', left: '-100000px',
     });
-    probe.querySelectorAll<HTMLElement>('[data-i18n-source]').forEach(label => {
-      label.textContent = translate(label.dataset.i18nSource!, language);
-      label.lang = language;
-    });
-    probe.querySelectorAll('details').forEach(branch => { branch.open = true; });
     document.body.append(probe);
     const width = Math.ceil(probe.getBoundingClientRect().width);
     probe.remove();
@@ -30,7 +27,7 @@ function fitSidebarToLabels() {
 
   const measure = () => {
     frame = 0;
-    const width = Math.max(measureLanguage('en'), measureLanguage('es'));
+    const width = measureVisibleContent();
     if (document.documentElement.style.getPropertyValue('--sidebar-width') !== `${width}px`) {
       document.documentElement.style.setProperty('--sidebar-width', `${width}px`);
     }
@@ -43,7 +40,7 @@ function fitSidebarToLabels() {
   };
   const schedule = () => { if (!frame) frame = requestAnimationFrame(measure); };
 
-  new MutationObserver(schedule).observe(sidebar, { childList: true, characterData: true, subtree: true });
+  new MutationObserver(schedule).observe(sidebar, { childList: true, characterData: true, attributes: true, attributeFilter: ['open', 'hidden'], subtree: true });
   const sizes = new ResizeObserver(schedule);
   sidebar.querySelectorAll('.navigation-label, .nav-eyebrow, .brand span').forEach(label => sizes.observe(label));
   document.fonts.ready.then(schedule);
