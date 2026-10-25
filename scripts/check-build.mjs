@@ -59,6 +59,11 @@ for (const directive of ["default-src 'self'", "object-src 'none'", "base-uri 's
   assert(csp.includes(directive), `Missing CSP restriction: ${directive}`);
 }
 
+for (const file of files.filter(file => extname(file) === '.css')) {
+  const css = readFileSync(file, 'utf8');
+  assert(!/@font-face\s*\{[^}]*url\(["']?data:/iu.test(css), 'Font URLs must remain same-origin files compatible with the CSP.');
+}
+
 const concepts = publishedTracks.flatMap(track => track.modules.flatMap(module => module.concepts));
 const routes = new Set(publishedTracks.flatMap(track => track.modules.map(module => `#${track.id}/${module.id}`)));
 const pendingSections = tags.filter(tag => 'data-pending-route' in tag.attributes);

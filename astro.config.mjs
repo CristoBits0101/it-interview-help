@@ -17,5 +17,8 @@ export default defineConfig({
       ],
     },
   },
-  vite: { server: { allowedHosts: ['terminal.local'] } },
+  vite: {
+    build: { assetsInlineLimit: filePath => /\.woff2?$/u.test(filePath) ? false : undefined },
+    server: { allowedHosts: ['terminal.local'] },
+  },
 });
