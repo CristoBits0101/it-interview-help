@@ -1,4 +1,5 @@
 ---
+import { publishedGuides } from '../../data/published-catalog';
 import { t } from '../../lib/translations';
 import Icon from '../Icon.astro';
 import StudySection from './StudySection.astro';
@@ -12,10 +13,10 @@ const firstModule = tracks[0].modules[0];
           <h1 class="study-title sr-only" id="study-title">{t(firstModule.title)}</h1>
           <StudyToolbar count={firstModule.concepts.length} />
           <p id="results-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
-          <div class="java-resource-result" data-resource-result="java/versions" hidden>
+          {publishedGuides.map(guide => <div class="java-resource-result" data-resource-result={guide.href.slice(1)} hidden>
             <h2>{t('Guías')}</h2>
-            <a href="/java/versions" data-route="java"><span>Java · <span>{t('Evolución de Versiones')}</span></span></a>
-          </div>
+            <a href={guide.href.replace(/^#/, '/')} data-route={guide.href.slice(1)}><span>{t(guide.label)}</span></a>
+          </div>)}
           <div id="concept-library">
             {tracks.map((track, ti) => track.modules.map((module, mi) => <StudySection track={track} module={module} index={mi} initial={ti === 0 && mi === 0} showPurpose={purposeModuleIds.has(module.id)} hideEmptyViews={compactTrackIds.has(track.id)} patternIds={patternIds} aliases={aliases} />))}
           </div>

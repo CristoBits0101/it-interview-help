@@ -1,10 +1,13 @@
+import { javaGuidePages } from './java-ecosystem';
+import { javaEcosystemSources } from './concept-sources';
+import { webFoundations } from './web-foundations';
 import { navigation, type NavigationNode } from './navigation';
 import { tracks as coreTracks } from './curriculum';
 import { designPatterns, designPatternPages } from './design-patterns';
 import { aiGlossary, glossaryTopics, glossaryInventory } from './ai-glossary';
 import { itServiceManagement } from './pending-navigation';
 export const pendingPages = [...itServiceManagement.children];
-export const publishedGuides = [{ label: 'Version Evolution', href: '#java/versions' }];
+export const publishedGuides = [{ label: 'Version History', href: '#java/versions' }, ...javaGuidePages, ...webFoundations.map(guide => ({ label: guide.label, href: `#${guide.route}` }))];
 const pendingDestinations = new Set(pendingPages.map(page => page.href));
 export const publishedTracks = [...coreTracks.filter(track => track.id === 'software-design'), aiGlossary];
 const destinations = new Set([...publishedTracks.flatMap(track => track.modules.map(module => `#${track.id}/${module.id}`)), ...publishedGuides.map(guide => guide.href)]);
@@ -13,7 +16,7 @@ const availableNavigation = (nodes: NavigationNode[]): NavigationNode[] => nodes
   children: node.children ? availableNavigation(node.children) : undefined,
 }));
 export const publishedNavigation = availableNavigation(navigation);
-export const publishedSources = [...new Map(publishedTracks.flatMap(track => track.modules.flatMap(module => module.concepts.map(concept => [concept.source.url, concept.source] as const)))).values()];
+export const publishedSources = [...new Map([...publishedTracks.flatMap(track => track.modules.flatMap(module => module.concepts.map(concept => [concept.source.url, concept.source] as const))), ...webFoundations.map(guide => [guide.source.url, guide.source] as const), ...Object.values(javaEcosystemSources).map(source => [source.url, source] as const)]).values()];
 export const patternIds = new Set(designPatterns.map(pattern => pattern.id));
 export const patternModuleIds = new Set(designPatternPages.map(page => page.id));
 const originalNames = new Map(glossaryInventory.map(item => [item.id, item.term]));

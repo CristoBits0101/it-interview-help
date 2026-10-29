@@ -1,0 +1,32 @@
+@layer components {
+  .java-path-page, .java-path-group, .java-path-heading { display: grid; min-width: 0; gap: var(--space-gap); }
+  .java-path-heading { gap: var(--gap-card); }
+  .java-path-heading h1 { margin: 0; }
+  .java-path-heading h1, .java-path-group > h2 { font-family: var(--brand); font-size: var(--font-title); font-weight: 500; line-height: var(--line-body); text-transform: uppercase; border-inline-start: 2px solid var(--accent); padding-inline: var(--space-compact); }
+  .java-path-page p { font-size: var(--font-body); line-height: var(--line-body); color: var(--text-secondary); text-align: justify; text-align-last: start; hyphens: none; overflow-wrap: normal; }
+  .java-ecosystem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--gap-card); }
+  .java-ecosystem-card, .java-career-card { display: flex; flex-direction: column; min-width: 0; padding: var(--space-card); gap: var(--gap-card); background: var(--paper); border: 1px solid var(--border-soft); border-radius: var(--radius-card); transition: border-color var(--motion-fast) var(--motion-ease); }
+  .java-ecosystem-card:hover, .java-career-card:hover { border-color: var(--border-strong); }
+  .java-ecosystem-card header { display: grid; gap: var(--gap-card); }
+  .java-ecosystem-card h3, .java-career-card h2, .java-developer-roadmap h2 { font-size: var(--font-title); font-weight: 500; line-height: var(--line-body); }
+  .java-technology-roadmap { border-block: 1px solid var(--line); margin-top: auto; }
+  .java-technology-roadmap summary { display: flex; align-items: center; gap: var(--gap-card); min-height: 44px; list-style: none; cursor: pointer; font-size: var(--font-small); }
+  .java-technology-roadmap summary::-webkit-details-marker { display: none; }
+  .java-technology-roadmap summary svg { margin-inline-start: auto; flex-shrink: 0; transition: transform var(--motion-fast) var(--motion-ease); }
+  .java-technology-roadmap[open] summary svg { transform: rotate(180deg); }
+  .java-technology-roadmap dl { display: grid; margin: 0; padding-block: var(--gap-card); gap: var(--gap-card); }
+  .java-technology-roadmap dl > div { display: grid; gap: var(--gap-compact); padding-inline-start: var(--space-compact); border-inline-start: 2px solid var(--border-accent); }
+  .java-technology-roadmap dt { color: var(--text-soft); font-size: var(--font-meta); }
+  .java-technology-roadmap dd { margin: 0; font-size: var(--font-body); line-height: var(--line-body); }
+  .java-technology-sources { display: grid; gap: var(--gap-compact); }
+  .java-career-technologies, .java-career-card > a, .java-path-links a { display: flex; align-items: center; flex-wrap: wrap; gap: var(--gap-control); font-size: var(--font-small); }
+  .java-career-card > a { min-height: 44px; margin-top: auto; }
+  .java-path-links { display: flex; flex-wrap: wrap; gap: var(--gap-card); }
+  .java-path-links a { min-height: 44px; padding: var(--space-compact); border: 1px solid var(--border-soft); border-radius: var(--radius-control); }
+  .java-developer-roadmap { display: grid; list-style: none; margin: 0; padding: 0; gap: var(--gap-card); }
+  .java-developer-roadmap li { display: flex; align-items: center; gap: var(--gap-card); padding: var(--space-card); background: var(--paper); border: 1px solid var(--border-soft); border-radius: var(--radius-card); }
+  .java-roadmap-number { font-size: var(--font-small); color: var(--text-soft); }
+  .java-developer-roadmap svg { margin-inline-start: auto; flex-shrink: 0; }
+  @media (prefers-reduced-motion: reduce) { .java-ecosystem-card, .java-career-card, .java-technology-roadmap summary svg { transition: none; } }
+  @media (forced-colors: active) { .java-ecosystem-card, .java-career-card, .java-developer-roadmap li, .java-technology-roadmap { border-color: CanvasText; } }
+}

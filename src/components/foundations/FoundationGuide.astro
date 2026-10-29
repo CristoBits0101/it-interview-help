@@ -1,0 +1,43 @@
+---
+import { t } from '../../lib/translations';
+import type { FoundationGuide } from '../../data/web-foundations';
+import { webFoundations } from '../../data/web-foundations';
+import Text from '../LocalizedText.astro';
+import Icon from '../Icon.astro';
+import ConceptSource from '../study/ConceptSource.astro';
+import '../../styles/foundation-guides.css';
+interface Props { guide: FoundationGuide }
+const { guide } = Astro.props;
+const headingId = `${guide.route}-title`;
+---
+<section class="foundation-guide" id={guide.route} data-resource-route={guide.route} data-resource-title={guide.label} aria-labelledby={headingId} hidden>
+  <header class="foundation-heading">
+    <h1 id={headingId}><Text value={guide.title} /></h1>
+    <Text as="p" value={guide.description} />
+  </header>
+  <figure class="foundation-figure">
+    <figcaption><Text value={{ es: 'Observa cómo se relacionan las piezas', en: 'See how the pieces connect' }} /></figcaption>
+    <ol class="foundation-flow">
+      {guide.diagram.map((part, index) => <li>
+        <div class="foundation-step-label"><span>{String(index + 1).padStart(2, '0')}</span><Text as="h2" value={part.title} />{index < guide.diagram.length - 1 && <Icon name="arrow" size={16} />}</div>
+        {part.code && <pre tabindex="0"><code>{part.code}</code></pre>}
+        <Text as="p" value={part.text} />
+      </li>)}
+    </ol>
+  </figure>
+  <div class="foundation-concepts">
+    {guide.concepts.map(concept => <article><Text as="h2" value={concept.title} /><Text as="p" value={concept.description} /></article>)}
+  </div>
+  <div class="foundation-practice">
+    <Text as="h2" value={{ es: 'Explícalo sin mirar', en: 'Explain it without looking' }} />
+    <Text as="p" value={{ es: 'Aparta la vista del esquema y responde con tus palabras antes de abrir cada solución. Después compara y corrige tu explicación.', en: 'Look away from the diagram and answer in your own words before opening each solution. Then compare and correct your explanation.' }} />
+    {guide.questions.map(question => <details><summary><Text value={question.prompt} /><Icon name="down" size={16} /></summary><Text as="p" value={question.answer} /></details>)}
+  </div>
+  <ConceptSource source={guide.source} conceptTitle={guide.label} />
+  <nav class="foundation-related" aria-label={t('Guías relacionadas')}>
+    {guide.related.map(route => {
+      const related = webFoundations.find(item => item.route === route)!;
+      return <a href={`/${route}`} data-route={route}><Text value={related.title} /><Icon name="arrow" size={16} /></a>;
+    })}
+  </nav>
+</section>

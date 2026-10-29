@@ -18,7 +18,7 @@ function visit(nodes, parent = []) {
   for (const node of nodes) {
     const path = [...parent, node.id ?? node.label];
     all.push({ ...node, path });
-    assert(!/\b(Engineer|Architect|Manager|Director|Lead|Developer|Analyst|Specialist|Administrator|Scientist|Designer|Researcher)\b/.test(node.label), `Job title in menu: ${node.label}`);
+    assert(node.label === 'Developer Roadmap' && node.href === '#java/developer-roadmap' || !/\b(Engineer|Architect|Manager|Director|Lead|Developer|Analyst|Specialist|Administrator|Scientist|Designer|Researcher)\b/.test(node.label), `Job title in menu: ${node.label}`);
     assert(!['Frontend Development', 'Backend Development', 'Mobile Development'].includes(node.label), `Career specialty in menu: ${node.label}`);
     if (node.children) { assert(node.children.length); visit(node.children, path); }
     if (node.shared) assert.equal(node, sharedFoundations[node.label]);

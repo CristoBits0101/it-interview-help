@@ -49,18 +49,17 @@ export function applyStaticTranslations(language: Language) {
     title.textContent = translatePatternTitle(title.dataset.patternTitle!, language);
     title.lang = language;
   });
-  document.querySelectorAll<HTMLElement>('.concept-card').forEach(card => {
+  document.querySelectorAll<HTMLElement>('.concept-card, .foundation-guide, .java-ecosystem-card').forEach(card => {
     const title = card.querySelector('h3');
     const level = card.querySelector<HTMLElement>('.level-badge');
     if (level) level.textContent = translate(card.dataset.level ?? '', language);
-    const conceptTitle = title?.textContent ?? '';
+    const conceptTitle = title?.textContent ?? translate(card.dataset.resourceTitle ?? '', language);
     card.querySelector('.card-views')?.setAttribute('aria-label', `${translate('Contenido de', language)} ${conceptTitle}`);
-    const source = card.querySelector<HTMLAnchorElement>('.concept-source');
-    if (source) {
+    card.querySelectorAll<HTMLAnchorElement>('.concept-source').forEach(source => {
       const publisher = source.querySelector('.source-publisher')?.textContent ?? '';
       const sourceTitle = source.getAttribute('title') ?? '';
       source.setAttribute('aria-label', sourceDescription(publisher, sourceTitle, conceptTitle, language));
-    }
+    });
   });
   const toggle = document.querySelector<HTMLButtonElement>('#language-toggle');
   if (toggle) {

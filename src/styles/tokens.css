@@ -50,9 +50,11 @@
     --radius-profile: 1rem;
     --radius-full: 9999px;
     --radius-inset: 6px;
-    --space-navigation-row: 18px;
+    --space-navigation-row: 9px;
+    --space-navigation-block: 6px;
+    --size-navigation-row: 30px;
     --gap-navigation-row: calc(var(--space-navigation-row) / 2);
-    --space-navigation-indent: 24px;
+    --space-navigation-indent: 12px;
     --gap-navigation-indent: calc(var(--space-navigation-indent) / 2);
     --space-page: 42px;
     --space-home: 21px;

@@ -1,5 +1,6 @@
 import type { IconName } from '../components/Icon.astro';
 import { glossaryTopics } from './ai-glossary';
+import { javaGuidePages } from './java-ecosystem';
 import { itServiceManagement } from './pending-navigation';
 
 export interface NavigationNode {
@@ -32,8 +33,8 @@ const quantitativeFoundations = (): NavigationNode => ({
 export const navigation: (NavigationNode & { icon: IconName })[] = [
   { label: 'Computer Systems', icon: 'cpu', children: [
     { label: 'Computing Fundamentals' },
-    { label: 'Computer Architecture' }, { label: 'Operating Systems' },
-    { label: 'Computer Networks' }, { label: 'Parallel Computing' },
+    { label: 'Computer Architecture' }, { label: 'Operating Systems', children: [{ label: 'Buffer', href: '#computer-systems/buffer' }] },
+    { label: 'Computer Networks', children: [{ label: 'HTTP Protocol', href: '#computer-networks/http' }] }, { label: 'Parallel Computing' },
     { label: 'Distributed Systems', href: '#distributed-systems/fundamentos' },
     { label: 'Cloud Computing' },
     itServiceManagement,
@@ -65,7 +66,7 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
     { label: 'Software Architecture', href: '#software-architecture/estilos-arquitectura', children: [
       { label: 'Architectural Styles', children: [
         { label: 'Monolithic' },
-        { label: 'REST' },
+        { label: 'REST', href: '#software-architecture/rest' },
         { label: 'Event-Driven' },
         { label: 'Microservices' },
       ] },
@@ -82,7 +83,7 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
           { label: 'Behavioral', module: 'patrones-comportamiento', href: '#software-design/patrones-comportamiento' },
       ] },
       { label: 'API Design', children: [
-        { label: 'REST API' }, { label: 'Webhook' },
+        { label: 'REST API', href: '#api-design/rest-api' }, { label: 'Webhook' },
         { label: 'GraphQL' }, { label: 'SOAP' },
         { label: 'WebSocket' }, { label: 'gRPC' },
       ] },
@@ -91,7 +92,8 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
       foundation('Programming Fundamentals'),
       { label: 'Programming Languages', children: [
         { label: 'TypeScript' }, { label: 'Java', children: [
-          { label: 'Version Evolution', href: '#java/versions' },
+          { label: 'Version History', href: '#java/versions' },
+          ...javaGuidePages,
         ] }, { label: 'Python' },
       ] },
       foundation('Discrete Mathematics'),

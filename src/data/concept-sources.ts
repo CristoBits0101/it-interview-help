@@ -8,6 +8,9 @@ const source = (publisher: string, title: string, url: string): ConceptSource =>
 const refactoringGuru = (title: string, slug: string) => source('Refactoring.Guru', `${title} — Patrones de diseño`, `https://refactoring.guru/es/design-patterns/${slug}`);
 
 export const conceptSources = {
+  buffer: source('Oracle', 'Buffer · Java SE 22', 'https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/Buffer.html'),
+  http: source('IETF · RFC 9110', 'HTTP Semantics', 'https://www.rfc-editor.org/rfc/rfc9110.html'),
+  restArchitecture: source('Roy Fielding', 'REST · Architectural Style', 'https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm'),
   distributed: source('AWS Builders’ Library', 'Challenges with distributed systems', 'https://aws.amazon.com/builders-library/challenges-with-distributed-systems/'),
   scaling: source('Microsoft Learn', 'Design to scale out', 'https://learn.microsoft.com/en-us/azure/architecture/guide/design-principles/scale-out'),
   monitoring: source('Google SRE', 'Monitoring Distributed Systems', 'https://sre.google/sre-book/monitoring-distributed-systems/'),
@@ -164,3 +167,31 @@ export const glossarySources = {
   risk: reference('NIST', 'Generative AI Profile', 'https://doi.org/10.6028/NIST.AI.600-1'),
   explain: reference('NIST', 'Four Principles of Explainable Artificial Intelligence', 'https://doi.org/10.6028/NIST.IR.8312'),
 } satisfies Record<string, ConceptSource>;
+
+export const javaEcosystemSources = {
+  spring: source('Spring', 'Spring Projects', 'https://spring.io/projects/'),
+  hibernate: source('Hibernate', 'Hibernate ORM', 'https://hibernate.org/orm/'),
+  javafx: source('OpenJFX', 'JavaFX', 'https://openjfx.io/'),
+  android: source('Android Developers', 'Android SDK Tools', 'https://developer.android.com/tools'),
+  maven: source('Apache Maven', 'Maven', 'https://maven.apache.org/'),
+  jenkins: source('Jenkins', 'Jenkins Documentation', 'https://www.jenkins.io/doc/'),
+  kafka: source('Apache Kafka', 'Kafka Introduction', 'https://kafka.apache.org/intro/'),
+  selenium: source('Selenium', 'Selenium Documentation', 'https://www.selenium.dev/documentation/'),
+  jsp: source('Eclipse Foundation', 'Jakarta Pages · JSP', 'https://jakarta.ee/specifications/pages/'),
+  microservices: source('Spring', 'Microservices', 'https://spring.io/microservices/'),
+  springBoot: source('Spring', 'Spring Boot', 'https://spring.io/projects/spring-boot'),
+  springDataJpa: source('Spring', 'Spring Data JPA', 'https://spring.io/projects/spring-data-jpa'),
+  springSecurity: source('Spring', 'Spring Security', 'https://spring.io/projects/spring-security'),
+  springWeb: source('Spring', 'Spring Web MVC', 'https://docs.spring.io/spring-framework/reference/web/webmvc.html'),
+  springWebflux: source('Spring', 'Spring WebFlux', 'https://docs.spring.io/spring-framework/reference/web/webflux.html'),
+  springCloud: source('Spring', 'Spring Cloud', 'https://spring.io/projects/spring-cloud'),
+  openFeign: source('Spring', 'Spring Cloud OpenFeign', 'https://docs.spring.io/spring-cloud-openfeign/reference/'),
+  springAmqp: source('Spring', 'Spring AMQP', 'https://spring.io/projects/spring-amqp'),
+  springKafka: source('Spring', 'Spring for Apache Kafka', 'https://spring.io/projects/spring-kafka'),
+  springCache: source('Spring', 'Cache Abstraction', 'https://docs.spring.io/spring-framework/reference/integration/cache.html'),
+  springBatch: source('Spring', 'Spring Batch', 'https://spring.io/projects/spring-batch'),
+  junit: source('JUnit', 'JUnit', 'https://junit.org/'),
+  mockito: source('Mockito', 'Mockito', 'https://site.mockito.org/'),
+  springdoc: source('springdoc', 'Springdoc OpenAPI', 'https://springdoc.org/'),
+  actuator: source('Spring', 'Spring Boot Actuator', 'https://docs.spring.io/spring-boot/reference/actuator/index.html'),
+};

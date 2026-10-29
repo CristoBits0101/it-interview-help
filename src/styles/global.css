@@ -52,7 +52,7 @@
   .navigation-tree { list-style: none; margin: 0; padding: 0; }
   .navigation-tree > li { min-width: 0; }
   .navigation-root { --navigation-end-inset: var(--space-navigation-row); }
-  .navigation-row { display: flex; align-items: center; gap: var(--gap-navigation-row); padding: 12px var(--space-navigation-row); padding-inline-end: var(--navigation-end-inset); min-height: 48px; border-radius: 9999px; font-size: var(--font-meta); font-weight: 300; line-height: var(--line-body); color: var(--text-soft); }
+  .navigation-row { display: flex; align-items: center; gap: var(--gap-navigation-row); padding: var(--space-navigation-block) var(--space-navigation-row); padding-inline-end: var(--navigation-end-inset); min-height: var(--size-navigation-row); border-radius: 9999px; font-size: var(--font-meta); font-weight: 300; line-height: var(--line-body); color: var(--text-soft); }
   summary.navigation-row { list-style: none; cursor: pointer; font-weight: 300; }
   summary::-webkit-details-marker { display: none; }
   .navigation-icon { width: 18px; height: 18px; flex: 0 0 18px; color: var(--accent); }
