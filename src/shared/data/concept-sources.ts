@@ -321,3 +321,10 @@ export const mcpClientSources = {
   models: source('Microsoft', 'AI language models in VS Code', 'https://code.visualstudio.com/docs/agent-customization/language-models'),
   custom: source('Model Context Protocol', 'Build an MCP client', 'https://modelcontextprotocol.io/docs/develop/build-client'),
 };
+
+export const mcpServerSources = {
+  tutorial: source('Model Context Protocol', 'Build an MCP server', 'https://modelcontextprotocol.io/docs/develop/build-server'),
+  repository: source('Model Context Protocol · GitHub', 'Official TypeScript SDK', 'https://github.com/modelcontextprotocol/typescript-sdk'),
+  sdk: source('Model Context Protocol', 'TypeScript SDK v2 · Build your first server', 'https://ts.sdk.modelcontextprotocol.io/v2/get-started/first-server'),
+  inspector: source('Model Context Protocol · GitHub', 'MCP Inspector', 'https://github.com/modelcontextprotocol/inspector'),
+};

@@ -1,4 +1,5 @@
 import { mcpClientSections } from './clients';
+import { mcpServerSection } from './server';
 import { conceptSources } from '../../../../../shared/data/concept-sources';
 import type { FoundationGuide } from '../../../../../shared/lib/foundation-guide';
 import type { LocalizedText } from '../../../../../shared/lib/localized-text';
@@ -29,7 +30,7 @@ export const mcpGuide: FoundationGuide = {
     { prompt: text('¿Cómo distinguirías las tres primitivas en un repositorio?', 'How would you distinguish the three primitives in a repository?'), answer: text('Buscar incidencias puede ser una herramienta. Leer documentación puede ser un recurso. Preparar una revisión puede partir de una plantilla.', 'Searching issues can be a tool. Reading documentation can be a resource. Preparing a review can start from a prompt template.') },
     { prompt: text('¿Un servidor MCP tiene que estar en la nube?', 'Must an MCP server run in the cloud?'), answer: text('No. Puede ejecutarse localmente con stdio o ser remoto mediante Streamable HTTP. La ubicación no cambia el propósito del protocolo.', 'No. It can run locally over stdio or remotely through Streamable HTTP. Location does not change the purpose of the protocol.') },
   ],
-  sections: mcpClientSections,
+  sections: [...mcpClientSections, mcpServerSection],
   related: ['computer-networks/http'],
   source: conceptSources.mcp,
 };
