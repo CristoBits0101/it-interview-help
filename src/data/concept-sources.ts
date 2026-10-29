@@ -292,6 +292,7 @@ export const aiEcosystemSources = {
 };
 
 export const systemDesignSummarySources = {
+  decomposition: source('InformIT', 'Software System Decomposition · Avoid Functional Decomposition', 'https://www.informit.com/articles/article.aspx?p=2995357'),
   units: source('NIST', 'Binary Prefixes', 'https://physics.nist.gov/cuu/Units/binary.html'),
   monitoring: source('Google SRE', 'Monitoring Distributed Systems', 'https://sre.google/sre-book/monitoring-distributed-systems/'),
   autocomplete: source('Elastic', 'Completion Suggester', 'https://www.elastic.co/docs/reference/elasticsearch/rest-apis/search-suggesters#completion-suggester'),

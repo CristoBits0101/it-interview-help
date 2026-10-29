@@ -13,11 +13,14 @@ export type SystemDesignTopic = {
 };
 export const systemDesignSummary: SystemDesignTopic[] = [
   {
-    id: 'method', title: text('Método de Diseño', 'Design Method'), sourceIds: ['architecture'],
+    id: 'method', title: text('Método de Diseño', 'Design Method'), sourceIds: ['architecture', 'decomposition'],
     terms: [
       term('Aclarar el Alcance', 'Clarify Scope', 'Define qué debe hacer el sistema y qué queda fuera. Pregunta por usuarios y carga antes de elegir tecnologías.', 'Define what the system must do and what is out of scope. Ask about users and load before choosing technologies.'),
       term('Requisitos y Restricciones', 'Requirements and Constraints', 'Distingue funciones de objetivos medibles de calidad. Registra las condiciones obligatorias y los supuestos.', 'Distinguish features from measurable quality goals. Record mandatory constraints and assumptions.'),
       term('Diseño de Alto Nivel', 'High-level Design', 'Identifica clientes y servicios junto con almacenamiento e interfaces. Sigue una petición completa para comprobar cómo encajan.', 'Identify clients and services alongside storage and interfaces. Trace a complete request to check how they fit together.'),
+      term('Evitar la Descomposición Funcional', 'Avoid Functional Decomposition', 'No conviertas automáticamente cada función del sistema en un componente o servicio. Agrupa responsabilidades relacionadas y encapsula decisiones que puedan cambiar para reducir cambios en cadena.', 'Do not automatically turn each system function into a component or service. Group related responsibilities and encapsulate decisions that may change to reduce cascading changes.'),
+      term('Ejemplo de Descomposición', 'Decomposition Example', 'Calcular un precio y cobrar un pedido son pasos del proceso que no determinan por sí solos los límites de los servicios. Examina qué reglas cambian juntas y qué integración de pagos conviene aislar.', 'Calculating a price and charging an order are process steps that do not by themselves determine service boundaries. Examine which rules change together and which payment integration should be isolated.'),
+      term('Cuándo Resulta Útil', 'When It Is Useful', 'Descomponer funciones ayuda a descubrir requisitos y operaciones que faltan. Ese análisis no obliga a copiar el mismo árbol en la arquitectura ni se refiere a evitar la programación funcional.', 'Decomposing functions helps discover missing requirements and operations. This analysis does not require copying the same tree into the architecture and does not mean avoiding functional programming.'),
       term('Profundizar', 'Deep Dive', 'Examina los componentes que más condicionan el resultado. Justifica las decisiones frente a alternativas y fallos.', 'Examine the components that most affect the outcome. Justify decisions against alternatives and failures.'),
       term('Revisar el Diseño', 'Review the Design', 'Recorre los requisitos de nuevo y busca cuellos de botella. Explica cómo medirías y mejorarías la solución.', 'Revisit requirements and look for bottlenecks. Explain how you would measure and improve the solution.'),
     ],
