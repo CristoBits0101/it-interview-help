@@ -157,6 +157,7 @@ const spanishToEnglish: Record<string, string> = {
   'rutas disponibles. Definiciones breves y fuentes originales para profundizar.': 'learning paths available. Concise definitions and original sources to explore further.',
   RUTA: 'PATH', módulo: 'module', módulos: 'modules',
   'Búfer': 'Buffer',
+  'Renderizado Web': 'Web Rendering',
   'Protocolo HTTP': 'HTTP Protocol',
   'Guías relacionadas': 'Related guides',
   'REST · Estilo Arquitectónico': 'REST · Architectural Style',

@@ -1,4 +1,5 @@
 ---
+import SystemDesignSummary from '../components/study/SystemDesignSummary.astro';
 import AppLayout from '../layouts/AppLayout.astro';
 import HomeOverview from '../components/HomeOverview.astro';
 import StudyArea from '../components/study/StudyArea.astro';
@@ -17,6 +18,7 @@ import { publishedTracks, publishedNavigation, publishedSources, patternIds, pat
   <HomeOverview tracks={publishedTracks} />
   <PendingContent pages={pendingPages} />
   <JavaVersions />
+  <SystemDesignSummary />
   <AiEcosystem />
   {referenceComparisons.map(guide => <ComparisonDialog guide={guide} />)}
   <JavaLearningPaths />

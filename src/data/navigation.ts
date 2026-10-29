@@ -89,6 +89,7 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
       ] },
     ] },
     { label: 'Software Development', children: [
+      { label: 'Web Rendering', href: '#software-development/web-rendering' },
       foundation('Programming Fundamentals'),
       { label: 'Programming Languages', children: [
         { label: 'TypeScript' }, { label: 'Java', children: [

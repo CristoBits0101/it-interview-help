@@ -8,6 +8,7 @@ const source = (publisher: string, title: string, url: string): ConceptSource =>
 const refactoringGuru = (title: string, slug: string) => source('Refactoring.Guru', `${title} — Patrones de diseño`, `https://refactoring.guru/es/design-patterns/${slug}`);
 
 export const conceptSources = {
+  webRendering: source('Astro', 'Islands architecture', 'https://docs.astro.build/en/concepts/islands/'),
   buffer: source('Oracle', 'Buffer · Java SE 22', 'https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/Buffer.html'),
   http: source('IETF · RFC 9110', 'HTTP Semantics', 'https://www.rfc-editor.org/rfc/rfc9110.html'),
   restArchitecture: source('Roy Fielding', 'REST · Architectural Style', 'https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm'),
@@ -288,4 +289,24 @@ export const aiEcosystemSources = {
   'pgvector': source("pgvector", "pgvector", "https://github.com/pgvector/pgvector"),
   'elasticsearch': source("Elasticsearch", "Elasticsearch", "https://www.elastic.co/docs/reference/elasticsearch"),
   'mongodb-vector': source("MongoDB Atlas Vector Search", "MongoDB Atlas Vector Search", "https://www.mongodb.com/docs/atlas/atlas-vector-search/"),
+};
+
+export const systemDesignSummarySources = {
+  units: source('NIST', 'Binary Prefixes', 'https://physics.nist.gov/cuu/Units/binary.html'),
+  monitoring: source('Google SRE', 'Monitoring Distributed Systems', 'https://sre.google/sre-book/monitoring-distributed-systems/'),
+  autocomplete: source('Elastic', 'Completion Suggester', 'https://www.elastic.co/docs/reference/elasticsearch/rest-apis/search-suggesters#completion-suggester'),
+  architecture: source('AWS', 'Well-Architected Framework', 'https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html'),
+  consistency: source('AWS', 'DynamoDB Read Consistency', 'https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html'),
+  distribution: source('Apache Cassandra', 'Dynamo Architecture', 'https://cassandra.apache.org/doc/latest/cassandra/architecture/dynamo.html'),
+  storage: source('Apache Cassandra', 'Storage Engine', 'https://cassandra.apache.org/doc/latest/cassandra/architecture/storage-engine.html'),
+  rate: source('IETF', 'HTTP 429 · RFC 6585', 'https://www.rfc-editor.org/rfc/rfc6585.html#section-4'),
+  uuid: source('IETF', 'UUID · RFC 9562', 'https://www.rfc-editor.org/rfc/rfc9562.html'),
+  snowflake: source('Twitter Archive', 'Snowflake', 'https://github.com/twitter-archive/snowflake'),
+  http: source('IETF', 'HTTP Semantics · RFC 9110', 'https://www.rfc-editor.org/rfc/rfc9110.html'),
+  crawler: source('IETF', 'Robots Exclusion Protocol · RFC 9309', 'https://www.rfc-editor.org/rfc/rfc9309.html'),
+  notifications: source('AWS', 'Amazon SNS', 'https://docs.aws.amazon.com/sns/latest/dg/welcome.html'),
+  websocket: source('IETF', 'WebSocket · RFC 6455', 'https://www.rfc-editor.org/rfc/rfc6455.html'),
+  video: source('AWS', 'MediaConvert', 'https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'),
+  streaming: source('RFC Editor', 'HTTP Live Streaming · RFC 8216', 'https://www.rfc-editor.org/rfc/rfc8216.html'),
+  files: source('AWS', 'Object Versioning', 'https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html'),
 };

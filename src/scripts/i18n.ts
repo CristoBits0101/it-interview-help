@@ -49,7 +49,7 @@ export function applyStaticTranslations(language: Language) {
     title.textContent = translatePatternTitle(title.dataset.patternTitle!, language);
     title.lang = language;
   });
-  document.querySelectorAll<HTMLElement>('.concept-card, .foundation-guide, .java-ecosystem-card, .comparison-panel').forEach(card => {
+  document.querySelectorAll<HTMLElement>('.concept-card, .foundation-guide, .java-ecosystem-card, .comparison-panel, .system-design-topic').forEach(card => {
     const title = card.querySelector('h3');
     const level = card.querySelector<HTMLElement>('.level-badge');
     if (level) level.textContent = translate(card.dataset.level ?? '', language);
