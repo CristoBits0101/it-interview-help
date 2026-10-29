@@ -1,7 +1,7 @@
 ---
 import { t } from '../../lib/translations';
 import type { FoundationGuide } from '../../data/web-foundations';
-import { webFoundations } from '../../data/web-foundations';
+import { foundationGuides } from '../../data/foundation-guides';
 import Text from '../LocalizedText.astro';
 import Icon from '../Icon.astro';
 import ConceptSource from '../study/ConceptSource.astro';
@@ -36,7 +36,7 @@ const headingId = `${guide.route}-title`;
   <ConceptSource source={guide.source} conceptTitle={guide.label} />
   <nav class="foundation-related" aria-label={t('Guías relacionadas')}>
     {guide.related.map(route => {
-      const related = webFoundations.find(item => item.route === route)!;
+      const related = foundationGuides.find(item => item.route === route)!;
       return <a href={`/${route}`} data-route={route}><Text value={related.title} /><Icon name="arrow" size={16} /></a>;
     })}
   </nav>

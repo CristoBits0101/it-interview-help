@@ -111,6 +111,21 @@ const assertLocalAsset = (url, fromFile) => {
   assert(existsSync(asset), `Missing built asset: ${relative(outputRoot, fromFile)} → ${url}`);
 };
 
+const expectedCssLayers = ['reset', 'base', 'layout', 'components', 'responsive'];
+const effectiveCssLayers = new Set();
+for (const tag of tags.filter(tag => tag.name === 'link' && tag.attributes.rel?.split(/\s+/).includes('stylesheet'))) {
+  const href = tag.attributes.href;
+  assertLocalAsset(href, join(outputRoot, 'index.html'));
+  const stylesheet = resolve(outputRoot, decodeURIComponent(href.split(/[?#]/, 1)[0]).replace(/^\/+/, ''));
+  const css = readFileSync(stylesheet, 'utf8');
+  for (const [, names] of css.matchAll(/@layer\s+([a-z][\w.-]*(?:\s*,\s*[a-z][\w.-]*)*)\s*[;{]/gi)) {
+    for (const name of names.split(',').map(name => name.trim())) {
+      if (expectedCssLayers.includes(name)) effectiveCssLayers.add(name);
+    }
+  }
+}
+assert.deepEqual([...effectiveCssLayers], expectedCssLayers, 'CSS layers must establish reset → base → layout → components → responsive before component styles can override application controls.');
+
 for (const tag of tags) {
   const attributes = tag.attributes;
   for (const name of ['aria-controls', 'aria-labelledby', 'aria-describedby']) {

@@ -9,7 +9,7 @@
 
 ## Trabajo en el repositorio
 
-- Trabaja exclusivamente en `C:\Workspace\tech-training`, rama `main`. Verifica carpeta, `git symbolic-ref --short HEAD` y `git status` antes de editar. No crees ramas, worktrees ni copias auxiliares sin revocación expresa de esta regla.
+- Trabaja exclusivamente en `C:\Workspace\tech-interview-prep`, rama `main`. Verifica carpeta, `git symbolic-ref --short HEAD` y `git status` antes de editar. No crees ramas, worktrees ni copias auxiliares sin revocación expresa de esta regla.
 - Conserva cambios ajenos, archivos pendientes e historial. No uses resets destructivos ni borres worktrees manualmente. Las barreras de `.codex/config.toml` y `.codex/rules/main-only.rules` son parciales; no sustituyen esta instrucción ni autorizan cambiar configuración global.
 - Mantén disponible `http://localhost:4321/`. Reutiliza el servidor habitual y no detengas servidores ajenos. Usa un puerto libre para preview cuando sea necesario y retira solo tus procesos temporales.
 - No hagas commit, push ni publicación en Sites por una revisión local. GitHub y Sites son destinos distintos. No apagues el ordenador. Una entrega remota requiere autorización explícita vigente.

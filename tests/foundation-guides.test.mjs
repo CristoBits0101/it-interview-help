@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { webFoundations } from '../src/data/web-foundations.ts';
+import { foundationGuides } from '../src/data/foundation-guides.ts';
 import { publishedGuides, publishedNavigation, publishedSources } from '../src/data/published-catalog.ts';
 import { translate } from '../src/lib/translations.ts';
 
@@ -12,9 +12,9 @@ const bilingual = value => {
 };
 
 test('foundation guides are reachable bilingual resources with verified source contracts', () => {
-  const routes = new Set(webFoundations.map(guide => guide.route));
-  assert.equal(routes.size, webFoundations.length);
-  for (const guide of webFoundations) {
+  const routes = new Set(foundationGuides.map(guide => guide.route));
+  assert.equal(routes.size, foundationGuides.length);
+  for (const guide of foundationGuides) {
     assert.match(guide.route, /^[a-z-]+\/[a-z-]+$/);
     assert(publishedGuides.some(item => item.href === `#${guide.route}`));
     assert.equal(flatten(publishedNavigation).filter(node => node.href === `#${guide.route}`).length, 1);
@@ -34,11 +34,11 @@ test('foundation guides are reachable bilingual resources with verified source c
 });
 
 test('HTTP and REST retain their distinct conceptual coverage', () => {
-  const http = webFoundations.find(guide => guide.label === 'HTTP Protocol');
+  const http = foundationGuides.find(guide => guide.label === 'HTTP Protocol');
   assert.match(http.diagram[0].code, /GET \/products\/42 HTTP\/1.1/);
   assert.match(http.diagram[1].code, /200 OK/);
   assert(http.concepts.some(concept => concept.title.en.startsWith('Body')));
-  const architecture = webFoundations.find(guide => guide.label === 'REST');
+  const architecture = foundationGuides.find(guide => guide.label === 'REST');
   for (const title of ['Client and Server', 'Stateless', 'Cache', 'Uniform Interface', 'Layered System', 'Code on Demand · Optional']) {
     assert(architecture.concepts.some(concept => concept.title.en === title));
   }

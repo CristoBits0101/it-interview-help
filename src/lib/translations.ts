@@ -338,6 +338,7 @@ Object.assign(spanishToEnglish, {
 });
 
 const navigationEnglishToSpanish: Record<string, string> = {
+  'Model Context Protocol (MCP)': 'Protocolo de contexto del modelo (MCP)',
   'Programming Fundamentals': 'Fundamentos de programación',
   'Algebra and Functions': 'Álgebra y funciones',
   'Mathematical and Statistical Foundations': 'Bases matemáticas y estadísticas',

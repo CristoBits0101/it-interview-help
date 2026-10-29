@@ -1,11 +1,11 @@
 ---
-import SystemDesignSummary from '../components/study/SystemDesignSummary.astro';
 import AppLayout from '../layouts/AppLayout.astro';
+import SystemDesignSummary from '../components/study/SystemDesignSummary.astro';
 import HomeOverview from '../components/HomeOverview.astro';
 import StudyArea from '../components/study/StudyArea.astro';
 import PendingContent from '../components/PendingContent.astro';
 import FoundationGuide from '../components/foundations/FoundationGuide.astro';
-import { webFoundations } from '../data/web-foundations';
+import { foundationGuides } from '../data/foundation-guides';
 import JavaLearningPaths from '../components/java/JavaLearningPaths.astro';
 import AiEcosystem from '../components/ai/AiEcosystem.astro';
 import ComparisonDialog from '../components/foundations/ComparisonDialog.astro';
@@ -22,6 +22,6 @@ import { publishedTracks, publishedNavigation, publishedSources, patternIds, pat
   <AiEcosystem />
   {referenceComparisons.map(guide => <ComparisonDialog guide={guide} />)}
   <JavaLearningPaths />
-  {webFoundations.map(guide => <FoundationGuide guide={guide} />)}
+  {foundationGuides.map(guide => <FoundationGuide guide={guide} />)}
   <StudyArea tracks={publishedTracks} purposeModuleIds={patternModuleIds} compactTrackIds={new Set(['applied-ai'])} patternIds={patternIds} aliases={glossaryAliases} />
 </AppLayout>
