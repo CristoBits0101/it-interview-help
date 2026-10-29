@@ -3,7 +3,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, extname, join, relative, resolve, sep } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
-import { publishedTracks, pendingPages } from '../src/data/published-catalog.ts';
+import { publishedTracks, pendingPages, publishedGuides } from '../src/data/published-catalog.ts';
 import { patternGuides } from '../src/data/pattern-guides/index.ts';
 import { t } from '../src/lib/translations.ts';
 
@@ -66,6 +66,9 @@ for (const file of files.filter(file => extname(file) === '.css')) {
 
 const concepts = publishedTracks.flatMap(track => track.modules.flatMap(module => module.concepts));
 const routes = new Set(publishedTracks.flatMap(track => track.modules.map(module => `#${track.id}/${module.id}`)));
+const guideSections = tags.filter(tag => 'data-resource-route' in tag.attributes);
+assert.deepEqual(new Set(guideSections.map(tag => `#${tag.attributes['data-resource-route']}`)), new Set(publishedGuides.map(guide => guide.href)));
+for (const guide of publishedGuides) assert(guideSections.some(tag => tag.attributes.id === guide.href.slice(1)));
 const pendingSections = tags.filter(tag => 'data-pending-route' in tag.attributes);
 assert.deepEqual(new Set(pendingSections.map(tag => `#${tag.attributes['data-pending-route']}`)), new Set(pendingPages.map(page => page.href)));
 for (const page of pendingPages) {
@@ -123,7 +126,9 @@ for (const tag of tags) {
   }
   if (tag.name !== 'a' || !attributes.href) continue;
   const href = attributes.href;
-  if (href.startsWith('#')) {
+  if (href.startsWith('/')) {
+    assert(existsSync(join(outputRoot, href, 'index.html')), `Missing static route: ${href}`);
+  } else if (href.startsWith('#')) {
     assert(routes.has(href) || href === '#home' || idSet.has(href.slice(1)), `Broken local link: ${href}`);
   } else {
     const url = new URL(href, 'https://build.invalid/');
@@ -153,5 +158,5 @@ for (const file of files) {
 for (const [metric, limit] of Object.entries(budgets)) {
   assert(totals[metric] <= limit, `${metric}: ${totals[metric]} exceeds ${limit}. Review growth before changing the budget.`);
 }
-console.log(`Validated static English HTML, ${concepts.length} concepts, ${routes.size} pages, ${Object.keys(patternGuides).length} guides, IDs, ARIA, links, assets and CSP.`);
+console.log(`Validated static English HTML, ${concepts.length} concepts, ${routes.size} concept pages, ${publishedGuides.length} topic guides, ${Object.keys(patternGuides).length} pattern guides, IDs, ARIA, links, assets and CSP.`);
 console.log(JSON.stringify({ bytes: totals, budgets }, null, 2));

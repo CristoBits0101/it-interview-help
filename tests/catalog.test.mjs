@@ -1,14 +1,14 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { navigation } from '../src/data/navigation.ts';
-import { publishedTracks, publishedNavigation, publishedSources, pendingPages } from '../src/data/published-catalog.ts';
+import { publishedTracks, publishedNavigation, publishedSources, pendingPages, publishedGuides } from '../src/data/published-catalog.ts';
 import { createConceptViews } from '../src/lib/concept-views.ts';
 
 const flatten = nodes => nodes.flatMap(node => [node, ...flatten(node.children ?? [])]);
 const concepts = publishedTracks.flatMap(track => track.modules.flatMap(module => module.concepts));
 const routeIds = publishedTracks.flatMap(track => track.modules.map(module => `#${track.id}/${module.id}`));
 const pendingIds = pendingPages.map(page => page.href);
-const availableIds = [...routeIds, ...pendingIds];
+const availableIds = [...routeIds, ...pendingIds, ...publishedGuides.map(guide => guide.href)];
 const publishedNodes = flatten(publishedNavigation);
 
 test('the published catalog has unique stable identifiers and every page is reachable', () => {

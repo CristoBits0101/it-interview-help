@@ -38,9 +38,12 @@ const reviewModuleButton = document.querySelector<HTMLButtonElement>('#review-mo
 const sections = $$<HTMLElement>('.concept-section');
 const pendingSections = $$<HTMLElement>('[data-pending-route]');
 let currentPending: HTMLElement | undefined;
+const resourceSections = $$<HTMLElement>('[data-resource-route]');
+let currentResource: HTMLElement | undefined;
 const cards = $$<HTMLElement>('.concept-card');
 const validIds = new Set(cards.map(card => card.dataset.conceptId!));
 const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const resourceSearch = new Map(resourceSections.map(section => [section.dataset.resourceRoute, normalize(`${section.textContent} ${Array.from(section.querySelectorAll<HTMLElement>('[data-i18n-es]'), item => `${item.dataset.i18nEs} ${item.dataset.i18nEn}`).join(' ')}`)]));
 function setLevel(index: number) {
   currentLevelIndex = Math.max(0, Math.min(levelOptions.length - 1, index));
   currentLevelValue = levelOptions[currentLevelIndex].value;
@@ -52,7 +55,7 @@ const learned = new Set(restoreLearnedIds(readJsonPreference(preferenceKeys.prog
 
 let currentModule = sections[0].dataset.moduleId!;
 let currentTrack = sections[0].dataset.trackId!;
-type RouteMode = 'home' | 'module' | 'pending';
+type RouteMode = 'home' | 'module' | 'pending' | 'resource';
 let routeMode: RouteMode = 'home';
 let mode: RouteMode | 'search' = 'home';
 let toastTimer: ReturnType<typeof setTimeout>;
@@ -107,12 +110,14 @@ function refreshView() {
   levelPrevious.disabled = currentLevelIndex === 0;
   levelNext.disabled = currentLevelIndex === levelOptions.length - 1;
   const navigationLinks = $$<HTMLAnchorElement>('[data-nav-link]');
-  const moduleLink = mode === 'pending'
-    ? navigationLinks.find(link => new URL(link.href).hash === `#${currentPending?.dataset.pendingRoute}`)
+  const moduleLink = mode === 'resource'
+    ? navigationLinks.find(link => new URL(link.href).pathname === `/${currentResource?.dataset.resourceRoute}`)
+    : mode === 'pending'
+    ? navigationLinks.find(link => new URL(link.href).pathname === `/${currentPending?.dataset.pendingRoute}`)
     : navigationLinks.find(link => link.dataset.navModule === currentModule)
-    ?? navigationLinks.find(link => new URL(link.href).hash === `#${currentTrack}/${currentModule}`);
+    ?? navigationLinks.find(link => new URL(link.href).pathname === `/${currentTrack}/${currentModule}`);
   const currentLink = moduleLink
-    ?? navigationLinks.find(link => !link.dataset.navModule && new URL(link.href).hash.slice(1).split('/')[0] === currentTrack);
+    ?? navigationLinks.find(link => !link.dataset.navModule && new URL(link.href).pathname.slice(1).split('/')[0] === currentTrack);
   const moduleLabel = currentLink?.querySelector('.navigation-label')?.textContent ?? selectedSection.dataset.moduleTitle!;
   const navigationPath = [moduleLabel];
   let parentBranch = currentLink?.closest<HTMLElement>('[data-nav-branch]');
@@ -124,8 +129,14 @@ function refreshView() {
   const isHome = mode === 'home';
   const isGrouped = mode === 'search';
   $('#home-view').hidden = !isHome;
-  $('#study').hidden = isHome || mode === 'pending';
+  $('#study').hidden = isHome || mode === 'pending' || mode === 'resource';
   pendingSections.forEach(section => { section.hidden = mode !== 'pending' || section !== currentPending; });
+  resourceSections.forEach(section => { section.hidden = mode !== 'resource' || section !== currentResource; });
+  let resourceCount = 0;
+  $$<HTMLElement>('[data-resource-result]').forEach(result => {
+    result.hidden = mode !== 'search' || !query || !resourceSearch.get(result.dataset.resourceResult)?.includes(query);
+    if (!result.hidden) resourceCount++;
+  });
   const breadcrumbPath = $('#breadcrumb-path');
   breadcrumbPath.hidden = isHome;
   breadcrumbPath.replaceChildren();
@@ -150,7 +161,7 @@ function refreshView() {
   const homeLink = $('[data-home-link]');
   if (isHome) homeLink.setAttribute('aria-current', 'page');
   else homeLink.removeAttribute('aria-current');
-  document.title = isHome ? `Tech Interview Prep · ${translate('Home', language)}` : mode === 'search' ? `${translate('Búsqueda', language)} · Tech Interview Prep` : `${translate(mode === 'pending' ? currentPending!.dataset.pendingTitle! : selectedSection.dataset.moduleTitle!, language)} · Tech Interview Prep`;
+  document.title = isHome ? `Tech Interview Prep · ${translate('Home', language)}` : mode === 'search' ? `${translate('Búsqueda', language)} · Tech Interview Prep` : `${translate(mode === 'resource' ? currentResource!.dataset.resourceTitle! : mode === 'pending' ? currentPending!.dataset.pendingTitle! : selectedSection.dataset.moduleTitle!, language)} · Tech Interview Prep`;
   let visibleCount = 0;
   sections.forEach(section => {
     let groupCount = 0;
@@ -167,13 +178,14 @@ function refreshView() {
   });
   $('#visible-count').textContent = String(visibleCount);
   $('.concept-count').setAttribute('aria-label', `${visibleCount} ${language === 'en' ? visibleCount === 1 ? 'concept' : 'concepts' : visibleCount === 1 ? 'concepto' : 'conceptos'}`);
-  $('#empty-state').hidden = visibleCount > 0;
+  $('#empty-state').hidden = visibleCount > 0 || resourceCount > 0;
+  $('.module-toolbar').hidden = visibleCount === 0 && resourceCount > 0;
   $('#module-bottom').hidden = isGrouped || visibleCount === 0;
   const heading = $('#study-title');
-  const showPatternPurpose = mode === 'module' && selectedSection.hasAttribute('data-pattern-category');
-  heading.classList.toggle('sr-only', !showPatternPurpose);
+  const showModulePurpose = mode === 'module' && (selectedSection.hasAttribute('data-pattern-category') || currentModule === 'solid');
+  heading.classList.toggle('sr-only', !showModulePurpose);
   if (mode === 'module') {
-    heading.textContent = showPatternPurpose ? translate(selectedSection.dataset.moduleDescription!, language).replace(/\.$/u, '') : moduleLabel;
+    heading.textContent = showModulePurpose ? translate(selectedSection.dataset.moduleDescription!, language).replace(/\.$/u, '') : moduleLabel;
   } else {
     heading.textContent = translate('Resultados de búsqueda', language);
   }
@@ -183,35 +195,40 @@ function refreshView() {
     reviewModuleButton.setAttribute('aria-label', translate(mode === 'module' ? 'Repasar el módulo visible' : 'Repasar los conceptos visibles', language));
   }
   navigationLinks.forEach(link => {
-    if ((mode === 'module' || mode === 'pending') && link === currentLink) link.setAttribute('aria-current', 'page');
+    if ((mode === 'module' || mode === 'pending' || mode === 'resource') && link === currentLink) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   });
   const next = sections[(sections.indexOf(selectedSection) + 1) % sections.length];
   const nextLink = $<HTMLAnchorElement>('#next-module');
-  nextLink.href = `#${next.dataset.trackId}/${next.dataset.moduleId}`;
+  nextLink.href = `/${next.dataset.trackId}/${next.dataset.moduleId}`;
   nextLink.setAttribute('aria-label', `${translate('Siguiente módulo:', language)} ${translate(next.dataset.moduleTitle!, language)}`);
 }
 
-function goToHash(initial = false) {
+function goToRoute(initial = false) {
   document.querySelectorAll<HTMLDialogElement>('[data-implementation][open]').forEach(dialog => dialog.close());
-  const route = location.hash.slice(1);
+  const legacyRoute = location.hash.slice(1);
+  if (initial && legacyRoute && legacyRoute !== 'main') history.replaceState(null, '', legacyRoute === 'home' ? '/' : `/${legacyRoute}`);
+  const route = location.pathname.replace(/^\/|\/$/g, '');
   if (route === 'main' && !initial) return;
   if (route === 'study' && routeMode === 'module') return;
   search.value = '';
   setLevel(0);
   const match = sections.find(section => `${section.dataset.trackId}/${section.dataset.moduleId}` === route);
   currentPending = pendingSections.find(section => section.dataset.pendingRoute === route);
+  currentResource = resourceSections.find(section => section.dataset.resourceRoute === route);
   const anchor = document.getElementById(route);
   const homeAnchor = anchor && $('#home-view').contains(anchor) ? anchor : null;
   if (match) {
     currentModule = match.dataset.moduleId!;
     currentTrack = match.dataset.trackId!;
     routeMode = 'module';
+  } else if (currentResource) {
+    routeMode = 'resource';
   } else if (currentPending) {
     routeMode = 'pending';
   } else {
     routeMode = 'home';
-    if (route && route !== 'home' && !homeAnchor) history.replaceState(null, '', '#home');
+    if (route && route !== 'home' && !homeAnchor) history.replaceState(null, '', '/');
   }
   mode = routeMode;
   navigationDrawer.close();
@@ -222,16 +239,20 @@ function goToHash(initial = false) {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
 }
-window.addEventListener('hashchange', () => goToHash());
+window.addEventListener('popstate', () => goToRoute());
 $('.skip-link').addEventListener('click', event => {
   event.preventDefault();
   $('#main').focus({ preventScroll: true });
   window.scrollTo({ top: 0, behavior: 'auto' });
 });
-$$<HTMLAnchorElement>('[data-route], [data-nav-link], [data-home-link], .brand').forEach(link => {
-  link.addEventListener('click', event => {
-    if (new URL(link.href).hash === location.hash) { event.preventDefault(); goToHash(); }
-  });
+document.addEventListener('click', event => {
+  const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('a[href]') : null;
+  if (!link || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || link.target || link.hasAttribute('download')) return;
+  const destination = new URL(link.href);
+  if (destination.origin !== location.origin || destination.hash) return;
+  event.preventDefault();
+  if (destination.pathname !== location.pathname) history.pushState(null, '', destination.pathname);
+  goToRoute();
 });
 $('#clear-filters').addEventListener('click', () => {
   search.value = '';
@@ -245,7 +266,8 @@ function announceResults() {
   clearTimeout(resultsTimer);
   resultsTimer = setTimeout(() => {
     const count = Number($('#visible-count').textContent);
-    $('#results-status').textContent = `${count} ${translate(count === 1 ? 'concepto encontrado' : 'conceptos encontrados', language)}.`;
+    const guides = $$<HTMLElement>('[data-resource-result]').filter(result => !result.hidden).length;
+    $('#results-status').textContent = `${count} ${translate(count === 1 ? 'concepto encontrado' : 'conceptos encontrados', language)}.${guides ? ` ${guides} ${translate('Guías', language)}.` : ''}`;
   }, 350);
 }
 search.addEventListener('input', () => { mode = search.value.trim() ? 'search' : routeMode; refreshView(); announceResults(); });
@@ -288,6 +310,6 @@ languageToggle.addEventListener('click', () => {
 });
 initializeDialogs();
 refreshProgress();
-goToHash(true);
+goToRoute(true);
 
 initializeInteractionSounds();

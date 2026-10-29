@@ -72,7 +72,7 @@ export function initializeInteractionSounds() {
       disclosure: control?.closest('summary')?.parentElement instanceof HTMLDetailsElement ? (control.closest('summary')!.parentElement as HTMLDetailsElement).open : undefined,
       dialog: document.querySelector('dialog[open]')?.id ?? '',
       drawer: document.getElementById('sidebar')?.classList.contains('mobile-open') ?? false,
-      destination: [location.hash, document.documentElement.lang, guide?.dataset.currentStep,
+      destination: [location.pathname, document.documentElement.lang, guide?.dataset.currentStep,
         carousel?.querySelector('[aria-pressed="true"]')?.textContent,
         viewport?.scrollLeft, carousel?.contains(document.activeElement) ? document.activeElement?.textContent : '', carousel?.querySelector('[data-carousel-position-list] [aria-current]')?.textContent,
         (document.getElementById('search') as HTMLInputElement)?.value,

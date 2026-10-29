@@ -3,8 +3,8 @@ import { readFileSync } from 'node:fs';
 import './register-typescript.mjs';
 
 const { navigation, sharedFoundations } = await import('../src/data/navigation.ts');
-const { pendingPages } = await import('../src/data/published-catalog.ts');
-const pendingDestinations = new Set(pendingPages.map(page => page.href));
+const { pendingPages, publishedGuides } = await import('../src/data/published-catalog.ts');
+const pendingDestinations = new Set([...pendingPages, ...publishedGuides].map(page => page.href));
 const { careerProfiles, areaGuidance } = await import('../src/data/career-paths.ts');
 const { tracks } = await import('../src/data/curriculum.ts');
 const { systemDesign } = await import('../src/data/system-design.ts');
@@ -18,7 +18,8 @@ function visit(nodes, parent = []) {
   for (const node of nodes) {
     const path = [...parent, node.id ?? node.label];
     all.push({ ...node, path });
-    assert(!/\b(Engineer|Architect|Manager|Director|Lead)\b/.test(node.label), `Job title in menu: ${node.label}`);
+    assert(!/\b(Engineer|Architect|Manager|Director|Lead|Developer|Analyst|Specialist|Administrator|Scientist|Designer|Researcher)\b/.test(node.label), `Job title in menu: ${node.label}`);
+    assert(!['Frontend Development', 'Backend Development', 'Mobile Development'].includes(node.label), `Career specialty in menu: ${node.label}`);
     if (node.children) { assert(node.children.length); visit(node.children, path); }
     if (node.shared) assert.equal(node, sharedFoundations[node.label]);
   }
@@ -30,7 +31,7 @@ const catalog = [...tracks, systemDesign, appliedAI];
 for (const node of all) {
   const es = translate(node.label, 'es');
   assert.equal(translate(es, 'en'), node.label, `Translation round trip: ${node.label}`);
-  if (!['Big Data', 'REST', 'MVC', 'SQL', 'Hexagonal', 'SOAP', 'GraphQL', 'gRPC', 'Webhook', 'WebSocket'].includes(node.label)) assert.notEqual(es, node.label, `Missing Spanish: ${node.label}`);
+  if (!['Big Data', 'REST', 'MVC', 'SQL', 'Hexagonal', 'SOAP', 'GraphQL', 'gRPC', 'Webhook', 'WebSocket', 'TypeScript', 'Java', 'Python'].includes(node.label)) assert.notEqual(es, node.label, `Missing Spanish: ${node.label}`);
   if (node.href && !pendingDestinations.has(node.href)) {
     const [trackId, moduleId] = node.href.slice(1).split('/');
     const track = catalog.find(t => t.id === trackId);

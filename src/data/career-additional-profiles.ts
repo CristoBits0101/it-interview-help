@@ -165,7 +165,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Construye una base de programación y matemáticas para trabajar con modelos.', areas: ['Programming Fundamentals', 'Linear Algebra', 'Probability Theory', 'Statistics'], milestone: 'Prepara datos para un modelo y explica qué representa cada variable.' },
       { id: 'junior', label: 'Junior', goal: 'Entrena y evalúa modelos sencillos con código reproducible.', areas: ['Machine Learning', 'Data Analytics', 'Software Testing', 'Software Design'], milestone: 'Compara un modelo con una referencia y guarda la configuración de la prueba.' },
-      { id: 'mid', label: 'Mid-Level', goal: 'Integra modelos con datos y servicios que pueden evaluarse y mantenerse.', areas: ['Data Engineering', 'Backend Development', 'Deep Learning', 'Software Engineering Operations'], milestone: 'Publica una predicción mediante una API y mide calidad y latencia.' },
+      { id: 'mid', label: 'Mid-Level', goal: 'Integra modelos con datos y servicios que pueden evaluarse y mantenerse.', areas: ['Data Engineering', 'API Design', 'Deep Learning', 'Software Engineering Operations'], milestone: 'Publica una predicción mediante una API y mide calidad y latencia.' },
       { id: 'senior', label: 'Senior', goal: 'Diseña la operación de modelos según sus riesgos y objetivos de producto.', areas: ['Cloud Computing', 'Data Security', 'System Design', 'Software Quality'], milestone: 'Define cómo monitorizar un modelo y cuándo retirarlo o volver a entrenarlo.' },
     ],
   },
@@ -198,7 +198,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
         id: 'junior',
         label: 'Junior',
         goal: 'Implementa pantallas sencillas con estados claros y pruebas básicas.',
-        areas: ['User Interface Design', 'Mobile Development', 'Software Testing', 'Security Fundamentals'],
+        areas: ['User Interface Design', 'Software Development', 'Software Testing', 'Security Fundamentals'],
         milestone: 'Construye una pantalla que conserve sus datos al cambiar de orientación.',
       },
       {
@@ -472,10 +472,6 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
 ];
 
 export const additionalAreaGuidance: Record<string, { focus: string; prerequisites: string[] }> = {
-  'Mobile Development': {
-    focus: 'Gestiona el ciclo de vida y el estado de una aplicación móvil. Adapta su interfaz y su acceso a datos al dispositivo.',
-    prerequisites: ['Programming Fundamentals', 'Operating Systems'],
-  },
   'Interaction Design': {
     focus: 'Diseña las acciones y respuestas de una interfaz. Representa los estados que permiten completar una tarea.',
     prerequisites: ['Information Architecture'],

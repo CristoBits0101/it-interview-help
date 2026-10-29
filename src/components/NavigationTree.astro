@@ -9,7 +9,6 @@ const branchId = (label: string) => [parentPath, encodeURIComponent(label)].filt
 <ul class:list={['navigation-tree', { 'navigation-root': depth === 0 }]}>
   {nodes.map(node => (
     <li>
-      {depth === 0 && node.separatorBefore && <hr class="navigation-separator" aria-hidden="true" />}
       {!node.children?.length && !node.href ? (
         <span class="navigation-row navigation-disabled" aria-disabled="true">
           {depth === 0 && node.icon && <Icon name={node.icon} size={18} class="navigation-icon" />}
@@ -25,7 +24,7 @@ const branchId = (label: string) => [parentPath, encodeURIComponent(label)].filt
           <Astro.self nodes={node.children} depth={depth + 1} parentPath={branchId(node.id ?? node.label)} />
         </details>
       ) : (
-        <a class="navigation-row navigation-link" href={node.href} data-nav-link data-nav-module={node.module}>
+        <a class="navigation-row navigation-link" href={node.href?.replace(/^#/, '/') } data-nav-link data-nav-module={node.module}>
           {depth === 0 && node.icon && <Icon name={node.icon} size={18} class="navigation-icon" />}
           <span class="navigation-label" data-i18n-source={node.label}>{t(node.label)}</span>
         </a>

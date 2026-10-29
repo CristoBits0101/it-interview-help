@@ -6,13 +6,17 @@ El contenido se centra en fundamentos para entrevistas de distintos perfiles y e
 
 ## Home y contenido
 
-Home permite elegir un área profesional y uno de sus perfiles y una etapa desde Trainee o Becario hasta Senior. Las rutas de preparación por etapa y alcance muestran un aviso de contenido en desarrollo. Los datos de orientación conservan áreas relacionadas, conocimientos previos y objetivos prácticos. Las opciones de especialización, liderazgo y gestión no representan una jerarquía profesional universal.
+Home permite elegir un área profesional y uno de sus perfiles y una etapa desde Trainee o Becario hasta Senior. La etapa muestra conocimientos recomendados, bases previas y objetivos prácticos con enlaces al contenido disponible. Las rutas por alcance conservan su aviso de contenido en desarrollo. Los puestos se seleccionan únicamente en Home; el menú lateral organiza disciplinas y conocimientos. Las opciones de especialización, liderazgo y gestión no representan una jerarquía profesional universal.
 
 Home presenta el encabezado «Prepara tu próxima entrevista técnica» y una orientación breve. Conserva los cuatro contadores y los selectores de área, profesión y etapa. El menú reúne seis grupos: Sistemas Informáticos, Ciberseguridad, Interacción Persona-Computadora, Ingeniería de Software, Tecnologías de Datos e Inteligencia Artificial. Las bases se integran en sus ámbitos y se comparten cuando corresponda. El orden y los años de las etapas orientan el aprendizaje sin imponer una progresión profesional universal.
 
 El catálogo publicado incluye Software Design con 19 conceptos en cuatro módulos y Aplicaciones de IA Generativa con 104 conceptos en diez páginas temáticas. El glosario recoge los cien términos del README de prácticas más cuatro fundamentos acordados. El contenido disponible se define en `src/data/published-catalog.ts`; subir cambios al repositorio no publica por sí mismo la web alojada. Las demás áreas mantienen sus ramas visibles y sus hojas sin contenido deshabilitadas.
 
 El catálogo fuente conserva estas rutas. La navegación publicada permite abrir Software Design y Generative AI Applications:
+
+Java añade un resumen visual en `#java/versions` bajo Software Engineering → Software Development → Programming Languages → Java → Version Evolution. Muestra 27 fichas de Java 1.0 a Java 26 con año y mejoras principales visibles en dos columnas o una en móvil. Las fuentes se despliegan dentro de cada ficha. El contenido y las etiquetas están disponibles en ES/EN y la búsqueda encuentra la sección. Los datos amplios de versiones y ejemplos se conservan como fuente sin montar el antiguo comparador ni los ejemplos en la interfaz. TypeScript y Python siguen sin contenido.
+
+El presupuesto de compilación admite el contenido bilingüe de esta guía: 116 KiB de HTML comprimido, 68 KiB de JavaScript comprimido y 2400 KiB de archivos totales. El incremento se limita a datos educativos, marcado y controles locales sin nuevas dependencias.
 
 1. User Experience Design: 6 conceptos de arquitectura de información y experiencia de usuario.
 2. Software Design: 19 conceptos. SOLID Principles contiene cinco principios en el orden S, O, L, I, D. Design Patterns contiene cinco creacionales, tres estructurales y seis de comportamiento.

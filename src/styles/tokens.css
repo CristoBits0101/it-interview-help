@@ -41,6 +41,7 @@
     --line-body: 1rem;
     --line-career-question: 1.5625rem;
     --control-border: var(--text-soft);
+    --topbar-control-size: 2.5rem;
     --motion-fast: 160ms;
     --motion-duration: 200ms;
     --motion-ease: ease-out;

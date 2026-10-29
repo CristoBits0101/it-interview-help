@@ -1,0 +1,13 @@
+---
+import Index from './index.astro';
+import { publishedTracks, publishedGuides, pendingPages } from '../data/published-catalog';
+export function getStaticPaths() {
+  const routes = new Set([
+    ...publishedTracks.flatMap(track => track.modules.map(module => `${track.id}/${module.id}`)),
+    ...publishedGuides.map(guide => guide.href.slice(1)),
+    ...pendingPages.map(page => page.href.slice(1)),
+  ]);
+  return [...routes].map(route => ({ params: { route } }));
+}
+---
+<Index />

@@ -133,7 +133,7 @@ export const softwareCareerProfileTemplates: CareerProfile[] = [
         "label": "Junior",
         "goal": "Implementa un intercambio de datos pequeño con validación y acceso controlado.",
         "areas": [
-          "Backend Development",
+          "API Design",
           "Software Testing",
           "Network Security",
           "Application Security"

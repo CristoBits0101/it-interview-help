@@ -71,6 +71,9 @@ export function applyStaticTranslations(language: Language) {
   document.querySelectorAll<HTMLElement>('[data-area-translation]').forEach(element => {
     element.textContent = translate(element.dataset.areaTranslation!, language);
   });
+  document.querySelectorAll<HTMLElement>('#sidebar [data-i18n-source]').forEach(element => {
+    element.textContent = translate(element.dataset.i18nSource!, language);
+  });
   document.querySelectorAll<HTMLElement>('[data-stage-area-count]').forEach(element => {
     const count = Number(element.dataset.stageAreaCount);
     element.textContent = stageAreaCount(count, language);

@@ -1,0 +1,23 @@
+@layer components {
+  .java-guide { display: flex; flex-direction: column; gap: var(--space-home); min-width: 0; }
+  .java-heading { display: flex; flex-direction: column; gap: var(--gap-control); }
+  .java-heading h1 { margin: 0; font: 500 var(--font-section)/1.5 var(--brand); text-transform: uppercase; border-inline-start: 2px solid var(--accent-heading); padding-inline: var(--space-compact); }
+  .java-heading > p, .java-meta { color: var(--text-soft); font-size: var(--font-meta); }
+  .java-release-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-control); }
+  .java-version-card { display: flex; flex-direction: column; gap: var(--space-compact); min-width: 0; padding: var(--space-control); border: 1px solid var(--border-soft); border-radius: var(--radius-card); background: var(--paper); transition: border-color var(--motion-fast) var(--motion-ease); }
+  .java-version-card:hover { border-color: var(--border-accent); }
+  .java-card-heading { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-control); border-bottom: 1px solid var(--line); padding-bottom: var(--space-compact); }
+  .java-card-heading h2 { font: 500 var(--font-section)/var(--line-body) var(--brand); }
+  .java-year { margin-inline-start: auto; color: var(--text-soft); font-size: var(--font-small); }
+  .java-badge { padding: var(--gap-micro) var(--gap-compact); color: var(--green); border: 1px solid var(--border-accent); border-radius: var(--radius-full); font-size: var(--font-caption); }
+  .java-highlights { margin: 0; padding-inline-start: var(--space-control); display: flex; flex-direction: column; gap: var(--gap-compact); }
+  .java-highlights li::marker { color: var(--accent); }
+  .java-highlights a { display: inline-block; min-height: 1.5rem; color: var(--green); }
+  .java-highlights a:hover { text-decoration: underline; }
+  .java-status { color: var(--text-soft); }
+  .java-resource-result { display: flex; flex-direction: column; gap: var(--gap-control); padding: var(--space-control); margin-bottom: var(--space-home); border: 1px solid var(--border-soft); border-radius: var(--radius-card); }
+  .java-resource-result a { color: var(--green); min-height: 2.75rem; display: flex; align-items: center; }
+}
+@layer responsive {
+  @media (max-width: 900px) { .java-release-grid { grid-template-columns: 1fr; } }
+}

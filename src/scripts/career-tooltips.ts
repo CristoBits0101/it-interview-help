@@ -78,5 +78,5 @@ export function initializeCareerTooltips() {
   });
   document.getElementById('language-toggle')?.addEventListener('click', hide);
   window.addEventListener('resize', hide);
-  window.addEventListener('hashchange', hide);
+  window.addEventListener('popstate', hide);
 }

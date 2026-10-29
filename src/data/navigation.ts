@@ -89,11 +89,14 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
     ] },
     { label: 'Software Development', children: [
       foundation('Programming Fundamentals'),
-      { label: 'Programming Languages' },
+      { label: 'Programming Languages', children: [
+        { label: 'TypeScript' }, { label: 'Java', children: [
+          { label: 'Version Evolution', href: '#java/versions' },
+        ] }, { label: 'Python' },
+      ] },
       foundation('Discrete Mathematics'),
       { label: 'Data Structures' },
       { label: 'Algorithms' },
-      { label: 'Frontend Development' }, { label: 'Backend Development' }, { label: 'Mobile Development' },
     ] },
     { label: 'Software Testing' }, { label: 'Software Quality' },
     { label: 'Software Engineering Operations' }, { label: 'Software Maintenance' },

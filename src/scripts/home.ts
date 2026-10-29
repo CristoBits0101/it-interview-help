@@ -58,9 +58,9 @@ export function initializeCareerPaths() {
     });
     stages.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.careerStage === stageId)));
     panels.forEach(panel => { panel.hidden = panel.dataset.careerPanel !== selection.profileId || panel.dataset.stage !== stageId; });
-    if (panelContainer) panelContainer.hidden = true;
+    if (panelContainer) panelContainer.hidden = !selection.profileId || !stageId;
     document.querySelectorAll<HTMLElement>('[data-career-notice]').forEach(notice => {
-      notice.hidden = notice.dataset.careerNotice !== noticeKind || scope?.kind !== noticeKind;
+      notice.hidden = notice.dataset.careerNotice === 'stage' || notice.dataset.careerNotice !== noticeKind || scope?.kind !== noticeKind;
     });
     const profile = profiles.find(button => button.dataset.careerProfile === selection.profileId);
     growth.update(scope, selection.profileId ?? '', profile?.getAttribute('aria-label') ?? '', panels.find(panel => panel.dataset.careerPanel === selection.profileId && panel.dataset.stage === 'senior'));

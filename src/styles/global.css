@@ -52,7 +52,6 @@
   .navigation-tree { list-style: none; margin: 0; padding: 0; }
   .navigation-tree > li { min-width: 0; }
   .navigation-root { --navigation-end-inset: var(--space-navigation-row); }
-  .navigation-separator { height: 1px; margin: var(--gap-navigation-row) var(--space-navigation-row); padding: 0; border: 0; border-top: 1px solid var(--line); }
   .navigation-row { display: flex; align-items: center; gap: var(--gap-navigation-row); padding: 12px var(--space-navigation-row); padding-inline-end: var(--navigation-end-inset); min-height: 48px; border-radius: 9999px; font-size: var(--font-meta); font-weight: 300; line-height: var(--line-body); color: var(--text-soft); }
   summary.navigation-row { list-style: none; cursor: pointer; font-weight: 300; }
   summary::-webkit-details-marker { display: none; }
@@ -75,9 +74,9 @@
   .breadcrumb-current { color: var(--text-secondary); }
   .breadcrumb > a { display: inline-flex; align-items: center; min-height: 44px; }
   .topbar-actions { display: flex; flex-shrink: 0; flex-wrap: wrap; max-width: 100%; align-items: center; gap: var(--space-gap); }
-  .language-selector { --language-padding: 16px; position: relative; flex: 0 0 auto; max-width: 100%; margin-inline-start: auto; color: var(--text-soft); }
-  .language-selector button { min-height: 44px; min-width: 6.625rem; text-align: start; white-space: nowrap; max-width: 100%; padding: calc(var(--language-padding) / 2) calc(var(--language-padding) * 1.5 + 14px) calc(var(--language-padding) / 2) var(--language-padding); appearance: none; border: 1px solid var(--control-border); border-radius: 9999px; background: var(--surface-soft); color: var(--text-secondary); font-size: var(--font-small); font-weight: 400; }
-  .language-selector > svg { position: absolute; inset-inline-end: calc(var(--language-padding) - 2px); top: 50%; transform: translateY(-50%); pointer-events: none; }
+  .language-selector { --language-padding: var(--space-control); position: relative; flex: 0 0 auto; max-width: 100%; margin-inline-start: auto; color: var(--text-soft); }
+  .language-selector button { min-height: 44px; min-width: 6.625rem; text-align: start; white-space: nowrap; max-width: 100%; padding: calc(var(--language-padding) / 2) calc(var(--language-padding) * 2 + 14px) calc(var(--language-padding) / 2) var(--language-padding); appearance: none; border: 1px solid var(--control-border); border-radius: 9999px; background: var(--surface-soft); color: var(--text-secondary); font-size: var(--font-small); font-weight: 400; }
+  .language-selector > svg { position: absolute; inset-inline-end: calc(var(--language-padding) + 1px); top: 50%; transform: translateY(-50%); pointer-events: none; }
   .language-selector:has(button:hover) > svg, .language-selector:has(button:focus-visible) > svg { color: var(--ink); }
   .language-selector button:hover, .language-selector button:focus-visible { background: var(--surface-tinted); color: var(--ink); }
   .search-box { display: flex; align-items: center; gap: var(--gap-control); width: 320px; max-width: 100%; min-height: 44px; border: 1px solid var(--control-border); background: var(--surface-soft); padding: var(--gap-control) var(--space-control); border-radius: 9999px; color: var(--text-soft); transition: background-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease); }
@@ -121,6 +120,8 @@
   .card-heading { display: flex; align-items: center; min-width: 0; gap: var(--gap-card); }
   .card-heading h3 { min-width: 0; overflow-wrap: normal; word-break: normal; hyphens: none; }
   .concept-number { display: grid; place-items: center; flex: 0 0 var(--card-number-size); width: var(--card-number-size); height: var(--card-number-size); border: 1px solid var(--border-soft); border-radius: 50%; color: var(--text-soft); font-family: var(--display); font-size: var(--font-meta); }
+  .solid-title { display: flex; align-items: center; gap: .25em; }
+  .solid-initial { flex-shrink: 0; font-size: var(--font-small); font-weight: 400; }
   .card-heading-pattern { gap: 0; }
   .concept-number-plain { --pattern-prefix-width: calc(var(--card-leading-size) + 2 * var(--gap-card)); display: grid; grid-template-columns: max-content 1fr 3px 1fr; flex: 0 0 var(--pattern-prefix-width); width: var(--pattern-prefix-width); border: 0; border-radius: 0; }
   .concept-number-plain > svg { grid-column: 3; }

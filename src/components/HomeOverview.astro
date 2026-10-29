@@ -1,7 +1,7 @@
 ---
 import { t } from '../lib/translations';
 import type { Track } from '../data/curriculum';
-import { publishedNavigation as navigation } from '../data/published-catalog';
+import { publishedNavigation as navigation, publishedGuides } from '../data/published-catalog';
 import { careerProfiles, areaGuidance, careerTermDescriptions } from '../data/career-paths';
 import { careerGrowthTargets } from '../data/career-growth';
 import { careerDirections } from '../data/career-directions';
@@ -18,7 +18,7 @@ const areas = new Map(catalog.map(node => [node.label, node]));
 const totalConcepts = tracks.reduce((total, track) => total + countConcepts(track), 0);
 const stats = [
   { value: navigation.length, label: 'Áreas Principales', detail: 'Temas para repasar' },
-  { value: tracks.length, label: 'Rutas con Contenido', detail: 'Disponibles para estudiar' },
+  { value: tracks.length + publishedGuides.length, label: 'Rutas con Contenido', detail: 'Disponibles para estudiar' },
   { value: totalConcepts, label: 'Conceptos', detail: 'Breves y conectados' },
   { value: careerProfiles.length, label: 'Perfiles Profesionales', detail: 'Orientación por especialidad' },
 ];
