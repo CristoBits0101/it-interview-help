@@ -49,11 +49,11 @@ export function applyStaticTranslations(language: Language) {
     title.textContent = translatePatternTitle(title.dataset.patternTitle!, language);
     title.lang = language;
   });
-  document.querySelectorAll<HTMLElement>('.concept-card, .foundation-guide, .java-ecosystem-card').forEach(card => {
+  document.querySelectorAll<HTMLElement>('.concept-card, .foundation-guide, .java-ecosystem-card, .comparison-panel').forEach(card => {
     const title = card.querySelector('h3');
     const level = card.querySelector<HTMLElement>('.level-badge');
     if (level) level.textContent = translate(card.dataset.level ?? '', language);
-    const conceptTitle = title?.textContent ?? translate(card.dataset.resourceTitle ?? '', language);
+    const conceptTitle = card.dataset.guideTitle ? translate(card.dataset.guideTitle, language) : title?.textContent ?? translate(card.dataset.resourceTitle ?? '', language);
     card.querySelector('.card-views')?.setAttribute('aria-label', `${translate('Contenido de', language)} ${conceptTitle}`);
     card.querySelectorAll<HTMLAnchorElement>('.concept-source').forEach(source => {
       const publisher = source.querySelector('.source-publisher')?.textContent ?? '';

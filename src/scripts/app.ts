@@ -1,3 +1,4 @@
+import { initializeAiEcosystem } from './ai-ecosystem';
 import { preferenceKeys, readJsonPreference, restoreLearnedIds, writePreference } from '../lib/preferences';
 import { $, $$ } from './dom';
 import { initializeNavigationDrawer } from './navigation-drawer';
@@ -14,6 +15,7 @@ import { applyStaticTranslations, getSavedLanguage, saveLanguage, translate, tra
 let language: Language = getSavedLanguage();
 applyStaticTranslations(language);
 initializeNavigation();
+const refreshAiEcosystem = initializeAiEcosystem();
 const refreshCareerSelection = initializeCareerPaths();
 initializeCareerTooltips();
 refreshCareerSelection?.();
@@ -43,7 +45,7 @@ let currentResource: HTMLElement | undefined;
 const cards = $$<HTMLElement>('.concept-card');
 const validIds = new Set(cards.map(card => card.dataset.conceptId!));
 const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-const resourceSearch = new Map(resourceSections.map(section => [section.dataset.resourceRoute, normalize(`${section.textContent} ${Array.from(section.querySelectorAll<HTMLElement>('[data-i18n-es]'), item => `${item.dataset.i18nEs} ${item.dataset.i18nEn}`).join(' ')}`)]));
+const resourceSearch = new Map([...resourceSections, ...$$<HTMLElement>('[data-learning-guide]')].map(section => [section.dataset.resourceRoute ?? section.id, normalize(`${section.textContent} ${Array.from(section.querySelectorAll<HTMLElement>('[data-i18n-es]'), item => `${item.dataset.i18nEs} ${item.dataset.i18nEn}`).join(' ')}`)]));
 function setLevel(index: number) {
   currentLevelIndex = Math.max(0, Math.min(levelOptions.length - 1, index));
   currentLevelValue = levelOptions[currentLevelIndex].value;
@@ -134,7 +136,7 @@ function refreshView() {
   resourceSections.forEach(section => { section.hidden = mode !== 'resource' || section !== currentResource; });
   let resourceCount = 0;
   $$<HTMLElement>('[data-resource-result]').forEach(result => {
-    result.hidden = mode !== 'search' || !query || !resourceSearch.get(result.dataset.resourceResult)?.includes(query);
+    result.hidden = mode !== 'search' || !query || !resourceSearch.get(result.dataset.resourceResult ?? '')?.includes(query);
     if (!result.hidden) resourceCount++;
   });
   const breadcrumbPath = $('#breadcrumb-path');
@@ -205,7 +207,7 @@ function refreshView() {
 }
 
 function goToRoute(initial = false) {
-  document.querySelectorAll<HTMLDialogElement>('[data-implementation][open]').forEach(dialog => dialog.close());
+  document.querySelectorAll<HTMLDialogElement>('[data-implementation][open], [data-learning-guide][open]').forEach(dialog => dialog.close());
   const legacyRoute = location.hash.slice(1);
   if (initial && legacyRoute && legacyRoute !== 'main') history.replaceState(null, '', legacyRoute === 'home' ? '/' : `/${legacyRoute}`);
   const route = location.pathname.replace(/^\/|\/$/g, '');
@@ -300,6 +302,7 @@ languageToggle.addEventListener('click', () => {
   language = language === 'es' ? 'en' : 'es';
   saveLanguage(language);
   applyStaticTranslations(language);
+  refreshAiEcosystem();
   refreshView();
   refreshProgress();
   refreshCareerSelection?.();

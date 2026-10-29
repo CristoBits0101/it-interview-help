@@ -9,4 +9,5 @@ const { track, module, index, initial = false, showPurpose = false, hideEmptyVie
 <section class:list={['concept-section', { 'glossary-section': hideEmptyViews }]} data-pattern-category={showPurpose ? '' : undefined} data-track-id={track.id} data-module-id={module.id} data-module-title={module.title} data-module-description={module.description} data-module-number={String(index + 1).padStart(2, '0')} data-track-title={track.title} data-track-eyebrow={track.eyebrow} hidden={!initial}>
               <h2 class="search-group-heading sr-only">{t(track.title)}<Icon name="chevron" size={13} />{t(module.title)}</h2>
               <div class="concept-grid">{module.concepts.map((concept, index) => <ConceptCard concept={concept} index={index} isPattern={patternIds.has(concept.id)} searchAliases={aliases.get(concept.id)} hideEmptyViews={hideEmptyViews} />)}</div>
+  {module.id === 'ai-rag' && <button type="button" class="learning-guide-trigger" data-open-guide="rag-kag-guide" aria-haspopup="dialog" aria-controls="rag-kag-guide">{t('RAG vs KAG')}<Icon name="arrow" size={16} /></button>}
 </section>

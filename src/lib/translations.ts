@@ -8,6 +8,15 @@ import { careerContentTranslations } from '../data/career-content-translations';
 export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
+  'Cerrar': 'Close',
+  'Documentación': 'Documentation',
+  'Todas las funciones': 'All functions',
+  'Filtrar herramientas por función': 'Filter tools by function',
+  'Aspecto': 'Aspect',
+  'Tabla comparativa': 'Comparison table',
+  'RAG y KAG': 'RAG vs KAG',
+  'Carga Diferida y Carga Anticipada': 'Lazy vs Eager Loading',
+  'Ecosistema de IA': 'AI Ecosystem',
   'Ecosistema': 'Ecosystem',
   'Trayectorias Profesionales': 'Career Paths',
   'Ruta de Aprendizaje': 'Developer Roadmap',

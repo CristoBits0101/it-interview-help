@@ -17,6 +17,7 @@ const { technology } = Astro.props;
       <div><dt>{t('Combinación')}</dt><dd><span>Java + </span><span>{t(technology.name)}</span></dd></div>
       <div><dt>{t('Lo que obtienes')}</dt><dd><Text value={technology.outcome} /></dd></div>
     </dl>
+    {['hibernate', 'spring-data-jpa'].includes(technology.id) && <button type="button" class="learning-guide-trigger" data-open-guide="hibernate-loading-guide" aria-haspopup="dialog" aria-controls="hibernate-loading-guide">{t('Lazy vs Eager Loading')}<Icon name="arrow" size={16} /></button>}
   </details>
   <div class="java-technology-sources">
     {technology.sourceIds.map(id => <ConceptSource source={javaEcosystemSources[id]} conceptTitle={technology.name} />)}

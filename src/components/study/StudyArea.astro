@@ -1,4 +1,5 @@
 ---
+import { referenceComparisons } from '../../data/reference-comparisons';
 import { publishedGuides } from '../../data/published-catalog';
 import { t } from '../../lib/translations';
 import Icon from '../Icon.astro';
@@ -17,6 +18,7 @@ const firstModule = tracks[0].modules[0];
             <h2>{t('Guías')}</h2>
             <a href={guide.href.replace(/^#/, '/')} data-route={guide.href.slice(1)}><span>{t(guide.label)}</span></a>
           </div>)}
+          {referenceComparisons.map(guide => <div class="java-resource-result" data-resource-result={guide.id} hidden><h2>{t('Guías')}</h2><button class="learning-guide-trigger" type="button" data-open-guide={guide.id} aria-haspopup="dialog" aria-controls={guide.id}>{t(guide.label)}</button></div>)}
           <div id="concept-library">
             {tracks.map((track, ti) => track.modules.map((module, mi) => <StudySection track={track} module={module} index={mi} initial={ti === 0 && mi === 0} showPurpose={purposeModuleIds.has(module.id)} hideEmptyViews={compactTrackIds.has(track.id)} patternIds={patternIds} aliases={aliases} />))}
           </div>

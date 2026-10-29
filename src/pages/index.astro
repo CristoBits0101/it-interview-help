@@ -6,6 +6,9 @@ import PendingContent from '../components/PendingContent.astro';
 import FoundationGuide from '../components/foundations/FoundationGuide.astro';
 import { webFoundations } from '../data/web-foundations';
 import JavaLearningPaths from '../components/java/JavaLearningPaths.astro';
+import AiEcosystem from '../components/ai/AiEcosystem.astro';
+import ComparisonDialog from '../components/foundations/ComparisonDialog.astro';
+import { referenceComparisons } from '../data/reference-comparisons';
 import JavaVersions from '../components/java/JavaVersions.astro';
 import { publishedTracks, publishedNavigation, publishedSources, patternIds, patternModuleIds, glossaryAliases, pendingPages } from '../data/published-catalog';
 
@@ -14,6 +17,8 @@ import { publishedTracks, publishedNavigation, publishedSources, patternIds, pat
   <HomeOverview tracks={publishedTracks} />
   <PendingContent pages={pendingPages} />
   <JavaVersions />
+  <AiEcosystem />
+  {referenceComparisons.map(guide => <ComparisonDialog guide={guide} />)}
   <JavaLearningPaths />
   {webFoundations.map(guide => <FoundationGuide guide={guide} />)}
   <StudyArea tracks={publishedTracks} purposeModuleIds={patternModuleIds} compactTrackIds={new Set(['applied-ai'])} patternIds={patternIds} aliases={glossaryAliases} />

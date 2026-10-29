@@ -1,0 +1,24 @@
+---
+import type { ReferenceComparison } from '../../data/reference-comparisons';
+import { t } from '../../lib/translations';
+import Text from '../LocalizedText.astro';
+import Icon from '../Icon.astro';
+import ConceptSource from '../study/ConceptSource.astro';
+import '../../styles/reference-content.css';
+interface Props { guide: ReferenceComparison }
+const { guide } = Astro.props;
+---
+<dialog class="comparison-panel" id={guide.id} data-learning-guide data-guide-title={guide.label} aria-labelledby={`${guide.id}-title`}>
+  <header class="comparison-heading"><h2 id={`${guide.id}-title`}><Text value={guide.title} /></h2><button class="icon-button" data-close-dialog aria-label={t('Cerrar')}><Icon name="close" /></button></header>
+  <Text as="p" value={guide.description} />
+  {guide.example && <div class="comparison-example"><div class="comparison-columns">{guide.example.tables.map(example => <div class="comparison-table-scroll" tabindex="0" role="region" aria-label={example.title}><table><caption>{example.title}</caption><thead><tr>{example.columns.map(column => <th scope="col">{column}</th>)}</tr></thead><tbody>{example.rows.map(row => <tr>{row.map(cell => <td>{cell}</td>)}</tr>)}</tbody></table></div>)}</div><pre tabindex="0"><code>{guide.example.code}</code></pre></div>}
+  <div class="comparison-columns">
+    {guide.columns.map(column => <section><h3>{column.title}</h3><ol>{column.steps.map(step => <li><Text value={step} /></li>)}</ol>{column.code && <pre tabindex="0"><code>{column.code}</code></pre>}</section>)}
+  </div>
+  <div class="comparison-table-scroll" tabindex="0" role="region" aria-label={t('Tabla comparativa')}>
+    <table><caption><Text value={guide.title} /></caption><thead><tr><th scope="col">{t('Aspecto')}</th>{guide.columns.map(column => <th scope="col">{column.title}</th>)}</tr></thead><tbody>{guide.rows.map(row => <tr><th scope="row"><Text value={row.title} /></th>{row.values.map(value => <td><Text value={value} /></td>)}</tr>)}</tbody></table>
+  </div>
+  <ul class="comparison-tips">{guide.tips.map(tip => <li><Text value={tip} /></li>)}</ul>
+  <details class="comparison-question"><summary><Text value={guide.question} /><Icon name="down" size={16} /></summary><Text as="p" value={guide.answer} /></details>
+  <div class="comparison-sources">{guide.sources.map(source => <ConceptSource source={source} conceptTitle={guide.label} />)}</div>
+</dialog>

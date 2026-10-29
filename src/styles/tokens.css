@@ -53,6 +53,7 @@
     --space-navigation-row: 9px;
     --space-navigation-block: 6px;
     --size-navigation-row: 30px;
+    --size-sidebar-header: 48px;
     --gap-navigation-row: calc(var(--space-navigation-row) / 2);
     --space-navigation-indent: 12px;
     --gap-navigation-indent: calc(var(--space-navigation-indent) / 2);

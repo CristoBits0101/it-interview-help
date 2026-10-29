@@ -41,12 +41,12 @@
   :where(.concept-section, .career-panel, .mobile-backdrop):not([hidden]), dialog[open], dialog[open]::backdrop { animation: interface-appear var(--motion-duration) var(--motion-ease); }
   @keyframes language-content-change { from { opacity: .82; } to { opacity: 1; } }
   @keyframes interface-appear { from { opacity: .7; } to { opacity: 1; } }
-  .brand { display: flex; align-items: center; flex-shrink: 0; font-family: var(--brand); font-size: var(--font-brand); font-weight: 500; letter-spacing: -.05em; padding: 9px var(--space-navigation-row); min-height: 48px; line-height: var(--line-body); }
+  .brand { display: flex; align-items: center; flex-shrink: 0; font-family: var(--brand); font-size: var(--font-brand); font-weight: 500; letter-spacing: -.05em; padding: 9px var(--space-navigation-row); min-height: var(--size-sidebar-header); line-height: var(--line-body); }
   .sidebar-header { position: sticky; top: 0; z-index: 1; display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; background: var(--sidebar); }
   .sidebar-header::before { content: ''; position: absolute; inset: calc(-1 * var(--sidebar-padding)) calc(-1 * var(--sidebar-padding)) 0; z-index: -1; background: var(--sidebar); pointer-events: none; }
   .sidebar-header .brand { min-width: 0; flex-shrink: 1; white-space: nowrap; overflow-x: auto; }
   .icon-button.sidebar-close { display: none; flex-shrink: 0; }
-  .nav-eyebrow { color: var(--text-soft); font-size: var(--font-small); letter-spacing: .125em; font-weight: 400; display: flex; flex-shrink: 0; align-items: center; padding: 12px var(--space-navigation-row); min-width: max-content; min-height: 48px; line-height: var(--line-body); white-space: nowrap; }
+  .nav-eyebrow { color: var(--text-soft); font-size: var(--font-small); letter-spacing: .125em; font-weight: 400; display: flex; flex-shrink: 0; align-items: center; padding: var(--space-compact) var(--space-navigation-row) calc(var(--space-compact) + (var(--size-sidebar-header) - var(--size-navigation-row)) / 2); min-width: max-content; line-height: var(--line-body); white-space: nowrap; }
   .navigation-section { display: flex; flex-direction: column; flex: 0 0 auto; min-width: 0; overflow-x: auto; scrollbar-width: thin; }
   .course-nav { flex-shrink: 0; min-width: max-content; }
   .navigation-tree { list-style: none; margin: 0; padding: 0; }
