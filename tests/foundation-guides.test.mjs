@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { foundationGuides } from '../src/data/foundation-guides.ts';
-import { publishedGuides, publishedNavigation, publishedSources } from '../src/data/published-catalog.ts';
-import { translate } from '../src/lib/translations.ts';
+import { foundationGuides } from '../src/app/data/foundation-guides.ts';
+import { publishedGuides, publishedNavigation, publishedSources } from '../src/app/data/published-catalog.ts';
+import { translate } from '../src/shared/lib/translations.ts';
 
 const flatten = nodes => nodes.flatMap(node => [node, ...flatten(node.children ?? [])]);
 const bilingual = value => {
@@ -41,5 +41,18 @@ test('HTTP and REST retain their distinct conceptual coverage', () => {
   const architecture = foundationGuides.find(guide => guide.label === 'REST');
   for (const title of ['Client and Server', 'Stateless', 'Cache', 'Uniform Interface', 'Layered System', 'Code on Demand · Optional']) {
     assert(architecture.concepts.some(concept => concept.title.en === title));
+  }
+});
+
+test('guide extensions retain bilingual content and published HTTPS sources', () => {
+  for (const guide of foundationGuides) for (const section of guide.sections ?? []) {
+    bilingual(section.title);
+    bilingual(section.description);
+    for (const item of section.items) {
+      bilingual(item.title);
+      bilingual(item.description);
+      assert.equal(new URL(item.source.url).protocol, 'https:');
+      assert(publishedSources.some(source => source.url === item.source.url));
+    }
   }
 });

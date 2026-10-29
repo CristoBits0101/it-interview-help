@@ -1,6 +1,6 @@
 ---
 import Index from './index.astro';
-import { publishedTracks, publishedGuides, pendingPages } from '../data/published-catalog';
+import { publishedTracks, publishedGuides, pendingPages } from '../app/data/published-catalog';
 export function getStaticPaths() {
   const routes = new Set([
     ...publishedTracks.flatMap(track => track.modules.map(module => `${track.id}/${module.id}`)),

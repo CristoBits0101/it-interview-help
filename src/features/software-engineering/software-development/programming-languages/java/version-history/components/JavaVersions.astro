@@ -1,0 +1,16 @@
+---
+import { javaSummary } from '../data/java-summary';
+import Text from './JavaText.astro';
+import JavaReleaseCard from './JavaReleaseCard.astro';
+import '../styles/java-versions.css';
+---
+<section id="java/versions" class="java-guide" data-resource-route="java/versions" data-resource-title="Version History" aria-labelledby="java-title" hidden>
+  <header class="java-heading">
+    <h1 id="java-title"><Text es="Historial de Versiones" en="Version History" /></h1>
+    <Text as="p" es="Java 1.0–26 · Año de lanzamiento y mejoras principales de cada versión." en="Java 1.0–26 · Release year and key improvements in each version." />
+  </header>
+  <div class="java-release-grid">
+    {javaSummary.map(release => <JavaReleaseCard release={release} />)}
+  </div>
+  <Text as="p" class="java-meta" es="LTS indica la designación de Oracle. El soporte depende del proveedor. Las vistas previas y APIs en incubación no son definitivas." en="LTS indicates Oracle’s designation. Support depends on the vendor. Preview and incubating APIs are not final." />
+</section>

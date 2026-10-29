@@ -1,9 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { javaGuidePages, javaTechnologies, springTechnologies, javaArchitecture, javaCareerPaths, javaDeveloperRoadmap } from '../src/data/java-ecosystem.ts';
-import { javaEcosystemSources } from '../src/data/concept-sources.ts';
-import { publishedNavigation, publishedGuides, publishedSources } from '../src/data/published-catalog.ts';
-import { translate } from '../src/lib/translations.ts';
+import { javaGuidePages } from '../src/features/software-engineering/software-development/programming-languages/java/data/navigation';
+import { javaTechnologies, springTechnologies, javaArchitecture } from '../src/features/software-engineering/software-development/programming-languages/java/ecosystem/data/java-ecosystem';
+import { javaCareerPaths } from '../src/features/software-engineering/software-development/programming-languages/java/career-paths/data/java-career-paths';
+import { javaDeveloperRoadmap } from '../src/features/software-engineering/software-development/programming-languages/java/developer-roadmap/data/java-developer-roadmap';
+import { javaEcosystemSources } from '../src/shared/data/concept-sources.ts';
+import { publishedNavigation, publishedGuides, publishedSources } from '../src/app/data/published-catalog.ts';
+import { translate } from '../src/shared/lib/translations.ts';
 
 const flatten = nodes => nodes.flatMap(node => [node, ...flatten(node.children ?? [])]);
 

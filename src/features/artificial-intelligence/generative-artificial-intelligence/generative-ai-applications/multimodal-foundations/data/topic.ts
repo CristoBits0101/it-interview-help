@@ -1,0 +1,16 @@
+import type { Topic } from '../../data/topic';
+
+export const multimodalFoundationsTopic: Topic = { id: 'ai-multimodal', es: 'Fundamentos Multimodales', en: 'Multimodal Foundations', entries: [
+    ['ai-multimodal', 'IA Multimodal', 'Multimodal AI', 'Procesa o genera más de un tipo de información como texto e imágenes dentro de un mismo sistema.', 'It processes or generates more than one information type such as text and images within one system.', 'vision'],
+    ['ai-computer-vision', 'Visión Artificial', 'Computer Vision', 'Analiza imágenes y vídeo para extraer información sobre su contenido.', 'Analyzes images and video to extract information about their content.', 'vision'],
+    ['ai-cross-alignment', 'Alineación entre Modalidades', 'Cross-Modal Alignment', 'Relaciona representaciones de distintos tipos de datos para asociar contenidos equivalentes.', 'It connects representations of different data types to associate corresponding content.', 'clip', 'Intermedio'],
+    ['ai-cross-understanding', 'Comprensión entre Modalidades', 'Cross-Modal Understanding', 'Relaciona información de distintos tipos para interpretar su significado conjunto.', 'It relates information from different data types to interpret their combined meaning.', 'vision', 'Intermedio'],
+    ['ai-fusion', 'Fusión Multimodal', 'Multimodal Fusion', 'Combina datos de varias modalidades para producir una representación o respuesta conjunta.', 'It combines information from multiple modalities into a joint representation or response.', 'vision', 'Intermedio'],
+    ['ai-multimodal-message', 'Mensaje Multimodal', 'Multimodal Message', 'Agrupa contenidos de distintos tipos en un mensaje que un modelo compatible puede procesar.', 'It groups different content types in a message that a compatible model can process.', 'messages'],
+    ['ai-vlm', 'Modelo de Visión y Lenguaje', 'Vision-Language Model', 'Relaciona imágenes y texto para interpretar contenido visual y responder a instrucciones.', 'It relates images and text to interpret visual content and respond to instructions.', 'vision'],
+    ['ai-visual-encoder', 'Codificador Visual', 'Visual Encoder', 'Convierte imágenes en representaciones numéricas para otros componentes del modelo.', 'It transforms images into numerical representations that other model components can process.', 'clip', 'Intermedio'],
+    ['ai-mm-rag', 'RAG Multimodal', 'MM-RAG', 'Recupera contexto de distintas modalidades para apoyar una respuesta generada.', 'It retrieves context from different modalities to support a generated response.', 'retrieval', 'Intermedio'],
+    ['ai-caption', 'Descripción de Imágenes', 'Image Captioning', 'Genera una descripción textual del contenido de una imagen.', 'It generates a text description of an image.', 'vision'],
+    ['ai-vqa', 'Preguntas sobre Imágenes', 'Visual Question Answering', 'Responde preguntas utilizando la información visual de una imagen.', 'It answers questions using the visual information in an image.', 'vision'],
+    ['ai-visual-search', 'Búsqueda Visual', 'Visual Search', 'Encuentra imágenes o elementos relacionados a partir de características visuales.', 'It finds related images or items using visual features.', 'clip', 'Intermedio'],
+  ] };

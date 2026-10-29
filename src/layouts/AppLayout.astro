@@ -1,17 +1,17 @@
 ---
 import '@fontsource-variable/google-sans-flex';
 import '@fontsource/dancing-script/latin-400.css';
-import { t } from '../lib/translations';
+import { t } from '../shared/lib/translations';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
-import '../styles/global.css';
-import designTokens from '../styles/tokens.css?raw';
-import Sidebar from '../components/layout/Sidebar.astro';
-import Topbar from '../components/layout/Topbar.astro';
-import ReviewDialog from '../components/dialogs/ReviewDialog.astro';
-import SourcesDialog from '../components/dialogs/SourcesDialog.astro';
-import type { NavigationNode } from '../data/navigation';
-import type { ConceptSource } from '../data/concept-sources';
+import '../shared/styles/global.css';
+import designTokens from '../shared/styles/tokens.css?raw';
+import Sidebar from '../shared/components/navigation/Sidebar.astro';
+import Topbar from '../shared/components/navigation/Topbar.astro';
+import ReviewDialog from '../shared/components/dialogs/ReviewDialog.astro';
+import SourcesDialog from '../shared/components/dialogs/SourcesDialog.astro';
+import type { NavigationNode } from '../app/data/navigation';
+import type { ConceptSource } from '../shared/data/concept-sources';
 interface Props { navigation: NavigationNode[]; sources: Pick<ConceptSource, 'title' | 'url'>[] }
 const { navigation, sources } = Astro.props;
 const canonicalUrl = Astro.site?.href;
@@ -53,6 +53,6 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
 
     <SourcesDialog sources={sources} />
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script>import '../scripts/app';</script>
+    <script>import '../app/scripts/app';</script>
   </body>
 </html>

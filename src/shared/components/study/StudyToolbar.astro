@@ -1,0 +1,14 @@
+---
+import { t } from '../../lib/translations';
+import Icon from '../primitives/Icon.astro';
+interface Props { count: number }
+const { count } = Astro.props;
+---
+<div class="module-toolbar">
+            <p class="concept-count" lang="en"><span id="visible-count">{count}</span> {t('CONCEPTS')}</p>
+            <div class="level-select" role="group" aria-label={t('Filtrar por nivel')}>
+              <button class="level-step level-previous" id="level-previous" type="button" aria-label={t('Nivel anterior')} disabled><span class="level-step-visual"><Icon name="chevron" size={16} /></span></button>
+              <span class="level-current" id="level-current" aria-live="polite" aria-atomic="true">{t('Todos los niveles')}</span>
+              <button class="level-step level-next" id="level-next" type="button" aria-label={t('Nivel siguiente')}><span class="level-step-visual"><Icon name="chevron" size={16} /></span></button>
+            </div>
+          </div>

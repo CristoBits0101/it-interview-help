@@ -1,0 +1,57 @@
+---
+import { t } from '../../../shared/lib/translations';
+import CareerPreparationNotice from './CareerPreparationNotice.astro';
+import Icon from '../../../shared/components/primitives/Icon.astro';
+import CareerPanel from './CareerPanel.astro';
+import CareerProfileOption from './CareerProfileOption.astro';
+import CareerStageOption from './CareerStageOption.astro';
+import CareerCarousel from './CareerCarousel.astro';
+import type { Track } from '../../../shared/lib/curriculum';
+import type { NavigationNode } from '../../../app/data/navigation';
+import type { CareerProfile } from '../data/career-paths';
+import type { CareerDirection } from '../data/career-directions';
+
+interface Props {
+  profiles: CareerProfile[];
+  directions: readonly CareerDirection[];
+  tracks: Track[];
+  areas: ReadonlyMap<string, NavigationNode>;
+  guidanceByArea: Record<string, { focus: string; prerequisites: string[] }>;
+  termDescriptions: Record<string, string>;
+}
+const { profiles, directions, tracks, areas, guidanceByArea, termDescriptions } = Astro.props;
+const stages = profiles[0].stages;
+const initialDirection = directions.find(direction => direction.profileIds.includes(profiles[0].id))!;
+const profilesById = new Map(profiles.map(profile => [profile.id, profile]));
+---
+<section class="home-section" id="career-paths" aria-labelledby="career-title">
+  <header class="home-section-heading">
+    <h2 id="career-title">{t('Elige tu Dirección')}</h2>
+  </header>
+
+  <p>{t('Explora los puestos desde las bases compartidas hasta la integración y la especialización. El orden y los años de cada etapa son orientativos y las especialidades son caminos paralelos con sus propias etapas.')}</p>
+
+  <CareerCarousel id="career-area-options" icon="compass" label="Elige un área profesional" previousLabel="Área anterior" nextLabel="Área siguiente" selection>
+    {directions.map(direction => <button class="career-area-option" type="button" data-carousel-item data-career-direction={direction.id} aria-pressed={direction.id === initialDirection.id} aria-controls="career-profile-options">{t(direction.label)}</button>)}
+  </CareerCarousel>
+
+  <CareerCarousel id="career-profile-options" icon="briefcase" label="Puestos del área" previousLabel="Puestos anteriores" nextLabel="Puestos siguientes" class="career-profile-options">
+    {directions.map(direction => direction.profileIds.map((id, index) => {
+      const profile = profilesById.get(id)!;
+      return <CareerProfileOption profile={profile} index={index} directionId={direction.id} hidden={direction.id !== initialDirection.id} selected={profile.id === profiles[0].id} />;
+    }))}
+  </CareerCarousel>
+
+  <div class="career-stage-section">
+    <p class="career-control-label career-icon-heading" id="career-stage-label"><Icon name="route" class="career-heading-icon" /><span>{t('¿En qué etapa quieres trabajar?')}</span></p>
+    <ol class="career-stage-options" aria-labelledby="career-stage-label">
+      {stages.map((stage, index) => <CareerStageOption stage={stage} selected={index === 0} descriptions={termDescriptions} />)}
+    </ol>
+    <CareerPreparationNotice kind="stage" />
+  </div>
+
+  <p id="career-selection-status" class="sr-only" role="status" aria-live="polite"></p>
+  <div id="career-panels" hidden>
+    {profiles.map((profile, profileIndex) => profile.stages.map((stage, stageIndex) => <CareerPanel profile={profile} stage={stage} initial={profileIndex === 0 && stageIndex === 0} tracks={tracks} areas={areas} guidanceByArea={guidanceByArea} />))}
+  </div>
+</section>

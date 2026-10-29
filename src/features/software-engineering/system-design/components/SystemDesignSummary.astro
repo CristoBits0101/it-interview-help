@@ -1,0 +1,28 @@
+---
+import { systemDesignGroups, systemDesignSummary } from '../data/system-design-summary';
+import { systemDesignSummarySources } from '../../../../shared/data/concept-sources';
+import { t } from '../../../../shared/lib/translations';
+import Text from '../../../../shared/components/primitives/LocalizedText.astro';
+import Icon from '../../../../shared/components/primitives/Icon.astro';
+import ConceptSource from '../../../../shared/components/study/ConceptSource.astro';
+import '../styles/system-design-summary.css';
+---
+<section id="system-design/sd-fundamentals" class="system-design-summary" data-resource-route="system-design/sd-fundamentals" data-resource-title="System Design" aria-labelledby="system-design-summary-title" hidden>
+  <h1 id="system-design-summary-title">{t('System Design')}</h1>
+  {systemDesignGroups.map(group => <section class="system-design-group" aria-labelledby={`system-design-group-${group.id}`}>
+    <h2 id={`system-design-group-${group.id}`}><Text value={group.title} /></h2>
+    {group.topicIds.map(id => {
+      const topic = systemDesignSummary.find(item => item.id === id)!;
+      const index = systemDesignSummary.indexOf(topic);
+      return <details class="system-design-topic" data-system-design-topic={topic.id} open={topic.id === 'method'}>
+        <summary><span class="system-topic-number">{String(index + 1).padStart(2, '0')}</span><h3><Text value={topic.title} /></h3><Icon name="down" size={16} /></summary>
+        <div class="system-topic-body">
+          <dl class="system-term-grid">{topic.terms.map(item => <div><dt><Text value={item.title} /></dt><dd><Text value={item.description} /></dd></div>)}</dl>
+          <Text as="p" class="system-design-decision" value={topic.decision} />
+          <details class="system-review-question"><summary><Text value={topic.question} /><Icon name="down" size={16} /></summary><Text as="p" value={topic.answer} /></details>
+          <div class="system-topic-sources">{topic.sourceIds.map(id => <ConceptSource source={systemDesignSummarySources[id]} conceptTitle={topic.title.en} />)}</div>
+        </div>
+      </details>;
+    })}
+  </section>)}
+</section>

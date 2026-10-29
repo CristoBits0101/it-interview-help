@@ -3,9 +3,9 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, extname, join, relative, resolve, sep } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
-import { publishedTracks, pendingPages, publishedGuides } from '../src/data/published-catalog.ts';
-import { patternGuides } from '../src/data/pattern-guides/index.ts';
-import { t } from '../src/lib/translations.ts';
+import { publishedTracks, pendingPages, publishedGuides } from '../src/app/data/published-catalog.ts';
+import { patternGuides } from '../src/features/software-engineering/software-design/design-patterns/data/index.ts';
+import { t } from '../src/shared/lib/translations.ts';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const outputRoot = resolve(projectRoot, 'dist');

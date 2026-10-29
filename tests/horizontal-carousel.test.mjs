@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { calculateCarouselLayout, formatCarouselRange, formatCarouselSelection, getCarouselSelectionState, getCarouselFocusIndex, getCarouselPage, getCarouselRange, getNearestCarouselScroll } from '../src/lib/horizontal-carousel.ts';
+import { calculateCarouselLayout, formatCarouselRange, formatCarouselSelection, getCarouselSelectionState, getCarouselFocusIndex, getCarouselPage, getCarouselRange, getNearestCarouselScroll } from '../src/features/home/lib/horizontal-carousel.ts';
 
 const rectangles = (count, itemWidth, gap, scroll = 0) => Array.from({ length: count }, (_, index) => ({ left: index * (itemWidth + gap) - scroll, right: index * (itemWidth + gap) + itemWidth - scroll }));
 

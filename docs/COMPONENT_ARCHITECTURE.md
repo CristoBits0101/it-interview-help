@@ -1,47 +1,49 @@
-# Componentes y continuidad
+# Arquitectura por dominios
 
-Pauta solicitada el 23 de octubre de 2026: reutilizar componentes y plantillas con datos por parámetros. Separar responsabilidades para que la aplicación no crezca como un archivo monolítico. Esta pauta se conserva para las siguientes sesiones.
+La aplicación utiliza Screaming Architecture. `src/features/` reproduce la jerarquía de las etiquetas canónicas del sidebar. Los dominios reúnen sus componentes, datos, reglas, scripts y estilos en carpetas finales. Los niveles de agrupación contienen solo carpetas.
 
-## Composición
+```text
+src/
+  features/
+    computer-systems/
+    human-computer-interaction/
+    software-engineering/
+      software-design/
+        solid-principles/
+        design-patterns/
+          creational/
+          structural/
+          behavioral/
+      software-development/
+        programming-languages/
+          java/
+    artificial-intelligence/
+      generative-artificial-intelligence/
+    home/
+  app/
+  shared/
+  layouts/
+  pages/
+```
 
-| Responsabilidad | Ubicación |
-| --- | --- |
-| Componer Home y estudio con el catálogo disponible | `src/pages/index.astro` |
-| Documento HTML, fuentes, metadatos y marco de aplicación | `src/layouts/AppLayout.astro` |
-| Catálogo publicado localmente, destinos, referencias y opciones de presentación | `src/data/published-catalog.ts` |
-| Sidebar y cabecera | `src/components/layout/` |
-| Buscador y selector de idioma | `src/components/controls/` |
-| Área de estudio, módulos, tarjetas, fuentes, vistas y progreso | `src/components/study/` |
-| Estadísticas, perfiles, etapas, paneles, crecimiento y rutas disponibles | `src/components/home/` |
-| Diálogos de repaso y referencias | `src/components/dialogs/` |
-| Cálculo de vistas y funciones de catálogo | `src/lib/` |
+`app/data/` compone los catálogos y conserva la navegación canónica y la disponibilidad. `app/scripts/app.ts` coordina el arranque. `shared/` contiene modelos, preferencias, traducción, referencias, controles y renderizadores reutilizables. Home conserva perfiles y orientación fuera del árbol de disciplinas. Las ramas sin implementación no necesitan carpetas vacías.
 
-Los componentes reciben propiedades tipadas. Las tarjetas reciben el concepto y opciones de presentación. Los módulos reciben los datos de su ruta. Los paneles de Home reciben perfiles, etapas y datos de las áreas. El layout recibe navegación y fuentes y usa un slot para el contenido. Las políticas de disponibilidad se mantienen fuera de la plantilla de tarjeta. No se añade React ni otra dependencia.
+Los tipos compartidos se separan del contenido de los dominios. Las guías web, las páginas de Java, los temas del glosario y las categorías de patrones tienen datos propios en sus hojas del menú. Los agregadores conservan el orden editorial y las rutas públicas existentes.
 
-La composición conserva el marcado útil existente para evitar cambios visuales o de accesibilidad. Las clases y los atributos `data-*` forman el contrato con los scripts. No añadir envoltorios, cambiar IDs o introducir estilos locales sin comprobar ese contrato. Las fuentes siguen centralizadas en `concept-sources.ts` y el estilo compartido permanece en los tokens y las hojas existentes.
+Astro conserva sus entradas en `pages/` y el documento común en `layouts/AppLayout.astro`. AppLayout permanece como primer import de la composición para establecer el orden CSS reset, base, layout, components, responsive. Los tokens viven en `shared/styles/tokens.css`.
 
-## Comportamiento
+Las propiedades tipadas y los contratos de IDs, clases y atributos data mantienen la comunicación con los scripts. El idioma, progreso, ramas y preferencias conservan sus claves. Home mantiene el último panel visible al deseleccionar una etapa.
 
-`ImplementationGuide.astro` presenta los ejemplos Java de los patrones en un diálogo. Recibe un `PatternGuide` tipado y deriva los fragmentos de sus rangos sobre el código completo. `implementation-guides.ts` gestiona apertura y navegación manual y copia. El cierre reutiliza `dialogs.ts`. `ConceptViewTabs.astro` identifica esta acción mediante `aria-haspopup="dialog"` y conserva la semántica de selección de las otras dos vistas.
+Las pruebas de estructura derivan la ramificación de navigation y comprueban que cada destino publicado tenga archivos propios en su dominio más profundo. También comprueban que no existan carpetas mixtas ni dominios vacíos.
 
-`app.ts` coordina ruta, búsqueda, niveles, idioma y progreso. Delega funciones delimitadas:
+## Regresión conocida de carga CSS
 
-- `navigation.ts` mide el sidebar y persiste las ramas abiertas.
-- `navigation-drawer.ts` controla el panel móvil, su foco y el atajo de búsqueda.
-- `study-cards.ts` cambia vistas de una tarjeta y comunica la acción de progreso mediante un callback.
-- `review.ts` recibe las tarjetas, el estado de progreso y callbacks para idioma, avisos y cambios.
-- `dialogs.ts` comparte el cierre de diálogos.
-- `home.ts` mantiene la selección de perfil y etapa.
-- `dom.ts` centraliza las dos funciones tipadas de consulta al documento.
+El commit `538a672` añadió el import de `SystemDesignSummary` antes de `AppLayout`. Esto estableció la capa `components` antes del orden general y permitió que reglas de base anularan bordes, fondos y estados de botones en Home y en las páginas de estudio. La revisión posterior de MCP no detectó inicialmente esa regresión visual pese a pasar las comprobaciones automáticas.
 
-El estado de los desplegables permanece en `tech-training:navigation:v1`. Se guarda la lista de ramas abiertas y las demás se restauran cerradas. Se mantiene el estado de hijos aunque el padre esté cerrado. Las claves usan identificadores canónicos independientes del idioma. No se abre una rama automáticamente por visitar su ruta. No se sustituyen por cookies ni se utilizan estas elecciones para seguimiento.
+La corrección mantiene `AppLayout` como primer import y comprueba el orden efectivo de capas en `scripts/check-build.mjs`. Las próximas ampliaciones deben verificar también los controles compartidos y las páginas existentes en navegador. Una comprobación de tipos o un build correcto no acredita que se haya conservado el diseño. La organización por carpetas técnicas tampoco sustituye la ramificación de negocio del sidebar.
 
-## Cómo ampliar
+## Verificación histórica de la extracción de componentes
 
-Antes de copiar una plantilla busca un componente existente. Añade una propiedad cuando represente una variación real y conserva valores predeterminados razonables. Una sección nueva compone componentes; no replica una tarjeta completa. Si una parte tiene un comportamiento independiente extráelo con una interfaz pequeña. No crees un componente por cada palabra ni abstracciones genéricas sin un uso claro.
+Este registro corresponde a una extracción anterior de componentes. No acredita la validación de la organización actual.
 
-En una refactorización conserva datos, selección, progreso, traducciones, búsqueda, atajos y accesibilidad. Revisa tipos, currículo y compilación. Verifica el resultado real en escritorio y móvil. Los scripts y capturas de prueba no se añaden al repositorio.
-
-## Validación de esta extracción
-
-Astro check con cero errores, advertencias y sugerencias. Build y comprobación de currículo correctos. Se compararon 28 árboles DOM renderizados antes y después en siete rutas, dos idiomas y dos tamaños de pantalla. No hubo diferencias en texto, estructura ni atributos y no aparecieron errores de ejecución. Se comprobaron las vistas de tarjetas con contenido temporal de prueba que no se guarda en el catálogo, perfil y etapa de Home, atajo de búsqueda, panel móvil y persistencia de ramas abiertas y cerradas tras recarga y cambio de idioma. Las comprobaciones complementan las auditorías anteriores y no certifican accesibilidad completa.
+En aquella revisión Astro check terminó sin errores, advertencias ni sugerencias. Build y comprobación de currículo fueron correctos. Se compararon 28 árboles DOM renderizados antes y después en siete rutas, dos idiomas y dos tamaños de pantalla. No hubo diferencias en texto, estructura ni atributos y no aparecieron errores de ejecución. Se comprobaron las vistas de tarjetas con contenido temporal de prueba que no se guardó en el catálogo, perfil y etapa de Home, atajo de búsqueda, panel móvil y persistencia de ramas abiertas y cerradas tras recarga y cambio de idioma. Las comprobaciones complementaban las auditorías anteriores y no certificaban accesibilidad completa.

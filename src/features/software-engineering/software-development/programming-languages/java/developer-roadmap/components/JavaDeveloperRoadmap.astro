@@ -1,0 +1,20 @@
+---
+import { javaDeveloperRoadmap } from '../data/java-developer-roadmap';
+import { t } from '../../../../../../../shared/lib/translations';
+import Text from '../../../../../../../shared/components/primitives/LocalizedText.astro';
+import Icon from '../../../../../../../shared/components/primitives/Icon.astro';
+import '../../styles/java-learning-paths.css';
+---
+<section id="java/developer-roadmap" class="java-path-page" data-resource-route="java/developer-roadmap" data-resource-title="Developer Roadmap" aria-labelledby="java-developer-roadmap-title" hidden>
+  <header class="java-path-heading">
+    <h1 id="java-developer-roadmap-title">{t('Developer Roadmap')}</h1>
+    <Text as="p" value={{ es: 'La secuencia de aprendizaje parte de los fundamentos y avanza hacia frameworks y pruebas. Ecosystem muestra las tecnologías y Career Paths las especializaciones.', en: 'The learning sequence starts with fundamentals and progresses towards frameworks and testing. Ecosystem shows technologies and Career Paths shows specializations.' }} />
+  </header>
+  <ol class="java-developer-roadmap">
+    {javaDeveloperRoadmap.map((stage, index) => <li><span class="java-roadmap-number">{String(index + 1).padStart(2, '0')}</span><Text as="h2" value={stage} />{index < javaDeveloperRoadmap.length - 1 && <Icon name="arrow" size={16} />}</li>)}
+  </ol>
+  <nav class="java-path-links" aria-label={t('Guías relacionadas')}>
+    <a href="/java/ecosystem" data-route="java/ecosystem">{t('Ecosystem')}<Icon name="arrow" size={16} /></a>
+    <a href="/java/career-paths" data-route="java/career-paths">{t('Career Paths')}<Icon name="arrow" size={16} /></a>
+  </nav>
+</section>

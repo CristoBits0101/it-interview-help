@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import Icon from '../components/Icon.astro';
-import designTokens from '../styles/tokens.css?raw';
+import Icon from '../shared/components/primitives/Icon.astro';
+import designTokens from '../shared/styles/tokens.css?raw';
 
 export const prerender = true;
 

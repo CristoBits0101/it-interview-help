@@ -1,0 +1,14 @@
+---
+import { t } from '../../lib/translations';
+import Icon from '../primitives/Icon.astro';
+
+---
+<dialog class="review-dialog" id="review-dialog" aria-labelledby="review-title">
+      <div class="dialog-top"><span class="eyebrow"><Icon name="flash" size={15} /> {t('REPASO ACTIVO')}</span><button class="icon-button" data-close-dialog aria-label={t('Cerrar repaso')}><Icon name="close" /></button></div>
+      <div class="review-progress"><span id="review-position">1 / 5</span><span id="review-category">{t('System Design')}</span></div>
+      <div id="review-question"><p class="review-prompt">{t('¿Cómo se lo explicarías a otra persona?')}</p><h2 id="review-title"></h2><div id="review-answer" hidden><div class="concept-description" id="review-definition"></div><div id="review-source"></div></div></div>
+      <button class="primary-button reveal-button" id="reveal-answer">{t('Mostrar explicación')}<Icon name="down" size={17} /></button>
+      <div class="review-rating" id="review-rating" hidden><button class="secondary-button" id="review-again">{t('Seguir practicando')}</button><button class="primary-button" id="review-known">{t('Lo entiendo')}<Icon name="check" size={17} /></button></div>
+      <div class="review-complete" id="review-complete" hidden><span class="complete-icon"><Icon name="check" size={30} /></span><h2 id="review-complete-title">{t('Un paso más.')}</h2><p id="review-summary"></p><button class="primary-button" data-close-dialog>{t('Volver a los conceptos')}<Icon name="arrow" size={17} /></button></div>
+      <p class="review-helper" id="review-helper">{t('Primero recuérdalo. Después, compruébalo.')}</p>
+    </dialog>

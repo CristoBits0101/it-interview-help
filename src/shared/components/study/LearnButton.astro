@@ -1,0 +1,7 @@
+---
+import { t } from '../../lib/translations';
+import Icon from '../primitives/Icon.astro';
+interface Props { conceptId: string; label?: string }
+const { conceptId, label = 'Lo entiendo' } = Astro.props;
+---
+<button type="button" class="learn-button" data-learn={conceptId} aria-pressed="false"><span class="check-circle"><Icon name="check" size={11} /></span><span class="learn-label">{t(label)}</span></button>

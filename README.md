@@ -10,7 +10,7 @@ Home permite elegir un área profesional y uno de sus perfiles y una etapa desde
 
 Home presenta el encabezado «Prepara tu próxima entrevista técnica» y una orientación breve. Conserva los cuatro contadores y los selectores de área, profesión y etapa. El menú reúne seis grupos: Sistemas Informáticos, Ciberseguridad, Interacción Persona-Computadora, Ingeniería de Software, Tecnologías de Datos e Inteligencia Artificial. Las bases se integran en sus ámbitos y se comparten cuando corresponda. El orden y los años de las etapas orientan el aprendizaje sin imponer una progresión profesional universal.
 
-El catálogo publicado incluye Software Design con 19 conceptos en cuatro módulos y Aplicaciones de IA Generativa con 104 conceptos en diez páginas temáticas. El glosario recoge los cien términos del README de prácticas más cuatro fundamentos acordados. El contenido disponible se define en `src/data/published-catalog.ts`; subir cambios al repositorio no publica por sí mismo la web alojada. Las demás áreas mantienen sus ramas visibles y sus hojas sin contenido deshabilitadas.
+El catálogo publicado incluye Software Design con 19 conceptos en cuatro módulos y Aplicaciones de IA Generativa con 104 conceptos en diez páginas temáticas. El glosario recoge los cien términos del README de prácticas más cuatro fundamentos acordados. El contenido disponible se define en `src/app/data/published-catalog.ts`; subir cambios al repositorio no publica por sí mismo la web alojada. Las demás áreas mantienen sus ramas visibles y sus hojas sin contenido deshabilitadas.
 
 El catálogo fuente conserva estas rutas. La navegación publicada permite abrir Software Design y Generative AI Applications:
 
@@ -23,9 +23,9 @@ El presupuesto de compilación admite el contenido bilingüe de esta guía: 116 
 3. Software Architecture: 5 conceptos.
 4. Distributed Systems: 40 conceptos en 5 módulos sobre comunicación, datos, coordinación y mensajería.
 5. System Design: 12 conceptos sobre requisitos, capacidad, flujo de datos y bloques de arquitectura.
-6. Generative AI Applications: el contenido local disponible se define en `src/data/ai-glossary.ts`. El catálogo anterior de 32 conceptos en `src/data/applied-ai.ts` se conserva como material histórico sin montar ni duplicar sus lecciones. Conserva el ID applied-ai.
+6. Generative AI Applications: el contenido local disponible se define en `src/features/artificial-intelligence/generative-artificial-intelligence/generative-ai-applications/data/ai-glossary.ts`. El catálogo anterior de 32 conceptos en `src/features/artificial-intelligence/generative-artificial-intelligence/generative-ai-applications/data/applied-ai.ts` se conserva como material histórico sin montar ni duplicar sus lecciones. Conserva el ID applied-ai.
 
-Cada tarjeta publicada muestra una explicación breve en un párrafo y su fuente concreta. Las referencias están centralizadas en `src/data/concept-sources.ts`. Las vistas Caso de Uso e Implementación solo se habilitan cuando existe contenido. Los ejemplos y recordatorios históricos de las rutas no publicadas se conservan en los datos. Al final de cada módulo aparece únicamente «Siguiente módulo» cuando existe un destino posterior.
+Cada tarjeta publicada muestra una explicación breve en un párrafo y su fuente concreta. Las referencias están centralizadas en `src/shared/data/concept-sources.ts`. Las vistas Caso de Uso e Implementación solo se habilitan cuando existe contenido. Los ejemplos y recordatorios históricos de las rutas no publicadas se conservan en los datos. Al final de cada módulo aparece únicamente «Siguiente módulo» cuando existe un destino posterior.
 
 ## Privacidad
 
@@ -34,6 +34,10 @@ El progreso se almacena solo en `localStorage` del navegador (`tech-training:v1`
 La aplicación genera HTML estático. JavaScript habilita la selección de perfil y etapa, la navegación entre módulos, búsqueda, progreso y repaso. Sin JavaScript se puede consultar el resumen inicial de Home. El área y el perfil no se guardan entre recargas y la etapa se conserva localmente. El idioma y las preferencias de audio también se guardan localmente; los sonidos están desactivados por defecto y sus archivos se sirven desde la propia web.
 
 Las dependencias Python del material de referencia son contexto para la ruta Generative AI Applications; no son necesarias para ejecutar esta web.
+
+## Organización del código
+
+El código se separa por responsabilidades y áreas funcionales. Los directorios de agrupación contienen solo subcarpetas y las carpetas finales contienen archivos relacionados. Astro conserva sus entradas en `src/pages/` y el documento común en `src/layouts/`. La estructura y sus contratos se describen en [Componentes y continuidad](docs/COMPONENT_ARCHITECTURE.md).
 
 ## Memoria del proyecto
 

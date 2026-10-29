@@ -1,0 +1,40 @@
+---
+import { t } from '../../../shared/lib/translations';
+import Icon, { type IconName } from '../../../shared/components/primitives/Icon.astro';
+import '../styles/career-carousel.css';
+
+interface Props {
+  id: string;
+  label: string;
+  icon?: IconName;
+  previousLabel: string;
+  nextLabel: string;
+  class?: string;
+  selection?: boolean;
+}
+const { id, label, icon, previousLabel, nextLabel, class: className = '', selection = false } = Astro.props;
+---
+<div class="career-choice-group">
+  <div class="career-carousel" data-carousel data-carousel-selection={selection || undefined}>
+    <div class="career-carousel-heading">
+      <p class:list={["career-control-label", { "career-icon-heading": icon }]} id={`${id}-label`}>{icon && <Icon name={icon} class="career-heading-icon" />}<span>{t(label)}</span></p>
+      <span class="career-carousel-range" data-carousel-range role="status" aria-live="polite" aria-atomic="true"></span>
+    </div>
+    <div class="career-carousel-row">
+      <div id={id} class:list={['career-carousel-viewport', className]} data-carousel-viewport role="group" aria-labelledby={`${id}-label`}>
+        <slot />
+      </div>
+      <div class:list={['career-carousel-controls', { 'career-carousel-positions': !selection }]} data-carousel-controls role={!selection ? 'group' : undefined} aria-label={!selection ? t('Navegación de puestos') : undefined} hidden>
+        {selection && <>
+          <button type="button" data-carousel-previous aria-label={t(previousLabel)} aria-controls={id} disabled><Icon name="chevron" size={16} class="career-carousel-back" /></button>
+          <button type="button" data-carousel-next aria-label={t(nextLabel)} aria-controls={id} disabled><Icon name="chevron" size={16} /></button>
+        </>}
+        {!selection && <>
+          <div data-carousel-position-list></div>
+          <button type="button" data-carousel-card-previous aria-label={t(previousLabel)} aria-controls={id} disabled><Icon name="chevron" size={16} class="career-carousel-back" /></button>
+          <button type="button" data-carousel-card-next aria-label={t(nextLabel)} aria-controls={id} disabled><Icon name="chevron" size={16} /></button>
+        </>}
+      </div>
+    </div>
+  </div>
+</div>

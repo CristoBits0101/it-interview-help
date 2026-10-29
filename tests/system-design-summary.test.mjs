@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { systemDesignSummary, systemDesignGroups } from '../src/data/system-design-summary.ts';
-import { systemDesignSummarySources } from '../src/data/concept-sources.ts';
-import { publishedGuides, publishedNavigation, publishedSources } from '../src/data/published-catalog.ts';
+import { systemDesignSummary, systemDesignGroups } from '../src/features/software-engineering/system-design/data/system-design-summary.ts';
+import { systemDesignSummarySources } from '../src/shared/data/concept-sources.ts';
+import { publishedGuides, publishedNavigation, publishedSources } from '../src/app/data/published-catalog.ts';
 
 test('the system design summary covers each technical topic once with bilingual learning content', () => {
   const topicIds = systemDesignSummary.map(topic => topic.id);

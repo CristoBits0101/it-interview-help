@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { navigation } from '../src/data/navigation.ts';
-import { publishedTracks, publishedNavigation, publishedSources, pendingPages, publishedGuides } from '../src/data/published-catalog.ts';
-import { createConceptViews } from '../src/lib/concept-views.ts';
+import { navigation } from '../src/app/data/navigation.ts';
+import { publishedTracks, publishedNavigation, publishedSources, pendingPages, publishedGuides } from '../src/app/data/published-catalog.ts';
+import { createConceptViews } from '../src/shared/lib/concept-views.ts';
 
 const flatten = nodes => nodes.flatMap(node => [node, ...flatten(node.children ?? [])]);
 const concepts = publishedTracks.flatMap(track => track.modules.flatMap(module => module.concepts));

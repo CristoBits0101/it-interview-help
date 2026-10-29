@@ -1,17 +1,19 @@
 ---
 import AppLayout from '../layouts/AppLayout.astro';
-import SystemDesignSummary from '../components/study/SystemDesignSummary.astro';
-import HomeOverview from '../components/HomeOverview.astro';
-import StudyArea from '../components/study/StudyArea.astro';
-import PendingContent from '../components/PendingContent.astro';
-import FoundationGuide from '../components/foundations/FoundationGuide.astro';
-import { foundationGuides } from '../data/foundation-guides';
-import JavaLearningPaths from '../components/java/JavaLearningPaths.astro';
-import AiEcosystem from '../components/ai/AiEcosystem.astro';
-import ComparisonDialog from '../components/foundations/ComparisonDialog.astro';
-import { referenceComparisons } from '../data/reference-comparisons';
-import JavaVersions from '../components/java/JavaVersions.astro';
-import { publishedTracks, publishedNavigation, publishedSources, patternIds, patternModuleIds, glossaryAliases, pendingPages } from '../data/published-catalog';
+import SystemDesignSummary from '../features/software-engineering/system-design/components/SystemDesignSummary.astro';
+import HomeOverview from '../features/home/components/HomeOverview.astro';
+import StudyArea from '../shared/components/study/StudyArea.astro';
+import PendingContent from '../shared/components/study/PendingContent.astro';
+import FoundationGuide from '../shared/components/guides/FoundationGuide.astro';
+import { foundationGuides } from '../app/data/foundation-guides';
+import JavaEcosystem from '../features/software-engineering/software-development/programming-languages/java/ecosystem/components/JavaEcosystem.astro';
+import JavaCareerPaths from '../features/software-engineering/software-development/programming-languages/java/career-paths/components/JavaCareerPaths.astro';
+import JavaDeveloperRoadmap from '../features/software-engineering/software-development/programming-languages/java/developer-roadmap/components/JavaDeveloperRoadmap.astro';
+import AiEcosystem from '../features/artificial-intelligence/generative-artificial-intelligence/ecosystem/components/AiEcosystem.astro';
+import ComparisonDialog from '../shared/components/guides/ComparisonDialog.astro';
+import { referenceComparisons } from '../app/data/reference-comparisons';
+import JavaVersions from '../features/software-engineering/software-development/programming-languages/java/version-history/components/JavaVersions.astro';
+import { publishedTracks, publishedNavigation, publishedSources, patternIds, patternModuleIds, glossaryAliases, pendingPages } from '../app/data/published-catalog';
 
 ---
 <AppLayout navigation={publishedNavigation} sources={publishedSources}>
@@ -21,7 +23,9 @@ import { publishedTracks, publishedNavigation, publishedSources, patternIds, pat
   <SystemDesignSummary />
   <AiEcosystem />
   {referenceComparisons.map(guide => <ComparisonDialog guide={guide} />)}
-  <JavaLearningPaths />
+  <JavaEcosystem />
+  <JavaCareerPaths />
+  <JavaDeveloperRoadmap />
   {foundationGuides.map(guide => <FoundationGuide guide={guide} />)}
   <StudyArea tracks={publishedTracks} purposeModuleIds={patternModuleIds} compactTrackIds={new Set(['applied-ai'])} patternIds={patternIds} aliases={glossaryAliases} />
 </AppLayout>

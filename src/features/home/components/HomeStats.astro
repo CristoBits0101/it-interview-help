@@ -1,0 +1,9 @@
+---
+import { t } from '../../../shared/lib/translations';
+
+interface Props { stats: { value: number; label: string; detail: string }[] }
+const { stats } = Astro.props;
+---
+<dl class="home-stats" aria-label={t('Resumen del catálogo')}>
+    {stats.map(stat => <div class="home-stat"><dt>{t(stat.label)}</dt><dd class="home-stat-value">{stat.value}</dd><dd class="home-stat-detail">{t(stat.detail)}</dd></div>)}
+  </dl>

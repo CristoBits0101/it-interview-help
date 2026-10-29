@@ -1,5 +1,7 @@
 # Memoria de producto, diseño y desarrollo
 
+La estructura vigente del código se describe en [Componentes y continuidad](COMPONENT_ARCHITECTURE.md). Las rutas de los apartados históricos reflejan su organización original.
+
 ## 24 de octubre de 2026 — inglés por defecto con preferencia local
 
 Sin preferencia válida la interfaz arranca en inglés. Una elección guardada de español o inglés se conserva entre visitas; valores inválidos o almacenamiento inaccesible usan inglés. No se detecta el idioma del navegador. El botón permite cambiar manualmente y guarda solo la clave de idioma existente. Los metadatos y lang iniciales usan inglés. El catálogo estático conserva sus textos fuente y se traduce mediante la inicialización existente antes de revelar el cuerpo; una liberación a los 1500 ms evita dejar una página vacía si falla el arranque. Sin JavaScript la barrera no se activa y se conserva el contenido estático de respaldo. No se añaden otros idiomas.
@@ -447,16 +449,16 @@ El objetivo de aprendizaje de Home utiliza el icono `Target` de Lucide como elem
 | `src/styles/tokens.css` | Única paleta literal, familias tipográficas y pares padding/gap |
 | `src/styles/global.css` | Diseño compartido, estados y responsive; consume tokens |
 | `src/styles/home.css` | Composición y adaptación responsive de Home |
-| `src/components/HomeOverview.astro` | Portada, inventario derivado y recomendaciones profesionales |
-| `src/components/NavigationTree.astro` | Árbol recursivo, enlaces y nodos sin contenido |
-| `src/components/Icon.astro` | Catálogo tipado de iconos Lucide |
-| `src/data/navigation.ts` | Taxonomía, nombres, iconos y destinos |
-| `src/data/career-paths.ts` | Perfiles, etapas, orientación de áreas, prerrequisitos, ramas y fuentes |
-| `src/data/curriculum.ts` | Tipos, contenido principal y fuentes |
-| `src/data/design-patterns.ts` | Catálogo conceptual de patrones ordenado por dificultad |
-| `src/data/concept-sources.ts` | Referencias específicas obligatorias de las tarjetas con autor, título y URL |
-| `src/data/system-design.ts` | Contenido de System Design |
-| `src/data/applied-ai.ts` | Contenido y fuentes de Applied Artificial Intelligence |
+| `src/components/home/HomeOverview.astro` | Portada, inventario derivado y recomendaciones profesionales |
+| `src/components/layout/NavigationTree.astro` | Árbol recursivo, enlaces y nodos sin contenido |
+| `src/components/shared/Icon.astro` | Catálogo tipado de iconos Lucide |
+| `src/data/navigation/navigation.ts` | Taxonomía, nombres, iconos y destinos |
+| `src/data/career/career-paths.ts` | Perfiles, etapas, orientación de áreas, prerrequisitos, ramas y fuentes |
+| `src/data/catalog/curriculum.ts` | Tipos, contenido principal y fuentes |
+| `src/data/design-patterns/design-patterns.ts` | Catálogo conceptual de patrones ordenado por dificultad |
+| `src/data/references/concept-sources.ts` | Referencias específicas obligatorias de las tarjetas con autor, título y URL |
+| `src/data/system-design/system-design.ts` | Contenido de System Design |
+| `src/data/ai/applied-ai.ts` | Contenido y fuentes de Applied Artificial Intelligence |
 | `src/scripts/app.ts` | Home/rutas hash, búsqueda, niveles, progreso, repaso, menú móvil y diálogos |
 | `src/scripts/home.ts` | Selección de perfil y etapa, panel visible y estado accesible |
 | `src/scripts/navigation.ts` | Restaurar y guardar el estado de ramas |

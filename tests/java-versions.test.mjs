@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { javaFeatures, javaReleases, javaExamples } from '../src/data/java-versions.ts';
-import { javaSummary } from '../src/data/java-summary.ts';
-import { javaFeatureState, javaFeatureChange, javaFeatureMilestone } from '../src/lib/java-release-state.ts';
+import { javaFeatures, javaReleases, javaExamples } from '../src/features/software-engineering/software-development/programming-languages/java/version-history/data/java-versions.ts';
+import { javaSummary } from '../src/features/software-engineering/software-development/programming-languages/java/version-history/data/java-summary.ts';
+import { javaFeatureState, javaFeatureChange, javaFeatureMilestone } from '../src/features/software-engineering/software-development/programming-languages/java/version-history/lib/java-release-state.ts';
 
 const feature = id => javaFeatures.find(item => item.id === id);
 

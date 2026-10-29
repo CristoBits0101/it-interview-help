@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { retainCareerView, restoreCareerView } from '../src/lib/career-view.ts';
-import { restoreCareerSelectionState } from '../src/lib/career-selection.ts';
+import { retainCareerView, restoreCareerView } from '../src/features/home/lib/career-view.ts';
+import { restoreCareerSelectionState } from '../src/features/home/lib/career-selection.ts';
 
 const directions = [{ id: 'software', profileIds: ['frontend', 'backend'] }, { id: 'data', profileIds: ['data-engineer'] }];
 const profileIds = ['frontend', 'backend', 'data-engineer'];

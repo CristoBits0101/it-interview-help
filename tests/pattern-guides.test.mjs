@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { designPatterns } from '../src/data/design-patterns.ts';
-import { patternGuides, patternGuideTranslations } from '../src/data/pattern-guides/index.ts';
+import { designPatterns } from '../src/features/software-engineering/software-design/design-patterns/data/design-patterns.ts';
+import { patternGuides, patternGuideTranslations } from '../src/features/software-engineering/software-design/design-patterns/data/index.ts';
 
 const patterns = new Map(designPatterns.map(pattern => [pattern.id, pattern]));
 

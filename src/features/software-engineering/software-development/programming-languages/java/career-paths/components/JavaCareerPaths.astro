@@ -1,0 +1,22 @@
+---
+import { javaCareerPaths } from '../data/java-career-paths';
+import { javaTechnologies } from '../../ecosystem/data/java-ecosystem';
+import { t } from '../../../../../../../shared/lib/translations';
+import Text from '../../../../../../../shared/components/primitives/LocalizedText.astro';
+import Icon from '../../../../../../../shared/components/primitives/Icon.astro';
+import '../../styles/java-learning-paths.css';
+---
+<section id="java/career-paths" class="java-path-page" data-resource-route="java/career-paths" data-resource-title="Career Paths" aria-labelledby="java-career-paths-title" hidden>
+  <header class="java-path-heading">
+    <h1 id="java-career-paths-title">{t('Career Paths')}</h1>
+    <Text as="p" value={{ es: 'Especializaciones profesionales relacionadas con Java. Las tecnologías mostradas son conexiones con el ecosistema y no una lista completa de requisitos del puesto.', en: 'Professional specializations related to Java. The technologies shown are connections with the ecosystem rather than a complete list of job requirements.' }} />
+  </header>
+  <div class="java-ecosystem-grid">
+    {javaCareerPaths.map(path => <article class="java-career-card" data-java-career={path.id}>
+      <Text as="h2" value={path.title} />
+      <Text as="p" value={path.focus} />
+      <div class="java-career-technologies"><span>Java</span>{path.technologyIds.map(id => <><Icon name="arrow" size={16} /><span>{javaTechnologies.find(technology => technology.id === id)!.name}</span></>)}</div>
+      <a href="/java/ecosystem" data-route="java/ecosystem">{t('Ecosystem')}<Icon name="arrow" size={16} /></a>
+    </article>)}
+  </div>
+</section>

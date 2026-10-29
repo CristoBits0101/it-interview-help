@@ -1,0 +1,9 @@
+---
+import { t } from '../../../shared/lib/translations';
+interface Props { kind: 'stage' | 'growth' }
+const { kind } = Astro.props;
+---
+<div class="career-preparation-notice" data-career-notice={kind} role="alert" aria-atomic="true" hidden>
+  <p class="career-notice-title">{t('Ruta en desarrollo')}</p>
+  <p>{t('El contenido de preparación aún no está disponible.')}</p>
+</div>

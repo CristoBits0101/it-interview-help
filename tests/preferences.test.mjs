@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { preferenceKeys, readPreference, writePreference, parseStoredJson, readJsonPreference, restoreKnownIds, restoreLearnedIds, restoreCareerStage } from '../src/lib/preferences.ts';
-import { migrateBranchId } from '../src/data/navigation-migrations.ts';
-import { navigation } from '../src/data/navigation.ts';
+import { preferenceKeys, readPreference, writePreference, parseStoredJson, readJsonPreference, restoreKnownIds, restoreLearnedIds, restoreCareerStage } from '../src/shared/lib/preferences.ts';
+import { migrateBranchId } from '../src/app/data/navigation-migrations.ts';
+import { navigation } from '../src/app/data/navigation.ts';
 
 test('existing preferences keep their persistent keys', () => {
   assert.deepEqual(preferenceKeys, {

@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { resolveCareerSelection, restoreCareerSelectionState, toggleCareerSelection } from '../src/lib/career-selection.ts';
-import { careerDirections } from '../src/data/career-directions.ts';
-import { careerProfiles } from '../src/data/career-paths.ts';
-import { navigation } from '../src/data/navigation.ts';
-import { translate } from '../src/lib/translations.ts';
+import { resolveCareerSelection, restoreCareerSelectionState, toggleCareerSelection } from '../src/features/home/lib/career-selection.ts';
+import { careerDirections } from '../src/features/home/data/career-directions.ts';
+import { careerProfiles } from '../src/features/home/data/career-paths.ts';
+import { navigation } from '../src/app/data/navigation.ts';
+import { translate } from '../src/shared/lib/translations.ts';
 
 const profileIds = careerProfiles.map(profile => profile.id);
 

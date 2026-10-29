@@ -2,15 +2,15 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import './register-typescript.mjs';
 
-const { navigation, sharedFoundations } = await import('../src/data/navigation.ts');
-const { pendingPages, publishedGuides } = await import('../src/data/published-catalog.ts');
+const { navigation, sharedFoundations } = await import('../src/app/data/navigation.ts');
+const { pendingPages, publishedGuides } = await import('../src/app/data/published-catalog.ts');
 const pendingDestinations = new Set([...pendingPages, ...publishedGuides].map(page => page.href));
-const { careerProfiles, areaGuidance } = await import('../src/data/career-paths.ts');
-const { tracks } = await import('../src/data/curriculum.ts');
-const { systemDesign } = await import('../src/data/system-design.ts');
-const { aiGlossary: appliedAI, glossaryInventory } = await import('../src/data/ai-glossary.ts');
-const { translate } = await import('../src/scripts/i18n.ts');
-const { migrateBranchId } = await import('../src/data/navigation-migrations.ts');
+const { careerProfiles, areaGuidance } = await import('../src/features/home/data/career-paths.ts');
+const { tracks } = await import('../src/app/data/curriculum.ts');
+const { systemDesign } = await import('../src/features/software-engineering/system-design/data/system-design.ts');
+const { aiGlossary: appliedAI, glossaryInventory } = await import('../src/features/artificial-intelligence/generative-artificial-intelligence/generative-ai-applications/data/ai-glossary.ts');
+const { translate } = await import('../src/shared/scripts/i18n.ts');
+const { migrateBranchId } = await import('../src/app/data/navigation-migrations.ts');
 const pathId = path => path.map(encodeURIComponent).join('/');
 const all = [];
 function visit(nodes, parent = []) {

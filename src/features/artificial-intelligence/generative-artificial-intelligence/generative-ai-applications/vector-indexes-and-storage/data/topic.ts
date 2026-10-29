@@ -1,0 +1,13 @@
+import type { Topic } from '../../data/topic';
+
+export const vectorIndexesAndStorageTopic: Topic = { id: 'ai-vectors', es: 'Índices y Almacenamiento Vectorial', en: 'Vector Indexes and Storage', entries: [
+    ['ai-vector-database', 'Base de Datos Vectorial', 'Vector Database', 'Almacena vectores y permite buscar elementos similares. Puede combinar la similitud con filtros de metadatos.', 'It stores vectors and supports similarity search. It can combine similarity with metadata filters.', 'milvus'],
+    ['ai-ann', 'ANN', 'ANN', 'Aproxima los vecinos más próximos para acelerar la búsqueda. Puede omitir coincidencias exactas.', 'It finds approximate nearest neighbors to reduce search cost. It may miss exact results.', 'faiss', 'Intermedio'],
+    ['ai-hnsw', 'HNSW', 'HNSW', 'Organiza vectores en un grafo de varias capas para encontrar vecinos similares sin recorrer toda la colección.', 'It organizes vectors in a layered graph to find similar neighbors without scanning the entire collection.', 'hnsw', 'Avanzado'],
+    ['ai-lsh', 'LSH', 'LSH', 'Utiliza funciones hash que tienden a agrupar elementos similares para acelerar búsquedas aproximadas.', 'It uses hash functions that tend to group similar items to accelerate approximate search.', 'lsh', 'Avanzado'],
+    ['ai-faiss', 'FAISS', 'FAISS', 'Es una biblioteca de búsqueda entre vectores con distintos índices. No es una base de datos completa.', 'It is a library for vector similarity search. It provides different indexes rather than a complete database.', 'faiss', 'Intermedio'],
+    ['ai-chroma', 'ChromaDB', 'ChromaDB', 'Almacena embeddings junto a documentos y metadatos para recuperar información por similitud.', 'It stores embeddings with documents and metadata to retrieve information by similarity.', 'chroma', 'Intermedio'],
+    ['ai-milvus', 'Milvus', 'Milvus', 'Es una base de datos vectorial diseñada para buscar por similitud en colecciones grandes.', 'It is a vector database designed for similarity search over large collections.', 'milvus', 'Intermedio'],
+    ['ai-point', 'Punto Vectorial', 'Point', 'En Qdrant es un registro con vectores y metadatos opcionales. No equivale siempre a un fragmento.', 'In Qdrant it is a record with an identifier and vectors that may include metadata. It is not always one chunk.', 'point', 'Intermedio'],
+    ['ai-vector-retriever', 'Recuperador Vectorial', 'Vector Store Retriever', 'Convierte una consulta en una búsqueda sobre un almacén vectorial y devuelve los elementos más similares.', 'It turns a query into a vector store search and returns the most similar items.', 'retrieval', 'Intermedio'],
+  ] };

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { restoreSoundPreference, createSoundGate, soundForChange } from '../src/lib/interaction-sound.ts';
+import { restoreSoundPreference, createSoundGate, soundForChange } from '../src/shared/lib/interaction-sound.ts';
 
 test('sound requires explicit opt-in and preserves a zero volume', () => {
   for (const value of [undefined, null, [], 'true', { enabled: 'true' }]) assert.deepEqual(restoreSoundPreference(value), { enabled: false, volume: 30 });
@@ -39,7 +39,7 @@ test('one actual state transition selects a semantic cue and no-op actions stay 
 
 
 test('player drops unloaded cues, interrupts without overlap and keeps important actions above secondary input', async () => {
-  const { createSoundPlayer } = await import('../src/scripts/sound-player.ts');
+  const { createSoundPlayer } = await import('../src/shared/scripts/sound-player.ts');
   const original = { AudioContext: globalThis.AudioContext, fetch: globalThis.fetch, document: globalThis.document };
   const starts = [];
   let resume;

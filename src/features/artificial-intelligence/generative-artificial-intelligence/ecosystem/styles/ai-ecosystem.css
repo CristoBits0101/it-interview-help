@@ -1,0 +1,15 @@
+@layer components {
+  .ai-ecosystem-page { display: grid; min-width: 0; gap: var(--space-gap); }
+  .ai-ecosystem-page h1 { margin: 0; font: 500 var(--font-title)/var(--line-body) var(--brand); text-transform: uppercase; border-inline-start: 2px solid var(--accent); padding-inline: var(--space-compact); }
+  .ai-ecosystem-page p { font-size: var(--font-body); line-height: var(--line-body); }
+  .ai-tool-filters { display: flex; flex-wrap: wrap; gap: var(--gap-control); }
+  .ai-tool-filters button { min-height: 44px; padding: var(--gap-control) var(--space-compact); border: 1px solid var(--border-soft); border-radius: var(--radius-full); font-size: var(--font-small); }
+  .ai-tool-filters button[aria-pressed='true'] { background: var(--surface-selected); border-color: var(--accent); }
+  .ai-tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: var(--gap-card); }
+  .ai-tool-card { display: flex; flex-direction: column; gap: var(--gap-card); padding: var(--space-card); border: 1px solid var(--border-soft); border-radius: var(--radius-card); background: var(--paper); min-width: 0; }
+  .ai-tool-card h2 { font-size: var(--font-title); font-weight: 500; line-height: var(--line-body); }
+  .ai-tool-kind { color: var(--text-soft); }
+  .ai-tool-card ul { display: grid; gap: var(--gap-compact); list-style: none; margin: 0; padding: 0; font-size: var(--font-body); }
+  .ai-tool-source { display: flex; align-items: center; gap: var(--gap-control); margin-block-start: auto; min-height: 44px; color: var(--text-secondary); font-size: var(--font-small); }
+  @media (forced-colors: active) { .ai-tool-filters button[aria-pressed='true'] { outline: 2px solid Highlight; } }
+}

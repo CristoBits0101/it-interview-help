@@ -1,0 +1,6 @@
+---
+import type { LocalizedText } from '../../lib/localized-text';
+interface Props { value: LocalizedText; as?: 'span' | 'p' | 'h1' | 'h2' | 'h3'; class?: string }
+const { value, as: Tag = 'span', class: className } = Astro.props;
+---
+<Tag class={className} data-i18n-es={value.es} data-i18n-en={value.en}>{value.en}</Tag>

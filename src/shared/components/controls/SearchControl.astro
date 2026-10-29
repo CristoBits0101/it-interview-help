@@ -1,0 +1,6 @@
+---
+import { t } from '../../lib/translations';
+import Icon from '../primitives/Icon.astro';
+
+---
+<div class="search-box" role="search" aria-label={t('Buscar conceptos')}><Icon name="search" size={18} /><input id="search" type="search" aria-label={t('Buscar conceptos')} placeholder={t('Buscar conceptos...')} autocomplete="off" aria-keyshortcuts="Control+k Meta+k" /><button class="search-clear" id="search-clear" type="button" aria-label={t('Borrar búsqueda')} hidden><Icon name="close" size={15} /></button></div>

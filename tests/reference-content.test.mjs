@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { aiEcosystemTools, aiToolCategories, aiToolKinds } from '../src/data/ai-ecosystem.ts';
-import { referenceComparisons } from '../src/data/reference-comparisons.ts';
-import { aiGlossary, glossaryInventory } from '../src/data/ai-glossary.ts';
+import { aiEcosystemTools, aiToolCategories, aiToolKinds } from '../src/features/artificial-intelligence/generative-artificial-intelligence/ecosystem/data/ai-ecosystem.ts';
+import { referenceComparisons } from '../src/app/data/reference-comparisons.ts';
+import { aiGlossary, glossaryInventory } from '../src/features/artificial-intelligence/generative-artificial-intelligence/generative-ai-applications/data/ai-glossary.ts';
 
 test('the reference ecosystem preserves all image occurrences with one record per tool', () => {
   assert.equal(aiToolCategories.length, 10);

@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { toggleCareerScope, reconcileCareerScope } from '../src/lib/career-scope.ts';
-import { careerGrowthGroups, careerGrowthTargets } from '../src/data/career-growth.ts';
-import { careerProfiles, careerStages } from '../src/data/career-paths.ts';
-import { translate } from '../src/lib/translations.ts';
+import { toggleCareerScope, reconcileCareerScope } from '../src/features/home/lib/career-scope.ts';
+import { careerGrowthGroups, careerGrowthTargets } from '../src/features/home/data/career-growth.ts';
+import { careerProfiles, careerStages } from '../src/features/home/data/career-paths.ts';
+import { translate } from '../src/shared/lib/translations.ts';
 
 test('a career stage and growth target replace each other rather than combining', () => {
   const choices = [

@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { defaultLanguage, t, translate, translatePatternTitle, stageAreaCount, availableConceptCount } from '../src/lib/translations.ts';
-import { getSavedLanguage, saveLanguage, applyStaticTranslations } from '../src/scripts/i18n.ts';
-import { publishedTracks } from '../src/data/published-catalog.ts';
-import { preferenceKeys } from '../src/lib/preferences.ts';
-import { careerProfiles } from '../src/data/career-paths.ts';
+import { defaultLanguage, t, translate, translatePatternTitle, stageAreaCount, availableConceptCount } from '../src/shared/lib/translations.ts';
+import { getSavedLanguage, saveLanguage, applyStaticTranslations } from '../src/shared/scripts/i18n.ts';
+import { publishedTracks } from '../src/app/data/published-catalog.ts';
+import { preferenceKeys } from '../src/shared/lib/preferences.ts';
+import { careerProfiles } from '../src/features/home/data/career-paths.ts';
 
 test('English is the deterministic default and persisted manual choices take precedence', () => {
   const original = Object.getOwnPropertyDescriptor(globalThis, 'localStorage');
