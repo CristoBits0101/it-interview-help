@@ -1,5 +1,5 @@
 import type { FoundationGuide } from '../../shared/lib/foundation-guide';
-import { webRenderingGuide } from '../../features/software-engineering/software-development/web-rendering/data/web-rendering';
+import { webRenderingGuide } from '../../features/software-engineering/software-development/development-domains/web-development/web-rendering/data/web-rendering';
 import { bufferGuide } from '../../features/computer-systems/operating-systems/buffer/data/buffer';
 import { httpGuide } from '../../features/computer-systems/computer-networks/http-protocol/data/http';
 import { restApiGuide } from '../../features/software-engineering/software-design/api-design/rest-api/data/rest-api';

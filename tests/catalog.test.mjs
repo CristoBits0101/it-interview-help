@@ -3,6 +3,7 @@ import test from 'node:test';
 import { navigation } from '../src/app/data/navigation.ts';
 import { publishedTracks, publishedNavigation, publishedSources, pendingPages, publishedGuides } from '../src/app/data/published-catalog.ts';
 import { createConceptViews } from '../src/shared/lib/concept-views.ts';
+import { translate } from '../src/shared/lib/translations.ts';
 
 const flatten = nodes => nodes.flatMap(node => [node, ...flatten(node.children ?? [])]);
 const concepts = publishedTracks.flatMap(track => track.modules.flatMap(module => module.concepts));
@@ -10,6 +11,28 @@ const routeIds = publishedTracks.flatMap(track => track.modules.map(module => `#
 const pendingIds = pendingPages.map(page => page.href);
 const availableIds = [...routeIds, ...pendingIds, ...publishedGuides.map(guide => guide.href)];
 const publishedNodes = flatten(publishedNavigation);
+
+test('development domains group web content without publishing empty mobile or desktop pages', () => {
+  const development = navigation.find(node => node.label === 'Software Engineering').children.find(node => node.label === 'Software Development');
+  assert.deepEqual(development.children.map(node => node.label), [
+    'Programming Languages', 'Development Domains',
+  ]);
+  const domains = development.children.at(-1);
+  assert.deepEqual(domains.children.map(node => node.label), ['Desktop Development', 'Embedded Software Development', 'Game Development', 'IoT Development', 'Mobile Development', 'Web Development']);
+  assert.deepEqual(domains.children.at(-1).children, [{ label: 'Web Rendering', href: '#software-development/web-rendering' }]);
+  for (const node of domains.children.slice(0, -1)) {
+    assert.equal(node.href, undefined);
+    assert.equal(node.children, undefined);
+    assert.equal(publishedNodes.find(item => item.label === node.label).href, undefined);
+  }
+  for (const [en, es] of [
+    ['Development Domains', 'Ámbitos de Desarrollo'], ['Web Development', 'Desarrollo Web'],
+    ['Mobile Development', 'Desarrollo Móvil'], ['Desktop Development', 'Desarrollo de Escritorio'],
+  ]) {
+    assert.equal(translate(en, 'es'), es);
+    assert.equal(translate(es, 'en'), en);
+  }
+});
 
 test('the published catalog has unique stable identifiers and every page is reachable', () => {
   assert.equal(new Set(publishedTracks.map(track => track.id)).size, publishedTracks.length);

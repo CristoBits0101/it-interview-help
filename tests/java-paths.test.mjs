@@ -13,6 +13,11 @@ const flatten = nodes => nodes.flatMap(node => [node, ...flatten(node.children ?
 test('Java keeps the three requested dimensions as ordered siblings and preserves versions', () => {
   const java = flatten(publishedNavigation).find(node => node.label === 'Java');
   assert.deepEqual(java.children.map(node => node.label), ['Version History', 'Ecosystem', 'Career Paths', 'Developer Roadmap']);
+  const roadmap = java.children.find(node => node.label === 'Developer Roadmap');
+  assert.equal(roadmap.href, undefined);
+  assert.deepEqual(roadmap.children.map(node => node.label), ['Programming Fundamentals', 'Data Structures', 'Algorithms']);
+  assert(roadmap.children.every(node => node.href === undefined));
+  assert(!publishedGuides.some(guide => guide.href === '#java/developer-roadmap'));
   for (const page of javaGuidePages) {
     assert(publishedGuides.some(guide => guide.href === page.href));
     assert.equal(flatten(publishedNavigation).filter(node => node.href === page.href).length, 1);
@@ -45,6 +50,6 @@ test('professional paths and learning stages retain the supplied scope and resol
     assert(path.title.es && path.focus.es && path.focus.en);
     for (const id of path.technologyIds) assert(javaTechnologies.some(technology => technology.id === id));
   }
-  assert.deepEqual(javaDeveloperRoadmap.map(stage => stage.en), ['Java Fundamentals', 'OOP', 'Collections', 'Concurrency', 'Frameworks', 'Testing']);
+  assert.deepEqual(javaDeveloperRoadmap.map(stage => stage.en), ['Programming Fundamentals', 'Data Structures', 'Algorithms']);
   assert(javaDeveloperRoadmap.every(stage => stage.es));
 });

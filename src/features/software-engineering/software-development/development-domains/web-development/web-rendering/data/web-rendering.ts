@@ -1,6 +1,6 @@
-import { conceptSources } from '../../../../../shared/data/concept-sources';
-import type { FoundationGuide } from '../../../../../shared/lib/foundation-guide';
-import { localizedText as text } from '../../../../../shared/lib/localized-text';
+import { conceptSources } from '../../../../../../../shared/data/concept-sources';
+import type { FoundationGuide } from '../../../../../../../shared/lib/foundation-guide';
+import { localizedText as text } from '../../../../../../../shared/lib/localized-text';
 
 export const webRenderingGuide: FoundationGuide = {
     route: 'software-development/web-rendering', label: 'Web Rendering', title: text('Renderizado Web', 'Web Rendering'),

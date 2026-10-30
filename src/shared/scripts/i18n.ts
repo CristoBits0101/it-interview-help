@@ -73,6 +73,14 @@ export function applyStaticTranslations(language: Language) {
   document.querySelectorAll<HTMLElement>('#sidebar [data-i18n-source]').forEach(element => {
     element.textContent = translate(element.dataset.i18nSource!, language);
   });
+  document.querySelectorAll<HTMLElement>('[data-navigation-alphabetical]').forEach(list => {
+    const rows = Array.from(list.children);
+    rows.sort((a, b) => {
+      const label = (row: Element) => row.querySelector<HTMLElement>('.navigation-label')?.textContent ?? '';
+      return label(a).localeCompare(label(b), language);
+    });
+    list.append(...rows);
+  });
   document.querySelectorAll<HTMLElement>('[data-stage-area-count]').forEach(element => {
     const count = Number(element.dataset.stageAreaCount);
     element.textContent = stageAreaCount(count, language);

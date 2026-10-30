@@ -8,7 +8,6 @@ import FoundationGuide from '../shared/components/guides/FoundationGuide.astro';
 import { foundationGuides } from '../app/data/foundation-guides';
 import JavaEcosystem from '../features/software-engineering/software-development/programming-languages/java/ecosystem/components/JavaEcosystem.astro';
 import JavaCareerPaths from '../features/software-engineering/software-development/programming-languages/java/career-paths/components/JavaCareerPaths.astro';
-import JavaDeveloperRoadmap from '../features/software-engineering/software-development/programming-languages/java/developer-roadmap/components/JavaDeveloperRoadmap.astro';
 import AiEcosystem from '../features/artificial-intelligence/generative-artificial-intelligence/ecosystem/components/AiEcosystem.astro';
 import ComparisonDialog from '../shared/components/guides/ComparisonDialog.astro';
 import { referenceComparisons } from '../app/data/reference-comparisons';
@@ -25,7 +24,6 @@ import { publishedTracks, publishedNavigation, publishedSources, patternIds, pat
   {referenceComparisons.map(guide => <ComparisonDialog guide={guide} />)}
   <JavaEcosystem />
   <JavaCareerPaths />
-  <JavaDeveloperRoadmap />
   {foundationGuides.map(guide => <FoundationGuide guide={guide} />)}
   <StudyArea tracks={publishedTracks} purposeModuleIds={patternModuleIds} compactTrackIds={new Set(['applied-ai'])} patternIds={patternIds} aliases={glossaryAliases} />
 </AppLayout>

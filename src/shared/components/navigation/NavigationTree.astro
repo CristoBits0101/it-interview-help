@@ -5,9 +5,10 @@ import type { NavigationNode } from '../../../app/data/navigation';
 interface Props { nodes: NavigationNode[]; depth?: number; parentPath?: string }
 const { nodes, depth = 0, parentPath = '' } = Astro.props;
 const branchId = (label: string) => [parentPath, encodeURIComponent(label)].filter(Boolean).join('/');
+const alphabetical = ['/Development%20Domains', '/Programming%20Languages'].some(group => parentPath.endsWith(group));
 ---
-<ul class:list={['navigation-tree', { 'navigation-root': depth === 0 }]}>
-  {nodes.map(node => (
+<ul class:list={['navigation-tree', { 'navigation-root': depth === 0 }]} data-navigation-alphabetical={alphabetical || undefined}>
+  {(alphabetical ? [...nodes].sort((a, b) => t(a.label).localeCompare(t(b.label), 'en')) : nodes).map(node => (
     <li class:list={{ 'navigation-described': Boolean(node.description) }}>
       {node.description && (
         <button type="button" class="navigation-description-trigger" aria-label={t(node.label)} data-navigation-description={t(node.description)} />

@@ -29,7 +29,7 @@ const foundation = (label: string): NavigationNode => {
 };
 const quantitativeFoundations = (): NavigationNode => ({
   label: 'Mathematical and Statistical Foundations',
-  children: ['Algebra and Functions', 'Linear Algebra', 'Probability Theory', 'Statistics', 'Calculus'].map(foundation),
+  children: ['Discrete Mathematics', 'Algebra and Functions', 'Linear Algebra', 'Probability Theory', 'Statistics', 'Calculus'].map(foundation),
 });
 
 export const navigation: (NavigationNode & { icon: IconName })[] = [
@@ -91,17 +91,31 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
       ] },
     ] },
     { label: 'Software Development', children: [
-      { label: 'Web Rendering', href: '#software-development/web-rendering' },
-      foundation('Programming Fundamentals'),
       { label: 'Programming Languages', children: [
-        { label: 'TypeScript' }, { label: 'Java', children: [
+        { label: 'Java', children: [
           { label: 'Version History', href: '#java/versions' },
           ...javaGuidePages,
-        ] }, { label: 'Python' },
+          { label: 'Developer Roadmap', children: [
+            { label: 'Programming Fundamentals' },
+            { label: 'Data Structures' }, { label: 'Algorithms' },
+          ] },
+        ] }, { label: 'Python', children: [{ label: 'Developer Roadmap', children: [
+          { label: 'Programming Fundamentals' }, { label: 'Data Structures' }, { label: 'Algorithms' },
+        ] }] },
+        { label: 'TypeScript', children: [{ label: 'Developer Roadmap', children: [
+          { label: 'Programming Fundamentals' }, { label: 'Data Structures' }, { label: 'Algorithms' },
+        ] }] },
       ] },
-      foundation('Discrete Mathematics'),
-      { label: 'Data Structures' },
-      { label: 'Algorithms' },
+      { label: 'Development Domains', children: [
+        { label: 'Desktop Development' },
+        { label: 'Embedded Software Development' },
+        { label: 'Game Development' },
+        { label: 'IoT Development' },
+        { label: 'Mobile Development' },
+        { label: 'Web Development', children: [
+          { label: 'Web Rendering', href: '#software-development/web-rendering' },
+        ] },
+      ] },
     ] },
     { label: 'Software Testing' }, { label: 'Software Quality' },
     { label: 'Software Engineering Operations' }, { label: 'Software Maintenance' },
