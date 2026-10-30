@@ -27,6 +27,17 @@ function fitSidebarToLabels() {
 
   const measure = () => {
     frame = 0;
+    sidebar.querySelectorAll<HTMLDetailsElement>('.navigation-branch[open]').forEach(branch => {
+      const label = branch.querySelector(':scope > summary .navigation-label');
+      const text = label?.firstChild;
+      if (!text || !text.textContent || !branch.getClientRects().length) return;
+      const range = document.createRange();
+      range.setStart(text, 0);
+      range.setEnd(text, 1);
+      const letter = range.getBoundingClientRect();
+      const offset = letter.left + letter.width / 2 - branch.getBoundingClientRect().left;
+      branch.style.setProperty('--navigation-line-offset', `${offset}px`);
+    });
     const width = measureVisibleContent();
     if (document.documentElement.style.getPropertyValue('--sidebar-width') !== `${width}px`) {
       document.documentElement.style.setProperty('--sidebar-width', `${width}px`);

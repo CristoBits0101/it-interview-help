@@ -65,7 +65,9 @@
   .navigation-branch:has(.navigation-link[aria-current='page']) > summary.navigation-row > svg, summary.navigation-row:hover > svg, .navigation-link:is(:hover, [aria-current='page']) > svg { color: inherit; }
   .navigation-disabled { color: var(--disabled); cursor: default; }
   .navigation-disabled > svg { color: inherit; }
-  .navigation-branch > .navigation-tree { margin: 0 0 0 var(--space-navigation-indent); padding-left: var(--gap-navigation-indent); border-left: 1px solid var(--border-soft); }
+  .navigation-branch { --navigation-line-offset: calc(var(--space-navigation-row) + .25em); }
+  .navigation-branch:has(> summary > .navigation-icon) { --navigation-line-offset: calc(var(--space-navigation-row) + 18px + var(--gap-navigation-row) + .25em); }
+  .navigation-branch > .navigation-tree { margin: 0 0 0 calc(var(--navigation-line-offset) - .5px); padding-left: var(--gap-navigation-indent); border-left: 1px solid var(--border-soft); }
   .breadcrumb { display: flex; flex: 1 1 20rem; min-width: 0; flex-wrap: wrap; align-items: center; gap: var(--gap-control); color: var(--text-soft); font-size: var(--font-small); font-weight: 400; }
   .breadcrumb-path { display: contents; }
   .breadcrumb > a, .breadcrumb-slash { flex-shrink: 0; }
