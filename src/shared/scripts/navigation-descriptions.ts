@@ -31,8 +31,22 @@ export function initializeNavigationDescriptions() {
     const bounds = tooltip.getBoundingClientRect();
     const margin = parseFloat(getComputedStyle(tooltip).paddingLeft);
     const gap = margin / 2;
-    const left = Math.max(margin, Math.min(anchor.right + gap, document.documentElement.clientWidth - bounds.width - margin));
-    const top = Math.max(margin, Math.min(anchor.top + (anchor.height - bounds.height) / 2, window.innerHeight - bounds.height - margin));
+    const viewportWidth = document.documentElement.clientWidth;
+    const viewportHeight = document.documentElement.clientHeight;
+    const fitsRight = anchor.right + gap + bounds.width <= viewportWidth - margin;
+    const fitsLeft = anchor.left - gap - bounds.width >= margin;
+    let left = anchor.right + gap;
+    let top = anchor.top + (anchor.height - bounds.height) / 2;
+    if (!fitsRight && fitsLeft) {
+      left = anchor.left - gap - bounds.width;
+    } else if (!fitsRight) {
+      left = anchor.left + (anchor.width - bounds.width) / 2;
+      top = anchor.bottom + gap + bounds.height <= viewportHeight - margin
+        ? anchor.bottom + gap
+        : anchor.top - gap - bounds.height;
+    }
+    left = Math.max(margin, Math.min(left, viewportWidth - bounds.width - margin));
+    top = Math.max(margin, Math.min(top, viewportHeight - bounds.height - margin));
     tooltip.style.left = `${left}px`;
     tooltip.style.top = `${top}px`;
   };
