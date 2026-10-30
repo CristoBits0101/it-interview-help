@@ -8,7 +8,10 @@ const branchId = (label: string) => [parentPath, encodeURIComponent(label)].filt
 ---
 <ul class:list={['navigation-tree', { 'navigation-root': depth === 0 }]}>
   {nodes.map(node => (
-    <li>
+    <li class:list={{ 'navigation-described': Boolean(node.description) }}>
+      {node.description && (
+        <button type="button" class="navigation-description-trigger" aria-label={t(node.label)} data-navigation-description={t(node.description)} />
+      )}
       {!node.children?.length && !node.href ? (
         <span class="navigation-row navigation-disabled" aria-disabled="true">
           {depth === 0 && node.icon && <Icon name={node.icon} size={18} class="navigation-icon" />}
@@ -32,3 +35,4 @@ const branchId = (label: string) => [parentPath, encodeURIComponent(label)].filt
     </li>
   ))}
 </ul>
+{depth === 0 && <div id="navigation-description-tooltip" class="navigation-description-tooltip" role="tooltip" popover="manual" />}

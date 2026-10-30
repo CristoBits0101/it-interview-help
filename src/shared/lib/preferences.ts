@@ -45,7 +45,7 @@ export function restoreLearnedIds(value: unknown, validIds: ReadonlySet<string>)
   return restoreKnownIds((value as Record<string, unknown>).learned, validIds);
 }
 
-export function restoreCareerStage(value: unknown, validIds: ReadonlySet<string>, fallback: string): string | null {
+export function restoreCareerStage(value: unknown, validIds: ReadonlySet<string>, fallback: string | null): string | null {
   return value === null || typeof value === 'string' && validIds.has(value) ? value : fallback;
 }
 

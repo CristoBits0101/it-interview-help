@@ -26,7 +26,7 @@ export function initializeCareerPaths() {
   const savedSession = readSessionJsonPreference(preferenceKeys.careerStage);
   let selection: CareerSelectionState = restoreCareerSelectionState(directionOptions, profileIds, savedSession, initialSelection);
   const validStageIds = new Set(stages.map(button => button.dataset.careerStage!));
-  const savedStageId = restoreCareerStage(readJsonPreference(preferenceKeys.careerStage), validStageIds, stages[0].dataset.careerStage!);
+  const savedStageId = restoreCareerStage(readJsonPreference(preferenceKeys.careerStage), validStageIds, null);
   let scope: CareerScope = savedStageId === null ? null : { kind: 'stage', id: savedStageId };
   let view = restoreCareerView(directionOptions, profileIds, validStageIds, savedSession, { ...initialSelection, stageId: savedStageId ?? stages[0].dataset.careerStage! });
   let noticeKind: 'stage' | 'growth' | null = null;
@@ -62,8 +62,8 @@ export function initializeCareerPaths() {
       button.setAttribute('aria-pressed', String(button.dataset.careerProfile === selection.profileId));
     });
     stages.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.careerStage === stageId)));
-    panels.forEach(panel => { panel.hidden = panel.dataset.careerPanel !== view.profileId || panel.dataset.stage !== view.stageId; });
-    if (panelContainer) panelContainer.hidden = false;
+    panels.forEach(panel => { panel.hidden = stageId === null || panel.dataset.careerPanel !== view.profileId || panel.dataset.stage !== stageId; });
+    if (panelContainer) panelContainer.hidden = stageId === null;
     document.querySelectorAll<HTMLElement>('[data-career-notice]').forEach(notice => {
       notice.hidden = notice.dataset.careerNotice === 'stage' || notice.dataset.careerNotice !== noticeKind || scope?.kind !== noticeKind;
     });

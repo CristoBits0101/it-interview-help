@@ -1,10 +1,12 @@
 import type { IconName } from '../../shared/components/primitives/Icon.astro';
+import { softwareEngineeringSectionDescriptions } from '../../features/software-engineering/data/section-descriptions';
 import { glossaryTopics } from '../../features/artificial-intelligence/generative-artificial-intelligence/generative-ai-applications/data/ai-glossary';
 import { javaGuidePages } from '../../features/software-engineering/software-development/programming-languages/java/data/navigation';
 import { itServiceManagement } from '../../features/computer-systems/it-service-management/data/pending-navigation';
 
 export interface NavigationNode {
   label: string;
+  description?: string;
   id?: string;
   icon?: IconName;
   href?: string;
@@ -103,7 +105,7 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
     ] },
     { label: 'Software Testing' }, { label: 'Software Quality' },
     { label: 'Software Engineering Operations' }, { label: 'Software Maintenance' },
-  ] },
+  ].map(node => ({ ...node, description: softwareEngineeringSectionDescriptions[node.label]?.es })) },
   { label: 'Data Technologies', id: 'Data', icon: 'database', separatorBefore: true, group: true, children: [
     { label: 'Data Engineering', icon: 'workflow', children: [
       { label: 'Database Management', children: [

@@ -68,7 +68,7 @@
 
 ## Persistencia y seguridad
 
-- Usa `src/shared/lib/preferences.ts` y conserva las cuatro claves: `tech-training:v1` para `{learned: [...]}`, `tech-training:navigation:v1` para ramas, `tech-training:language:v1` para ES/EN y `tech-training:career-stage:v1` para ID o JSON `null` sin etapa seleccionada. Al deseleccionar una etapa o sus controles superiores Home conserva visible el último panel consultado.
+- Usa `src/shared/lib/preferences.ts` y conserva las cuatro claves: `tech-training:v1` para `{learned: [...]}`, `tech-training:navigation:v1` para ramas, `tech-training:language:v1` para ES/EN y `tech-training:career-stage:v1` para ID o JSON `null` sin etapa seleccionada. El roadmap de Home solo se muestra con una etapa seleccionada y se oculta al desmarcarla o deseleccionar sus controles superiores.
 - Valida formas e IDs, ignora datos corruptos sin bloquear el arranque y tolera getter, lectura, cuota o escritura fallidos. Mantén estado en memoria y permite recuperación de escrituras posteriores. No confundas corrupción de JSON con indisponibilidad permanente.
 - Conserva migraciones en `navigation-migrations.ts`, hijos abiertos dentro de padres cerrados y restauración tras recarga/idioma. Nunca abras ramas automáticamente al navegar. El área y el perfil son de sesión; etapa, idioma, progreso y ramas se guardan localmente.
 - No introduzcas cookies, seguimiento o sincronización remota. Las preferencias pertenecen al origen y navegador; no prometas recuperación si se borran. No almacenes secretos ni datos personales y no limpies almacenamiento ajeno.

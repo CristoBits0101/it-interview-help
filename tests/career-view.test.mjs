@@ -8,7 +8,7 @@ const profileIds = ['frontend', 'backend', 'data-engineer'];
 const stages = new Set(['foundation', 'junior', 'mid', 'senior']);
 const previous = { directionId: 'software', profileId: 'backend', stageId: 'mid' };
 
-test('deselecting a stage or its parents retains the last visible route', () => {
+test('deselecting a stage or its parents retains the last consulted route in session', () => {
   for (const selection of [
     { directionId: 'software', profileId: 'backend' },
     { directionId: 'software', profileId: null },
@@ -16,13 +16,13 @@ test('deselecting a stage or its parents retains the last visible route', () => 
   ]) assert.deepEqual(retainCareerView(directions, profileIds, previous, selection, null), previous);
 });
 
-test('new choices update the visible route while retaining a compatible stage', () => {
+test('new choices update the consulted route while retaining a compatible stage', () => {
   assert.deepEqual(retainCareerView(directions, profileIds, previous, { directionId: 'software', profileId: 'frontend' }, null), { ...previous, profileId: 'frontend' });
   assert.deepEqual(retainCareerView(directions, profileIds, previous, { directionId: 'data', profileId: 'data-engineer' }, null), { directionId: 'data', profileId: 'data-engineer', stageId: 'mid' });
   assert.deepEqual(retainCareerView(directions, profileIds, previous, { directionId: 'software', profileId: 'backend' }, 'senior'), { ...previous, stageId: 'senior' });
 });
 
-test('session restoration keeps the visible route separate from deselected controls', () => {
+test('session restoration keeps the consulted route separate from deselected controls', () => {
   const saved = { directionId: null, profileId: null, view: previous };
   assert.deepEqual(restoreCareerSelectionState(directions, profileIds, saved, previous), { directionId: null, profileId: null });
   assert.deepEqual(restoreCareerView(directions, profileIds, stages, saved, { ...previous, stageId: 'foundation' }), previous);

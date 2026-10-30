@@ -1,5 +1,6 @@
 import { preferenceKeys, readJsonPreference, restoreKnownIds, writePreference } from '../lib/preferences';
 import { migrateBranchId } from '../../app/data/navigation-migrations';
+import { initializeNavigationDescriptions } from './navigation-descriptions';
 
 function fitSidebarToLabels() {
   const sidebar = document.querySelector<HTMLElement>('#sidebar');
@@ -27,6 +28,11 @@ function fitSidebarToLabels() {
 
   const measure = () => {
     frame = 0;
+    sidebar.querySelectorAll<HTMLElement>('.navigation-description-trigger').forEach(trigger => {
+      const row = trigger.parentElement?.querySelector(':scope > .navigation-row, :scope > .navigation-branch > summary');
+      const height = row?.getBoundingClientRect().height;
+      if (height) trigger.style.top = `${height / 2}px`;
+    });
     sidebar.querySelectorAll<HTMLDetailsElement>('.navigation-branch[open]').forEach(branch => {
       const label = branch.querySelector(':scope > summary .navigation-label');
       const text = label?.firstChild;
@@ -35,7 +41,8 @@ function fitSidebarToLabels() {
       range.setStart(text, 0);
       range.setEnd(text, 1);
       const letter = range.getBoundingClientRect();
-      const offset = letter.left + letter.width / 2 - branch.getBoundingClientRect().left;
+      const center = letter.left + letter.width / 2;
+      const offset = center - branch.getBoundingClientRect().left;
       branch.style.setProperty('--navigation-line-offset', `${offset}px`);
     });
     const width = measureVisibleContent();
@@ -61,6 +68,7 @@ function fitSidebarToLabels() {
 }
 
 export function initializeNavigation() {
+  initializeNavigationDescriptions();
   fitSidebarToLabels();
   const branches = Array.from(document.querySelectorAll<HTMLDetailsElement>('[data-nav-branch]'));
   const validIds = new Set(branches.map(branch => branch.dataset.navBranch!));

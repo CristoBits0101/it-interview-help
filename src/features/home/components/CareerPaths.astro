@@ -45,13 +45,13 @@ const profilesById = new Map(profiles.map(profile => [profile.id, profile]));
   <div class="career-stage-section">
     <p class="career-control-label career-icon-heading" id="career-stage-label"><Icon name="route" class="career-heading-icon" /><span>{t('¿En qué etapa quieres trabajar?')}</span></p>
     <ol class="career-stage-options" aria-labelledby="career-stage-label">
-      {stages.map((stage, index) => <CareerStageOption stage={stage} selected={index === 0} descriptions={termDescriptions} />)}
+      {stages.map(stage => <CareerStageOption stage={stage} selected={false} descriptions={termDescriptions} />)}
     </ol>
     <CareerPreparationNotice kind="stage" />
   </div>
 
   <p id="career-selection-status" class="sr-only" role="status" aria-live="polite"></p>
   <div id="career-panels" hidden>
-    {profiles.map((profile, profileIndex) => profile.stages.map((stage, stageIndex) => <CareerPanel profile={profile} stage={stage} initial={profileIndex === 0 && stageIndex === 0} tracks={tracks} areas={areas} guidanceByArea={guidanceByArea} />))}
+    {profiles.map(profile => profile.stages.map(stage => <CareerPanel profile={profile} stage={stage} initial={false} tracks={tracks} areas={areas} guidanceByArea={guidanceByArea} />))}
   </div>
 </section>

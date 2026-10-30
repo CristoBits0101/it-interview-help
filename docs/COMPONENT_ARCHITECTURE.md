@@ -32,7 +32,7 @@ Los tipos compartidos se separan del contenido de los dominios. Las guías web, 
 
 Astro conserva sus entradas en `pages/` y el documento común en `layouts/AppLayout.astro`. AppLayout permanece como primer import de la composición para establecer el orden CSS reset, base, layout, components, responsive. Los tokens viven en `shared/styles/tokens.css`.
 
-Las propiedades tipadas y los contratos de IDs, clases y atributos data mantienen la comunicación con los scripts. El idioma, progreso, ramas y preferencias conservan sus claves. Home mantiene el último panel visible al deseleccionar una etapa.
+Las propiedades tipadas y los contratos de IDs, clases y atributos data mantienen la comunicación con los scripts. El idioma, progreso, ramas y preferencias conservan sus claves. Home conserva la última consulta en sesión y muestra el roadmap solo mientras hay una etapa seleccionada.
 
 Las pruebas de estructura derivan la ramificación de navigation y comprueban que cada destino publicado tenga archivos propios en su dominio más profundo. También comprueban que no existan carpetas mixtas ni dominios vacíos.
 

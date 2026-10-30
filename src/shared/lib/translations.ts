@@ -5,9 +5,11 @@ import { careerRoleTranslations } from '../../features/home/data/career-role-tra
 import { careerResearchTranslations } from '../../features/home/data/career-research-translations';
 import { careerInteractionTranslations } from '../../features/home/data/career-interaction-translations';
 import { careerContentTranslations } from '../../features/home/data/career-content-translations';
+import { softwareEngineeringSectionTranslations } from '../../features/software-engineering/data/section-descriptions';
 export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
+  ...softwareEngineeringSectionTranslations,
   'Cerrar': 'Close',
   'Documentación': 'Documentation',
   'Todas las funciones': 'All functions',
