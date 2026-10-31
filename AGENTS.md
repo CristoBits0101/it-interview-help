@@ -1,4 +1,4 @@
-# Tech Interview Prep — instrucciones para agentes
+# IT Interview Help — instrucciones para agentes
 
 ## Alcance y stack
 
@@ -29,7 +29,7 @@
 
 ## Interfaz, tokens y accesibilidad
 
-- Conserva la marca `Tech Interview Prep` sin icono ni puntuación. Marca y Home llevan a la portada real. No recuperes Library, marcadores, hero antiguo, repaso global ni pies retirados.
+- Conserva la marca `IT Interview Help` sin icono ni puntuación. Marca y Home llevan a la portada real. No recuperes Library, marcadores, hero antiguo, repaso global ni pies retirados.
 - Centraliza paleta, fuentes, radios y espaciado en `src/shared/styles/tokens.css`. Fuera de tokens usa variables, `currentColor`, transparencia o mezclas derivadas; no introduzcas colores literales ni acentos ajenos.
 - Para futuros diseños toma Home como referencia de radios: prefiere 2XL en tarjetas y contenedores principales mediante `--radius-profile` (1rem, 16 px de base), y radio completo mediante `--radius-full` en selecciones, píldoras, chips y controles circulares según su función.
 - Conserva la jerarquía interior de radios menores (`--radius-card`, `--radius-control`, `--radius-inset`) y radios concéntricos; no apliques redondeado universal ni cambies controles rectangulares o radios existentes sin petición.

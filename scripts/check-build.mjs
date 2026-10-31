@@ -71,7 +71,7 @@ for (const [page, preferencesVisible] of [[html, false], [preferencesHtml, true]
   }
   assert(topbar.includes('id="search"') && topbar.includes('id="mobile-toggle"'));
 }
-assert.match(preferencesHtml, /<title>Preferences · Tech Interview Prep<\/title>/);
+assert.match(preferencesHtml, /<title>Preferences · IT Interview Help<\/title>/);
 assert(preferencesHtml.includes('Customize the application language and sounds.'));
 assert(!existsSync(join(outputRoot, 'settings/index.html')), 'Only the Preferences route is published.');
 const csp = tags.find(tag => tag.name === 'meta' && tag.attributes['http-equiv']?.toLowerCase() === 'content-security-policy')?.attributes.content;

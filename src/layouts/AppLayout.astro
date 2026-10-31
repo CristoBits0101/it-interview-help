@@ -17,7 +17,7 @@ const { navigation, sources } = Astro.props;
 const isPreferences = Astro.url.pathname.replace(/\/$/, '') === '/preferences';
 const defaultDescription = 'Review key concepts and prepare your answers for technical interviews across different roles and companies.';
 const description = isPreferences ? t('Personaliza el idioma y los sonidos de la aplicación.') : defaultDescription;
-const pageTitle = isPreferences ? `${t('Preferencias')} · Tech Interview Prep` : 'Tech Interview Prep · Home';
+const pageTitle = isPreferences ? `${t('Preferencias')} · IT Interview Help` : 'IT Interview Help · Home';
 const canonicalUrl = isPreferences && Astro.site ? new URL('preferences', Astro.site).href : Astro.site?.href;
 const canvasColor = designTokens.match(/--canvas:\s*(#[\da-fA-F]{6})\s*;/)?.[1];
 if (!canvasColor) throw new Error('The canvas design token must define a six-digit hex color.');
@@ -32,7 +32,7 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} data-base-url={Astro.site?.href} />}
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
     <meta name="theme-color" content={canvasColor} />
-    <meta property="og:title" content={isPreferences ? pageTitle : 'Tech Interview Prep · Foundations for technical interviews'} />
+    <meta property="og:title" content={isPreferences ? pageTitle : 'IT Interview Help · Foundations for technical interviews'} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

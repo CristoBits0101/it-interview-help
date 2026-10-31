@@ -271,9 +271,9 @@ const spanishToEnglish: Record<string, string> = {
 
 Object.assign(spanishToEnglish, {
   'Idioma': 'Language',
-  'Tech Interview Prep. Inicio': 'Tech Interview Prep. Home',
+  'IT Interview Help. Inicio': 'IT Interview Help. Home',
   'Fundamentos para entrevistas técnicas': 'Foundations for technical interviews',
-  'Tech Interview Prep · Fundamentos para entrevistas técnicas': 'Tech Interview Prep · Foundations for technical interviews',
+  'IT Interview Help · Fundamentos para entrevistas técnicas': 'IT Interview Help · Foundations for technical interviews',
   'Repasa conceptos clave y prepara tus respuestas para entrevistas técnicas de distintos perfiles y empresas.': 'Review key concepts and prepare your answers for technical interviews across different roles and companies.',
   'Temas para repasar': 'Topics to review',
   'Barbara Liskov y Jeannette Wing': 'Barbara Liskov and Jeannette Wing',

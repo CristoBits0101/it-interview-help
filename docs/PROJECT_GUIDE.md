@@ -29,7 +29,7 @@ Los cuatro botones de etapa retiran los ordinales 1–4. El rango de años se al
 
 ## 24 de octubre de 2026 — favicon minimalista reutilizable
 
-Tech Interview Prep conserva CodeXml de Lucide como símbolo de código minimalista. El alias `brand` de Icon.astro permite reutilizarlo sin vincularlo al área de programación. El favicon SVG de 32 px utiliza el token verde y un trazo de 2.25 unidades para mejorar su definición en pestañas pequeñas. Icon.astro conserva el trazo anterior de 1.65 por defecto para los otros pictogramas. El recurso se genera en src/pages/favicon.svg.ts y no añade icono a la marca visible ni altera Home.
+IT Interview Help conserva CodeXml de Lucide como símbolo de código minimalista. El alias `brand` de Icon.astro permite reutilizarlo sin vincularlo al área de programación. El favicon SVG de 32 px utiliza el token verde y un trazo de 2.25 unidades para mejorar su definición en pestañas pequeñas. Icon.astro conserva el trazo anterior de 1.65 por defecto para los otros pictogramas. El recurso se genera en src/pages/favicon.svg.ts y no añade icono a la marca visible ni altera Home.
 
 
 ## 24 de octubre de 2026 — separación vertical de Home reducida a 21 px
@@ -205,13 +205,13 @@ Estado documentado: **22 de octubre de 2026**. Lee también [AGENTS.md](../AGENT
 
 ## 1. Propósito y preferencias
 
-Tech Interview Prep prepara fundamentos para entrevistas técnicas de distintos perfiles y empresas. Prioriza conceptos claros, descripciones cortas y recuperación activa de lo aprendido. No pretende enseñar exhaustivamente todas las áreas desde cero ni reproducir un currículo universitario completo. No es una aplicación de escritorio ni una plataforma que ejecute modelos de IA. El nombre elegido el 22 de octubre de 2026 es Tech Interview Prep.
+IT Interview Help prepara fundamentos para entrevistas técnicas de distintos perfiles y empresas. Prioriza conceptos claros, descripciones cortas y recuperación activa de lo aprendido. No pretende enseñar exhaustivamente todas las áreas desde cero ni reproducir un currículo universitario completo. No es una aplicación de escritorio ni una plataforma que ejecute modelos de IA. El nombre actual es IT Interview Help.
 
 La interfaz de Home y Software Design está disponible en español e inglés. El selector de idiomas es un `<select>` nativo con las opciones Español y English en la cabecera después del buscador. Sustituye los dos botones ES / EN. El español es el idioma inicial y la elección se conserva en `tech-training:language:v1`. El cambio mantiene la ruta actual y actualiza títulos, navegación, tarjetas, niveles, ayudas y mensajes dinámicos. Mantén las dos versiones al editar contenido visible. Los textos bilingües se centralizan en `src/scripts/i18n.ts`. Por la última petición del 21 de octubre, los nombres de patrones de diseño muestran solo su traducción española al elegir Español y solo su nombre inglés al elegir English, sin combinar ambos. Las siglas técnicas conservan su notación.
 
 El usuario pidió un diseño profesional, moderno y minimalista, con especial cuidado por la simetría, márgenes y alineación. Los enlaces de navegación usan nombres completos en el idioma elegido y conservan Title Case. Las etiquetas inglesas canónicas se mantienen en los datos para resolver rutas y persistencia. Las siglas propias de conceptos técnicos, como SQL, RPC o LLM, pueden formar parte de las lecciones.
 
-La marca del sidebar es exactamente **Tech Interview Prep**. El usuario retiró el logo gráfico, el guion y el subtítulo «Un concepto. Un paso más.». También retiró el separador horizontal, la biblioteca de exploración/guardados y el pie de progreso. El borde vertical entre sidebar y contenido y las guías de indentación de los submenús siguen presentes. La nueva portada Home sustituye al antiguo hero y la franja de seis rutas. La etiqueta `Library` y el acceso al repaso rápido global también se eliminaron. Más adelante se retiró el botón de repaso de la cabecera de estudio; su código y diálogo se conservan.
+La marca del sidebar es exactamente **IT Interview Help**. El usuario retiró el logo gráfico, el guion y el subtítulo «Un concepto. Un paso más.». También retiró el separador horizontal, la biblioteca de exploración/guardados y el pie de progreso. El borde vertical entre sidebar y contenido y las guías de indentación de los submenús siguen presentes. La nueva portada Home sustituye al antiguo hero y la franja de seis rutas. La etiqueta `Library` y el acceso al repaso rápido global también se eliminaron. Más adelante se retiró el botón de repaso de la cabecera de estudio; su código y diálogo se conservan.
 
 ## 2. Tipografía
 

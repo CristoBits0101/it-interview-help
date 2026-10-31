@@ -1,14 +1,14 @@
-# Tech Interview Prep
+# IT Interview Help
 
 Web estática responsive para preparar entrevistas técnicas y repasar ingeniería de software. Construida con Astro 7, TypeScript y CSS; sin backend, cuentas ni servicios de IA necesarios para usarla.
 
 El contenido se centra en fundamentos para entrevistas de distintos perfiles y empresas. No pretende enseñar exhaustivamente todas las áreas desde cero ni sustituir una formación completa.
 
-## Nombre y dominios propuestos / Proposed name and domains
+## Nombre y dominios / Name and domains
 
-**ES:** «Computer Science Interviews» es un nombre candidato pendiente de decisión. Gemini propuso `computer-science-interviews.dev` y `computer-science-interviews.com`; estas variantes no se han comprobado. Una consulta previa a RDAP de Verisign para `computerscienceinterviews.com` (sin guiones) devolvió HTTP 404, por lo que parecía no registrado en ese momento, pendiente de confirmación por un registrador. No se ha completado una comprobación registral de marcas ni se han verificado ventajas de SEO. No se confirma ninguna compra de dominio ni un cambio definitivo de nombre; la marca actual sigue siendo Tech Interview Prep.
+**ES:** La marca elegida es «IT Interview Help» y el nombre propuesto para el repositorio es `it-interview-help`. La carpeta local y los remotos existentes conservan sus nombres. «Computer Science Interviews» fue una propuesta anterior. Gemini propuso `computer-science-interviews.dev` y `computer-science-interviews.com`; estas variantes no se han comprobado. Una consulta previa a RDAP de Verisign para `computerscienceinterviews.com` (sin guiones) devolvió HTTP 404, por lo que parecía no registrado en ese momento, pendiente de confirmación por un registrador. No se ha completado una comprobación registral de marcas ni se han verificado ventajas de SEO. No se confirma ninguna compra de dominio.
 
-**EN:** “Computer Science Interviews” is a candidate name awaiting a decision. Gemini proposed `computer-science-interviews.dev` and `computer-science-interviews.com`; these variants have not been checked. An earlier Verisign RDAP query for `computerscienceinterviews.com` (without hyphens) returned HTTP 404, so it appeared unregistered at that time, pending confirmation by a registrar. No trademark registry check has been completed and no SEO advantages have been verified. No domain purchase or final name change is confirmed; the current brand remains Tech Interview Prep.
+**EN:** The chosen brand is “IT Interview Help” and the proposed repository name is `it-interview-help`. The local folder and existing remotes retain their names. “Computer Science Interviews” was an earlier proposal. Gemini proposed `computer-science-interviews.dev` and `computer-science-interviews.com`; these variants have not been checked. An earlier Verisign RDAP query for `computerscienceinterviews.com` (without hyphens) returned HTTP 404, so it appeared unregistered at that time, pending confirmation by a registrar. No trademark registry check has been completed and no SEO advantages have been verified. No domain purchase is confirmed.
 
 ## Home y contenido
 

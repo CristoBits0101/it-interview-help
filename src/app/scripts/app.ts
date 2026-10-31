@@ -175,7 +175,7 @@ function refreshView() {
   const homeLink = $('[data-home-link]');
   if (isHome) homeLink.setAttribute('aria-current', 'page');
   else homeLink.removeAttribute('aria-current');
-  document.title = isPreferences ? `${translate('Preferencias', language)} · Tech Interview Prep` : isHome ? `Tech Interview Prep · ${translate('Home', language)}` : mode === 'search' ? `${translate('Búsqueda', language)} · Tech Interview Prep` : `${translate(mode === 'resource' ? currentResource!.dataset.resourceTitle! : mode === 'pending' ? currentPending!.dataset.pendingTitle! : selectedSection.dataset.moduleTitle!, language)} · Tech Interview Prep`;
+  document.title = isPreferences ? `${translate('Preferencias', language)} · IT Interview Help` : isHome ? `IT Interview Help · ${translate('Home', language)}` : mode === 'search' ? `${translate('Búsqueda', language)} · IT Interview Help` : `${translate(mode === 'resource' ? currentResource!.dataset.resourceTitle! : mode === 'pending' ? currentPending!.dataset.pendingTitle! : selectedSection.dataset.moduleTitle!, language)} · IT Interview Help`;
   document.querySelector<HTMLMetaElement>('meta[property="og:title"]')!.content = document.title;
   let visibleCount = 0;
   sections.forEach(section => {
