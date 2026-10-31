@@ -9,7 +9,7 @@ import '../styles/java-versions.css';
   <PageHeading id="java-title" class="java-heading">
     <span slot="title"><Text es="Historial de Versiones" en="Version History" /></span>
     <Text as="p" es="Java 1.0–26 · Año de lanzamiento y mejoras principales de cada versión." en="Java 1.0–26 · Release year and key improvements in each version." />
-  
+
   </PageHeading>
   <div class="java-release-grid">
     {javaSummary.map(release => <JavaReleaseCard release={release} />)}

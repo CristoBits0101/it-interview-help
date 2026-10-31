@@ -1,19 +1,21 @@
 @layer components {
   #sound-toggle svg { width: 1rem; height: 1rem; }
-  .sound-controls { display: flex; align-items: center; gap: var(--gap-control); }
-  #sound-toggle { width: var(--topbar-control-size); height: var(--topbar-control-size); border: 1px solid var(--control-border); border-radius: 9999px; background: var(--surface-soft); color: var(--text-soft); }
-  #sound-toggle:hover, #sound-toggle:focus-visible { background: var(--surface-tinted); color: var(--ink); }
-  #sound-settings { flex: 0 0 auto; width: max-content; padding: 0; margin: 0; border: 0; }
-  .sound-settings-toggle { display: grid; place-items: center; width: max-content; min-width: 0; min-height: 44px; padding: 0; margin: 0; border: 0; line-height: 1; list-style: none; color: var(--text-soft); border-radius: var(--radius-control); }
-  .sound-settings-toggle::-webkit-details-marker { display: none; }
-  .sound-settings-toggle { background: transparent; }
-  #sound-settings[open] .sound-settings-toggle { color: var(--green); }
-  .sound-settings-toggle:hover { color: var(--ink); background: transparent; }
-  .sound-settings-panel { position: absolute; z-index: 30; inset-inline-end: 0; top: calc(100% + var(--gap-compact)); width: min(16rem, calc(100vw - 2 * var(--space-page))); display: flex; flex-direction: column; gap: var(--space-compact); padding: var(--space-compact); border: 1px solid var(--line); border-radius: var(--radius-control); background: var(--paper); color: var(--ink); box-shadow: 0 4px 12px color-mix(in srgb, var(--ink) 12%, transparent); font-size: var(--font-body); }
-  .sound-volume-row { display: flex; align-items: center; gap: var(--gap-control); }
-  #sound-volume { min-width: 0; width: 100%; min-height: 44px; accent-color: var(--green); cursor: pointer; }
+  .sound-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-horizontal); width: 100%; min-width: 0; }
+  .sound-volume-control { display: flex; flex: 1 1 12rem; align-items: center; gap: var(--gap-control); min-width: 0; padding-inline: var(--space-control); border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--paper); }
+  #sound-toggle { flex: 0 0 44px; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--text-soft); }
+  #sound-toggle:hover { border-color: var(--border-accent); background: var(--surface-hover); }
+  #sound-toggle[aria-pressed='true'] { border-color: var(--control-border); background: var(--surface-selected); color: var(--green); }
+  #sound-volume { flex: 1 1 0; min-width: 0; width: 100%; min-height: 44px; margin: 0; accent-color: color-mix(in srgb, var(--accent) 75%, var(--paper)); cursor: pointer; }
   #sound-volume-value { min-width: 4ch; text-align: end; }
+  #sound-volume:disabled { accent-color: var(--text-secondary); cursor: default; }
+  .sound-volume-control:has(:disabled) { color: var(--text-secondary); }
+  .sound-volume-control:has(#sound-volume:enabled) { border-color: var(--control-border); background: var(--surface-selected); }
   #sound-status { color: var(--text-secondary); }
+  .sound-volume-control { transition: border-color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease); }
+  @media (hover: hover) {
+    .sound-volume-control:has(#sound-volume:enabled):hover { border-color: var(--border-accent); background: var(--surface-hover); }
+    #sound-volume:enabled:hover { accent-color: color-mix(in srgb, var(--accent) 85%, var(--paper)); }
+  }
 }
 
 @layer responsive {

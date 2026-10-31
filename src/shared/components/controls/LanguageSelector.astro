@@ -1,7 +1,4 @@
----
-import Icon from '../primitives/Icon.astro';
----
-<div class="language-selector">
-  <button type="button" id="language-toggle" aria-label="Switch to Spanish" lang="en" translate="no">English</button>
-  <Icon name="languages" size={14} />
+<div class="language-selector" id="language-selector" role="radiogroup" aria-labelledby="preferences-language-title">
+  <label lang="es" translate="no"><input class="sr-only" type="radio" name="language" id="language-es" value="es" data-language="es" /><span>Español</span></label>
+  <label lang="en" translate="no"><input class="sr-only" type="radio" name="language" id="language-en" value="en" data-language="en" checked /><span>English</span></label>
 </div>

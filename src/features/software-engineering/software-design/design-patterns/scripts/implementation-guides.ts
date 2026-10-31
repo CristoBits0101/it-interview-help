@@ -41,7 +41,7 @@ export function initializeImplementationGuides(library: HTMLElement, getLanguage
       try {
         await navigator.clipboard.writeText(dialog.querySelector<HTMLElement>('[data-guide-code]')!.textContent!);
         status.textContent = translate('Código copiado.', getLanguage());
-        document.dispatchEvent(new CustomEvent('interaction-feedback', { detail: 'navigate' }));
+        document.dispatchEvent(new CustomEvent('interaction-feedback', { detail: { cue: 'navigate', source: event } }));
       } catch {
         status.textContent = translate('Selecciona el código para copiarlo.', getLanguage());
       }

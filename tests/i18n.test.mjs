@@ -100,7 +100,8 @@ test('DOM localization preserves canonical titles, bilingual guide text and acce
   const code = new ElementFixture('System.out.println("Server");', { translate: 'no' });
   const guide = new ElementFixture('Create the object', {}, { i18nEs: 'Crea el objeto', i18nEn: 'Create the object' });
   const stepButton = new ElementFixture('1', { title: 'Create the object' }, { i18nEs: 'Crea el objeto', i18nEn: 'Create the object', i18nAttribute: 'title' });
-  const toggle = new ElementFixture('English', { translate: 'no', lang: 'en', 'aria-label': 'Switch to Spanish' });
+  const toggle = new ElementFixture('English', { translate: 'no', lang: 'en' });
+  const options = [{ value: 'es', checked: false }, { value: 'en', checked: true }];
   const root = { lang: 'en' };
   const nodes = [heading, concept, code, guide, stepButton, toggle].map(element => element.text);
   globalThis.NodeFilter = { SHOW_TEXT: 4 };
@@ -108,9 +109,10 @@ test('DOM localization preserves canonical titles, bilingual guide text and acce
     documentElement: root,
     body: {},
     createTreeWalker() { let position = 0; return { nextNode: () => nodes[position++] ?? null }; },
-    querySelector: selector => selector === '#language-toggle' ? toggle : null,
+    querySelector: () => null,
     querySelectorAll(selector) {
       if (selector === '[lang]') return [toggle];
+      if (selector === '[data-language]') return options;
       if (selector === '[aria-label], [title], [placeholder], meta[content]') return [stepButton, toggle];
       if (selector === '[data-i18n-es][data-i18n-en]') return [guide, stepButton];
       return [];
@@ -125,8 +127,9 @@ test('DOM localization preserves canonical titles, bilingual guide text and acce
       assert.equal(guide.textContent, language === 'es' ? 'Crea el objeto' : 'Create the object');
       assert.equal(stepButton.title, guide.textContent);
       assert.equal(stepButton.textContent, '1');
-      assert.equal(toggle.textContent, language === 'es' ? 'Español' : 'English');
-      assert.equal(toggle.getAttribute('aria-label'), language === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish');
+      assert.equal(toggle.textContent, 'English');
+      assert.equal(options.find(option => option.checked)?.value, language);
+      assert.equal(options.filter(option => option.checked).length, 1);
       assert.equal(code.textContent, 'System.out.println("Server");');
     }
   } finally {

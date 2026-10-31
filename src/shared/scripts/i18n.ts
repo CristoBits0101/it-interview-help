@@ -42,6 +42,7 @@ export function applyStaticTranslations(language: Language) {
     const text = language === 'en' ? element.dataset.i18nEn : element.dataset.i18nEs;
     if (text !== undefined) {
       if (element.dataset.i18nAttribute === 'title') element.title = text;
+      else if (element.dataset.i18nAttribute === 'data-navigation-description') element.dataset.navigationDescription = text;
       else element.textContent = text;
     }
   });
@@ -61,12 +62,9 @@ export function applyStaticTranslations(language: Language) {
       source.setAttribute('aria-label', sourceDescription(publisher, sourceTitle, conceptTitle, language));
     });
   });
-  const toggle = document.querySelector<HTMLButtonElement>('#language-toggle');
-  if (toggle) {
-    toggle.textContent = language === 'es' ? 'Español' : 'English';
-    toggle.lang = language;
-    toggle.setAttribute('aria-label', language === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish');
-  }
+  document.querySelectorAll<HTMLInputElement>('[data-language]').forEach(option => {
+    option.checked = option.value === language;
+  });
   document.querySelectorAll<HTMLElement>('[data-area-translation]').forEach(element => {
     element.textContent = translate(element.dataset.areaTranslation!, language);
   });

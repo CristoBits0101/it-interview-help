@@ -7,6 +7,7 @@ import { initializeImplementationGuides } from '../../features/software-engineer
 import { initializeReview } from '../../shared/scripts/review';
 import { initializeDialogs } from '../../shared/scripts/dialogs';
 import { initializeNavigation } from '../../shared/scripts/navigation';
+import { normalizeSearch as normalize } from '../../shared/lib/search';
 import { initializeInteractionSounds } from '../../shared/scripts/interaction-sounds';
 import { initializeCareerPaths } from '../../features/home/scripts/home';
 import { initializeCareerTooltips } from '../../features/home/scripts/career-tooltips';
@@ -14,7 +15,7 @@ import { applyStaticTranslations, getSavedLanguage, saveLanguage, translate, tra
 
 let language: Language = getSavedLanguage();
 applyStaticTranslations(language);
-initializeNavigation();
+const filterNavigation = initializeNavigation();
 const refreshAiEcosystem = initializeAiEcosystem();
 const refreshCareerSelection = initializeCareerPaths();
 initializeCareerTooltips();
@@ -44,7 +45,6 @@ const resourceSections = $$<HTMLElement>('[data-resource-route]');
 let currentResource: HTMLElement | undefined;
 const cards = $$<HTMLElement>('.concept-card');
 const validIds = new Set(cards.map(card => card.dataset.conceptId!));
-const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 const resourceSearch = new Map([...resourceSections, ...$$<HTMLElement>('[data-learning-guide]')].map(section => [section.dataset.resourceRoute ?? section.id, normalize(`${section.textContent} ${Array.from(section.querySelectorAll<HTMLElement>('[data-i18n-es]'), item => `${item.dataset.i18nEs} ${item.dataset.i18nEn}`).join(' ')}`)]));
 function setLevel(index: number) {
   currentLevelIndex = Math.max(0, Math.min(levelOptions.length - 1, index));
@@ -89,6 +89,7 @@ function refreshProgress() {
 }
 
 function refreshView() {
+  filterNavigation(search.value);
   const query = normalize(search.value.trim());
   searchClear.hidden = !search.value;
   const selectedSection = sections.find(section => section.dataset.moduleId === currentModule)!;
@@ -139,7 +140,7 @@ function refreshView() {
     document.querySelector<HTMLMetaElement>('meta[property="og:url"]')!.content = canonical.href;
   }
   const descriptionMeta = document.querySelector<HTMLMetaElement>('meta[name=description]')!;
-  descriptionMeta.content = translate(isPreferences ? 'Personaliza el idioma y los sonidos de la aplicación.' : descriptionMeta.dataset.defaultDescription!, language);
+  descriptionMeta.content = translate(isPreferences ? 'Configura la aplicación según tus preferencias.' : descriptionMeta.dataset.defaultDescription!, language);
   document.querySelector<HTMLMetaElement>('meta[property="og:description"]')!.content = descriptionMeta.content;
   const isGrouped = mode === 'search';
   $('#home-view').hidden = !isHome;
@@ -249,7 +250,6 @@ function goToRoute(initial = false) {
     if (route && route !== 'home' && !homeAnchor) history.replaceState(null, '', '/');
   }
   mode = routeMode;
-  $<HTMLDetailsElement>('#sound-settings').open = routeMode === 'preferences';
   navigationDrawer.close();
   refreshView();
   if (homeAnchor) requestAnimationFrame(() => homeAnchor.scrollIntoView({ block: 'start' }));
@@ -314,9 +314,11 @@ initializeStudyCards($('#concept-library'), learnId => {
 });
 
 initializeReview({ cards, learned, getLanguage: () => language, onChange: () => { persist(); refreshProgress(); }, onNotice: say, trigger: reviewModuleButton });
-const languageToggle = $<HTMLButtonElement>('#language-toggle');
-languageToggle.addEventListener('click', () => {
-  language = language === 'es' ? 'en' : 'es';
+const languageSelector = $('#language-selector');
+languageSelector.addEventListener('change', event => {
+  const option = event.target;
+  if (!(option instanceof HTMLInputElement) || !option.checked || (option.value !== 'es' && option.value !== 'en')) return;
+  language = option.value;
   saveLanguage(language);
   applyStaticTranslations(language);
   refreshAiEcosystem();

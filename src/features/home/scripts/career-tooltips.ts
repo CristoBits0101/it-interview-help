@@ -76,7 +76,7 @@ export function initializeCareerTooltips() {
   document.addEventListener('pointerdown', event => {
     if (active && event.target instanceof Node && !active.group.contains(event.target)) hide();
   });
-  document.getElementById('language-toggle')?.addEventListener('click', hide);
+  document.getElementById('language-selector')?.addEventListener('change', hide);
   window.addEventListener('resize', hide);
   window.addEventListener('popstate', hide);
 }

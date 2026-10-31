@@ -1,5 +1,3 @@
-import { translate } from '../lib/translations';
-
 export function initializeNavigationDescriptions() {
   const sidebar = document.getElementById('sidebar');
   const tooltip = document.getElementById('navigation-description-tooltip');
@@ -24,7 +22,7 @@ export function initializeNavigationDescriptions() {
     cancelClose();
     if (active !== trigger) active?.removeAttribute('aria-describedby');
     active = trigger;
-    tooltip.textContent = translate(trigger.dataset.navigationDescription!, document.documentElement.lang === 'es' ? 'es' : 'en');
+    tooltip.textContent = trigger.dataset.navigationDescription!;
     trigger.setAttribute('aria-describedby', tooltip.id);
     if (!tooltip.matches(':popover-open')) tooltip.showPopover();
     const anchor = trigger.getBoundingClientRect();
@@ -77,7 +75,7 @@ export function initializeNavigationDescriptions() {
   document.addEventListener('pointerdown', event => {
     if (active && event.target instanceof Node && !active.contains(event.target) && !tooltip.contains(event.target)) hide();
   });
-  document.getElementById('language-toggle')?.addEventListener('click', hide);
+  document.getElementById('language-selector')?.addEventListener('change', hide);
   document.getElementById('sidebar-close')?.addEventListener('click', hide);
   document.addEventListener('scroll', hide, true);
   window.addEventListener('resize', hide);

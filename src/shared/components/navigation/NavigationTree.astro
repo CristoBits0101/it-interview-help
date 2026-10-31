@@ -9,9 +9,9 @@ const alphabetical = ['/Development%20Domains', '/Programming%20Languages'].some
 ---
 <ul class:list={['navigation-tree', { 'navigation-root': depth === 0 }]} data-navigation-alphabetical={alphabetical || undefined}>
   {(alphabetical ? [...nodes].sort((a, b) => t(a.label).localeCompare(t(b.label), 'en')) : nodes).map(node => (
-    <li class:list={{ 'navigation-described': Boolean(node.description) }}>
-      {node.description && (
-        <button type="button" class="navigation-description-trigger" aria-label={t(node.label)} data-navigation-description={t(node.description)} />
+    <li class:list={{ 'navigation-described': depth > 0 && Boolean(node.description) }}>
+      {depth > 0 && node.description && (
+        <button type="button" class="navigation-description-trigger" aria-label={t(node.label)} data-navigation-description={node.description.en} data-i18n-es={node.description.es} data-i18n-en={node.description.en} data-i18n-attribute="data-navigation-description" />
       )}
       {!node.children?.length && !node.href ? (
         <span class="navigation-row navigation-disabled" aria-disabled="true">

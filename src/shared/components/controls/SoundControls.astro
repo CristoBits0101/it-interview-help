@@ -2,20 +2,16 @@
 import Icon from '../primitives/Icon.astro';
 import { t } from '../../lib/translations';
 import '../../styles/sound-controls.css';
-interface Props { expanded?: boolean }
-const { expanded = false } = Astro.props;
 ---
 <div class="sound-controls">
   <button type="button" id="sound-toggle" class="icon-button" aria-pressed="false" aria-label={t('Activar sonidos')} title={t('Activar sonidos')}>
     <span data-sound-icon="off"><Icon name="sound-off" size={18} /></span>
     <span data-sound-icon="on" hidden><Icon name="sound-on" size={18} /></span>
   </button>
-  <details id="sound-settings" open={expanded}>
-    <summary class="sound-settings-toggle" aria-label={t('Volumen de los sonidos')} title={t('Volumen de los sonidos')}><Icon name="sound-settings" size={16} /></summary>
-    <div class="sound-settings-panel">
-      <label for="sound-volume">{t('Volumen de los sonidos')}</label>
-      <div class="sound-volume-row"><input id="sound-volume" type="range" min="0" max="100" step="1" value="30" /><output id="sound-volume-value" for="sound-volume">30%</output></div>
-      <p id="sound-status" role="status" hidden></p>
-    </div>
-  </details>
+  <div class="sound-volume-control">
+    <label class="sr-only" for="sound-volume">{t('Volumen de los sonidos')}</label>
+    <input id="sound-volume" type="range" min="0" max="100" step="1" value="30" disabled />
+    <output id="sound-volume-value" for="sound-volume">30%</output>
+  </div>
 </div>
+<p id="sound-status" role="status" hidden></p>

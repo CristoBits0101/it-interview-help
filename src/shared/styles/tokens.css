@@ -58,7 +58,7 @@
     --size-navigation-icon: 18px;
     --gap-navigation-row: var(--space-navigation-row);
     --size-navigation-dot: 4px;
-    --size-navigation-description-target: 12px;
+    --size-navigation-description-target: 24px;
     --space-navigation-indent: 12px;
     --gap-navigation-indent: calc(var(--space-navigation-indent) / 2);
     --space-page: 42px;

@@ -6,11 +6,13 @@ import { fileURLToPath } from 'node:url';
 import { publishedTracks, pendingPages, publishedGuides } from '../src/app/data/published-catalog.ts';
 import { patternGuides } from '../src/features/software-engineering/software-design/design-patterns/data/index.ts';
 import { t } from '../src/shared/lib/translations.ts';
+import { careerGrowthTargets } from '../src/features/home/data/career-growth.ts';
+import { careerGrowthResources } from '../src/features/home/data/career-growth-resources.ts';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const outputRoot = resolve(projectRoot, 'dist');
 const budgets = JSON.parse(readFileSync(new URL('./build-budgets.json', import.meta.url), 'utf8'));
-assert(existsSync(join(outputRoot, 'index.html')), 'Run npm run build before checking the artifact.');
+assert(existsSync(join(outputRoot, 'index.html')), 'Run pnpm run build before checking the artifact.');
 const collectFiles = directory => readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
   const path = join(directory, entry.name);
   return entry.isDirectory() ? collectFiles(path) : [path];
@@ -42,6 +44,20 @@ const assertRenderedText = (tag, expected, label) => assert.equal(normalizeText(
 const ids = tags.flatMap(tag => tag.attributes.id ? [tag.attributes.id] : []);
 assert.equal(new Set(ids).size, ids.length, 'Duplicate HTML IDs');
 const idSet = new Set(ids);
+const growthLinks = tags.filter(tag => tag.attributes['data-career-growth']);
+assert.equal(growthLinks.length, careerGrowthTargets.length);
+for (const tag of growthLinks) {
+  const resource = careerGrowthResources[tag.attributes['data-career-growth']];
+  assert.equal(tag.name, 'a');
+  assert.equal(tag.attributes.href, resource.url);
+  assert.equal(tag.attributes.hreflang, resource.language);
+  assert.equal(tag.attributes.target, '_blank');
+  assert.equal(tag.attributes.rel, 'noopener noreferrer');
+  assert.equal(tag.attributes['aria-pressed'], undefined);
+  assert.equal(tag.attributes['aria-controls'], undefined);
+  assert(renderedText(tag).includes(t('Se abre en una pestaña nueva')));
+}
+assert(!idSet.has('growth-preparation'));
 assert.equal(tags.find(tag => tag.name === 'html')?.attributes.lang, 'en', 'The static document must default to English.');
 assert.equal(tags.find(tag => tag.name === 'body')?.attributes.lang, 'en', 'The static body must use the document language.');
 assert.match(html, /Foundations for technical interviews/);
@@ -64,7 +80,7 @@ for (const [page, preferencesVisible] of [[html, false], [preferencesHtml, true]
   assert(!/data-(?:resource|pending)-route/.test(preferencesSection), 'Preferences is not educational content.');
   assert(preferenceFooter.includes('href="/preferences"') && preferenceFooter.includes('Preferences'));
   assert(!preferenceFooter.includes('<details') && !topbar.includes('href="/preferences"'));
-  for (const id of ['language-toggle', 'sound-toggle', 'sound-volume', 'sound-settings']) {
+  for (const id of ['language-selector', 'language-es', 'language-en', 'sound-toggle', 'sound-volume']) {
     assert.equal(page.split('id="' + id + '"').length - 1, 1, 'Unique preference control: ' + id);
     assert(!preferenceFooter.includes('id="' + id + '"') && !topbar.includes('id="' + id + '"'));
     assert(page.indexOf('id="' + id + '"') > page.indexOf('id="preferences-view"'));
@@ -77,7 +93,7 @@ for (const [page, preferencesVisible] of [[html, false], [preferencesHtml, true]
   assert(navigationHeadingIndex < searchIndex && searchIndex < navigationIndex);
 }
 assert.match(preferencesHtml, /<title>Preferences · IT Interview Help<\/title>/);
-assert(preferencesHtml.includes('Customize the application language and sounds.'));
+assert(preferencesHtml.includes('Configure the application according to your preferences.'));
 assert(!existsSync(join(outputRoot, 'settings/index.html')), 'Only the Preferences route is published.');
 const csp = tags.find(tag => tag.name === 'meta' && tag.attributes['http-equiv']?.toLowerCase() === 'content-security-policy')?.attributes.content;
 assert(csp, 'The built document must carry the static CSP.');

@@ -1,6 +1,6 @@
 import { preferenceKeys, readJsonPreference, readSessionJsonPreference, writeSessionPreference, restoreCareerStage, writePreference } from '../../../shared/lib/preferences';
 import { resolveCareerSelection, restoreCareerSelectionState, toggleCareerSelection, type CareerSelectionState } from '../lib/career-selection';
-import { reconcileCareerScope, toggleCareerScope, type CareerScope } from '../lib/career-scope';
+import { toggleCareerScope, type CareerScope } from '../lib/career-scope';
 import { initializeCareerGrowth } from './career-growth';
 import { initializeHorizontalCarousels } from './horizontal-carousel';
 import { restoreCareerView, retainCareerView } from '../lib/career-view';
@@ -31,20 +31,13 @@ export function initializeCareerPaths() {
   let view = restoreCareerView(directionOptions, profileIds, validStageIds, savedSession, { ...initialSelection, stageId: savedStageId ?? stages[0].dataset.careerStage! });
   let noticeKind: 'stage' | 'growth' | null = null;
   const carousels = initializeHorizontalCarousels(container);
-  const growth = initializeCareerGrowth(id => {
-    if (!selection.profileId) selection = { directionId: view.directionId, profileId: view.profileId };
-    scope = toggleCareerScope(scope, { kind: 'growth', id });
-    noticeKind = 'growth';
-    writePreference(preferenceKeys.careerStage, JSON.stringify(null));
-    update();
-  });
+  const growth = initializeCareerGrowth();
 
   const update = () => {
     if (!selection.profileId) {
       scope = null;
       writePreference(preferenceKeys.careerStage, JSON.stringify(null));
     }
-    scope = reconcileCareerScope(scope, selection.profileId ?? view.profileId, growth.options);
     view = retainCareerView(directionOptions, profileIds, view, selection, scope?.kind === 'stage' ? scope.id : null);
     writeSessionPreference(preferenceKeys.careerStage, JSON.stringify({ ...selection, view }));
     const profileCarousel = document.getElementById('career-profile-options')?.closest<HTMLElement>('.career-choice-group');
@@ -67,8 +60,7 @@ export function initializeCareerPaths() {
     document.querySelectorAll<HTMLElement>('[data-career-notice]').forEach(notice => {
       notice.hidden = notice.dataset.careerNotice === 'stage' || notice.dataset.careerNotice !== noticeKind || scope?.kind !== noticeKind;
     });
-    const profile = profiles.find(button => button.dataset.careerProfile === view.profileId);
-    growth.update(scope, view.profileId, profile?.getAttribute('aria-label') ?? '', panels.find(panel => panel.dataset.careerPanel === view.profileId && panel.dataset.stage === 'senior'));
+    growth.update(view.profileId);
     carousels.refresh();
   };
   directions.forEach(button => button.addEventListener('click', () => {

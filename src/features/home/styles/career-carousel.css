@@ -9,7 +9,6 @@
   .career-carousel-viewport { --carousel-item-width: min(var(--carousel-max-width), calc((100% - (var(--carousel-columns) - 1) * var(--gap-horizontal)) / var(--carousel-columns))); display: grid; grid-auto-flow: column; grid-auto-columns: var(--carousel-item-width); max-inline-size: calc(5 * var(--carousel-max-width) + 4 * var(--gap-horizontal)); gap: var(--gap-control); min-width: 0; overflow-x: auto; overscroll-behavior-inline: contain; scroll-snap-type: x mandatory; scrollbar-width: none; column-gap: var(--gap-horizontal); }
   .career-carousel-viewport::-webkit-scrollbar { display: none; }
   .career-carousel-viewport > [data-carousel-item] { scroll-snap-align: start; scroll-margin: 0; min-width: 0; }
-  .career-carousel-viewport > [data-carousel-item]:focus-visible { outline-offset: -3px; }
   .career-area-option { min-height: 3rem; padding: var(--gap-control) var(--space-control); border: 1px solid var(--line); border-radius: 9999px; background: var(--paper); color: var(--text-secondary); font-size: var(--font-body); font-weight: 400; line-height: var(--line-body); }
   .career-area-option, .career-carousel-controls button { transition: border-color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease); }
   .career-area-option:hover { border-color: var(--border-accent); background: var(--surface-hover); }

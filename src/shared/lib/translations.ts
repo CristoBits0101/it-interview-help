@@ -5,14 +5,15 @@ import { careerRoleTranslations } from '../../features/home/data/career-role-tra
 import { careerResearchTranslations } from '../../features/home/data/career-research-translations';
 import { careerInteractionTranslations } from '../../features/home/data/career-interaction-translations';
 import { careerContentTranslations } from '../../features/home/data/career-content-translations';
-import { softwareEngineeringSectionTranslations } from '../../features/software-engineering/data/section-descriptions';
 export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
-  ...softwareEngineeringSectionTranslations,
+  'Computación Cuántica': 'Quantum Computing',
   'Preferencias': 'Preferences',
+  'No hay coincidencias en el menú.': 'No matches in the menu.',
+  'Recursos externos en inglés sobre responsabilidades y competencias. Los títulos y el alcance varían según la organización.': 'External resources in English about responsibilities and skills. Titles and scope vary by organization.',
   'Sonido': 'Sound',
-  'Personaliza el idioma y los sonidos de la aplicación.': 'Customize the application language and sounds.',
+  'Configura la aplicación según tus preferencias.': 'Configure the application according to your preferences.',
   'Cerrar': 'Close',
   'Documentación': 'Documentation',
   'Todas las funciones': 'All functions',
@@ -131,22 +132,17 @@ const spanishToEnglish: Record<string, string> = {
   'Prueba con otra palabra o cambia el nivel seleccionado.': 'Try another search term or change the selected level.',
   'Limpiar filtros': 'Clear filters', 'Siguiente módulo': 'Next module',
   'No hay conceptos con estos filtros Prueba con otra palabra o cambia el nivel seleccionado. Limpiar filtros': 'No concepts match these filters. Try another search term or change the selected level. Clear filters',
-  'Abrir menú de rutas': 'Open learning paths menu', 'TU MAPA DE APRENDIZAJE': 'YOUR LEARNING MAP',
-  'Organiza tu': 'Shape your', 'aprendizaje técnico.': 'technical learning.',
-  'Elige un perfil y una etapa para ver las áreas recomendadas. Estudia los conceptos disponibles y consulta sus fuentes originales.': 'Choose a role and career stage to see recommended areas. Study available concepts and explore their original sources.',
-  'Encuentra tu ruta': 'Find your path', 'Proceso de aprendizaje': 'Learning process',
-  'EL CONOCIMIENTO SE CONSTRUYE': 'KNOWLEDGE GROWS STEP BY STEP',
-  'Construye una base': 'Build a foundation', 'Comprende antes de especializarte.': 'Understand the basics before specializing.',
-  'Conecta las áreas': 'Connect related fields', 'Estudia según el perfil que buscas.': 'Choose topics that fit your goals.',
-  'Amplía tu impacto': 'Expand your impact', 'De resolver tareas a orientar equipos.': 'Grow from solving tasks to guiding teams.',
-  'Resumen del catálogo': 'Catalog overview', 'Áreas Principales': 'Core Areas', 'El mapa completo': 'The full learning map',
+  'Abrir menú de rutas': 'Open learning paths menu',
+
+  'Construye una base': 'Build a foundation',
+
+  'Resumen del catálogo': 'Catalog overview', 'Áreas Principales': 'Core Areas',
   'Rutas con Contenido': 'Learning Paths with Lessons', 'Disponibles para estudiar': 'Available to study',
   Conceptos: 'Concepts', 'Breves y conectados': 'Short and connected',
   'Perfiles Profesionales': 'Professional Profiles', 'Orientación por especialidad': 'Guidance by specialty',
   'Elige tu Dirección': 'Choose your Direction',
   'Amplía tu Alcance': 'Expand your Scope',
-  '01 / ELIGE TU DIRECCIÓN': '01 / CHOOSE YOUR DIRECTION', 'Un perfil. Varias áreas conectadas.': 'One role. Connected areas.',
-  'Selecciona un perfil y una etapa para orientar tu repaso. Refuerza los fundamentos y prepara cómo explicarlos.': 'Choose a role and career stage to guide your review. Strengthen your foundations and practice explaining them.',
+
   'Perfil profesional': 'Career path', '¿En qué etapa quieres trabajar?': 'Which career stage are you targeting?',
   'Panel de etapa cerrado.': 'Career stage panel closed.',
   Fundamentos: 'Foundations', 'Las etapas orientan el aprendizaje. Los títulos varían según la organización.': 'Stages guide learning. Job titles vary by organization.',
@@ -158,12 +154,12 @@ const spanishToEnglish: Record<string, string> = {
   'QUÉ DEBERÍAS PODER HACER': 'WHAT YOU SHOULD BE ABLE TO DO', 'DEMUESTRA LO APRENDIDO': 'SHOW WHAT YOU HAVE LEARNED',
   'Valora lo que puedes explicar y construir. Comprueba también que puedes mantenerlo. Leer los conceptos es solo el comienzo.': 'Focus on what you can explain and build. Make sure you can maintain it too. Reading is only the start.',
   'Recorrido orientativo': 'Suggested path', 'El mapa incluye áreas todavía sin lecciones. Solo los títulos con contenido disponible abren una ruta.': 'The map includes areas that do not have lessons yet. Only areas with available content open a learning path.',
-  '02 / AMPLÍA TU ALCANCE': '02 / EXPAND YOUR SCOPE', 'Después de Senior, el camino se abre.': 'After Senior, more paths open up.',
+
   'Puedes crecer en especialización técnica o en liderazgo y negocio. Analyst y Architect describen especialidades. Lead describe una responsabilidad de liderazgo. No son etapas obligatorias para todo el mundo.': 'You can grow through technical specialization or leadership and business. Analyst and Architect describe specialties. Lead describes a leadership responsibility. These are not required steps for everyone.',
   'Cómo interpretar estos niveles': 'How to read these levels',
   'Esta propuesta orienta el estudio. No representa una escala universal de puestos. Valora la autonomía y la complejidad del trabajo. Considera también el alcance de las decisiones. El título y los años no bastan para determinar una etapa. Las responsabilidades de análisis pueden aparecer desde las primeras etapas. La dirección tecnológica también exige gestión de personas y conocimientos de estrategia y negocio.': 'This guide helps you plan your learning. It is not a universal job ladder. Consider autonomy and work complexity. Also consider the scope of decisions. Job titles and years of experience alone do not define a stage. Analytical responsibilities can appear early. Technology leadership also calls for people management, strategy, and business knowledge.',
   'Referencias para las competencias y la progresión.': 'References for skills and career progression.',
-  '03 / PASA A LOS CONCEPTOS': '03 / EXPLORE THE CONCEPTS', 'Explora las rutas disponibles.': 'Explore available learning paths.',
+
   'rutas disponibles. Definiciones breves y fuentes originales para profundizar.': 'learning paths available. Concise definitions and original sources to explore further.',
   RUTA: 'PATH', módulo: 'module', módulos: 'modules',
   'Búfer': 'Buffer',

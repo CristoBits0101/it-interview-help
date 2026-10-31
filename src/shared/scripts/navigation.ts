@@ -1,6 +1,7 @@
 import { preferenceKeys, readJsonPreference, restoreKnownIds, writePreference } from '../lib/preferences';
 import { migrateBranchId } from '../../app/data/navigation-migrations';
 import { initializeNavigationDescriptions } from './navigation-descriptions';
+import { initializeNavigationSearch } from './navigation-search';
 
 function fitSidebarToLabels() {
   const sidebar = document.querySelector<HTMLElement>('#sidebar');
@@ -28,6 +29,10 @@ function fitSidebarToLabels() {
 
   const measure = () => {
     frame = 0;
+    const top = sidebar.querySelector<HTMLElement>('.sidebar-top');
+    const bottom = sidebar.querySelector<HTMLElement>('.sidebar-preferences');
+    sidebar.style.setProperty('--sidebar-sticky-top', `${top?.offsetHeight ?? 0}px`);
+    sidebar.style.setProperty('--sidebar-sticky-bottom', `${bottom?.offsetHeight ?? 0}px`);
     sidebar.querySelectorAll<HTMLElement>('.navigation-description-trigger').forEach(trigger => {
       const row = trigger.parentElement?.querySelector(':scope > .navigation-row, :scope > .navigation-branch > summary');
       const height = row?.getBoundingClientRect().height;
@@ -60,7 +65,7 @@ function fitSidebarToLabels() {
 
   new MutationObserver(schedule).observe(sidebar, { childList: true, characterData: true, attributes: true, attributeFilter: ['open', 'hidden'], subtree: true });
   const sizes = new ResizeObserver(schedule);
-  sidebar.querySelectorAll('.navigation-label, .nav-eyebrow, .brand span').forEach(label => sizes.observe(label));
+  sidebar.querySelectorAll('.navigation-label, .nav-eyebrow, .brand span, .sidebar-top, .sidebar-preferences').forEach(label => sizes.observe(label));
   document.fonts.ready.then(schedule);
   document.fonts.addEventListener('loadingdone', schedule);
   window.addEventListener('resize', schedule);
@@ -73,14 +78,29 @@ export function initializeNavigation() {
   const branches = Array.from(document.querySelectorAll<HTMLDetailsElement>('[data-nav-branch]'));
   const validIds = new Set(branches.map(branch => branch.dataset.navBranch!));
   const expanded = new Set(restoreKnownIds(readJsonPreference(preferenceKeys.navigation), validIds, migrateBranchId));
+  let filtering = false;
+  const filterTree = initializeNavigationSearch(document.getElementById('course-navigation')!);
+  const empty = document.getElementById('navigation-search-empty')!;
 
   branches.forEach(branch => { branch.open = expanded.has(branch.dataset.navBranch!); });
 
   const persistNavigation = () => {
+    if (filtering) return;
     const openIds = branches.filter(branch => branch.open).map(branch => branch.dataset.navBranch!);
+    if (openIds.length === expanded.size && openIds.every(id => expanded.has(id))) return;
+    expanded.clear();
+    openIds.forEach(id => expanded.add(id));
     writePreference(preferenceKeys.navigation, JSON.stringify(openIds));
   };
 
   branches.forEach(branch => branch.addEventListener('toggle', persistNavigation));
   window.addEventListener('pagehide', persistNavigation);
+  return (value: string) => {
+    const wasFiltering = filtering;
+    filtering = Boolean(value.trim());
+    const result = filterTree(value);
+    empty.hidden = !filtering || result.hasMatches;
+    if (filtering) branches.forEach(branch => { branch.open = result.openBranches.has(branch); });
+    else if (wasFiltering) branches.forEach(branch => { branch.open = expanded.has(branch.dataset.navBranch!); });
+  };
 }

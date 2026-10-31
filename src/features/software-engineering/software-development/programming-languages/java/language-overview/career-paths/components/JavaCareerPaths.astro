@@ -11,7 +11,7 @@ import '../../../styles/java-learning-paths.css';
   <PageHeading id="java-career-paths-title" class="java-path-heading">
     <span slot="title">{t('Career Paths')}</span>
     <Text as="p" value={{ es: 'Especializaciones profesionales relacionadas con Java. Las tecnologías mostradas son conexiones con el ecosistema y no una lista completa de requisitos del puesto.', en: 'Professional specializations related to Java. The technologies shown are connections with the ecosystem rather than a complete list of job requirements.' }} />
-  
+
   </PageHeading>
   <div class="java-ecosystem-grid">
     {javaCareerPaths.map(path => <article class="java-career-card" data-java-career={path.id}>

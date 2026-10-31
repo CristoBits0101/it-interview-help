@@ -1,12 +1,12 @@
 import type { IconName } from '../../shared/components/primitives/Icon.astro';
-import { softwareEngineeringSectionDescriptions } from '../../features/software-engineering/data/section-descriptions';
+import { describeNavigation } from './navigation-descriptions';
 import { glossaryTopics } from '../../features/artificial-intelligence/generative-artificial-intelligence/generative-ai-applications/data/ai-glossary';
 import { javaGuidePages } from '../../features/software-engineering/software-development/programming-languages/java/data/navigation';
 import { itServiceManagement } from '../../features/computer-systems/it-service-management/data/pending-navigation';
 
 export interface NavigationNode {
   label: string;
-  description?: string;
+  description?: { es: string; en: string };
   id?: string;
   icon?: IconName;
   href?: string;
@@ -32,11 +32,12 @@ const quantitativeFoundations = (): NavigationNode => ({
   children: ['Discrete Mathematics', 'Algebra and Functions', 'Linear Algebra', 'Probability Theory', 'Statistics', 'Calculus'].map(foundation),
 });
 
-export const navigation: (NavigationNode & { icon: IconName })[] = [
+const navigationTree: (NavigationNode & { icon: IconName })[] = [
   { label: 'Computer Systems', icon: 'cpu', children: [
     { label: 'Computing Fundamentals' },
     { label: 'Computer Architecture' }, { label: 'Operating Systems', children: [{ label: 'Buffer', href: '#computer-systems/buffer' }] },
     { label: 'Computer Networks', children: [{ label: 'HTTP Protocol', href: '#computer-networks/http' }] }, { label: 'Parallel Computing' },
+    { label: 'Quantum Computing' },
     { label: 'Distributed Systems', href: '#distributed-systems/fundamentos' },
     { label: 'Cloud Computing' },
     itServiceManagement,
@@ -129,7 +130,7 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
     ] },
     { label: 'Software Testing' }, { label: 'Software Quality' },
     { label: 'Software Engineering Operations' }, { label: 'Software Maintenance' },
-  ].map(node => ({ ...node, description: softwareEngineeringSectionDescriptions[node.label]?.es })) },
+  ] },
   { label: 'Data Technologies', id: 'Data', icon: 'database', separatorBefore: true, group: true, children: [
     { label: 'Data Engineering', icon: 'workflow', children: [
       { label: 'Database Management', children: [
@@ -187,3 +188,14 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
     ] },
   ] },
 ];
+
+function withDescription<T extends NavigationNode>(node: T, area: string): T {
+  node.description = describeNavigation(node.label, area);
+  node.children?.forEach(child => withDescription(child, area));
+  return node;
+}
+
+export const navigation = navigationTree.map(node => {
+  node.children?.forEach(child => withDescription(child, node.label));
+  return node;
+});

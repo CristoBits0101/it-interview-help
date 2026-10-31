@@ -2,7 +2,7 @@
 import { t } from '../../../shared/lib/translations';
 import type { CareerGrowthTarget } from '../data/career-growth';
 import { careerGrowthGroups } from '../data/career-growth';
-import CareerPreparationNotice from './CareerPreparationNotice.astro';
+import { careerGrowthResources } from '../data/career-growth-resources';
 import Icon, { type IconName } from '../../../shared/components/primitives/Icon.astro';
 
 interface Props { targets: readonly CareerGrowthTarget[]; initialProfileId: string }
@@ -14,6 +14,7 @@ const groupIcons: Record<CareerGrowthTarget['group'], IconName> = { specializati
     <h2 class="section-title" id="growth-title">{t('Amplía tu Alcance')}</h2>
   </header>
   <p class="career-growth-introduction">{t('Elige el próximo paso en la trayectoria hacia tu progresión profesional.')}</p>
+  <p class="career-growth-note" id="growth-resources-note">{t('Recursos externos en inglés sobre responsabilidades y competencias. Los títulos y el alcance varían según la organización.')}</p>
   <div class="career-branches">
     {careerGrowthGroups.map(group => <article class="career-branch" data-growth-group={group.id}>
       <h3 class="career-icon-heading" id={`growth-${group.id}-title`}><Icon name={groupIcons[group.id]} class="career-heading-icon" /><span>{t(group.title)}</span></h3>
@@ -21,45 +22,13 @@ const groupIcons: Record<CareerGrowthTarget['group'], IconName> = { specializati
       <p class="career-growth-question" id={`growth-${group.id}-question`}>{t(group.question)}</p>
       <ul class="career-growth-options" aria-labelledby={`growth-${group.id}-title growth-${group.id}-question`}>
         {targets.filter(target => target.group === group.id).map(target => <li data-growth-option hidden={!target.profileIds.includes(initialProfileId)}>
-          <button type="button" data-career-growth={target.id} data-growth-profiles={target.profileIds.join(' ')} aria-pressed="false" aria-controls="growth-preparation" aria-label={t(target.label)}>
+          <a href={careerGrowthResources[target.id].url} target="_blank" rel="noopener noreferrer" hreflang={careerGrowthResources[target.id].language} data-career-growth={target.id} data-growth-profiles={target.profileIds.join(' ')} aria-describedby="growth-resources-note">
             <span data-growth-label>{t(target.label)}</span>
-            <Icon name="check" size={16} class="career-growth-check" />
-          </button>
+            <Icon name="link" size={16} class="career-growth-link-icon" />
+            <span class="sr-only"><span translate="no">{careerGrowthResources[target.id].publisher}</span>. <span>{t('Se abre en una pestaña nueva')}</span></span>
+          </a>
         </li>)}
       </ul>
     </article>)}
   </div>
-  <CareerPreparationNotice kind="growth" />
-  <div hidden>
-    {targets.map(target => <div data-growth-copy={target.id}>
-      <p data-growth-goal>{t(target.goal)}</p>
-      <p data-growth-practice>{t(target.practice)}</p>
-    </div>)}
-  </div>
-  <section id="growth-preparation" class="career-panel" aria-labelledby="growth-preparation-title" hidden>
-    <header class="career-panel-heading">
-      <div>
-        <p class="home-kicker">{t('Preparación para el alcance seleccionado')}</p>
-        <h3 id="growth-preparation-title"></h3>
-        <p data-growth-profile-label></p>
-      </div>
-    </header>
-    <hr class="home-separator" />
-    <div class="career-plan-layout">
-      <div class="career-plan-content">
-        <p class="career-list-label">{t('Base técnica del puesto')}</p>
-        <div data-growth-foundations></div>
-      </div>
-      <div class="career-outcome">
-        <p class="home-kicker">{t('Qué preparar')}</p>
-        <p data-growth-selected-goal></p>
-        <hr class="home-separator" />
-        <div class="career-milestone">
-          <p>{t('Práctica propuesta')}</p>
-          <p data-growth-selected-practice></p>
-        </div>
-        <p class="career-outcome-note">{t('Estos ejercicios son propuestas de preparación y no pruebas atribuidas a una empresa.')}</p>
-      </div>
-    </div>
-  </section>
 </section>

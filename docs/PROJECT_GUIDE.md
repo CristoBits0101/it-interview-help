@@ -9,7 +9,7 @@ Sin preferencia válida la interfaz arranca en inglés. Una elección guardada d
 
 ## 24 de octubre de 2026 — cambio directo de idioma
 
-El control de idioma pasa de select desplegable a botón nativo que alterna directamente Español e English mediante clic, Enter o Espacio. Muestra el idioma actual y su nombre accesible indica el idioma de destino. El chevron se sustituye por ArrowRightLeft de Lucide como indicador decorativo de intercambio, en el mismo inset derecho y sin abrir menú. Conserva el tratamiento exterior, padding, altura mínima de 44 px y un ancho mínimo estable de 6.625rem equivalente a los 106 px del control anterior a tamaño normal. Conserva la preferencia guardada y la actualización compartida de traducciones sin navegación ni reinicio de progreso. Esta decisión sustituye las reglas previas sobre select y chevron de idiomas.
+El control de idioma muestra dos radios nativos en una fila con forma de píldora y los nombres Español y English sin banderas, códigos ni separador central. Conserva objetivos de 44 px, navegación con flechas, preferencia guardada y traducciones compartidas. Los encabezados Idioma y Sonido incluyen iconos Lucide distintos.
 
 
 ## 24 de octubre de 2026 — números de patrones sin círculo
@@ -489,19 +489,19 @@ Los IDs de conceptos y módulos deben ser únicos y estables; la selección de m
 Requiere Node.js **>=22.22.0** según `package.json`. El fallo histórico con 22.13.0 se resuelve usando una versión compatible. Instala con el lockfile:
 
 ```bash
-npm ci
-npm run dev
+pnpm install --frozen-lockfile
+pnpm run dev
 ```
 
 El script enlaza el servidor a `127.0.0.1`; usa la URL que imprime Astro, normalmente `http://127.0.0.1:4321/`. Reutiliza el servidor del proyecto si ya está activo.
 
 ```bash
-npm run check
-npm run build
-npm run preview
+pnpm run validate
+pnpm run test:e2e
+pnpm run preview
 ```
 
-No existe script `npm test`. `dist/` es generado, no se versiona. Para cambios solo de documentación no hace falta recompilar la aplicación.
+`pnpm test` ejecuta los contratos y `pnpm run test:e2e` las pruebas de navegador. `dist/` es generado, no se versiona. Para cambios solo de documentación no hace falta recompilar la aplicación.
 
 Verifica según el alcance del cambio:
 

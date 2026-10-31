@@ -37,14 +37,14 @@ test('development domains group web content without publishing empty mobile or d
   ]);
   const domains = development.children.at(-1);
   const runtimes = development.children.find(node => node.label === 'Runtimes');
-  assert.deepEqual(runtimes.children, [{ label: 'Node.js' }]);
+  assert.deepEqual(runtimes.children.map(({ label }) => label), ['Node.js']);
   const runtimeEntries = publishedNodes.find(node => node.label === 'Runtimes').children;
   assert.equal(runtimeEntries.length, 1);
   assert.equal(runtimeEntries[0].label, 'Node.js');
   assert.equal(runtimeEntries[0].href, undefined);
   assert.equal(runtimeEntries[0].children, undefined);
   assert.deepEqual(domains.children.map(node => node.label), ['Desktop Development', 'Embedded Software Development', 'Game Development', 'IoT Development', 'Mobile Development', 'Web Development']);
-  assert.deepEqual(domains.children.at(-1).children, [{ label: 'Web Rendering', href: '#software-development/web-rendering' }]);
+  assert.deepEqual(domains.children.at(-1).children.map(({ label, href }) => ({ label, href })), [{ label: 'Web Rendering', href: '#software-development/web-rendering' }]);
   for (const node of domains.children.slice(0, -1)) {
     assert.equal(node.href, undefined);
     assert.equal(node.children, undefined);

@@ -1,18 +1,18 @@
 ---
 import {
-  ArrowRight, Languages, Link2, Check, ChevronDown, ChevronRight, Circle,
-  Lightbulb, Target, Menu, Settings, Copy, Compass, Briefcase, Route, Users, Volume2, VolumeX, SlidersHorizontal,
-  Search, X, Zap, Sigma, ChartColumn, CodeXml, Network,
+  ArrowRight, Languages, Link2, Check, ChevronDown, ChevronRight,
+  Lightbulb, Target, Menu, Settings, Copy, Compass, Briefcase, Route, Users, Volume2, VolumeX,
+  Search, X, Zap, ChartColumn, CodeXml, Network, Music2,
   MousePointerClick, Blocks, Database, Workflow, ShieldCheck, FlaskConical, BrainCircuit,
 } from 'lucide-astro';
 
 const icons = {
-  brand: CodeXml, languages: Languages, arrow: ArrowRight, link: Link2, check: Check, circle: Circle, dot: Circle,
+  brand: CodeXml, languages: Languages, arrow: ArrowRight, link: Link2, check: Check,
   chevron: ChevronRight, down: ChevronDown,
-  'sound-on': Volume2, 'sound-off': VolumeX, 'sound-settings': SlidersHorizontal,
+  'sound-on': Volume2, 'sound-off': VolumeX, music: Music2,
   bulb: Lightbulb, target: Target, menu: Menu, compass: Compass, briefcase: Briefcase, route: Route, users: Users,
   search: Search, close: X, copy: Copy, settings: Settings,
-  flash: Zap, sigma: Sigma, chart: ChartColumn, programming: CodeXml,
+  flash: Zap, chart: ChartColumn,
   cpu: Network, interaction: MousePointerClick, blocks: Blocks, database: Database,
   workflow: Workflow, shield: ShieldCheck, science: FlaskConical, brain: BrainCircuit,
 };
@@ -21,4 +21,4 @@ interface Props { name: IconName; size?: number; class?: string; color?: string;
 const { name, size = 20, class: className = '', color, strokeWidth = 1.65 } = Astro.props;
 const Glyph = icons[name];
 ---
-<Glyph size={size} class={className} color={color} fill={name === 'dot' ? 'currentColor' : 'none'} stroke-width={strokeWidth} aria-hidden="true" focusable="false" />
+<Glyph size={size} class={className} color={color} fill="none" stroke-width={strokeWidth} aria-hidden="true" focusable="false" />

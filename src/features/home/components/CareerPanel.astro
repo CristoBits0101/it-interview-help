@@ -32,7 +32,7 @@ const { profile, stage, initial, tracks, areas, guidanceByArea } = Astro.props;
                   const linkedGuide = publishedGuides.some(guide => guide.href === destination);
                   return <li class="career-area-card">
                     <div class="career-area-heading"><span class="career-area-number">{String(index + 1).padStart(2, '0')}</span><span class="career-area-separator" aria-hidden="true">|</span>
-                      <div>{destination && (linkedTrack || linkedGuide) ? <a href={destination.replace(/^#/, '/')} data-route={linkedTrack?.id ?? 'java'}><span data-area-translation={label}>{t(label)}</span><Icon name="arrow" size={14} /></a> : <strong data-area-translation={label}>{t(label)}</strong>}
+                      <div>{destination && (linkedTrack || linkedGuide) ? <a href={destination.replace(/^#/, '/')} data-route={linkedTrack?.id ?? 'java'}><span data-area-translation={label}>{t(label)}</span><Icon name="link" size={16} /></a> : <strong data-area-translation={label}>{t(label)}</strong>}
                       </div>
                     </div>
                     {guidance && <p class="career-area-focus">{t(guidance.focus)}</p>}
@@ -42,12 +42,12 @@ const { profile, stage, initial, tracks, areas, guidanceByArea } = Astro.props;
             </div>
             <div class="career-outcome career-stage-outcome" role="group" aria-label={t('Objetivo y práctica de esta etapa')}>
               <div class="career-outcome-section">
-                <h4 class="career-outcome-title"><span>{t('Qué deberías poder hacer')}</span></h4>
+                <h4 class="career-outcome-title"><span>{t('Qué deberías poder hacer')}{'\u00a0'}<span aria-hidden="true">🤔</span></span></h4>
                 <p>{t(stage.goal)}</p>
               </div>
               <hr class="home-separator" />
               <div class="career-outcome-section">
-                <h4 class="career-outcome-title"><span>{t('Demuestra lo aprendido')}</span></h4>
+                <h4 class="career-outcome-title"><span>{t('Demuestra lo aprendido')}{'\u00a0'}<span aria-hidden="true">💪</span></span></h4>
                 <p>{t(stage.milestone)}</p>
               </div>
               <p class="career-outcome-note">{t('Valora lo que puedes explicar y construir. Comprueba también que puedes mantenerlo. Leer los conceptos es solo el comienzo.')}</p>

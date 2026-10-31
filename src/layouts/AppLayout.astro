@@ -16,7 +16,7 @@ interface Props { navigation: NavigationNode[]; sources: Pick<ConceptSource, 'ti
 const { navigation, sources } = Astro.props;
 const isPreferences = Astro.url.pathname.replace(/\/$/, '') === '/preferences';
 const defaultDescription = 'Review key concepts and prepare your answers for technical interviews across different roles and companies.';
-const description = isPreferences ? t('Personaliza el idioma y los sonidos de la aplicación.') : defaultDescription;
+const description = isPreferences ? t('Configura la aplicación según tus preferencias.') : defaultDescription;
 const pageTitle = isPreferences ? `${t('Preferencias')} · IT Interview Help` : 'IT Interview Help · Home';
 const canonicalUrl = isPreferences && Astro.site ? new URL('preferences', Astro.site).href : Astro.site?.href;
 const canvasColor = designTokens.match(/--canvas:\s*(#[\da-fA-F]{6})\s*;/)?.[1];
