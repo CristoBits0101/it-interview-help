@@ -4,6 +4,12 @@ Web estática responsive para preparar entrevistas técnicas y repasar ingenier�
 
 El contenido se centra en fundamentos para entrevistas de distintos perfiles y empresas. No pretende enseñar exhaustivamente todas las áreas desde cero ni sustituir una formación completa.
 
+## Nombre y dominios propuestos / Proposed name and domains
+
+**ES:** «Computer Science Interviews» es un nombre candidato pendiente de decisión. Gemini propuso `computer-science-interviews.dev` y `computer-science-interviews.com`; estas variantes no se han comprobado. Una consulta previa a RDAP de Verisign para `computerscienceinterviews.com` (sin guiones) devolvió HTTP 404, por lo que parecía no registrado en ese momento, pendiente de confirmación por un registrador. No se ha completado una comprobación registral de marcas ni se han verificado ventajas de SEO. No se confirma ninguna compra de dominio ni un cambio definitivo de nombre; la marca actual sigue siendo Tech Interview Prep.
+
+**EN:** “Computer Science Interviews” is a candidate name awaiting a decision. Gemini proposed `computer-science-interviews.dev` and `computer-science-interviews.com`; these variants have not been checked. An earlier Verisign RDAP query for `computerscienceinterviews.com` (without hyphens) returned HTTP 404, so it appeared unregistered at that time, pending confirmation by a registrar. No trademark registry check has been completed and no SEO advantages have been verified. No domain purchase or final name change is confirmed; the current brand remains Tech Interview Prep.
+
 ## Home y contenido
 
 Home permite elegir un área profesional y uno de sus perfiles y una etapa desde Trainee o Becario hasta Senior. La etapa muestra conocimientos recomendados, bases previas y objetivos prácticos con enlaces al contenido disponible. Las rutas por alcance conservan su aviso de contenido en desarrollo. Los puestos se seleccionan únicamente en Home; el menú lateral organiza disciplinas y conocimientos. Las opciones de especialización, liderazgo y gestión no representan una jerarquía profesional universal.
