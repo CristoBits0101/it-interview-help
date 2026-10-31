@@ -18,7 +18,7 @@ function visit(nodes, parent = []) {
   for (const node of nodes) {
     const path = [...parent, node.id ?? node.label];
     all.push({ ...node, path });
-    assert(node.label === 'Developer Roadmap' && (node.href === '#java/developer-roadmap' || ['TypeScript', 'Java', 'Python'].includes(parent.at(-1))) || !/\b(Engineer|Architect|Manager|Director|Lead|Developer|Analyst|Specialist|Administrator|Scientist|Designer|Researcher)\b/.test(node.label), `Job title in menu: ${node.label}`);
+    assert(node.label === 'Developer Roadmap' && parent.at(-2) === 'Programming Languages' || !/\b(Engineer|Architect|Manager|Director|Lead|Developer|Analyst|Specialist|Administrator|Scientist|Designer|Researcher)\b/.test(node.label), `Job title in menu: ${node.label}`);
     assert(!['Frontend Development', 'Backend Development'].includes(node.label), `Career specialty in menu: ${node.label}`);
     if (['Web Development', 'Mobile Development', 'Desktop Development', 'Game Development', 'Embedded Software Development', 'IoT Development'].includes(node.label)) {
       assert.deepEqual(parent, ['Software Engineering', 'Software Development', 'Development Domains'], `Development domain outside its group: ${node.label}`);

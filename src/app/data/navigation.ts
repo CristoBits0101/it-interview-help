@@ -116,7 +116,20 @@ const navigationTree: (NavigationNode & { icon: IconName })[] = [
           { label: 'Programming Fundamentals' }, { label: 'Data Structures' }, { label: 'Algorithms' },
         ] }] },
       ].map((language: NavigationNode) => ({
-        ...language, children: [...(language.children ?? []), { label: 'Frameworks' }, { label: 'Libraries' }],
+        ...language, children: [
+          language.children?.find(node => node.label === 'Language Overview') ?? {
+            label: 'Language Overview', children: [
+              { label: 'Version History' }, { label: 'Ecosystem' }, { label: 'Career Paths' },
+            ],
+          },
+          language.children?.find(node => node.label === 'Developer Roadmap') ?? {
+            label: 'Developer Roadmap', children: [
+              { label: 'Programming Fundamentals' }, { label: 'Data Structures' }, { label: 'Algorithms' },
+            ],
+          },
+          ...(language.children ?? []).filter(node => !['Language Overview', 'Developer Roadmap'].includes(node.label)),
+          { label: 'Libraries' }, { label: 'Frameworks' },
+        ],
       })) },
       { label: 'Development Domains', children: [
         { label: 'Desktop Development' },

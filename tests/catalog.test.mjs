@@ -20,7 +20,7 @@ test('programming language placeholders remain bilingual and unavailable without
     const node = languages.children.find(item => item.label === label);
     assert(node, label);
     assert.equal(node.href, undefined);
-    assert.deepEqual(node.children.map(child => child.label), label === 'JavaScript' ? ['Runtimes', 'Frameworks', 'Libraries'] : ['Frameworks', 'Libraries']);
+    assert.deepEqual(node.children.map(child => child.label), ['Language Overview', 'Developer Roadmap', ...(label === 'JavaScript' ? ['Runtimes'] : []), 'Libraries', 'Frameworks']);
     assert.equal(translate(label, 'en'), label);
     assert.equal(translate(label, 'es'), label);
   }
@@ -28,8 +28,21 @@ test('programming language placeholders remain bilingual and unavailable without
     assert(languages.children.find(node => node.label === label)?.children.length);
   }
   assert(!languages.children.some(node => node.label === 'Node.js'));
+  assert.equal(languages.children.length, 13);
   for (const language of languages.children) {
-    for (const label of ['Frameworks', 'Libraries']) {
+    assert.equal(new Set(language.children.map(node => node.label)).size, language.children.length);
+    for (const [label, children] of [
+      ['Language Overview', ['Version History', 'Ecosystem', 'Career Paths']],
+      ['Developer Roadmap', ['Programming Fundamentals', 'Data Structures', 'Algorithms']],
+    ]) {
+      const group = language.children.find(node => node.label === label);
+      assert.deepEqual(group.children.map(node => node.label), children);
+      assert.equal(group.href, undefined);
+      if (language.label !== 'Java' || label === 'Developer Roadmap') {
+        assert(group.children.every(node => node.href === undefined && node.children === undefined));
+      }
+    }
+    for (const label of ['Libraries', 'Frameworks']) {
       const entries = language.children.filter(node => node.label === label);
       assert.equal(entries.length, 1);
       assert.equal(entries[0].href, undefined);
