@@ -1,6 +1,7 @@
 ---
 import { t } from '../../lib/translations';
 import Icon from '../primitives/Icon.astro';
+import SearchControl from '../controls/SearchControl.astro';
 import NavigationTree from './NavigationTree.astro';
 import type { NavigationNode } from '../../../app/data/navigation';
 interface Props { nodes: NavigationNode[] }
@@ -14,6 +15,7 @@ const isPreferences = Astro.url.pathname.replace(/\/$/, '') === '/preferences';
       </div>
       <div class="navigation-section">
         <p class="nav-eyebrow" id="navigation-heading" lang="en" data-i18n-source="FOUNDATIONS BY AREA">{t('FOUNDATIONS BY AREA')}</p>
+        <div class="sidebar-search"><SearchControl /></div>
         <nav id="course-navigation" class="course-nav" aria-labelledby="navigation-heading" lang="en">
           <NavigationTree nodes={nodes} />
         </nav>

@@ -74,7 +74,9 @@ test('role exploration introduces shared foundations before integrated specializ
   assert.equal(roles('data-engineering')[0], 'data-analyst');
   for (const id of ['research-engineer', 'research-scientist']) {
     assert(roles('data-ai').includes(id));
-    assert(careerProfiles.find(profile => profile.id === id).summary.includes('primeras etapas'));
+    const foundation = careerProfiles.find(profile => profile.id === id).stages[0];
+    assert.equal(foundation.id, 'foundation');
+    assert(foundation.areas.includes('Programming Fundamentals'));
   }
   assert.equal(translate(careerProfiles.find(profile => profile.id === 'ux-ui-designer').label, 'en'), 'Interaction Designer');
 });

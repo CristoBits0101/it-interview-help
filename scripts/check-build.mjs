@@ -69,7 +69,12 @@ for (const [page, preferencesVisible] of [[html, false], [preferencesHtml, true]
     assert(!preferenceFooter.includes('id="' + id + '"') && !topbar.includes('id="' + id + '"'));
     assert(page.indexOf('id="' + id + '"') > page.indexOf('id="preferences-view"'));
   }
-  assert(topbar.includes('id="search"') && topbar.includes('id="mobile-toggle"'));
+  assert(!topbar.includes('id="search"') && topbar.includes('id="mobile-toggle"'));
+  assert.equal(page.split('id="search"').length - 1, 1);
+  const navigationHeadingIndex = page.indexOf('id="navigation-heading"');
+  const searchIndex = page.indexOf('id="search"');
+  const navigationIndex = page.indexOf('id="course-navigation"');
+  assert(navigationHeadingIndex < searchIndex && searchIndex < navigationIndex);
 }
 assert.match(preferencesHtml, /<title>Preferences · IT Interview Help<\/title>/);
 assert(preferencesHtml.includes('Customize the application language and sounds.'));

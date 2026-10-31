@@ -1,5 +1,5 @@
 import { preferenceKeys, readPreference, writePreference } from '../lib/preferences';
-import { translate, translatePatternTitle, stageAreaCount, availableConceptCount, sourceDescription, type Language } from '../lib/translations';
+import { translate, translatePatternTitle, stageAreaCount, sourceDescription, type Language } from '../lib/translations';
 export { translate, translatePatternTitle, type Language } from '../lib/translations';
 
 type OriginalValue = { source: string; rendered: string };
@@ -90,10 +90,6 @@ export function applyStaticTranslations(language: Language) {
     element.textContent = language === 'en'
       ? `${count} ${count === 1 ? 'learning path' : 'learning paths'} available. Concise definitions and original sources to explore further.`
       : `${count} ${count === 1 ? 'ruta disponible' : 'rutas disponibles'}. Definiciones breves y fuentes originales para profundizar.`;
-  });
-  document.querySelectorAll<HTMLElement>('.career-content-status.is-available').forEach(element => {
-    const match = element.textContent?.match(/\d+/);
-    if (match) element.textContent = availableConceptCount(Number(match[0]), language);
   });
   document.querySelectorAll<HTMLElement>('[data-route-number]').forEach(element => {
     element.textContent = `${language === 'en' ? 'PATH' : 'RUTA'} ${element.dataset.routeNumber}`;

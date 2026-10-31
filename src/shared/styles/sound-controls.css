@@ -1,8 +1,5 @@
 @layer components {
-  .topbar-actions { position: relative; gap: var(--gap-control); }
-  .topbar .search-box { width: 18rem; min-height: var(--topbar-control-size); padding: var(--space-micro) var(--space-compact); }
-  .topbar .search-box input { font-size: var(--font-body); }
-  .topbar .search-box > svg, #sound-toggle svg { width: 1rem; height: 1rem; }
+  #sound-toggle svg { width: 1rem; height: 1rem; }
   .sound-controls { display: flex; align-items: center; gap: var(--gap-control); }
   #sound-toggle { width: var(--topbar-control-size); height: var(--topbar-control-size); border: 1px solid var(--control-border); border-radius: 9999px; background: var(--surface-soft); color: var(--text-soft); }
   #sound-toggle:hover, #sound-toggle:focus-visible { background: var(--surface-tinted); color: var(--ink); }
@@ -20,7 +17,5 @@
 }
 
 @layer responsive {
-  :root.sidebar-drawer .topbar .topbar-actions { min-width: min(100%, 16rem); }
-  @media (max-width: 600px) { .topbar .topbar-actions .search-box { flex-basis: 100%; } .topbar .mobile-toggle { align-self: flex-start; } }
-  @media (max-width: 850px) { .topbar .topbar-actions { min-width: min(100%, 16rem); } }
+  @media (max-width: 600px) { .topbar .mobile-toggle { align-self: flex-start; } }
 }

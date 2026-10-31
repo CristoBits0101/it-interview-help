@@ -5,7 +5,7 @@ export const softwareCareerProfileTemplates: CareerProfile[] = [
     "id": "game-developer",
     "label": "Desarrollador de Videojuegos",
     "purpose": "Programa mecánicas de juego",
-    "summary": "Construye comportamientos interactivos y controla el rendimiento del juego. Trabaja con estados y reglas que deben responder de forma consistente.",
+    "summary": "Construye experiencias de juego con un comportamiento y rendimiento consistentes.",
     "stages": [
       {
         "id": "foundation",
@@ -60,7 +60,7 @@ export const softwareCareerProfileTemplates: CareerProfile[] = [
     "id": "embedded-software",
     "label": "Ingeniero de Software Embebido",
     "purpose": "Programa el software de dispositivos",
-    "summary": "Desarrolla software que se ejecuta dentro de dispositivos incluso sin conexión a una red. Controla el uso de memoria y la respuesta a eventos del hardware.",
+    "summary": "Desarrolla software adaptado al hardware y a los recursos de cada dispositivo.",
     "stages": [
       {
         "id": "foundation",
@@ -114,7 +114,7 @@ export const softwareCareerProfileTemplates: CareerProfile[] = [
     "id": "iot-developer",
     "label": "Desarrollador de Software IoT",
     "purpose": "Conecta dispositivos y servicios",
-    "summary": "Integra dispositivos conectados con redes y servicios. Gestiona el intercambio de datos y el comportamiento ante pérdidas de conexión.",
+    "summary": "Integra dispositivos conectados con servicios preparados para gestionar desconexiones.",
     "stages": [
       {
         "id": "foundation",

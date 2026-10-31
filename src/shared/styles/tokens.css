@@ -54,6 +54,8 @@
     --space-navigation-block: 6px;
     --size-navigation-row: 30px;
     --size-sidebar-header: 48px;
+    --size-preferences-link: 44px;
+    --size-navigation-icon: 18px;
     --gap-navigation-row: var(--space-navigation-row);
     --size-navigation-dot: 4px;
     --size-navigation-description-target: 12px;
@@ -67,6 +69,7 @@
     --gap-vertical: var(--space-section);
     --gap-home-panel: calc(var(--space-home) / 2);
     --gap-home-heading: var(--gap-home-panel);
+    --gap-career-plan-heading: 10px;
     --space-home-panel: calc(var(--gap-home-panel) * 2);
     --space-gap: calc(var(--space-page) / 2);
     --space-panel: 32px;

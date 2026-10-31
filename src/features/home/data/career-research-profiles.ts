@@ -5,7 +5,7 @@ export const researchCareerProfileTemplates: CareerProfile[] = [
     id: 'research-engineer',
     label: 'Ingeniero de Investigación en IA',
     purpose: 'Construye sistemas para experimentar',
-    summary: 'Implementa métodos y sistemas que permiten contrastar ideas de investigación. Las primeras etapas preparan fundamentos para esta especialidad.',
+    summary: 'Construye sistemas que permiten contrastar ideas de investigación.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Prepara una base de programación y matemáticas para reproducir experimentos.', areas: ['Programming Fundamentals', 'Linear Algebra', 'Probability Theory', 'Statistics'], milestone: 'Implementa un cálculo con datos de prueba y verifica su resultado esperado.' },
       { id: 'junior', label: 'Junior', goal: 'Practica la reproducción de resultados publicados con acompañamiento.', areas: ['Machine Learning', 'Software Design', 'Software Testing', 'Data Analytics'], milestone: 'Reproduce un experimento sencillo y registra la configuración y sus diferencias con la referencia.' },
@@ -17,7 +17,7 @@ export const researchCareerProfileTemplates: CareerProfile[] = [
     id: 'research-scientist',
     label: 'Científico de Investigación en IA',
     purpose: 'Investiga nuevos métodos de IA',
-    summary: 'Formula hipótesis y desarrolla métodos que aportan conocimiento verificable. Las primeras etapas preparan fundamentos para una trayectoria de investigación.',
+    summary: 'Desarrolla conocimiento verificable mediante la formulación y comprobación de hipótesis.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Prepara matemáticas y programación para comprender y contrastar modelos.', areas: ['Programming Fundamentals', 'Linear Algebra', 'Calculus', 'Probability Theory', 'Statistics'], milestone: 'Explica los supuestos de un modelo sencillo y comprueba un resultado con datos simulados.' },
       { id: 'junior', label: 'Junior', goal: 'Practica la lectura crítica y la reproducción de experimentos con supervisión.', areas: ['Artificial Intelligence Fundamentals', 'Machine Learning', 'Data Analytics', 'Software Testing'], milestone: 'Reproduce un resultado publicado y distingue la evidencia de las conclusiones que no permite obtener.' },

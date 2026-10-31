@@ -26,7 +26,7 @@ const careerProfileTemplates: CareerProfile[] = [
   {
     id: 'frontend', label: 'Ingeniero frontend',
     purpose: 'Construye interfaces web',
-    summary: 'Combina la programación con la experiencia de usuario. Aplica criterios de calidad para construir interfaces accesibles.',
+    summary: 'Construye interfaces accesibles centradas en la experiencia de usuario.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Entiende la web y organiza la información antes de elegir un framework.', areas: ['Computing Fundamentals', 'Programming Fundamentals', 'Computer Networks', 'User Research', 'Information Architecture', 'Software Requirements'], milestone: 'Construye una página semántica y explica cómo llega del servidor al navegador.' },
       { id: 'junior', label: 'Junior', goal: 'Entrega interfaces pequeñas con acompañamiento y pruebas básicas.', areas: ['User Interface Design', 'Software Development', 'Software Testing', 'Security Fundamentals', 'Application Security'], milestone: 'Implementa un formulario accesible que se adapte al móvil. Comprueba su funcionamiento con pruebas.' },
@@ -38,7 +38,7 @@ const careerProfileTemplates: CareerProfile[] = [
   {
     id: 'backend', label: 'Ingeniero backend',
     purpose: 'Implementa la lógica de negocio',
-    summary: 'Empieza por los servicios y los datos. Añade distribución y nube cuando entiendas sus costes.',
+    summary: 'Desarrolla servicios de datos teniendo en cuenta los costes de la infraestructura.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende el lenguaje de programación y los procesos. Estudia la comunicación entre cliente y servidor.', areas: ['Computing Fundamentals', 'Programming Fundamentals', 'Operating Systems', 'Computer Networks', 'Software Requirements'], milestone: 'Explica una petición HTTP y construye un programa que procese y valide datos.' },
       { id: 'junior', label: 'Junior', goal: 'Construye servicios pequeños con persistencia y controles de seguridad.', areas: ['Relational Databases', 'API Design', 'Software Testing', 'Security Fundamentals', 'Application Security'], milestone: 'Entrega una API con autenticación y consultas parametrizadas. Comprueba su funcionamiento con pruebas de integración.' },
@@ -50,7 +50,7 @@ const careerProfileTemplates: CareerProfile[] = [
   {
     id: 'full-stack', label: 'Ingeniero full-stack',
     purpose: 'Conecta interfaces y servicios web',
-    summary: 'Conecta la interfaz con los servicios y los datos. Profundiza en una parte sin perder la visión completa.',
+    summary: 'Conecta las partes de una aplicación con una visión completa de su funcionamiento.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Conecta los fundamentos de programación con el recorrido de una petición web.', areas: ['Computing Fundamentals', 'Programming Fundamentals', 'Operating Systems', 'Computer Networks', 'User Research', 'Information Architecture', 'Software Requirements'], milestone: 'Describe cómo una petición viaja del navegador al servidor y accede a los datos. Maqueta una interfaz clara.' },
       { id: 'junior', label: 'Junior', goal: 'Completa una funcionalidad sencilla de extremo a extremo con ayuda.', areas: ['User Interface Design', 'Software Development', 'Relational Databases', 'API Design', 'Software Testing', 'Security Fundamentals', 'Application Security'], milestone: 'Construye un flujo que guarde datos y pruebe tanto la interfaz como la API.' },
@@ -62,7 +62,7 @@ const careerProfileTemplates: CareerProfile[] = [
   {
     id: 'devops', label: 'Ingeniero DevOps',
     purpose: 'Automatiza la entrega y operación',
-    summary: 'Automatiza la entrega y la operación de sistemas. Colabora con los equipos para mantener software fiable.',
+    summary: 'Automatiza la entrega de software y colabora para que funcione de forma fiable.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Aprende a automatizar tareas y diagnosticar procesos y conexiones.', areas: ['Computing Fundamentals', 'Operating Systems', 'Computer Networks', 'Programming Fundamentals', 'Security Fundamentals'], milestone: 'Automatiza una tarea. Practica el diagnóstico de fallos de procesos y permisos. Revisa también los problemas de conexión.' },
       { id: 'junior', label: 'Junior', goal: 'Entrega cambios repetibles con pruebas y acceso controlado.', areas: ['Software Engineering Operations', 'Software Testing', 'Network Security'], milestone: 'Prepara una integración continua con pruebas y un despliegue reversible.' },
@@ -74,7 +74,7 @@ const careerProfileTemplates: CareerProfile[] = [
   {
     id: 'artificial-intelligence', label: 'Ingeniero de IA',
     purpose: 'Aplica modelos de IA a problemas reales',
-    summary: 'Integra modelos y servicios de IA en aplicaciones útiles. Evalúa su calidad y sus límites frente a las necesidades del producto.',
+    summary: 'Integra IA en aplicaciones evaluando su adecuación a las necesidades del producto.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Construye una base de programación y razonamiento matemático para trabajar con datos.', areas: ['Computing Fundamentals', 'Programming Fundamentals', 'Algebra and Functions', 'Linear Algebra', 'Probability Theory', 'Statistics'], milestone: 'Manipula un conjunto de datos y explica cómo lo representan los vectores. Describe sus distribuciones y su variabilidad.' },
       { id: 'junior', label: 'Junior', goal: 'Entrena y evalúa modelos sencillos con código reproducible y acompañamiento.', areas: ['Data Analytics', 'Artificial Intelligence Fundamentals', 'Machine Learning', 'Software Testing', 'Software Design'], milestone: 'Compara un modelo con una referencia simple usando datos de evaluación separados.' },

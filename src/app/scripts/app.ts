@@ -278,7 +278,7 @@ $('#clear-filters').addEventListener('click', () => {
   setLevel(0);
   mode = routeMode;
   refreshView();
-  search.focus();
+  navigationDrawer.focusSearch();
 });
 let resultsTimer: ReturnType<typeof setTimeout>;
 function announceResults() {

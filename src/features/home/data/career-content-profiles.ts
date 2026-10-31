@@ -5,7 +5,7 @@ export const contentCareerProfileTemplates: CareerProfile[] = [
     id: 'ux-writer',
     label: 'Redactor UX',
     purpose: 'Redacta textos de interfaz',
-    summary: 'Escribe textos que ayudan a comprender una interfaz y completar tareas. Comprueba su claridad y accesibilidad con las personas que los utilizan.',
+    summary: 'Escribe textos claros y accesibles que ayudan a completar tareas en una interfaz.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende las necesidades de las personas y la función de cada texto en una tarea.', areas: ['User Research', 'Information Architecture', 'Accessibility'], milestone: 'Explica qué necesita saber una persona antes de completar un formulario.' },
       { id: 'junior', label: 'Junior', goal: 'Redacta mensajes y etiquetas de un flujo definido con acompañamiento.', areas: ['Information Architecture', 'Interaction Design', 'User Interface Design', 'Accessibility'], milestone: 'Redacta una etiqueta y un mensaje de error que indiquen cómo continuar.' },
@@ -17,7 +17,7 @@ export const contentCareerProfileTemplates: CareerProfile[] = [
     id: 'information-architect',
     label: 'Arquitecto de Información',
     purpose: 'Organiza información y navegación',
-    summary: 'Define estructuras y taxonomías para que las personas encuentren y comprendan información. Las primeras etapas preparan fundamentos para esta especialidad.',
+    summary: 'Organiza la información para que las personas puedan encontrarla y comprenderla.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende cómo las personas buscan información y agrupan conceptos.', areas: ['User Research', 'Information Architecture', 'Accessibility'], milestone: 'Agrupa un conjunto pequeño de contenidos y explica el criterio usado.' },
       { id: 'junior', label: 'Junior', goal: 'Practica la organización de contenidos y etiquetas con apoyo.', areas: ['User Research', 'Information Architecture', 'Usability Evaluation'], milestone: 'Prueba si una persona encuentra un contenido dentro de una estructura sencilla.' },
@@ -29,7 +29,7 @@ export const contentCareerProfileTemplates: CareerProfile[] = [
     id: 'content-strategist',
     label: 'Estratega de Contenidos',
     purpose: 'Planifica contenido de producto',
-    summary: 'Define el ciclo de vida y el gobierno del contenido de un producto digital. Las primeras etapas preparan capacidades de análisis antes de asumir decisiones estratégicas.',
+    summary: 'Orienta la gestión del contenido durante la vida de un producto digital.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende qué contenido necesita una persona para completar sus tareas.', areas: ['User Research', 'Information Architecture', 'Accessibility'], milestone: 'Relaciona un contenido con una necesidad y detecta información que falta.' },
       { id: 'junior', label: 'Junior', goal: 'Practica auditorías de contenido y documenta responsabilidades con apoyo.', areas: ['Information Architecture', 'Software Requirements', 'Accessibility'], milestone: 'Prepara un inventario con propósito y responsable de cada contenido.' },
@@ -41,7 +41,7 @@ export const contentCareerProfileTemplates: CareerProfile[] = [
     id: 'ux-strategist',
     label: 'Estratega UX',
     purpose: 'Orienta prioridades de experiencia',
-    summary: 'Relaciona investigación de usuarios con objetivos de negocio y capacidades del producto. Las primeras etapas preparan fundamentos para orientar decisiones de experiencia.',
+    summary: 'Orienta la experiencia de usuario según los objetivos y posibilidades del producto.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende cómo una necesidad de usuario se relaciona con un objetivo de producto.', areas: ['User Research', 'User Experience Design', 'Software Requirements'], milestone: 'Distingue una necesidad observada de una solución propuesta por el equipo.' },
       { id: 'junior', label: 'Junior', goal: 'Practica la síntesis de evidencia y la comparación de oportunidades con apoyo.', areas: ['User Research', 'Information Architecture', 'Data Analytics', 'Usability Evaluation'], milestone: 'Resume un hallazgo de investigación y explica qué decisión puede informar.' },

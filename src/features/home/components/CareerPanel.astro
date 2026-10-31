@@ -1,10 +1,10 @@
 ---
-import { t, stageAreaCount, availableConceptCount } from '../../../shared/lib/translations';
+import { t, stageAreaCount } from '../../../shared/lib/translations';
 import Icon from '../../../shared/components/primitives/Icon.astro';
 import type { Track } from '../../../shared/lib/curriculum';
 import type { NavigationNode } from '../../../app/data/navigation';
 import type { CareerProfile, CareerStage } from '../data/career-paths';
-import { countConcepts, firstPublishedDestination } from '../../../shared/lib/catalog';
+import { firstPublishedDestination } from '../../../shared/lib/catalog';
 import { publishedGuides } from '../../../app/data/published-catalog';
 interface Props { profile: CareerProfile; stage: CareerStage; initial: boolean; tracks: Track[]; areas: ReadonlyMap<string, NavigationNode>; guidanceByArea: Record<string, { focus: string; prerequisites: string[] }> }
 const { profile, stage, initial, tracks, areas, guidanceByArea } = Astro.props;
@@ -33,10 +33,9 @@ const { profile, stage, initial, tracks, areas, guidanceByArea } = Astro.props;
                   return <li class="career-area-card">
                     <div class="career-area-heading"><span class="career-area-number">{String(index + 1).padStart(2, '0')}</span>
                       <div>{destination && (linkedTrack || linkedGuide) ? <a href={destination.replace(/^#/, '/')} data-route={linkedTrack?.id ?? 'java'}><span data-area-translation={label}>{t(label)}</span><Icon name="arrow" size={14} /></a> : <strong data-area-translation={label}>{t(label)}</strong>}
-                        {linkedTrack ? <span class="career-content-status is-available">{availableConceptCount(countConcepts(linkedTrack), 'en')}</span> : <span class="career-content-status">{t(linkedGuide ? 'Guía disponible' : 'Contenido no disponible ahora')}</span>}
                       </div>
                     </div>
-                    {guidance && <><p class="career-area-focus">{t(guidance.focus)}</p><hr class="home-separator" /><p class="career-prerequisites"><span>{t('Base previa')}</span><span class="career-prerequisite-list">{guidance.prerequisites.length ? guidance.prerequisites.map((prerequisite, prerequisiteIndex) => <span>{prerequisiteIndex > 0 && ' · '}<span data-area-translation={prerequisite}>{t(prerequisite)}</span></span>) : t('Puedes empezar aquí')}</span></p></>}
+                    {guidance && <p class="career-area-focus">{t(guidance.focus)}</p>}
                   </li>;
                 })}
               </ol>

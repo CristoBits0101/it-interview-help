@@ -1,7 +1,7 @@
 export const careerInteractionTranslations: Record<string, string> = {
   'Diseñador de Interacción': 'Interaction Designer',
   'Diseña flujos y comportamientos': 'Designs flows and behaviors',
-  'Define cómo las personas interactúan con un servicio. Prueba sus flujos y estados para que las tareas sean comprensibles y accesibles.': 'Defines how people interact with a service. Tests its flows and states to make tasks understandable and accessible.',
+  'Diseña interacciones comprensibles y accesibles mediante pruebas de uso.': 'Designs understandable and accessible interactions through usage testing.',
   'Comprende las necesidades de las personas y organiza las acciones de una tarea.': 'Understands people’s needs and organizes the actions within a task.',
   'Representa los pasos de una tarea y detecta una barrera de acceso.': 'Represents the steps of a task and identifies an accessibility barrier.',
   'Diseña un flujo pequeño con apoyo y representa sus estados principales.': 'Designs a small flow with support and represents its main states.',

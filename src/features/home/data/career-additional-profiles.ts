@@ -5,7 +5,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'data-scientist',
     label: 'Científico de Datos',
     purpose: 'Analiza datos y contrasta hipótesis',
-    summary: 'Utiliza estadística y modelos para responder preguntas con datos. Comunica resultados y sus límites para orientar decisiones.',
+    summary: 'Analiza datos con métodos estadísticos para orientar decisiones.',
     stages: [
       {
         id: 'foundation',
@@ -41,7 +41,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'systems-administrator',
     label: 'Administrador de sistemas',
     purpose: 'Mantiene sistemas disponibles',
-    summary: 'Configura y mantiene sistemas y servicios. Diagnostica incidencias y protege el acceso a los recursos operativos.',
+    summary: 'Mantiene el funcionamiento seguro de los sistemas mediante la resolución de incidencias.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende procesos, archivos, permisos y conexiones de red.', areas: ['Computing Fundamentals', 'Operating Systems', 'Computer Networks', 'Security Fundamentals'], milestone: 'Configura una cuenta con permisos mínimos y comprueba el acceso a un servicio.' },
       { id: 'junior', label: 'Junior', goal: 'Administra sistemas definidos y documenta cambios e incidencias.', areas: ['Operating Systems', 'Network Security', 'Software Engineering Operations'], milestone: 'Aplica una actualización en un entorno de prueba y registra cómo volver atrás.' },
@@ -53,7 +53,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'it-support-specialist',
     label: 'Especialista de soporte TI',
     purpose: 'Resuelve problemas técnicos de usuarios',
-    summary: 'Ayuda a las personas a usar equipos y aplicaciones corporativas. Diagnostica incidencias y documenta soluciones para recuperar el servicio.',
+    summary: 'Resuelve incidencias para que las personas puedan usar sus herramientas de trabajo.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende equipos, sistemas operativos, redes y prácticas básicas de seguridad.', areas: ['Computing Fundamentals', 'Operating Systems', 'Computer Networks', 'Security Fundamentals'], milestone: 'Registra una incidencia y explica una comprobación segura para aislar su causa.' },
       { id: 'junior', label: 'Junior', goal: 'Resuelve solicitudes y problemas definidos con procedimientos y comunicación clara.', areas: ['Operating Systems', 'Software Requirements', 'Network Security'], milestone: 'Documenta la solución de una incidencia y comprueba que la persona puede volver a completar su tarea.' },
@@ -65,7 +65,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'network-engineer',
     label: 'Ingeniero de redes',
     purpose: 'Diseña y opera redes',
-    summary: 'Configura redes y resuelve problemas de conectividad. Automatiza cambios y protege los servicios que conectan los sistemas.',
+    summary: 'Mantiene conexiones seguras entre sistemas mediante la gestión de redes.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende protocolos, direccionamiento y los sistemas que se comunican por la red.', areas: ['Computing Fundamentals', 'Operating Systems', 'Computer Networks', 'Security Fundamentals'], milestone: 'Explica el recorrido de una petición y localiza un fallo de conectividad en un entorno de prueba.' },
       { id: 'junior', label: 'Junior', goal: 'Configura servicios de red definidos y documenta cambios comprobables.', areas: ['Computer Networks', 'Network Security', 'Software Testing'], milestone: 'Aplica un cambio de red en un laboratorio y verifica su efecto con pruebas de conexión.' },
@@ -77,7 +77,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'cloud-engineer',
     label: 'Ingeniero de nube',
     purpose: 'Construye infraestructura en la nube',
-    summary: 'Implementa recursos y servicios en la nube. Automatiza su configuración y controla acceso, coste y disponibilidad.',
+    summary: 'Automatiza recursos en la nube para mantenerlos disponibles con acceso y costes controlados.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende sistemas, redes y permisos antes de desplegar recursos en la nube.', areas: ['Operating Systems', 'Computer Networks', 'Security Fundamentals', 'Programming Fundamentals'], milestone: 'Describe los recursos de un servicio y limita el acceso de una cuenta de prueba.' },
       { id: 'junior', label: 'Junior', goal: 'Despliega recursos definidos de forma repetible y verifica sus controles básicos.', areas: ['Cloud Computing', 'Cloud Security', 'Software Testing'], milestone: 'Despliega un servicio de prueba y comprueba su acceso y registro de actividad.' },
@@ -89,7 +89,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'site-reliability-engineer',
     label: 'Ingeniero de fiabilidad de sitios',
     purpose: 'Mejora la fiabilidad de servicios',
-    summary: 'Automatiza la operación y mide la fiabilidad de servicios. Usa objetivos de servicio para priorizar mejoras y responder a incidentes.',
+    summary: 'Mejora la fiabilidad de los servicios según objetivos medibles.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende sistemas, redes y programación para diagnosticar fallos de servicios.', areas: ['Operating Systems', 'Computer Networks', 'Programming Fundamentals', 'Security Fundamentals'], milestone: 'Identifica una señal de fallo de un servicio y registra la evidencia necesaria para investigarlo.' },
       { id: 'junior', label: 'Junior', goal: 'Automatiza comprobaciones y participa en la respuesta a incidentes definidos.', areas: ['Software Engineering Operations', 'Software Testing', 'Cloud Computing'], milestone: 'Implementa una comprobación de disponibilidad y documenta cómo responder a una alerta.' },
@@ -101,7 +101,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'platform-engineer',
     label: 'Ingeniero de plataforma',
     purpose: 'Crea plataformas para equipos',
-    summary: 'Construye capacidades compartidas para que otros equipos entreguen y operen software con seguridad y autonomía.',
+    summary: 'Facilita que los equipos entreguen y operen software con seguridad y autonomía.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende sistemas, redes y automatización antes de crear capacidades compartidas.', areas: ['Operating Systems', 'Computer Networks', 'Programming Fundamentals', 'Security Fundamentals'], milestone: 'Explica qué necesita un equipo para desplegar un servicio sencillo de forma segura.' },
       { id: 'junior', label: 'Junior', goal: 'Implementa una capacidad de plataforma definida y recoge feedback de sus usuarios internos.', areas: ['Cloud Computing', 'Software Engineering Operations', 'Software Testing'], milestone: 'Prepara una plantilla de despliegue y comprueba que otro equipo puede usarla.' },
@@ -113,7 +113,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'penetration-tester',
     label: 'Especialista en pruebas de penetración',
     purpose: 'Evalúa defensas autorizadas',
-    summary: 'Prueba sistemas dentro de un alcance autorizado. Comunica hallazgos reproducibles y recomendaciones para reducir el riesgo.',
+    summary: 'Evalúa sistemas con autorización para orientar la reducción de riesgos.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende redes, sistemas y principios de seguridad antes de evaluar un alcance autorizado.', areas: ['Operating Systems', 'Computer Networks', 'Security Fundamentals', 'Programming Fundamentals'], milestone: 'Define un alcance autorizado y describe una amenaza sin ejecutar acciones contra sistemas ajenos.' },
       { id: 'junior', label: 'Junior', goal: 'Identifica vulnerabilidades en entornos de prueba y conserva evidencia clara.', areas: ['Network Security', 'Application Security', 'Software Testing'], milestone: 'Verifica una debilidad en un laboratorio y explica cómo reproducirla de forma segura.' },
@@ -125,7 +125,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'soc-analyst',
     label: 'Analista SOC',
     purpose: 'Investiga alertas de seguridad',
-    summary: 'Analiza alertas y evidencia de seguridad. Clasifica incidentes y coordina una respuesta proporcionada al riesgo.',
+    summary: 'Analiza evidencia de seguridad para coordinar una respuesta proporcionada al riesgo.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende sistemas, redes y los principios de una respuesta segura.', areas: ['Operating Systems', 'Computer Networks', 'Security Fundamentals', 'Network Security'], milestone: 'Explica qué evidencia conservarías ante una alerta y por qué.' },
       { id: 'junior', label: 'Junior', goal: 'Clasifica alertas definidas y documenta una investigación reproducible.', areas: ['Software Engineering Operations', 'Data Security', 'Software Testing'], milestone: 'Clasifica una alerta de laboratorio y registra la evidencia y la decisión tomada.' },
@@ -137,7 +137,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'detection-engineer',
     label: 'Ingeniero de detección',
     purpose: 'Construye detecciones verificables',
-    summary: 'Diseña y mantiene detecciones para comportamientos relevantes. Ajusta reglas con evidencia y reduce señales que no aportan valor.',
+    summary: 'Mejora la detección de comportamientos relevantes a partir de evidencias.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende eventos de sistemas y redes junto con las amenazas que pueden reflejar.', areas: ['Operating Systems', 'Computer Networks', 'Security Fundamentals', 'Data Analytics'], milestone: 'Describe un evento de seguridad y el comportamiento que podría indicar.' },
       { id: 'junior', label: 'Junior', goal: 'Implementa reglas sencillas y comprueba su comportamiento en un entorno controlado.', areas: ['Network Security', 'Software Testing', 'Software Engineering Operations'], milestone: 'Crea una detección de laboratorio y demuestra un caso que debe activar la alerta.' },
@@ -149,7 +149,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'data-analyst',
     label: 'Analista de datos',
     purpose: 'Convierte datos en información útil',
-    summary: 'Explora datos y comunica resultados para orientar decisiones. Comprueba la calidad de los datos y explica los límites de cada conclusión.',
+    summary: 'Orienta decisiones con datos fiables y explica los límites del análisis.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende medidas, variabilidad y preguntas que los datos pueden responder.', areas: ['Programming Fundamentals', 'Algebra and Functions', 'Statistics', 'Data Analytics'], milestone: 'Resume un conjunto de datos y separa una observación de una conclusión.' },
       { id: 'junior', label: 'Junior', goal: 'Consulta y prepara datos para responder preguntas definidas.', areas: ['Relational Databases', 'Data Analytics', 'Data Quality and Governance'], milestone: 'Construye una consulta y explica qué registros quedan fuera del análisis.' },
@@ -161,7 +161,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'machine-learning-engineer',
     label: 'Ingeniero de aprendizaje automático',
     purpose: 'Lleva modelos a producción',
-    summary: 'Construye sistemas que entrenan y sirven modelos. Evalúa su comportamiento y opera sus dependencias de datos y software.',
+    summary: 'Construye sistemas de aprendizaje automático y evalúa su funcionamiento.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Construye una base de programación y matemáticas para trabajar con modelos.', areas: ['Programming Fundamentals', 'Linear Algebra', 'Probability Theory', 'Statistics'], milestone: 'Prepara datos para un modelo y explica qué representa cada variable.' },
       { id: 'junior', label: 'Junior', goal: 'Entrena y evalúa modelos sencillos con código reproducible.', areas: ['Machine Learning', 'Data Analytics', 'Software Testing', 'Software Design'], milestone: 'Compara un modelo con una referencia y guarda la configuración de la prueba.' },
@@ -173,7 +173,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'mlops-engineer',
     label: 'Ingeniero MLOps',
     purpose: 'Opera ciclos de vida de modelos',
-    summary: 'Construye procesos reproducibles para entrenar, evaluar y desplegar modelos. Observa sus resultados y controla sus dependencias de datos.',
+    summary: 'Gestiona el ciclo de vida de los modelos mediante procesos reproducibles y supervisión.',
     stages: [
       { id: 'foundation', label: 'Fundamentos', goal: 'Comprende programación, datos y sistemas antes de automatizar el trabajo con modelos.', areas: ['Programming Fundamentals', 'Statistics', 'Operating Systems', 'Computer Networks'], milestone: 'Explica cómo un conjunto de datos llega a un entrenamiento y qué evidencia permite repetirlo.' },
       { id: 'junior', label: 'Junior', goal: 'Prepara ejecuciones de modelos reproducibles con pruebas y registros.', areas: ['Machine Learning', 'Data Engineering', 'Software Testing', 'Software Engineering Operations'], milestone: 'Guarda una configuración de entrenamiento y comprueba que otra ejecución conserva sus resultados esperados.' },
@@ -185,7 +185,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'mobile',
     label: 'Ingeniero de Desarrollo Móvil',
     purpose: 'Desarrolla aplicaciones móviles',
-    summary: 'Construye aplicaciones adaptadas al dispositivo. Gestiona su ciclo de vida y su comportamiento sin conexión.',
+    summary: 'Construye aplicaciones adaptadas al dispositivo que funcionan también sin conexión.',
     stages: [
       {
         id: 'foundation',
@@ -221,7 +221,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'data-engineer',
     label: 'Ingeniero de Datos',
     purpose: 'Prepara datos fiables para otros equipos',
-    summary: 'Integra datos de distintas fuentes. Construye procesos reproducibles y comprueba su calidad antes de entregarlos.',
+    summary: 'Prepara datos fiables de distintas fuentes mediante procesos reproducibles.',
     stages: [
       {
         id: 'foundation',
@@ -257,7 +257,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'security-engineer',
     label: 'Ingeniero de Seguridad',
     purpose: 'Protege aplicaciones y sistemas',
-    summary: 'Relaciona amenazas con controles verificables. Colabora con desarrollo y operación para reducir riesgos concretos.',
+    summary: 'Reduce riesgos mediante controles verificables integrados en el trabajo de los equipos.',
     stages: [
       {
         id: 'foundation',
@@ -293,7 +293,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'qa-engineer',
     label: 'Ingeniero de Calidad de Software',
     purpose: 'Verifica la calidad del software',
-    summary: 'Convierte expectativas en comprobaciones útiles. Combina exploración y automatización según el riesgo del producto.',
+    summary: 'Comprueba que el software responde a las expectativas según el riesgo del producto.',
     stages: [
       {
         id: 'foundation',
@@ -329,7 +329,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'ux-designer',
     label: 'Diseñador de Experiencia de Usuario',
     purpose: 'Diseña experiencias comprensibles',
-    summary: 'Investiga necesidades y prueba alternativas de interacción. Utiliza evidencia para mejorar la experiencia de las personas.',
+    summary: 'Mejora la experiencia de las personas mediante investigación y pruebas de interacción.',
     stages: [
       {
         id: 'foundation',
@@ -365,7 +365,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'software-architect',
     label: 'Arquitecto de Software',
     purpose: 'Orienta decisiones de arquitectura',
-    summary: 'Relaciona requisitos con decisiones técnicas. Las primeras etapas preparan fundamentos para asumir responsabilidades de arquitectura.',
+    summary: 'Orienta decisiones técnicas a partir de los requisitos del software.',
     stages: [
       {
         id: 'foundation',
@@ -401,7 +401,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'business-analyst',
     label: 'Analista de Negocio',
     purpose: 'Conecta necesidades con soluciones',
-    summary: 'Analiza necesidades y aclara resultados esperados. Conecta a las personas implicadas con el equipo que construye la solución.',
+    summary: 'Aclara las necesidades del negocio con las personas que construyen la solución.',
     stages: [
       {
         id: 'foundation',
@@ -437,7 +437,7 @@ export const additionalCareerProfileTemplates: CareerProfile[] = [
     id: 'desktop',
     label: 'Ingeniero de Software de Escritorio',
     purpose: 'Desarrolla aplicaciones de escritorio',
-    summary: 'Construye aplicaciones que se integran con el sistema operativo. Cuida la respuesta de la interfaz y la conservación de los datos.',
+    summary: 'Construye aplicaciones de escritorio ágiles que preservan los datos.',
     stages: [
       {
         id: 'foundation',
