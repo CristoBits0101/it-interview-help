@@ -5,6 +5,7 @@ import NavigationTree from './NavigationTree.astro';
 import type { NavigationNode } from '../../../app/data/navigation';
 interface Props { nodes: NavigationNode[] }
 const { nodes } = Astro.props;
+const isPreferences = Astro.url.pathname.replace(/\/$/, '') === '/preferences';
 ---
 <div class="sidebar" id="sidebar" role="complementary" aria-label={t('Navegación de aprendizaje')}>
       <div class="sidebar-header">
@@ -17,4 +18,8 @@ const { nodes } = Astro.props;
           <NavigationTree nodes={nodes} />
         </nav>
       </div>
+      <footer class="sidebar-preferences">
+        <hr class="sidebar-preferences-divider" />
+        <a href="/preferences" id="preferences-link" class="preferences-link" aria-current={isPreferences ? 'page' : undefined}><Icon name="settings" size={18} /><span>{t('Preferencias')}</span></a>
+      </footer>
     </div>

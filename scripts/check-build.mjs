@@ -52,6 +52,28 @@ assert(tags.find(tag => tag.name === 'meta' && tag.attributes.name === 'descript
 assert(!html.includes('data-language-pending'), 'Do not hide the document while JavaScript initializes.');
 assert.equal(tags.filter(tag => tag.name === 'main').length, 1);
 assert(idSet.has('home-view') && idSet.has('study'));
+const preferencesHtml = readFileSync(join(outputRoot, 'preferences/index.html'), 'utf8');
+for (const [page, preferencesVisible] of [[html, false], [preferencesHtml, true]]) {
+  const preferencesSection = page.match(/<section\b[^>]*\bid="preferences-view"[^>]*>/)?.[0];
+  const homeSection = page.match(/<section\b[^>]*\bid="home-view"[^>]*>/)?.[0];
+  const preferenceFooter = page.match(/<footer class="sidebar-preferences">[\s\S]*?<\/footer>/)?.[0];
+  const topbar = page.match(/<header class="topbar">[\s\S]*?<\/header>/)?.[0];
+  assert(preferencesSection && homeSection && preferenceFooter && topbar);
+  assert.equal(/\bhidden(?:[\s=>])/.test(preferencesSection), !preferencesVisible);
+  assert.equal(/\bhidden(?:[\s=>])/.test(homeSection), preferencesVisible);
+  assert(!/data-(?:resource|pending)-route/.test(preferencesSection), 'Preferences is not educational content.');
+  assert(preferenceFooter.includes('href="/preferences"') && preferenceFooter.includes('Preferences'));
+  assert(!preferenceFooter.includes('<details') && !topbar.includes('href="/preferences"'));
+  for (const id of ['language-toggle', 'sound-toggle', 'sound-volume', 'sound-settings']) {
+    assert.equal(page.split('id="' + id + '"').length - 1, 1, 'Unique preference control: ' + id);
+    assert(!preferenceFooter.includes('id="' + id + '"') && !topbar.includes('id="' + id + '"'));
+    assert(page.indexOf('id="' + id + '"') > page.indexOf('id="preferences-view"'));
+  }
+  assert(topbar.includes('id="search"') && topbar.includes('id="mobile-toggle"'));
+}
+assert.match(preferencesHtml, /<title>Preferences · Tech Interview Prep<\/title>/);
+assert(preferencesHtml.includes('Customize the application language and sounds.'));
+assert(!existsSync(join(outputRoot, 'settings/index.html')), 'Only the Preferences route is published.');
 const csp = tags.find(tag => tag.name === 'meta' && tag.attributes['http-equiv']?.toLowerCase() === 'content-security-policy')?.attributes.content;
 assert(csp, 'The built document must carry the static CSP.');
 assert(!/'unsafe-(?:inline|eval)'/.test(csp), 'The CSP must not allow unsafe inline or eval scripts.');

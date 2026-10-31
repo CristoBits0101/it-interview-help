@@ -10,6 +10,9 @@ export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
   ...softwareEngineeringSectionTranslations,
+  'Preferencias': 'Preferences',
+  'Sonido': 'Sound',
+  'Personaliza el idioma y los sonidos de la aplicación.': 'Customize the application language and sounds.',
   'Cerrar': 'Close',
   'Documentación': 'Documentation',
   'Todas las funciones': 'All functions',

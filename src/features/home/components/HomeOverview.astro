@@ -12,8 +12,8 @@ import CareerGrowth from './CareerGrowth.astro';
 import { flattenNavigation, countConcepts } from '../../../shared/lib/catalog';
 import '../styles/home.css';
 
-interface Props { tracks: Track[] }
-const { tracks } = Astro.props;
+interface Props { tracks: Track[]; hidden?: boolean }
+const { tracks, hidden = false } = Astro.props;
 const catalog = flattenNavigation(navigation);
 const areas = new Map(catalog.map(node => [node.label, node]));
 const totalConcepts = tracks.reduce((total, track) => total + countConcepts(track), 0);
@@ -25,7 +25,7 @@ const stats = [
 ];
 ---
 
-<section id="home-view" aria-labelledby="home-title">
+<section id="home-view" aria-labelledby="home-title" hidden={hidden}>
   <PageHeading id="home-title" class="home-introduction">
     <span slot="title">{t('Prepara tu próxima entrevista técnica')}</span>
     <p>{t('Prepara tus entrevistas y pruebas técnicas con los fundamentos esenciales de las áreas relevantes para tu puesto objetivo reunidos en un solo lugar con contenido respaldado por fuentes verificadas.')}</p>

@@ -1,0 +1,23 @@
+---
+import PageHeading from '../guides/PageHeading.astro';
+import LanguageSelector from '../controls/LanguageSelector.astro';
+import SoundControls from '../controls/SoundControls.astro';
+import { t } from '../../lib/translations';
+import './preferences.css';
+interface Props { hidden?: boolean }
+const { hidden = true } = Astro.props;
+---
+<section id="preferences-view" class="page-flow" aria-labelledby="preferences-title" hidden={hidden}>
+  <PageHeading id="preferences-title">
+    <span slot="title">{t('Preferencias')}</span>
+    <p>{t('Personaliza el idioma y los sonidos de la aplicación.')}</p>
+  </PageHeading>
+  <section class="preferences-section" aria-labelledby="preferences-language-title">
+    <h2 id="preferences-language-title">{t('Idioma')}</h2>
+    <LanguageSelector />
+  </section>
+  <section class="preferences-section" aria-labelledby="preferences-sound-title">
+    <h2 id="preferences-sound-title">{t('Sonido')}</h2>
+    <SoundControls expanded />
+  </section>
+</section>

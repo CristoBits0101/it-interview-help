@@ -1,10 +1,7 @@
 @layer components {
-  .locale-controls { display: flex; flex: 0 0 auto; align-items: center; gap: var(--gap-control); margin-inline-start: 0; max-width: 100%; }
   .topbar-actions { position: relative; gap: var(--gap-control); }
-  .locale-controls .language-selector { --language-padding: var(--space-compact); flex: 0 1 auto; min-width: 0; margin-inline-start: 0; }
-  .locale-controls .language-selector button { min-width: 0; width: auto; min-height: var(--topbar-control-size); }
   .topbar .search-box { width: 18rem; min-height: var(--topbar-control-size); padding: var(--space-micro) var(--space-compact); }
-  .locale-controls .language-selector button, .topbar .search-box input { font-size: var(--font-body); }
+  .topbar .search-box input { font-size: var(--font-body); }
   .topbar .search-box > svg, #sound-toggle svg { width: 1rem; height: 1rem; }
   .sound-controls { display: flex; align-items: center; gap: var(--gap-control); }
   #sound-toggle { width: var(--topbar-control-size); height: var(--topbar-control-size); border: 1px solid var(--control-border); border-radius: 9999px; background: var(--surface-soft); color: var(--text-soft); }

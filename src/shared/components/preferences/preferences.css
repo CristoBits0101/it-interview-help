@@ -1,0 +1,13 @@
+@layer components {
+  .sidebar-preferences { flex: 0 0 auto; display: grid; gap: var(--sidebar-padding); margin-block-start: auto; padding-block: var(--space-section) 0; min-width: 0; }
+  .sidebar-preferences-divider { width: 100%; margin: 0; border: 0; border-top: 1px solid var(--line); }
+  .preferences-link { display: flex; justify-self: start; align-items: center; justify-content: center; gap: var(--gap-navigation-row); min-height: 44px; max-width: 100%; padding: var(--space-compact) var(--space-navigation-row); color: var(--text-secondary); font-size: var(--font-meta); font-weight: 300; line-height: var(--line-body); border-radius: var(--radius-control); }
+  .preferences-link:hover, .preferences-link[aria-current='page'] { color: var(--green); }
+  .preferences-section { display: grid; align-content: start; justify-items: start; gap: var(--gap-card); min-width: 0; padding: var(--space-card); border: 1px solid var(--border-soft); border-radius: var(--radius-profile); background: var(--paper); }
+  .preferences-section h2 { font-size: var(--font-title); line-height: var(--line-body); font-weight: 500; }
+  .preferences-section .language-selector { margin-inline-start: 0; }
+  .preferences-section .sound-controls { flex-wrap: wrap; align-items: flex-start; max-width: 100%; }
+  .preferences-section #sound-settings { max-width: 100%; }
+  .preferences-section .sound-settings-toggle { min-width: 44px; }
+  .preferences-section .sound-settings-panel { position: static; max-width: 100%; box-shadow: none; }
+}

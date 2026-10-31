@@ -57,7 +57,7 @@ const learned = new Set(restoreLearnedIds(readJsonPreference(preferenceKeys.prog
 
 let currentModule = sections[0].dataset.moduleId!;
 let currentTrack = sections[0].dataset.trackId!;
-type RouteMode = 'home' | 'module' | 'pending' | 'resource';
+type RouteMode = 'home' | 'module' | 'pending' | 'resource' | 'preferences';
 let routeMode: RouteMode = 'home';
 let mode: RouteMode | 'search' = 'home';
 let toastTimer: ReturnType<typeof setTimeout>;
@@ -129,9 +129,21 @@ function refreshView() {
     parentBranch = parentBranch.parentElement?.closest<HTMLElement>('[data-nav-branch]');
   }
   const isHome = mode === 'home';
+  const isPreferences = mode === 'preferences';
+  $('#preferences-view').hidden = !isPreferences;
+  if (isPreferences) $('#preferences-link').setAttribute('aria-current', 'page');
+  else $('#preferences-link').removeAttribute('aria-current');
+  const canonical = document.querySelector<HTMLLinkElement>('link[rel=canonical]');
+  if (canonical?.dataset.baseUrl) {
+    canonical.href = isPreferences ? new URL('preferences', canonical.dataset.baseUrl).href : canonical.dataset.baseUrl;
+    document.querySelector<HTMLMetaElement>('meta[property="og:url"]')!.content = canonical.href;
+  }
+  const descriptionMeta = document.querySelector<HTMLMetaElement>('meta[name=description]')!;
+  descriptionMeta.content = translate(isPreferences ? 'Personaliza el idioma y los sonidos de la aplicación.' : descriptionMeta.dataset.defaultDescription!, language);
+  document.querySelector<HTMLMetaElement>('meta[property="og:description"]')!.content = descriptionMeta.content;
   const isGrouped = mode === 'search';
   $('#home-view').hidden = !isHome;
-  $('#study').hidden = isHome || mode === 'pending' || mode === 'resource';
+  $('#study').hidden = isHome || isPreferences || mode === 'pending' || mode === 'resource';
   pendingSections.forEach(section => { section.hidden = mode !== 'pending' || section !== currentPending; });
   resourceSections.forEach(section => { section.hidden = mode !== 'resource' || section !== currentResource; });
   let resourceCount = 0;
@@ -142,7 +154,7 @@ function refreshView() {
   const breadcrumbPath = $('#breadcrumb-path');
   breadcrumbPath.hidden = isHome;
   breadcrumbPath.replaceChildren();
-  const pathLabels = isHome ? [] : isGrouped ? [translate('Búsqueda', language)] : navigationPath;
+  const pathLabels = isHome ? [] : isPreferences ? [translate('Preferencias', language)] : isGrouped ? [translate('Búsqueda', language)] : navigationPath;
   pathLabels.forEach((label, index) => {
     const separator = document.createElement('span');
     separator.className = 'breadcrumb-slash';
@@ -163,7 +175,8 @@ function refreshView() {
   const homeLink = $('[data-home-link]');
   if (isHome) homeLink.setAttribute('aria-current', 'page');
   else homeLink.removeAttribute('aria-current');
-  document.title = isHome ? `Tech Interview Prep · ${translate('Home', language)}` : mode === 'search' ? `${translate('Búsqueda', language)} · Tech Interview Prep` : `${translate(mode === 'resource' ? currentResource!.dataset.resourceTitle! : mode === 'pending' ? currentPending!.dataset.pendingTitle! : selectedSection.dataset.moduleTitle!, language)} · Tech Interview Prep`;
+  document.title = isPreferences ? `${translate('Preferencias', language)} · Tech Interview Prep` : isHome ? `Tech Interview Prep · ${translate('Home', language)}` : mode === 'search' ? `${translate('Búsqueda', language)} · Tech Interview Prep` : `${translate(mode === 'resource' ? currentResource!.dataset.resourceTitle! : mode === 'pending' ? currentPending!.dataset.pendingTitle! : selectedSection.dataset.moduleTitle!, language)} · Tech Interview Prep`;
+  document.querySelector<HTMLMetaElement>('meta[property="og:title"]')!.content = document.title;
   let visibleCount = 0;
   sections.forEach(section => {
     let groupCount = 0;
@@ -221,7 +234,9 @@ function goToRoute(initial = false) {
   currentResource = resourceSections.find(section => section.dataset.resourceRoute === route);
   const anchor = document.getElementById(route);
   const homeAnchor = anchor && $('#home-view').contains(anchor) ? anchor : null;
-  if (match) {
+  if (route === 'preferences') {
+    routeMode = 'preferences';
+  } else if (match) {
     currentModule = match.dataset.moduleId!;
     currentTrack = match.dataset.trackId!;
     routeMode = 'module';
@@ -234,6 +249,7 @@ function goToRoute(initial = false) {
     if (route && route !== 'home' && !homeAnchor) history.replaceState(null, '', '/');
   }
   mode = routeMode;
+  $<HTMLDetailsElement>('#sound-settings').open = routeMode === 'preferences';
   navigationDrawer.close();
   refreshView();
   if (homeAnchor) requestAnimationFrame(() => homeAnchor.scrollIntoView({ block: 'start' }));
