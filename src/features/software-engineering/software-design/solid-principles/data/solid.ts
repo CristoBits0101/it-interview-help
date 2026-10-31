@@ -3,7 +3,7 @@ import { conceptSources } from '../../../../../shared/data/concept-sources';
 
 export const solidModule: Module = {
         id: 'solid',
-        title: 'SOLID · cinco principios',
+        title: '5 Principios SOLID',
         description: 'Ayudan a separar el código en piezas fáciles de cambiar y combinar.',
         concepts: [
           {

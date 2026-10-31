@@ -139,12 +139,12 @@
   .card-top { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-card); padding-bottom: var(--space-card); margin-bottom: var(--space-card); border-bottom: 1px solid var(--line); }
   .card-heading { display: flex; align-items: center; min-width: 0; gap: var(--gap-card); }
   .card-heading h3 { min-width: 0; overflow-wrap: normal; word-break: normal; hyphens: none; }
-  .concept-number { display: grid; place-items: center; flex: 0 0 var(--card-number-size); width: var(--card-number-size); height: var(--card-number-size); border: 1px solid var(--border-soft); border-radius: 50%; color: var(--text-soft); font-family: var(--display); font-size: var(--font-meta); }
+  .concept-number { display: grid; place-items: center; flex: 0 0 var(--card-number-size); width: var(--card-number-size); height: var(--card-number-size); border: 1px solid var(--border-soft); border-radius: 50%; color: var(--text-soft); font-family: var(--display); font-size: var(--font-title); }
   .solid-title { display: flex; align-items: center; gap: .25em; }
-  .solid-initial { flex-shrink: 0; font-size: var(--font-small); font-weight: 400; }
+  .solid-initial { flex-shrink: 0; font-size: inherit; font-weight: 400; }
   .card-heading-pattern { gap: 0; }
   .concept-number-plain { --pattern-prefix-width: calc(var(--card-leading-size) + 2 * var(--gap-card)); display: grid; grid-template-columns: max-content 1fr 3px 1fr; flex: 0 0 var(--pattern-prefix-width); width: var(--pattern-prefix-width); border: 0; border-radius: 0; }
-  .concept-number-plain > svg { grid-column: 3; }
+  .concept-number-separator { grid-column: 3; justify-self: center; height: 1em; border-inline-start: 1px solid currentColor; }
   .level-badge { display: flex; flex-shrink: 0; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 9999px; font-size: var(--font-meta); font-weight: 300; letter-spacing: .1px; white-space: nowrap; }
   .level-esencial { background: var(--surface-tinted); color: var(--text-secondary); }.level-intermedio { background: var(--surface-selected); color: var(--accent-strong); }.level-avanzado { background: var(--green); color: var(--paper); }
 

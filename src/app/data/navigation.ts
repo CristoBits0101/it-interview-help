@@ -92,6 +92,9 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
     ] },
     { label: 'Software Development', children: [
       { label: 'Programming Languages', children: [
+        { label: 'C' }, { label: 'C++' }, { label: 'C#' }, { label: 'Go' },
+        { label: 'JavaScript' }, { label: 'Kotlin' }, { label: 'PHP' },
+        { label: 'Ruby' }, { label: 'Rust' }, { label: 'Swift' },
         { label: 'Java', children: [
           { label: 'Language Overview', children: [
             { label: 'Version History', href: '#java/versions' },
@@ -112,6 +115,7 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
           { label: 'Programming Fundamentals' }, { label: 'Data Structures' }, { label: 'Algorithms' },
         ] }] },
       ] },
+      { label: 'Runtimes', children: [{ label: 'Node.js' }] },
       { label: 'Development Domains', children: [
         { label: 'Desktop Development' },
         { label: 'Embedded Software Development' },

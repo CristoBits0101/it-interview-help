@@ -12,12 +12,37 @@ const pendingIds = pendingPages.map(page => page.href);
 const availableIds = [...routeIds, ...pendingIds, ...publishedGuides.map(guide => guide.href)];
 const publishedNodes = flatten(publishedNavigation);
 
+test('programming language placeholders remain bilingual and unavailable without invented pages', () => {
+  const languages = publishedNodes.find(node => node.label === 'Programming Languages');
+  const added = ['C', 'C++', 'C#', 'Go', 'JavaScript', 'Kotlin', 'PHP', 'Ruby', 'Rust', 'Swift'];
+  assert.equal(new Set(languages.children.map(node => node.label)).size, languages.children.length);
+  for (const label of added) {
+    const node = languages.children.find(item => item.label === label);
+    assert(node, label);
+    assert.equal(node.href, undefined);
+    assert.equal(node.children, undefined);
+    assert.equal(translate(label, 'en'), label);
+    assert.equal(translate(label, 'es'), label);
+  }
+  for (const label of ['Java', 'Python', 'TypeScript']) {
+    assert(languages.children.find(node => node.label === label)?.children.length);
+  }
+  assert(!languages.children.some(node => node.label === 'Node.js'));
+});
+
 test('development domains group web content without publishing empty mobile or desktop pages', () => {
   const development = navigation.find(node => node.label === 'Software Engineering').children.find(node => node.label === 'Software Development');
   assert.deepEqual(development.children.map(node => node.label), [
-    'Programming Languages', 'Development Domains',
+    'Programming Languages', 'Runtimes', 'Development Domains',
   ]);
   const domains = development.children.at(-1);
+  const runtimes = development.children.find(node => node.label === 'Runtimes');
+  assert.deepEqual(runtimes.children, [{ label: 'Node.js' }]);
+  const runtimeEntries = publishedNodes.find(node => node.label === 'Runtimes').children;
+  assert.equal(runtimeEntries.length, 1);
+  assert.equal(runtimeEntries[0].label, 'Node.js');
+  assert.equal(runtimeEntries[0].href, undefined);
+  assert.equal(runtimeEntries[0].children, undefined);
   assert.deepEqual(domains.children.map(node => node.label), ['Desktop Development', 'Embedded Software Development', 'Game Development', 'IoT Development', 'Mobile Development', 'Web Development']);
   assert.deepEqual(domains.children.at(-1).children, [{ label: 'Web Rendering', href: '#software-development/web-rendering' }]);
   for (const node of domains.children.slice(0, -1)) {
@@ -26,6 +51,7 @@ test('development domains group web content without publishing empty mobile or d
     assert.equal(publishedNodes.find(item => item.label === node.label).href, undefined);
   }
   for (const [en, es] of [
+    ['Runtimes', 'Entornos de Ejecución'],
     ['Development Domains', 'Ámbitos de Desarrollo'], ['Web Development', 'Desarrollo Web'],
     ['Mobile Development', 'Desarrollo Móvil'], ['Desktop Development', 'Desarrollo de Escritorio'],
   ]) {

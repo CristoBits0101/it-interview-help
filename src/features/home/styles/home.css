@@ -73,7 +73,8 @@
   .career-area-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; gap: var(--gap-home-panel) var(--gap-horizontal); }
   .career-area-card { min-width: 0; padding: var(--space-home-panel); border: 1px solid var(--line); border-radius: var(--radius-profile); display: flex; flex-direction: column; gap: var(--gap-home-panel); }
   .career-area-heading { display: flex; align-items: baseline; gap: var(--gap-home-panel); }
-  .career-area-number { font-size: var(--font-meta); line-height: var(--line-body); color: var(--text-soft); flex-shrink: 0; }
+  .career-area-number { font-size: var(--font-small); line-height: var(--line-body); color: var(--text-soft); flex-shrink: 0; }
+  .career-area-separator { font-size: var(--font-small); line-height: var(--line-body); color: var(--text-soft); flex-shrink: 0; }
   .career-area-heading > div { min-width: 0; display: flex; flex-direction: column; gap: var(--gap-home-panel); }
   .career-area-heading a, .career-area-heading strong { display: flex; align-items: center; min-height: 24px; font-family: var(--body); font-size: var(--font-small); font-weight: 400; line-height: var(--line-body); overflow-wrap: normal; }
   .career-area-heading a { color: inherit; gap: var(--gap-home-panel); text-decoration: none; text-underline-offset: 3px; }
@@ -84,7 +85,7 @@
   .career-outcome { display: flex; flex-direction: column; gap: var(--gap-home-panel); background: var(--sidebar); border: 1px solid var(--line); border-radius: var(--radius-profile); padding: var(--space-home-panel); }
   .career-outcome.career-stage-outcome { display: flex; }
   .career-outcome-section { display: grid; min-width: 0; gap: var(--gap-control); }
-  .career-outcome-section > .career-outcome-title { display: flex; align-items: flex-start; gap: var(--gap-compact); font-family: var(--body); font-size: var(--font-small); font-weight: 500; line-height: var(--line-body); color: var(--ink); }
+  .career-outcome-section > .career-outcome-title { display: flex; align-items: flex-start; gap: var(--gap-compact); font-family: var(--brand); font-size: var(--font-small); font-weight: 500; line-height: var(--line-body); color: var(--ink); }
   .career-outcome-section > p { font-size: var(--font-body); line-height: var(--line-body); color: var(--text-secondary); }
   .career-stage-outcome > .career-outcome-note { font-size: var(--font-meta); }
   .career-outcome .home-kicker { font-size: var(--font-meta); letter-spacing: .9px; }
@@ -178,5 +179,6 @@
     .career-outcome { padding: var(--gap-home-panel); }
     .career-area-card { padding: var(--gap-home-panel); }
     .career-area-heading { flex-direction: column; align-items: flex-start; }
+    .career-area-separator { display: none; }
   }
 }
