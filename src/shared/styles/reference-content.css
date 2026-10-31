@@ -5,7 +5,7 @@
   .comparison-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-card); }
   .comparison-heading h2 { font: 500 var(--font-title)/var(--line-body) var(--brand); text-transform: uppercase; }
   .comparison-panel p, .comparison-panel li, .comparison-panel td { font-size: var(--font-body); line-height: var(--line-body); }
-  .comparison-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--gap-card); }
+  .comparison-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--gap-vertical) var(--gap-horizontal); }
   .comparison-columns > section { display: grid; align-content: start; gap: var(--gap-card); padding: var(--space-compact); min-width: 0; border: 1px solid var(--border-soft); border-radius: var(--radius-card); }
   .comparison-columns h3 { font-size: var(--font-title); }
   .comparison-columns ol, .comparison-tips { display: grid; gap: var(--gap-card); margin: 0; padding-inline-start: var(--space-card); }

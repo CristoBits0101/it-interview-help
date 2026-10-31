@@ -1,4 +1,5 @@
 ---
+import PageHeading from '../../../shared/components/guides/PageHeading.astro';
 import { t } from '../../../shared/lib/translations';
 import type { Track } from '../../../shared/lib/curriculum';
 import { publishedNavigation as navigation, publishedGuides } from '../../../app/data/published-catalog';
@@ -25,10 +26,10 @@ const stats = [
 ---
 
 <section id="home-view" aria-labelledby="home-title">
-  <header class="home-introduction">
-    <h1 id="home-title">{t('Prepara tu próxima entrevista técnica')}</h1>
-    <p>{t('Prepara tus entrevistas y pruebas técnicas con los fundamentos esenciales de las áreas relevantes para tu puesto reunidos en un solo lugar con contenido respaldado por fuentes verificadas.')}</p>
-  </header>
+  <PageHeading id="home-title" class="home-introduction">
+    <span slot="title">{t('Prepara tu próxima entrevista técnica')}</span>
+    <p>{t('Prepara tus entrevistas y pruebas técnicas con los fundamentos esenciales de las áreas relevantes para tu puesto objetivo reunidos en un solo lugar con contenido respaldado por fuentes verificadas.')}</p>
+  </PageHeading>
 
   <HomeStats stats={stats} />
   <hr class="home-separator" />

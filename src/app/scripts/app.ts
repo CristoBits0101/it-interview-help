@@ -184,10 +184,11 @@ function refreshView() {
   $('.module-toolbar').hidden = visibleCount === 0 && resourceCount > 0;
   $('#module-bottom').hidden = isGrouped || visibleCount === 0;
   const heading = $('#study-title');
-  const showModulePurpose = mode === 'module' && (selectedSection.hasAttribute('data-pattern-category') || currentModule === 'solid');
-  heading.classList.toggle('sr-only', !showModulePurpose);
+  const description = $('#study-description');
+  description.hidden = mode !== 'module';
   if (mode === 'module') {
-    heading.textContent = showModulePurpose ? translate(selectedSection.dataset.moduleDescription!, language).replace(/\.$/u, '') : moduleLabel;
+    heading.textContent = translate(selectedSection.dataset.moduleTitle!, language);
+    description.textContent = translate(selectedSection.dataset.moduleDescription!, language);
   } else {
     heading.textContent = translate('Resultados de búsqueda', language);
   }

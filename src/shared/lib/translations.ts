@@ -20,6 +20,10 @@ const spanishToEnglish: Record<string, string> = {
   'Carga Diferida y Carga Anticipada': 'Lazy vs Eager Loading',
   'Ecosistema de IA': 'AI Ecosystem',
   'Ecosistema': 'Ecosystem',
+  'Panorama del Lenguaje': 'Language Overview',
+  'Patrones Creacionales': 'Creational Patterns',
+  'Patrones Estructurales': 'Structural Patterns',
+  'Patrones de Comportamiento': 'Behavioral Patterns',
   'Trayectorias Profesionales': 'Career Paths',
   'Ruta de Aprendizaje': 'Developer Roadmap',
   'Ruta Tecnológica': 'Technology Roadmap',
@@ -66,7 +70,7 @@ const spanishToEnglish: Record<string, string> = {
   'Mostrar página': 'Show page',
   'Puestos': 'Roles',
   'Prepara tu próxima entrevista técnica': 'Prepare for your next technical interview',
-  'Prepara tus entrevistas y pruebas técnicas con los fundamentos esenciales de las áreas relevantes para tu puesto reunidos en un solo lugar con contenido respaldado por fuentes verificadas.': 'Prepare for your technical interviews and assessments with the essential knowledge from the areas relevant to your role gathered in one place with content backed by verified sources.',
+  'Prepara tus entrevistas y pruebas técnicas con los fundamentos esenciales de las áreas relevantes para tu puesto objetivo reunidos en un solo lugar con contenido respaldado por fuentes verificadas.': 'Prepare for your technical interviews and assessments with the essential knowledge from the areas relevant to your target role gathered in one place with content backed by verified sources.',
   '0 años': '0 years',
   '0 - 2 años': '0 - 2 years',
   '2 - 5 años': '2 - 5 years',
@@ -143,10 +147,11 @@ const spanishToEnglish: Record<string, string> = {
   'Perfil profesional': 'Career path', '¿En qué etapa quieres trabajar?': 'Which career stage are you targeting?',
   'Panel de etapa cerrado.': 'Career stage panel closed.',
   Fundamentos: 'Foundations', 'Las etapas orientan el aprendizaje. Los títulos varían según la organización.': 'Stages guide learning. Job titles vary by organization.',
-  'áreas en esta etapa': 'areas at this stage', 'Orden sugerido de estudio': 'Suggested study order',
+  'áreas en esta etapa': 'areas at this stage', 'Orden de estudio sugerido': 'Suggested study order',
   'Conserva las bases de etapas anteriores': 'Build on earlier foundations', 'Base previa': 'Prior knowledge',
   'Puedes empezar aquí': 'You can start here', 'conceptos disponibles': 'concepts available',
   'Contenido no disponible ahora': 'Content not available yet', 'Objetivo y práctica de esta etapa': 'Stage goal and practice',
+  'Qué deberías poder hacer': 'What you should be able to do', 'Demuestra lo aprendido': 'Show what you have learned',
   'QUÉ DEBERÍAS PODER HACER': 'WHAT YOU SHOULD BE ABLE TO DO', 'DEMUESTRA LO APRENDIDO': 'SHOW WHAT YOU HAVE LEARNED',
   'Valora lo que puedes explicar y construir. Comprueba también que puedes mantenerlo. Leer los conceptos es solo el comienzo.': 'Focus on what you can explain and build. Make sure you can maintain it too. Reading is only the start.',
   'Recorrido orientativo': 'Suggested path', 'El mapa incluye áreas todavía sin lecciones. Solo los títulos con contenido disponible abren una ruta.': 'The map includes areas that do not have lessons yet. Only areas with available content open a learning path.',
@@ -435,7 +440,7 @@ export const defaultLanguage: Language = 'en';
 export const t = (value: string) => translate(value, defaultLanguage);
 
 export function stageAreaCount(count: number, language: Language): string {
-  return language === 'en' ? `${count} ${count === 1 ? 'area' : 'areas'} at this stage` : `${count} ${count === 1 ? 'área en esta etapa' : 'áreas en esta etapa'}`;
+  return language === 'en' ? `${count} ${count === 1 ? 'block' : 'blocks'}` : `${count} ${count === 1 ? 'bloque' : 'bloques'}`;
 }
 
 export function availableConceptCount(count: number, language: Language): string {

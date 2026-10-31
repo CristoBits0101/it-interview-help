@@ -1,18 +1,15 @@
 @layer components {
-  .foundation-guide { display: grid; gap: var(--space-gap); min-width: 0; }
-  .foundation-heading h1 { margin: 0; }
-  .foundation-heading, .foundation-practice { display: grid; gap: var(--gap-card); }
-  .foundation-heading h1, .foundation-practice > h2, .foundation-figure figcaption { font-family: var(--brand); font-size: var(--font-title); font-weight: 500; line-height: var(--line-body); text-transform: uppercase; border-inline-start: 2px solid var(--accent); padding-inline: var(--space-compact); }
+  .foundation-practice { display: grid; gap: var(--gap-card); }
   .foundation-guide p { font-size: var(--font-body); line-height: var(--line-body); color: var(--text-secondary); text-align: justify; text-align-last: start; hyphens: none; overflow-wrap: normal; }
   .foundation-figure { margin: 0; display: grid; gap: var(--space-gap); min-width: 0; }
-  .foundation-flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--gap-card); }
+  .foundation-flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--gap-vertical) var(--gap-horizontal); }
   .foundation-flow > li, .foundation-concepts > article { padding: var(--space-card); border: 1px solid var(--border-soft); border-radius: var(--radius-card); background: var(--paper); display: grid; align-content: start; gap: var(--gap-card); min-width: 0; }
   .foundation-step-label { display: flex; align-items: center; gap: var(--gap-card); }
   .foundation-step-label > span { color: var(--text-soft); font-size: var(--font-small); }
   .foundation-step-label > svg { margin-inline-start: auto; flex-shrink: 0; }
   .foundation-guide h2 { font-size: var(--font-title); font-weight: 500; line-height: var(--line-body); }
   .foundation-guide pre { margin: 0; padding: var(--space-compact); border: 1px solid var(--border-soft); border-radius: var(--radius-inset); background: var(--surface-soft); overflow-x: auto; max-width: 100%; font-family: var(--code); font-size: var(--font-meta); line-height: var(--line-body); }
-  .foundation-concepts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--gap-card); }
+  .foundation-concepts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--gap-vertical) var(--gap-horizontal); }
   .foundation-practice details { border: 1px solid var(--border-soft); border-radius: var(--radius-card); background: var(--paper); }
   .foundation-practice summary { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: var(--gap-card); padding: var(--space-compact); cursor: pointer; list-style: none; font-size: var(--font-small); }
   .foundation-practice summary::-webkit-details-marker { display: none; }

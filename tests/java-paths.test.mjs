@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { javaGuidePages } from '../src/features/software-engineering/software-development/programming-languages/java/data/navigation';
-import { javaTechnologies, springTechnologies, javaArchitecture } from '../src/features/software-engineering/software-development/programming-languages/java/ecosystem/data/java-ecosystem';
-import { javaCareerPaths } from '../src/features/software-engineering/software-development/programming-languages/java/career-paths/data/java-career-paths';
+import { javaTechnologies, springTechnologies, javaArchitecture } from '../src/features/software-engineering/software-development/programming-languages/java/language-overview/ecosystem/data/java-ecosystem';
+import { javaCareerPaths } from '../src/features/software-engineering/software-development/programming-languages/java/language-overview/career-paths/data/java-career-paths';
 import { javaDeveloperRoadmap } from '../src/features/software-engineering/software-development/programming-languages/java/developer-roadmap/data/java-developer-roadmap';
 import { javaEcosystemSources } from '../src/shared/data/concept-sources.ts';
 import { publishedNavigation, publishedGuides, publishedSources } from '../src/app/data/published-catalog.ts';
@@ -10,9 +10,10 @@ import { translate } from '../src/shared/lib/translations.ts';
 
 const flatten = nodes => nodes.flatMap(node => [node, ...flatten(node.children ?? [])]);
 
-test('Java keeps the three requested dimensions as ordered siblings and preserves versions', () => {
+test('Java groups its three overview dimensions and preserves versions', () => {
   const java = flatten(publishedNavigation).find(node => node.label === 'Java');
-  assert.deepEqual(java.children.map(node => node.label), ['Version History', 'Ecosystem', 'Career Paths', 'Developer Roadmap']);
+  assert.deepEqual(java.children.map(node => node.label), ['Language Overview', 'Developer Roadmap']);
+  assert.deepEqual(java.children[0].children.map(node => node.label), ['Version History', 'Ecosystem', 'Career Paths']);
   const roadmap = java.children.find(node => node.label === 'Developer Roadmap');
   assert.equal(roadmap.href, undefined);
   assert.deepEqual(roadmap.children.map(node => node.label), ['Programming Fundamentals', 'Data Structures', 'Algorithms']);

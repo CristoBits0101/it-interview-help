@@ -93,16 +93,22 @@ export const navigation: (NavigationNode & { icon: IconName })[] = [
     { label: 'Software Development', children: [
       { label: 'Programming Languages', children: [
         { label: 'Java', children: [
-          { label: 'Version History', href: '#java/versions' },
-          ...javaGuidePages,
+          { label: 'Language Overview', children: [
+            { label: 'Version History', href: '#java/versions' },
+            ...javaGuidePages,
+          ] },
           { label: 'Developer Roadmap', children: [
             { label: 'Programming Fundamentals' },
             { label: 'Data Structures' }, { label: 'Algorithms' },
           ] },
-        ] }, { label: 'Python', children: [{ label: 'Developer Roadmap', children: [
+        ] }, { label: 'Python', children: [{ label: 'Language Overview', children: [
+          { label: 'Version History' }, { label: 'Ecosystem' }, { label: 'Career Paths' },
+        ] }, { label: 'Developer Roadmap', children: [
           { label: 'Programming Fundamentals' }, { label: 'Data Structures' }, { label: 'Algorithms' },
         ] }] },
-        { label: 'TypeScript', children: [{ label: 'Developer Roadmap', children: [
+        { label: 'TypeScript', children: [{ label: 'Language Overview', children: [
+          { label: 'Version History' }, { label: 'Ecosystem' }, { label: 'Career Paths' },
+        ] }, { label: 'Developer Roadmap', children: [
           { label: 'Programming Fundamentals' }, { label: 'Data Structures' }, { label: 'Algorithms' },
         ] }] },
       ] },

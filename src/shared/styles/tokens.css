@@ -60,7 +60,14 @@
     --space-navigation-indent: 12px;
     --gap-navigation-indent: calc(var(--space-navigation-indent) / 2);
     --space-page: 42px;
-    --space-home: 21px;
+    --space-section: 21px;
+    --space-home: var(--space-section);
+    --gap-horizontal: var(--gap-control);
+    --gap-horizontal-compact: calc(var(--gap-control) / 2);
+    --gap-vertical: var(--space-section);
+    --gap-home-panel: calc(var(--space-home) / 2);
+    --gap-home-heading: var(--gap-home-panel);
+    --space-home-panel: calc(var(--gap-home-panel) * 2);
     --space-gap: calc(var(--space-page) / 2);
     --space-panel: 32px;
     --gap-panel: calc(var(--space-panel) / 2);
@@ -72,6 +79,9 @@
     --gap-micro: calc(var(--space-micro) / 2);
     --space-compact: 12px;
     --gap-compact: calc(var(--space-compact) / 2);
+    --heading-rule: 2px;
+    --space-heading: var(--space-compact);
+    --gap-heading: var(--space-section);
   }
 }
 @layer responsive {

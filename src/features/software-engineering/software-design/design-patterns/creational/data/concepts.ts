@@ -40,7 +40,7 @@ export const creationalConcepts = [
 
 export const creationalPage = {
     id: 'patrones',
-    title: 'Creational',
+    title: 'Creational Patterns',
     description: 'Definen cómo se crean los objetos.',
     conceptIds: ['factory', 'builder', 'prototype', 'singleton', 'factory-method'],
   };

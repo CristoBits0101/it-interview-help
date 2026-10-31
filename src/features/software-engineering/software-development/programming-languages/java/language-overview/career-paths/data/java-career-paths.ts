@@ -1,4 +1,4 @@
-import type { LocalizedText } from '../../../../../../../shared/lib/localized-text';
+import type { LocalizedText } from '../../../../../../../../shared/lib/localized-text';
 
 const text = (es: string, en: string): LocalizedText => ({ es, en });
 

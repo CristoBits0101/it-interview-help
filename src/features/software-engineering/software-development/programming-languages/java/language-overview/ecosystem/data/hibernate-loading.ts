@@ -1,6 +1,6 @@
-import type { LocalizedText } from '../../../../../../../shared/lib/localized-text';
-import type { ReferenceComparison } from '../../../../../../../shared/lib/reference-comparison';
-import { comparisonSources } from '../../../../../../../shared/data/concept-sources';
+import type { LocalizedText } from '../../../../../../../../shared/lib/localized-text';
+import type { ReferenceComparison } from '../../../../../../../../shared/lib/reference-comparison';
+import { comparisonSources } from '../../../../../../../../shared/data/concept-sources';
 
 const text = (es: string, en: string): LocalizedText => ({ es, en });
 

@@ -47,7 +47,7 @@ export const behavioralConcepts = [
 
 export const behavioralPage = {
     id: 'patrones-comportamiento',
-    title: 'Behavioral',
+    title: 'Behavioral Patterns',
     description: 'Define cómo colaboran y se reparten responsabilidades los objetos.',
     conceptIds: ['iterator', 'strategy', 'observer', 'state', 'mediator', 'visitor'],
   };

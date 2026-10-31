@@ -26,7 +26,7 @@ export const structuralConcepts = [
 
 export const structuralPage = {
     id: 'patrones-estructurales',
-    title: 'Structural',
+    title: 'Structural Patterns',
     description: 'Definen cómo se componen los objetos para formar estructuras.',
     conceptIds: ['facade', 'adapter', 'decorator'],
   };

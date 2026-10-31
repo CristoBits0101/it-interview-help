@@ -1,26 +1,28 @@
 ---
+import PageHeading from '../../../../../../../../shared/components/guides/PageHeading.astro';
 import { javaTechnologies, springTechnologies, javaArchitecture } from '../data/java-ecosystem';
 import JavaTechnologyCard from './JavaTechnologyCard.astro';
-import { t } from '../../../../../../../shared/lib/translations';
-import Text from '../../../../../../../shared/components/primitives/LocalizedText.astro';
-import '../../styles/java-learning-paths.css';
+import { t } from '../../../../../../../../shared/lib/translations';
+import Text from '../../../../../../../../shared/components/primitives/LocalizedText.astro';
+import '../../../styles/java-learning-paths.css';
 ---
-<section id="java/ecosystem" class="java-path-page" data-resource-route="java/ecosystem" data-resource-title="Ecosystem" aria-labelledby="java-ecosystem-title" hidden>
-  <header class="java-path-heading">
-    <h1 id="java-ecosystem-title">{t('Ecosystem')}</h1>
+<section id="java/ecosystem" class="java-path-page page-flow" data-resource-route="java/ecosystem" data-resource-title="Ecosystem" aria-labelledby="java-ecosystem-title" hidden>
+  <PageHeading id="java-ecosystem-title" class="java-path-heading">
+    <span slot="title">{t('Ecosystem')}</span>
     <Text as="p" value={{ es: 'Explora qué puedes construir con Java y cada tecnología. Las rutas tecnológicas relacionan necesidades y resultados sin fijar un orden de aprendizaje.', en: 'Explore what you can build with Java and each technology. Technology roadmaps connect needs and outcomes without prescribing a learning order.' }} />
-  </header>
+  
+  </PageHeading>
   <div class="java-path-group">
-    <h2>{t('Tecnologías para Java')}</h2>
+    <h2 class="section-title">{t('Tecnologías para Java')}</h2>
     <div class="java-ecosystem-grid">{javaTechnologies.map(technology => <JavaTechnologyCard technology={technology} />)}</div>
   </div>
   <div class="java-path-group">
-    <h2>Spring + Java</h2>
+    <h2 class="section-title">Spring + Java</h2>
     <Text as="p" value={{ es: 'Herramientas para distintas necesidades de aplicaciones Java con Spring. JUnit y Mockito son herramientas de pruebas independientes.', en: 'Tools for different needs of Java applications with Spring. JUnit and Mockito are independent testing tools.' }} />
     <div class="java-ecosystem-grid">{springTechnologies.map(technology => <JavaTechnologyCard technology={technology} />)}</div>
   </div>
   <div class="java-path-group">
-    <h2>{t('Estilos Arquitectónicos')}</h2>
+    <h2 class="section-title">{t('Estilos Arquitectónicos')}</h2>
     <Text as="p" value={{ es: 'Los microservicios describen cómo organizar un sistema. Son un estilo arquitectónico y no una biblioteca de Java.', en: 'Microservices describes how to organize a system. It is an architectural style rather than a Java library.' }} />
     <div class="java-ecosystem-grid"><JavaTechnologyCard technology={javaArchitecture} /></div>
   </div>

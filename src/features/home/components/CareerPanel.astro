@@ -11,13 +11,18 @@ const { profile, stage, initial, tracks, areas, guidanceByArea } = Astro.props;
 ---
 <section class="career-panel" data-career-panel={profile.id} data-stage={stage.id} hidden={!initial} aria-labelledby={`career-heading-${profile.id}-${stage.id}`}>
           <header class="career-panel-heading">
-            <div><p class="home-kicker">{t(stage.label)}</p><h3 id={`career-heading-${profile.id}-${stage.id}`}>{t(profile.label)}</h3><p>{t(profile.summary)}</p></div>
-            <span class="career-area-count" data-stage-area-count={stage.areas.length}>{stageAreaCount(stage.areas.length, 'en')}</span>
+            <div><h3 id={`career-heading-${profile.id}-${stage.id}`}>{t(profile.label)}</h3><p>{t(profile.summary)}</p></div>
           </header>
           <hr class="home-separator" />
           <div class="career-plan-layout">
             <div class="career-plan-content">
-              <p class="career-list-label">{t('Orden sugerido de estudio')} <span>{t('Conserva las bases de etapas anteriores')}</span></p>
+              <div class="career-plan-heading">
+                <p class="home-kicker">{t(stage.label)}</p>
+                <div class="career-plan-meta">
+                  <p class="career-list-label">{t('Orden de estudio sugerido')}</p>
+                  <span class="career-area-count" data-stage-area-count={stage.areas.length}>{stageAreaCount(stage.areas.length, 'en')}</span>
+                </div>
+              </div>
               <ol class="career-area-grid">
                 {stage.areas.map((label, index) => {
                   const area = areas.get(label);
@@ -36,12 +41,16 @@ const { profile, stage, initial, tracks, areas, guidanceByArea } = Astro.props;
                 })}
               </ol>
             </div>
-            <div class="career-outcome" role="group" aria-label={t('Objetivo y práctica de esta etapa')}>
-              <span class="career-outcome-symbol"><Icon name="target" size={24} /></span>
-              <p class="home-kicker">{t('QUÉ DEBERÍAS PODER HACER')}</p>
-              <h4>{t(stage.goal)}</h4>
+            <div class="career-outcome career-stage-outcome" role="group" aria-label={t('Objetivo y práctica de esta etapa')}>
+              <div class="career-outcome-section">
+                <h4 class="career-outcome-title"><span>{t('Qué deberías poder hacer')}</span></h4>
+                <p>{t(stage.goal)}</p>
+              </div>
               <hr class="home-separator" />
-              <div class="career-milestone"><p>{t('DEMUESTRA LO APRENDIDO')}</p><p>{t(stage.milestone)}</p></div>
+              <div class="career-outcome-section">
+                <h4 class="career-outcome-title"><span>{t('Demuestra lo aprendido')}</span></h4>
+                <p>{t(stage.milestone)}</p>
+              </div>
               <p class="career-outcome-note">{t('Valora lo que puedes explicar y construir. Comprueba también que puedes mantenerlo. Leer los conceptos es solo el comienzo.')}</p>
             </div>
           </div>

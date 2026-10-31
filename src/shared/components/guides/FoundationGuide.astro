@@ -1,4 +1,5 @@
 ---
+import PageHeading from './PageHeading.astro';
 import { t } from '../../lib/translations';
 import type { FoundationGuide } from '../../lib/foundation-guide';
 import { foundationGuides } from '../../../app/data/foundation-guides';
@@ -10,13 +11,13 @@ interface Props { guide: FoundationGuide }
 const { guide } = Astro.props;
 const headingId = `${guide.route}-title`;
 ---
-<section class="foundation-guide" id={guide.route} data-resource-route={guide.route} data-resource-title={guide.label} aria-labelledby={headingId} hidden>
-  <header class="foundation-heading">
-    <h1 id={headingId}><Text value={guide.title} /></h1>
+<section class="foundation-guide page-flow" id={guide.route} data-resource-route={guide.route} data-resource-title={guide.label} aria-labelledby={headingId} hidden>
+  <PageHeading id={headingId} class="foundation-heading">
+    <span slot="title"><Text value={guide.title} /></span>
     <Text as="p" value={guide.description} />
-  </header>
+  </PageHeading>
   <figure class="foundation-figure">
-    <figcaption><Text value={{ es: 'Observa cómo se relacionan las piezas', en: 'See how the pieces connect' }} /></figcaption>
+    <figcaption class="section-title"><Text value={{ es: 'Observa cómo se relacionan las piezas', en: 'See how the pieces connect' }} /></figcaption>
     <ol class="foundation-flow">
       {guide.diagram.map((part, index) => <li>
         <div class="foundation-step-label"><span>{String(index + 1).padStart(2, '0')}</span><Text as="h2" value={part.title} />{index < guide.diagram.length - 1 && <Icon name="arrow" size={16} />}</div>
@@ -29,7 +30,7 @@ const headingId = `${guide.route}-title`;
     {guide.concepts.map(concept => <article><Text as="h2" value={concept.title} /><Text as="p" value={concept.description} /></article>)}
   </div>
   {guide.sections?.map(section => <section class="foundation-practice">
-    <Text as="h2" value={section.title} />
+    <Text as="h2" class="section-title" value={section.title} />
     <Text as="p" value={section.description} />
     <div class="foundation-concepts">{section.items.map(item => <article>
       <Text as="h2" value={item.title} />
@@ -39,7 +40,7 @@ const headingId = `${guide.route}-title`;
     </article>)}</div>
   </section>)}
   <div class="foundation-practice">
-    <Text as="h2" value={{ es: 'Explícalo sin mirar', en: 'Explain it without looking' }} />
+    <Text as="h2" class="section-title" value={{ es: 'Explícalo sin mirar', en: 'Explain it without looking' }} />
     <Text as="p" value={{ es: 'Aparta la vista del esquema y responde con tus palabras antes de abrir cada solución. Después compara y corrige tu explicación.', en: 'Look away from the diagram and answer in your own words before opening each solution. Then compare and correct your explanation.' }} />
     {guide.questions.map(question => <details><summary><Text value={question.prompt} /><Icon name="down" size={16} /></summary><Text as="p" value={question.answer} /></details>)}
   </div>

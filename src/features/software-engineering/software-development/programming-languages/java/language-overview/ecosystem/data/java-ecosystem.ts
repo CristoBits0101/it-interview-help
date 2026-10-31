@@ -1,5 +1,5 @@
-import type { LocalizedText } from '../../../../../../../shared/lib/localized-text';
-import type { JavaTechnology } from '../../data/java-technology';
+import type { LocalizedText } from '../../../../../../../../shared/lib/localized-text';
+import type { JavaTechnology } from '../../../data/java-technology';
 
 const text = (es: string, en: string): LocalizedText => ({ es, en });
 

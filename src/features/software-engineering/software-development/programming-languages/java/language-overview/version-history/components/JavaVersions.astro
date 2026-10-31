@@ -1,14 +1,16 @@
 ---
+import PageHeading from '../../../../../../../../shared/components/guides/PageHeading.astro';
 import { javaSummary } from '../data/java-summary';
 import Text from './JavaText.astro';
 import JavaReleaseCard from './JavaReleaseCard.astro';
 import '../styles/java-versions.css';
 ---
-<section id="java/versions" class="java-guide" data-resource-route="java/versions" data-resource-title="Version History" aria-labelledby="java-title" hidden>
-  <header class="java-heading">
-    <h1 id="java-title"><Text es="Historial de Versiones" en="Version History" /></h1>
+<section id="java/versions" class="java-guide page-flow" data-resource-route="java/versions" data-resource-title="Version History" aria-labelledby="java-title" hidden>
+  <PageHeading id="java-title" class="java-heading">
+    <span slot="title"><Text es="Historial de Versiones" en="Version History" /></span>
     <Text as="p" es="Java 1.0–26 · Año de lanzamiento y mejoras principales de cada versión." en="Java 1.0–26 · Release year and key improvements in each version." />
-  </header>
+  
+  </PageHeading>
   <div class="java-release-grid">
     {javaSummary.map(release => <JavaReleaseCard release={release} />)}
   </div>

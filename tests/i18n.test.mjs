@@ -39,8 +39,8 @@ test('published explanations retain their approved Spanish through English rende
   assert.equal(t('Envuelve un objeto con otro para añadirle funcionalidades sin tener que tocar su clase.'), 'Wraps an object with another to add functionality without having to change its class.');
   assert.equal(translatePatternTitle('Prototype', 'es'), 'Prototipo');
   assert.equal(translatePatternTitle('Prototype', 'en'), 'Prototype');
-  assert.equal(stageAreaCount(1, 'en'), '1 area at this stage');
-  assert.equal(stageAreaCount(2, 'es'), '2 áreas en esta etapa');
+  assert.equal(stageAreaCount(1, 'en'), '1 block');
+  assert.equal(stageAreaCount(2, 'es'), '2 bloques');
   assert.equal(availableConceptCount(1, 'en'), '1 concept available');
 });
 

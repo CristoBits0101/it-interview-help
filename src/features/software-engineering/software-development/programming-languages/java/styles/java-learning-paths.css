@@ -1,10 +1,7 @@
 @layer components {
-  .java-path-page, .java-path-group, .java-path-heading { display: grid; min-width: 0; gap: var(--space-gap); }
-  .java-path-heading { gap: var(--gap-card); }
-  .java-path-heading h1 { margin: 0; }
-  .java-path-heading h1, .java-path-group > h2 { font-family: var(--brand); font-size: var(--font-title); font-weight: 500; line-height: var(--line-body); text-transform: uppercase; border-inline-start: 2px solid var(--accent); padding-inline: var(--space-compact); }
+  .java-path-group { display: grid; min-width: 0; gap: var(--space-gap); }
   .java-path-page p { font-size: var(--font-body); line-height: var(--line-body); color: var(--text-secondary); text-align: justify; text-align-last: start; hyphens: none; overflow-wrap: normal; }
-  .java-ecosystem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--gap-card); }
+  .java-ecosystem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--gap-vertical) var(--gap-horizontal); }
   .java-ecosystem-card, .java-career-card { display: flex; flex-direction: column; min-width: 0; padding: var(--space-card); gap: var(--gap-card); background: var(--paper); border: 1px solid var(--border-soft); border-radius: var(--radius-card); transition: border-color var(--motion-fast) var(--motion-ease); }
   .java-ecosystem-card:hover, .java-career-card:hover { border-color: var(--border-strong); }
   .java-ecosystem-card header { display: grid; gap: var(--gap-card); }

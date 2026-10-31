@@ -6,11 +6,12 @@ import Text from '../../../../shared/components/primitives/LocalizedText.astro';
 import Icon from '../../../../shared/components/primitives/Icon.astro';
 import ConceptSource from '../../../../shared/components/study/ConceptSource.astro';
 import '../styles/system-design-summary.css';
+import PageHeading from '../../../../shared/components/guides/PageHeading.astro';
 ---
-<section id="system-design/sd-fundamentals" class="system-design-summary" data-resource-route="system-design/sd-fundamentals" data-resource-title="System Design" aria-labelledby="system-design-summary-title" hidden>
-  <h1 id="system-design-summary-title">{t('System Design')}</h1>
+<section id="system-design/sd-fundamentals" class="system-design-summary page-flow" data-resource-route="system-design/sd-fundamentals" data-resource-title="System Design" aria-labelledby="system-design-summary-title" hidden>
+  <PageHeading id="system-design-summary-title"><span slot="title">{t('System Design')}</span><Text as="p" value={{ es: 'Repasa cómo definir requisitos y elegir componentes para diseñar sistemas. Compara sus límites y justifica tus decisiones técnicas.', en: 'Review how to define requirements and choose components when designing systems. Compare their limits and explain your technical decisions.' }} /></PageHeading>
   {systemDesignGroups.map(group => <section class="system-design-group" aria-labelledby={`system-design-group-${group.id}`}>
-    <h2 id={`system-design-group-${group.id}`}><Text value={group.title} /></h2>
+    <h2 class="section-title" id={`system-design-group-${group.id}`}><Text value={group.title} /></h2>
     {group.topicIds.map(id => {
       const topic = systemDesignSummary.find(item => item.id === id)!;
       const index = systemDesignSummary.indexOf(topic);

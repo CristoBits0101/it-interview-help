@@ -1,4 +1,5 @@
 ---
+import PageHeading from '../../../../../shared/components/guides/PageHeading.astro';
 import { aiEcosystemTools, aiToolCategories, aiToolKinds } from '../data/ai-ecosystem';
 import Text from '../../../../../shared/components/primitives/LocalizedText.astro';
 import Icon from '../../../../../shared/components/primitives/Icon.astro';
@@ -6,8 +7,10 @@ import { t, sourceDescription } from '../../../../../shared/lib/translations';
 import '../../../../../shared/styles/reference-content.css';
 import '../styles/ai-ecosystem.css';
 ---
-<section id="applied-ai/ecosystem" class="ai-ecosystem-page" data-resource-route="applied-ai/ecosystem" data-resource-title="AI Ecosystem" aria-labelledby="ai-ecosystem-title" hidden>
-  <header class="foundation-heading"><h1 id="ai-ecosystem-title">{t('AI Ecosystem')}</h1><Text as="p" value={{ es: 'Herramientas y servicios agrupados por su función. Una misma herramienta puede tener varios usos y el mapa no fija un orden de aprendizaje.', en: 'Tools and services grouped by function. A tool may serve several purposes and the map does not prescribe a learning order.' }} /></header>
+<section id="applied-ai/ecosystem" class="ai-ecosystem-page page-flow" data-resource-route="applied-ai/ecosystem" data-resource-title="AI Ecosystem" aria-labelledby="ai-ecosystem-title" hidden>
+  <PageHeading id="ai-ecosystem-title" class="foundation-heading">
+    <span slot="title">{t('AI Ecosystem')}</span><Text as="p" value={{ es: 'Herramientas y servicios agrupados por su función. Una misma herramienta puede tener varios usos y el mapa no fija un orden de aprendizaje.', en: 'Tools and services grouped by function. A tool may serve several purposes and the map does not prescribe a learning order.' }} />
+  </PageHeading>
   <div class="ai-tool-filters" role="group" aria-label={t('Filtrar herramientas por función')}>
     <button type="button" data-ai-category="all" aria-pressed="true">{t('Todas las funciones')}</button>
     {aiToolCategories.map(category => <button type="button" data-ai-category={category.id} aria-pressed="false"><Text value={category.title} /></button>)}
