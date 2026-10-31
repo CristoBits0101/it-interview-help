@@ -101,3 +101,12 @@ test('data navigation migrations retain nested disclosures without opening their
   assert.equal(migrateBranchId(pathId(['Mathematical and Statistical Foundations'])), pathId(['Data', 'Data Science', 'Mathematical and Statistical Foundations']));
   for (const id of known) assert.equal(migrateBranchId(id), id);
 });
+
+
+test('runtime expansion follows Node.js into JavaScript without opening ancestors', () => {
+  const old = ['Software Engineering', 'Software Development', 'Runtimes'].map(encodeURIComponent).join('/');
+  const current = ['Software Engineering', 'Software Development', 'Programming Languages', 'JavaScript', 'Runtimes'].map(encodeURIComponent).join('/');
+  assert.equal(migrateBranchId(old), current);
+  assert.equal(migrateBranchId(current), current);
+  assert.deepEqual(restoreKnownIds([old], new Set([current]), migrateBranchId), [current]);
+});

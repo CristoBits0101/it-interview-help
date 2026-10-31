@@ -1,5 +1,6 @@
 const branch = (labels: string[]) => labels.map(encodeURIComponent).join('/');
 const moves: [string[], string[]][] = [
+  [['Software Engineering', 'Software Development', 'Runtimes'], ['Software Engineering', 'Software Development', 'Programming Languages', 'JavaScript', 'Runtimes']],
   [['Data Management', 'Database Management'], ['Data', 'Data Engineering', 'Database Management']],
   [['Data Management', 'Data Engineering'], ['Data', 'Data Engineering']],
   [['Software Development'], ['Software Engineering', 'Software Development']],

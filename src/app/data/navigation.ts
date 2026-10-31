@@ -94,7 +94,7 @@ const navigationTree: (NavigationNode & { icon: IconName })[] = [
     { label: 'Software Development', children: [
       { label: 'Programming Languages', children: [
         { label: 'C' }, { label: 'C++' }, { label: 'C#' }, { label: 'Go' },
-        { label: 'JavaScript' }, { label: 'Kotlin' }, { label: 'PHP' },
+        { label: 'JavaScript', children: [{ label: 'Runtimes', children: [{ label: 'Node.js' }] }] }, { label: 'Kotlin' }, { label: 'PHP' },
         { label: 'Ruby' }, { label: 'Rust' }, { label: 'Swift' },
         { label: 'Java', children: [
           { label: 'Language Overview', children: [
@@ -115,8 +115,9 @@ const navigationTree: (NavigationNode & { icon: IconName })[] = [
         ] }, { label: 'Developer Roadmap', children: [
           { label: 'Programming Fundamentals' }, { label: 'Data Structures' }, { label: 'Algorithms' },
         ] }] },
-      ] },
-      { label: 'Runtimes', children: [{ label: 'Node.js' }] },
+      ].map((language: NavigationNode) => ({
+        ...language, children: [...(language.children ?? []), { label: 'Frameworks' }, { label: 'Libraries' }],
+      })) },
       { label: 'Development Domains', children: [
         { label: 'Desktop Development' },
         { label: 'Embedded Software Development' },

@@ -20,7 +20,7 @@ test('programming language placeholders remain bilingual and unavailable without
     const node = languages.children.find(item => item.label === label);
     assert(node, label);
     assert.equal(node.href, undefined);
-    assert.equal(node.children, undefined);
+    assert.deepEqual(node.children.map(child => child.label), label === 'JavaScript' ? ['Runtimes', 'Frameworks', 'Libraries'] : ['Frameworks', 'Libraries']);
     assert.equal(translate(label, 'en'), label);
     assert.equal(translate(label, 'es'), label);
   }
@@ -28,15 +28,23 @@ test('programming language placeholders remain bilingual and unavailable without
     assert(languages.children.find(node => node.label === label)?.children.length);
   }
   assert(!languages.children.some(node => node.label === 'Node.js'));
+  for (const language of languages.children) {
+    for (const label of ['Frameworks', 'Libraries']) {
+      const entries = language.children.filter(node => node.label === label);
+      assert.equal(entries.length, 1);
+      assert.equal(entries[0].href, undefined);
+      assert.equal(entries[0].children, undefined);
+    }
+  }
 });
 
 test('development domains group web content without publishing empty mobile or desktop pages', () => {
   const development = navigation.find(node => node.label === 'Software Engineering').children.find(node => node.label === 'Software Development');
   assert.deepEqual(development.children.map(node => node.label), [
-    'Programming Languages', 'Runtimes', 'Development Domains',
+    'Programming Languages', 'Development Domains',
   ]);
   const domains = development.children.at(-1);
-  const runtimes = development.children.find(node => node.label === 'Runtimes');
+  const runtimes = development.children.find(node => node.label === 'Programming Languages').children.find(node => node.label === 'JavaScript').children.find(node => node.label === 'Runtimes');
   assert.deepEqual(runtimes.children.map(({ label }) => label), ['Node.js']);
   const runtimeEntries = publishedNodes.find(node => node.label === 'Runtimes').children;
   assert.equal(runtimeEntries.length, 1);
@@ -51,7 +59,7 @@ test('development domains group web content without publishing empty mobile or d
     assert.equal(publishedNodes.find(item => item.label === node.label).href, undefined);
   }
   for (const [en, es] of [
-    ['Runtimes', 'Entornos de Ejecución'],
+    ['Runtimes', 'Entornos de Ejecución'], ['Frameworks', 'Marcos de Trabajo'], ['Libraries', 'Bibliotecas'],
     ['Development Domains', 'Ámbitos de Desarrollo'], ['Web Development', 'Desarrollo Web'],
     ['Mobile Development', 'Desarrollo Móvil'], ['Desktop Development', 'Desarrollo de Escritorio'],
   ]) {

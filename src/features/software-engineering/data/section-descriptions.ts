@@ -45,6 +45,8 @@ export const softwareEngineeringSectionDescriptions: Record<string, { es: string
   Algorithms: { es: 'Ayuda a diseñar procedimientos y razonar sobre su coste y corrección.', en: 'Helps design procedures and reason about their cost and correctness.' },
   Python: { es: 'Permite estudiar programación y automatización con las herramientas del lenguaje Python.', en: 'Enables studying programming and automation with the tools of the Python language.' },
   TypeScript: { es: 'Ayuda a expresar contratos mediante tipos sobre código del ecosistema JavaScript.', en: 'Helps express contracts through types in JavaScript ecosystem code.' },
+  Frameworks: { es: 'Organizan la estructura y el desarrollo de aplicaciones con este lenguaje.', en: 'Organize the structure and development of applications with this language.' },
+  Libraries: { es: 'Proporcionan funciones reutilizables para programas escritos en este lenguaje.', en: 'Provide reusable functionality for programs written in this language.' },
   Runtimes: { es: 'Explica los entornos que ejecutan código y proporcionan servicios al programa.', en: 'Explains the environments that execute code and provide services to a program.' },
   'Node.js': { es: 'Ayuda a comprender la ejecución de JavaScript fuera del navegador.', en: 'Helps explain JavaScript execution outside the browser.' },
   'Development Domains': { es: 'Relaciona los fundamentos de programación con distintos entornos de aplicación.', en: 'Connects programming foundations with different application environments.' },

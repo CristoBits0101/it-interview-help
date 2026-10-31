@@ -12,7 +12,7 @@ const flatten = nodes => nodes.flatMap(node => [node, ...flatten(node.children ?
 
 test('Java groups its three overview dimensions and preserves versions', () => {
   const java = flatten(publishedNavigation).find(node => node.label === 'Java');
-  assert.deepEqual(java.children.map(node => node.label), ['Language Overview', 'Developer Roadmap']);
+  assert.deepEqual(java.children.map(node => node.label), ['Language Overview', 'Developer Roadmap', 'Frameworks', 'Libraries']);
   assert.deepEqual(java.children[0].children.map(node => node.label), ['Version History', 'Ecosystem', 'Career Paths']);
   const roadmap = java.children.find(node => node.label === 'Developer Roadmap');
   assert.equal(roadmap.href, undefined);
