@@ -76,14 +76,16 @@
   .career-area-number { font-size: var(--font-small); line-height: var(--line-body); color: var(--text-soft); flex-shrink: 0; }
   .career-area-separator { font-size: var(--font-small); line-height: var(--line-body); color: var(--text-soft); flex-shrink: 0; }
   .career-area-heading > div { min-width: 0; display: flex; flex-direction: column; gap: var(--gap-home-panel); }
-  .career-area-heading a, .career-area-heading strong { display: flex; align-items: center; min-height: 24px; font-family: var(--body); font-size: var(--font-small); font-weight: 400; line-height: var(--line-body); overflow-wrap: normal; }
+  .career-area-heading a, .career-area-heading strong { display: flex; align-items: center; min-height: 24px; font-family: var(--brand); font-size: var(--font-small); font-weight: 400; line-height: var(--line-body); overflow-wrap: normal; }
   .career-area-heading a { color: inherit; gap: var(--gap-home-panel); text-decoration: none; text-underline-offset: 3px; }
   .career-area-heading a:is(:hover, :focus-visible) { color: var(--green); text-decoration: underline; }
   .career-area-heading a svg { width: 12px; height: 12px; opacity: 0; }
   .career-area-heading a:is(:hover, :focus-visible) svg { opacity: 1; }
   .career-area-focus { font-size: var(--font-body); line-height: var(--line-body); color: var(--text-soft); }
   .career-outcome { display: flex; flex-direction: column; gap: var(--gap-home-panel); background: var(--sidebar); border: 1px solid var(--line); border-radius: var(--radius-profile); padding: var(--space-home-panel); }
-  .career-outcome.career-stage-outcome { display: flex; }
+  .career-outcome.career-stage-outcome { display: flex; gap: 0; }
+  .career-stage-outcome > * + * { margin-block-start: var(--gap-home-panel); }
+  .career-stage-outcome > .home-separator, .career-stage-outcome > .home-separator + * { margin-block-start: var(--space-home); }
   .career-outcome-section { display: grid; min-width: 0; gap: var(--gap-control); }
   .career-outcome-section > .career-outcome-title { display: flex; align-items: flex-start; gap: var(--gap-compact); font-family: var(--brand); font-size: var(--font-small); font-weight: 500; line-height: var(--line-body); color: var(--ink); }
   .career-outcome-section > p { font-size: var(--font-body); line-height: var(--line-body); color: var(--text-secondary); }
