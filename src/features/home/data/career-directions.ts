@@ -21,7 +21,7 @@ const directionProfiles: Record<string, Omit<CareerDirection, 'label'>> = {
   },
   'Software Engineering': {
     id: 'software-development',
-    profileIds: ['software-engineer', 'business-analyst', 'qa-engineer', 'frontend', 'backend', 'full-stack', 'mobile', 'desktop', 'game-developer', 'embedded-software', 'iot-developer', 'software-architect'],
+    profileIds: ['software-engineer', 'product-engineer', 'business-analyst', 'qa-engineer', 'frontend', 'backend', 'full-stack', 'mobile', 'desktop', 'game-developer', 'embedded-software', 'iot-developer', 'software-architect'],
   },
   Data: {
     id: 'data-engineering',

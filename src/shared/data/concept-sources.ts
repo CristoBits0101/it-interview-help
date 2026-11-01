@@ -111,6 +111,9 @@ export const conceptSources = {
 
 const reference = (publisher: string, title: string, url: string): ConceptSource => ({ publisher, title, url });
 export const glossarySources = {
+  parameters: reference('PyTorch', 'Optimizing Model Parameters', 'https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html'),
+  temperature: reference('Hugging Face', 'GenerationConfig · Temperature', 'https://huggingface.co/docs/transformers/main_classes/text_generation#transformers.GenerationConfig'),
+  latency: reference('Hugging Face', 'Streaming · Latency', 'https://huggingface.co/docs/text-generation-inference/en/conceptual/streaming'),
   context: conceptSources.context,
   hallucinations: conceptSources.hallucinations,
   agents: reference('Anthropic', 'Building effective agents', 'https://www.anthropic.com/research/building-effective-agents'),

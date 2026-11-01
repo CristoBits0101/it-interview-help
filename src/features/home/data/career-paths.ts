@@ -158,6 +158,7 @@ export const areaGuidance: Record<string, { focus: string; prerequisites: string
 };
 
 export const careerSources = [
+  { title: 'PostHog · Product Engineer', url: 'https://posthog.com/careers/product-engineer' },
   ...additionalCareerSources,
   { title: 'MDN · fundamentos de desarrollo web', url: 'https://developer.mozilla.org/en-US/curriculum/core/' },
   { title: 'MDN · primeros pasos en backend', url: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps' },

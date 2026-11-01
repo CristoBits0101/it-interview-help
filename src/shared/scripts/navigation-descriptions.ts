@@ -26,19 +26,16 @@ export function initializeNavigationDescriptions() {
     trigger.setAttribute('aria-describedby', tooltip.id);
     if (!tooltip.matches(':popover-open')) tooltip.showPopover();
     const anchor = trigger.getBoundingClientRect();
+    const label = trigger.parentElement?.querySelector('.navigation-label')?.getBoundingClientRect();
     const bounds = tooltip.getBoundingClientRect();
     const margin = parseFloat(getComputedStyle(tooltip).paddingLeft);
     const gap = margin / 2;
     const viewportWidth = document.documentElement.clientWidth;
     const viewportHeight = document.documentElement.clientHeight;
-    const fitsRight = anchor.right + gap + bounds.width <= viewportWidth - margin;
-    const fitsLeft = anchor.left - gap - bounds.width >= margin;
-    let left = anchor.right + gap;
+    let left = label?.left ?? anchor.right + gap;
+    const fitsRight = left + bounds.width <= viewportWidth - margin;
     let top = anchor.top + (anchor.height - bounds.height) / 2;
-    if (!fitsRight && fitsLeft) {
-      left = anchor.left - gap - bounds.width;
-    } else if (!fitsRight) {
-      left = anchor.left + (anchor.width - bounds.width) / 2;
+    if (!fitsRight) {
       top = anchor.bottom + gap + bounds.height <= viewportHeight - margin
         ? anchor.bottom + gap
         : anchor.top - gap - bounds.height;

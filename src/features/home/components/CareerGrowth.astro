@@ -22,7 +22,7 @@ const groupIcons: Record<CareerGrowthTarget['group'], IconName> = { specializati
       <ul class="career-growth-options" aria-labelledby={`growth-${group.id}-title growth-${group.id}-question`}>
         {targets.filter(target => target.group === group.id).map(target => <li data-growth-option hidden={!target.profileIds.includes(initialProfileId)}>
           <a href={careerGrowthResources[target.id].url} target="_blank" rel="noopener noreferrer" hreflang={careerGrowthResources[target.id].language} data-career-growth={target.id} data-growth-profiles={target.profileIds.join(' ')}>
-            {target.abbreviation && <span class="career-growth-abbreviation" translate="no" aria-hidden="true">{target.abbreviation}</span>}
+            <span class="career-growth-abbreviation" data-i18n-es={target.abbreviation.es} data-i18n-en={target.abbreviation.en} aria-hidden="true">{target.abbreviation.en}</span>
             <span data-growth-label>{t(target.label)}</span>
             <Icon name="link" size={16} class="career-growth-link-icon" />
             <span class="sr-only"><span translate="no">{careerGrowthResources[target.id].publisher}</span>. <span>{t('Se abre en una pestaña nueva')}</span></span>

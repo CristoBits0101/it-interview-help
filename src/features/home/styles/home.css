@@ -68,7 +68,7 @@
   .career-plan-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--gap-home-panel) var(--gap-horizontal); min-width: 0; }
   .career-plan-meta > .career-area-count { max-width: 100%; margin-inline-start: auto; white-space: normal; text-align: end; }
   .career-panel[data-career-panel] .career-list-label { font-family: var(--career-heading); font-size: var(--font-career-heading); line-height: var(--line-career-question); font-weight: 300; }
-  .career-panel[data-career-panel] .career-area-grid { grid-column: 1; grid-row: 2; }
+  .career-panel[data-career-panel] .career-area-grid { grid-column: 1; grid-row: 2; align-self: stretch; }
   .career-panel[data-career-panel] .career-plan-layout > .career-outcome { grid-column: 2; grid-row: 2; align-self: stretch; }
   .career-list-label { display: flex; flex-direction: column; gap: var(--gap-home-panel); font-size: var(--font-small); font-weight: 400; }
   .career-area-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; gap: var(--gap-home-panel) var(--gap-horizontal); }

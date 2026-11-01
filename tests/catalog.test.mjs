@@ -124,7 +124,7 @@ test('pending destinations are distinct leaves and do not publish empty learning
     assert.equal(nodes[0].label, page.label);
     assert(!routeIds.includes(page.href));
   }
-  assert.equal(concepts.length, 123);
+  assert.equal(concepts.length, 126);
   assert.equal(publishedTracks.length, 2);
   const methods = publishedNodes.find(node => node.label === 'Software Engineering Methods');
   assert.deepEqual(methods.children.map(node => node.label), ['Heuristic Methods', 'Formal Methods', 'Prototyping Methods', 'Agile Methods']);

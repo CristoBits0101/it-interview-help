@@ -24,7 +24,7 @@ const originalNames: Record<string, string> = {
   'ai-multimodal': 'IA Multimodal', 'ai-visual-prompt': 'Prompt Engineering Visual',
   'ai-dalle': 'DALL-E', 'ai-qwen': 'Qwen2.5VL',
 };
-const supplementalIds = new Set(['ai-inferencia', 'ai-tokens', 'ai-contexto', 'ai-alucinacion']);
+const supplementalIds = new Set(['ai-inferencia', 'ai-tokens', 'ai-contexto', 'ai-alucinacion', 'ai-parametros', 'ai-temperatura', 'ai-latencia']);
 export const glossaryInventory = glossaryTopics.flatMap(topic => topic.entries.filter(([id]) => !supplementalIds.has(id)).map(([id, , en]) => ({
   id, term: originalNames[id] ?? en, topic: topic.en,
 })));

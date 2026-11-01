@@ -107,7 +107,7 @@ function initializeCarousel(root: HTMLElement): CarouselController | undefined {
     insetStart = Number.parseFloat(viewportStyles.paddingInlineStart) || 0;
     insetEnd = Number.parseFloat(viewportStyles.paddingInlineEnd) || 0;
     layout = calculateCarouselLayout(contentWidth(), items.length, cssLength(styles.getPropertyValue('--carousel-min-width'), rootSize, 9 * rootSize), cssLength(styles.getPropertyValue('--carousel-max-width'), rootSize, 18 * rootSize), gap);
-    const itemWidth = `${layout.itemWidth}px`;
+    const itemWidth = Array.from({ length: layout.slots }, (_, index) => `${Math.round((index + 1) * layout.itemWidth) - Math.round(index * layout.itemWidth)}px`).join(' ');
     if (layout.slots && viewport.style.getPropertyValue('--carousel-item-width') !== itemWidth) viewport.style.setProperty('--carousel-item-width', itemWidth);
     const width = contentWidth();
     const language = document.documentElement.lang;

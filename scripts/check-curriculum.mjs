@@ -90,7 +90,7 @@ for (const concept of publishedConcepts) {
   assert.notEqual(translate(concept.description, 'en'), concept.description, `Untranslated concept: ${concept.id}`);
 }
 const glossary = appliedAI.modules.flatMap(m => m.concepts);
-assert.equal(glossary.length, 104, 'Retain the 100 README terms and four agreed model basics');
+assert.equal(glossary.length, 107, 'Retain the 100 README terms and seven agreed model basics');
 const publishedIds = [...publishedConcepts, ...glossary].map(c => c.id);
 assert.equal(new Set(publishedIds).size, publishedIds.length, 'Concept IDs must be globally unique');
 assert.equal(new Set(glossaryInventory.map(c => c.term)).size, 100);

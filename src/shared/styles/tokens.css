@@ -3,6 +3,7 @@
   :root {
     --paper: #ffffff;
     --canvas: #fcfcfa;
+    --workspace-background: linear-gradient(to bottom right, var(--canvas), color-mix(in srgb, var(--canvas) 90%, var(--paper)));
     --sidebar: #f4f5f0;
     --ink: #252d29;
     --muted: #626b60;
