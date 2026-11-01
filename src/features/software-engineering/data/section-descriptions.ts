@@ -5,6 +5,7 @@ export const softwareEngineeringSectionDescriptions: Record<string, { es: string
   'Agile Methods': { es: 'Permite organizar entregas iterativas y adaptar el trabajo a la información recibida.', en: 'Helps organize iterative deliveries and adapt work to incoming information.' },
   'Architectural Styles': { es: 'Ayuda a comparar formas generales de organizar componentes y sus comunicaciones.', en: 'Helps compare general ways to organize components and their communications.' },
   Monolithic: { es: 'Permite razonar sobre una aplicación que se construye y despliega como una unidad.', en: 'Helps reason about an application that is built and deployed as one unit.' },
+  'Modular Monolith': { es: 'Organiza una aplicación en módulos con límites e interfaces definidos que se despliegan como una unidad.', en: 'Organizes an application into modules with defined boundaries and interfaces that are deployed as one unit.' },
   REST: { es: 'Explica las restricciones arquitectónicas para interactuar con recursos mediante una interfaz uniforme.', en: 'Explains architectural constraints for interacting with resources through a uniform interface.' },
   'Event-Driven': { es: 'Ayuda a organizar componentes que reaccionan a eventos y reducir su dependencia directa.', en: 'Helps organize components that react to events and reduce their direct dependency.' },
   Microservices: { es: 'Permite evaluar la separación de una aplicación en servicios desplegables de forma independiente.', en: 'Helps evaluate splitting an application into independently deployable services.' },

@@ -19,5 +19,5 @@ export function describeNavigation(label: string, area: string) {
     ?? dataTechnologiesDescriptions[label]
     ?? softwareEngineeringSectionDescriptions[label];
   if (!description) throw new Error(`Missing navigation description: ${area}/${label}`);
-  return description;
+  return { es: description.es.replace(/\.$/, ''), en: description.en.replace(/\.$/, '') };
 }

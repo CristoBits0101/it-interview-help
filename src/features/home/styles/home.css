@@ -108,7 +108,7 @@
   .career-branch ol { margin-block-start: var(--gap-card); }
   .career-branch li { display: flex; align-items: baseline; gap: var(--gap-card); color: var(--text-secondary); font-size: var(--font-body); line-height: var(--line-body); }
   .career-branch li > span { flex-shrink: 0; color: var(--text-soft); font-size: var(--font-meta); }
-  .career-growth-introduction, .career-growth-note { font-size: var(--font-body); line-height: var(--line-body); color: var(--text-soft); }
+  .career-growth-introduction { font-size: var(--font-body); line-height: var(--line-body); color: var(--text-soft); }
   #career-growth .career-branch { gap: 0; border-radius: var(--radius-profile); }
   #career-growth .career-branch > h3 { margin: 0; font-family: var(--brand); }
   .career-branch > .career-growth-question { font-family: var(--career-heading); font-size: var(--font-career-heading); line-height: var(--line-career-question); }
@@ -118,6 +118,8 @@
   .career-growth-options li { display: block; }
   .career-growth-options a { display: grid; grid-template-columns: var(--line-body) minmax(0, 1fr) var(--line-body); align-items: center; gap: var(--gap-compact); width: 100%; min-height: 44px; padding: var(--space-compact); border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--paper); color: var(--text-secondary); font-size: var(--font-small); line-height: var(--line-body); font-weight: 400; text-align: start; }
   .career-growth-options a:is(:hover, :focus-visible) { border-color: var(--border-strong); background: var(--surface-hover); color: var(--ink); }
+  .career-growth-options a:has(.career-growth-abbreviation) { grid-template-columns: max-content minmax(0, 1fr) var(--line-body); }
+  .career-growth-abbreviation { grid-column: 1; grid-row: 1; font-size: var(--font-caption); font-weight: 200; white-space: nowrap; }
   .career-growth-options [data-growth-label] { grid-column: 2; grid-row: 1; min-width: 0; text-align: center; text-align-last: center; }
   .career-growth-link-icon { grid-column: 3; grid-row: 1; justify-self: center; }
   .career-methodology { padding: var(--space-card); background: var(--sidebar); border: 1px solid var(--line); border-radius: var(--radius-card); }

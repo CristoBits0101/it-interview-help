@@ -11,7 +11,7 @@ test('every destination with an existing dot has a bilingual declarative explana
     assert.ok(node.description?.en, `Missing English explanation: ${node.label}`);
     assert.notEqual(node.description.es, node.description.en);
     for (const description of Object.values(node.description)) {
-      assert.ok(description.endsWith('.'), node.label);
+      assert.ok(!description.endsWith('.'), node.label);
       assert.doesNotMatch(description, /[?¿]/u, node.label);
     }
   }

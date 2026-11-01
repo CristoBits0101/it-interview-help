@@ -83,23 +83,6 @@ export function applyStaticTranslations(language: Language) {
     const count = Number(element.dataset.stageAreaCount);
     element.textContent = stageAreaCount(count, language);
   });
-  document.querySelectorAll<HTMLElement>('[data-route-count]').forEach(element => {
-    const count = Number(element.dataset.routeCount);
-    element.textContent = language === 'en'
-      ? `${count} ${count === 1 ? 'learning path' : 'learning paths'} available. Concise definitions and original sources to explore further.`
-      : `${count} ${count === 1 ? 'ruta disponible' : 'rutas disponibles'}. Definiciones breves y fuentes originales para profundizar.`;
-  });
-  document.querySelectorAll<HTMLElement>('[data-route-number]').forEach(element => {
-    element.textContent = `${language === 'en' ? 'PATH' : 'RUTA'} ${element.dataset.routeNumber}`;
-  });
-  document.querySelectorAll<HTMLElement>('[data-concept-count]').forEach(element => {
-    const count = Number(element.dataset.conceptCount);
-    element.textContent = `${count} ${language === 'en' ? count === 1 ? 'concept' : 'concepts' : count === 1 ? 'concepto' : 'conceptos'}`;
-  });
-  document.querySelectorAll<HTMLElement>('[data-module-count]').forEach(element => {
-    const count = Number(element.dataset.moduleCount);
-    element.textContent = `${count} ${language === 'en' ? count === 1 ? 'module' : 'modules' : count === 1 ? 'módulo' : 'módulos'}`;
-  });
   const count = document.querySelector<HTMLElement>('.concept-count');
   if (count) count.lastChild!.textContent = ` ${language === 'en' ? 'CONCEPTS' : 'CONCEPTOS'}`;
 }

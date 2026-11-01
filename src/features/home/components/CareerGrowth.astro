@@ -14,7 +14,6 @@ const groupIcons: Record<CareerGrowthTarget['group'], IconName> = { specializati
     <h2 class="section-title" id="growth-title">{t('Amplía tu Alcance')}</h2>
   </header>
   <p class="career-growth-introduction">{t('Elige el próximo paso en la trayectoria hacia tu progresión profesional.')}</p>
-  <p class="career-growth-note" id="growth-resources-note">{t('Recursos externos en inglés sobre responsabilidades y competencias. Los títulos y el alcance varían según la organización.')}</p>
   <div class="career-branches">
     {careerGrowthGroups.map(group => <article class="career-branch" data-growth-group={group.id}>
       <h3 class="career-icon-heading" id={`growth-${group.id}-title`}><Icon name={groupIcons[group.id]} class="career-heading-icon" /><span>{t(group.title)}</span></h3>
@@ -22,7 +21,8 @@ const groupIcons: Record<CareerGrowthTarget['group'], IconName> = { specializati
       <p class="career-growth-question" id={`growth-${group.id}-question`}>{t(group.question)}</p>
       <ul class="career-growth-options" aria-labelledby={`growth-${group.id}-title growth-${group.id}-question`}>
         {targets.filter(target => target.group === group.id).map(target => <li data-growth-option hidden={!target.profileIds.includes(initialProfileId)}>
-          <a href={careerGrowthResources[target.id].url} target="_blank" rel="noopener noreferrer" hreflang={careerGrowthResources[target.id].language} data-career-growth={target.id} data-growth-profiles={target.profileIds.join(' ')} aria-describedby="growth-resources-note">
+          <a href={careerGrowthResources[target.id].url} target="_blank" rel="noopener noreferrer" hreflang={careerGrowthResources[target.id].language} data-career-growth={target.id} data-growth-profiles={target.profileIds.join(' ')}>
+            {target.abbreviation && <span class="career-growth-abbreviation" translate="no" aria-hidden="true">{target.abbreviation}</span>}
             <span data-growth-label>{t(target.label)}</span>
             <Icon name="link" size={16} class="career-growth-link-icon" />
             <span class="sr-only"><span translate="no">{careerGrowthResources[target.id].publisher}</span>. <span>{t('Se abre en una pestaña nueva')}</span></span>

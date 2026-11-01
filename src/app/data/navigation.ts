@@ -69,6 +69,7 @@ const navigationTree: (NavigationNode & { icon: IconName })[] = [
     { label: 'Software Architecture', href: '#software-architecture/estilos-arquitectura', children: [
       { label: 'Architectural Styles', children: [
         { label: 'Monolithic' },
+        { label: 'Modular Monolith' },
         { label: 'REST', href: '#software-architecture/rest' },
         { label: 'Event-Driven' },
         { label: 'Microservices' },
