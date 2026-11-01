@@ -1,3 +1,4 @@
+import { initializeInteractionSounds } from '../../shared/scripts/interaction-sounds';
 import { applyStaticTranslations, getSavedLanguage, translate } from '../../shared/scripts/i18n';
 import { initializeNavigation } from '../../shared/scripts/navigation';
 import { initializeNavigationDrawer } from '../../shared/scripts/navigation-drawer';
@@ -40,5 +41,6 @@ export function initializeNotFoundPage() {
     if (destination) back.href = destination;
   };
   refreshReturn();
+  initializeInteractionSounds();
   window.addEventListener('pageshow', () => { refreshLanguage(); refreshReturn(); });
 }

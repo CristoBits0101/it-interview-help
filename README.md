@@ -21,6 +21,12 @@ El contenido se centra en fundamentos para entrevistas de distintos perfiles y e
 | `/` | Inicio / Home | Página existente / Existing page | [Astro](src/pages/index.astro) |
 | `/404.html` | Página no encontrada / Page Not Found | Página de error / Error page | [Astro](src/pages/404.astro) |
 
+## Componentes finalizados / Completed components
+
+**ES:** El propietario ha confirmado la tarjeta «Solicitud de Consentimiento» como terminada y estable. Es un componente compartido sin ruta propia. Esta confirmación no incluye la página de Preferencias que continúa en desarrollo. Fuente: [StorageConsentDialog.astro](src/shared/components/preferences/StorageConsentDialog.astro).
+
+**EN:** The owner has confirmed the “Consent Request” card as finished and stable. It is a shared component without its own route. This confirmation does not include the Preferences page which remains in development. Source: [StorageConsentDialog.astro](src/shared/components/preferences/StorageConsentDialog.astro).
+
 ## Rutas de desarrollo sujetas a cambios / Development routes subject to change
 
 **ES:** Todas las páginas existentes sin esa confirmación figuran a continuación. Las rutas son relativas al origen de la aplicación y los enlaces apuntan a sus entradas Astro en este repositorio. Se incluyen las páginas de contenido pendiente que ya tienen ruta y el documento de error 404. Se excluyen los recursos y las hojas del menú sin página.

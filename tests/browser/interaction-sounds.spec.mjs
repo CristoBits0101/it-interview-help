@@ -1,6 +1,6 @@
 import { test, expect } from './fixtures.mjs';
 
-test.beforeEach(async ({ page }) => {
+async function recordAudio(page) {
   await page.addInitScript(() => {
     window.audioStarts = 0;
     const start = AudioBufferSourceNode.prototype.start;
@@ -9,7 +9,9 @@ test.beforeEach(async ({ page }) => {
       return start.apply(this, args);
     };
   });
-});
+}
+
+test.beforeEach(async ({ page }) => { await recordAudio(page); });
 
 async function feedback(page, action, expected = 1) {
   const before = await page.evaluate(() => window.audioStarts);
@@ -61,6 +63,9 @@ test('navigation, study controls and dialogs provide feedback without duplicate 
   await feedback(page, () => page.locator('.breadcrumb a').first().click());
   await feedback(page, () => page.locator('[data-career-stage="junior"]').click());
   await feedback(page, () => page.locator('[data-career-stage="junior"]').click());
+  await feedback(page, () => page.locator('[data-carousel-selection] [data-carousel-next]').click());
+  await feedback(page, () => page.locator('[data-carousel-selection] [data-carousel-previous]').click());
+  await feedback(page, () => page.locator('[data-career-profile][aria-pressed="false"]:visible').first().click());
   await page.goto('/software-design/patrones');
   expect(await page.evaluate(() => window.audioStarts)).toBe(0);
   await feedback(page, () => page.locator('[data-guide-open]:visible').first().click());
@@ -71,6 +76,8 @@ test('navigation, study controls and dialogs provide feedback without duplicate 
   await feedback(page, () => page.locator('dialog[open] [data-guide-go][aria-current="step"]').click(), 0);
   await feedback(page, () => page.keyboard.press('Escape'));
   await feedback(page, () => page.locator('[data-learn="builder"]').click());
+  await feedback(page, () => page.locator('.concept-card:visible [data-card-view="use-case"]').first().click());
+  await feedback(page, () => page.locator('.concept-card:visible [data-card-view="explanation"]').first().click());
   await feedback(page, () => page.locator('#level-next').click());
   await feedback(page, () => page.keyboard.press('Control+k'));
   await feedback(page, () => page.locator('#search').fill('solid'));
@@ -88,4 +95,74 @@ test('unavailable audio reports a translated status and restores the disabled st
   await expect(page.locator('#sound-volume')).toBeDisabled();
   await page.locator('label[lang="es"]').click();
   await expect(page.locator('#sound-status')).toHaveText('El audio no está disponible. Puedes volver a intentarlo.');
+});
+
+
+test('consent changes keep one cue in memory mode and never play during the initial request', async ({ browser }, testInfo) => {
+  const context = await browser.newContext({ ...testInfo.project.use, baseURL: 'http://127.0.0.1:4322' });
+  try {
+    const page = await context.newPage();
+    await recordAudio(page);
+    await page.addInitScript(() => {
+      if (!localStorage.getItem('tech-training:storage-consent:v1')) localStorage.setItem('tech-training:sound:v1', JSON.stringify({ enabled: true, volume: 80 }));
+    });
+    await page.goto('/preferences');
+    expect(await page.evaluate(() => window.audioStarts)).toBe(0);
+    await feedback(page, () => page.locator('#storage-consent-reject').click(), 0);
+    await expect(page.locator('#sound-toggle')).toHaveAttribute('aria-pressed', 'false');
+    await feedback(page, () => page.locator('#sound-toggle').click());
+    expect(await page.evaluate(() => localStorage.getItem('tech-training:sound:v1'))).toBeNull();
+    for (const language of ['es', 'en']) {
+      await feedback(page, () => page.locator('label[lang="' + language + '"]').click());
+      await expect(page.locator('#storage-save-toggle')).toHaveAccessibleName(language === 'es' ? 'Consentir almacenamiento' : 'Allow storage');
+      await feedback(page, () => page.locator('.storage-save-control').click());
+      await page.locator('#storage-save-toggle').focus();
+      await feedback(page, () => page.keyboard.press('Space'));
+      await expect(page.locator('#storage-save-toggle')).not.toBeChecked();
+      expect(await page.evaluate(() => localStorage.getItem('tech-training:sound:v1'))).toBeNull();
+    }
+    await feedback(page, () => page.locator('#sound-toggle').click(), 0);
+    await feedback(page, () => page.locator('.storage-save-control').click(), 0);
+  } finally { await context.close(); }
+});
+
+test('404 navigation shares enabled audio without controls or startup playback', async ({ page }, testInfo) => {
+  await page.goto('/preferences');
+  await feedback(page, () => page.locator('#sound-toggle').click());
+  for (const language of ['es', 'en']) {
+    await page.goto('/preferences');
+    await feedback(page, () => page.locator('label[lang="' + language + '"]').click());
+    await page.goto('/missing-audio-page');
+    expect(await page.evaluate(() => window.audioStarts)).toBe(0);
+    await expect(page.locator('#sound-toggle')).toHaveCount(0);
+    if (testInfo.project.name === 'mobile') {
+      await feedback(page, () => page.locator('#mobile-toggle').click());
+      await feedback(page, () => page.locator('#sidebar-close').click());
+    }
+    await feedback(page, () => page.keyboard.press('Control+k'));
+    await feedback(page, () => page.locator('#search').fill('solid'));
+    await feedback(page, () => page.locator('#search-clear').click());
+    const branch = page.locator('[data-nav-branch="Computer%20Systems"] > summary');
+    await feedback(page, () => branch.click());
+    await feedback(page, () => branch.click());
+  }
+});
+
+
+test('blocked Web Audio disables sound safely and can be retried', async ({ page }) => {
+  await page.addInitScript(() => {
+    window.AudioContext = new Proxy(window.AudioContext, {
+      construct(Context, args) {
+        if (!window.allowAudioResume) throw new DOMException('Blocked', 'NotAllowedError');
+        return Reflect.construct(Context, args);
+      },
+    });
+  });
+  await page.goto('/preferences');
+  await feedback(page, () => page.locator('#sound-toggle').click(), 0);
+  await expect(page.locator('#sound-status')).toBeVisible();
+  await expect(page.locator('#sound-toggle')).toHaveAttribute('aria-pressed', 'false');
+  await page.evaluate(() => { window.allowAudioResume = true; });
+  await feedback(page, () => page.locator('#sound-toggle').click());
+  await expect(page.locator('#sound-status')).toBeHidden();
 });

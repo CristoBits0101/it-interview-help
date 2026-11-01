@@ -8,7 +8,6 @@ export function initializeInteractionSounds() {
   const slider = document.querySelector<HTMLInputElement>('#sound-volume');
   const output = document.querySelector<HTMLOutputElement>('#sound-volume-value');
   const status = document.querySelector<HTMLElement>('#sound-status');
-  if (!toggle || !slider || !output || !status) return;
   let preference = restoreSoundPreference(readJsonPreference(soundPreferenceKey));
   let unlocked = false;
   let readiness: Promise<void> | undefined;
@@ -23,24 +22,25 @@ export function initializeInteractionSounds() {
   const language = () => document.documentElement.lang === 'es' ? 'es' : 'en';
   const persist = () => writePreference(soundPreferenceKey, JSON.stringify(preference));
   const render = () => {
-    toggle.setAttribute('aria-pressed', String(preference.enabled));
+    toggle?.setAttribute('aria-pressed', String(preference.enabled));
     const label = translate(preference.enabled ? 'Desactivar sonidos' : 'Activar sonidos', language());
-    toggle.setAttribute('aria-label', label);
-    toggle.title = label;
-    toggle.querySelectorAll<HTMLElement>('[data-sound-icon]').forEach(icon => {
+    toggle?.setAttribute('aria-label', label);
+    if (toggle) toggle.title = label;
+    toggle?.querySelectorAll<HTMLElement>('[data-sound-icon]').forEach(icon => {
       icon.hidden = icon.dataset.soundIcon !== (preference.enabled && preference.volume > 0 ? 'on' : 'off');
     });
-    slider.value = String(preference.volume);
-    slider.disabled = !preference.enabled;
-    output.value = `${preference.volume}%`;
+    if (slider) { slider.value = String(preference.volume); slider.disabled = !preference.enabled; }
+    if (output) output.value = `${preference.volume}%`;
   };
   const player = createSoundPlayer(() => {
     preference.enabled = false;
     unlocked = false;
     persist();
     render();
-    status.textContent = translate('El audio no está disponible. Puedes volver a intentarlo.', language());
-    status.hidden = false;
+    if (status) {
+      status.textContent = translate('El audio no está disponible. Puedes volver a intentarlo.', language());
+      status.hidden = false;
+    }
   });
   player.setVolume(preference.volume);
   render();
@@ -57,17 +57,17 @@ export function initializeInteractionSounds() {
       if (preference.enabled && unlocked && readiness === ready && pendingCue === request) player.play(cue);
     });
   };
-  toggle.addEventListener('click', event => {
+  toggle?.addEventListener('click', event => {
     if (!event.isTrusted) return;
     preference.enabled = !preference.enabled;
-    status.hidden = true;
+    if (status) status.hidden = true;
     persist();
     render();
     if (preference.enabled) {
       play('select');
     } else { unlocked = false; player.disable(); }
   });
-  slider.addEventListener('input', event => {
+  if (slider) slider.addEventListener('input', event => {
     if (!event.isTrusted || !preference.enabled || preference.volume === Number(slider.value)) return;
     preference.volume = Number(slider.value);
     player.setVolume(preference.volume);
