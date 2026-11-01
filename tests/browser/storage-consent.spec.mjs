@@ -210,7 +210,7 @@ test('saved language localizes an undecided request on reload and 404 while memo
       await expect(page.locator('#storage-consent-dialog')).toBeVisible();
       await expect(page.locator('#storage-consent-title')).toHaveText(language === 'es' ? 'Solicitud de Consentimiento' : 'Consent Request');
       await expect(page.locator('#storage-consent-privacy')).toHaveText(approvedPrivacy[language]);
-      await expect(page.locator('.storage-consent-items li')).toHaveText(language === 'es' ? ['Idioma Seleccionado', 'Progreso de Aprendizaje', 'Etapa Seleccionada', 'Despliegue de las Ramas del Menú', 'Sonido Activado o Desactivado', 'Nivel de Volumen'] : ['Selected Language', 'Learning Progress', 'Selected Stage', 'Menu Branch Expansion', 'Sound On or Off', 'Volume Level']);
+      await expect(page.locator('.storage-consent-items li')).toHaveText(language === 'es' ? ['Idioma Seleccionado.', 'Progreso de Aprendizaje.', 'Etapa Seleccionada.', 'Despliegue de las Ramas del Menú.', 'Sonido Activado o Desactivado.', 'Nivel de Volumen.'] : ['Selected Language.', 'Learning Progress.', 'Selected Stage.', 'Menu Branch Expansion.', 'Sound On or Off.', 'Volume Level.']);
       await expect(page.locator('#storage-consent-dialog hr')).toHaveCount(3);
       expect(await page.locator('.storage-consent-items').evaluate(element => getComputedStyle(element).listStyleType)).toBe('disc');
       expect(await page.evaluate(() => localStorage.getItem('tech-training:storage-consent:v1'))).toBeNull();
