@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Redaction 20';
+  src: url('/fonts/redaction-20/redaction-20-bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+@layer components {
+  .workspace:has(#not-found-view) { display: grid; grid-template-rows: auto 1fr; min-block-size: 100svh; }
+  main:has(#not-found-view) { display: grid; place-items: center; inline-size: 100%; min-width: 0; margin-block: 0; }
+  #not-found-view { --line-not-found-message: 1.5; justify-items: center; text-align: center; }
+  #not-found-view .page-heading { justify-items: center; }
+  #not-found-view .not-found-heading { display: grid; justify-items: center; gap: calc(var(--space-section) / 2 + .03125rem); padding: 0; border: 0; text-transform: none; }
+  .not-found-code { --tracking-error-label: .02em; font-family: var(--error-label); font-size: var(--font-error-label); font-weight: 700; letter-spacing: var(--tracking-error-label); }
+  .not-found-headline { max-inline-size: 40ch; font-family: var(--not-found-headline); font-size: var(--font-not-found-headline); font-weight: 400; line-height: calc(var(--line-body) * 1.5); text-wrap: balance; }
+  #not-found-view .page-description { max-inline-size: 52ch; padding-block-start: var(--space-section); border-block-start: 1px solid var(--line); text-align: center; text-align-last: center; text-wrap: pretty; }
+  #not-found-view .page-description p { line-height: var(--line-not-found-message); }
+  .not-found-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--gap-horizontal); }
+  .not-found-actions .primary-button { min-height: 44px; border-radius: var(--radius-full); }
+}

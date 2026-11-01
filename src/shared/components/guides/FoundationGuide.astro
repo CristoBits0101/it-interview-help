@@ -16,7 +16,8 @@ const headingId = `${guide.route}-title`;
     <span slot="title"><Text value={guide.title} /></span>
     <Text as="p" value={guide.description} />
   </PageHeading>
-  <figure class="foundation-figure">
+  {guide.separateIntroduction && <hr class="section-separator" />}
+  {guide.diagram.length > 0 && <figure class="foundation-figure">
     <figcaption class="section-title"><Text value={{ es: 'Observa cómo se relacionan las piezas', en: 'See how the pieces connect' }} /></figcaption>
     <ol class="foundation-flow">
       {guide.diagram.map((part, index) => <li>
@@ -25,30 +26,33 @@ const headingId = `${guide.route}-title`;
         <Text as="p" value={part.text} />
       </li>)}
     </ol>
-  </figure>
-  <div class="foundation-concepts">
-    {guide.concepts.map(concept => <article><Text as="h2" value={concept.title} /><Text as="p" value={concept.description} /></article>)}
-  </div>
-  {guide.sections?.map(section => <section class="foundation-practice">
+  </figure>}
+  {guide.concepts.length > 0 && <>{guide.diagram.length > 0 && <hr class="section-separator" />}<div class="foundation-concepts">
+    {guide.concepts.map(concept => <article><Text as="h2" value={concept.title} /><Text as="p" value={concept.description} />{concept.source && <ConceptSource source={concept.source} conceptTitle={concept.title.en} />}</article>)}
+  </div></>}
+  {guide.sections?.map((section, index) => <>{(index > 0 || guide.diagram.length > 0 || guide.concepts.length > 0) && <hr class="section-separator" />}<section class="foundation-practice">
     <Text as="h2" class="section-title" value={section.title} />
-    <Text as="p" value={section.description} />
-    <div class="foundation-concepts">{section.items.map(item => <article>
-      <Text as="h2" value={item.title} />
+    {section.description && <Text as="p" value={section.description} />}
+    {(section.groups ?? (section.items.length ? [{ items: section.items }] : [])).map(group => <>
+    {'title' in group && <><Text as="h3" class={group.question ? 'foundation-question' : 'section-title'} value={group.title} /><Text as="p" value={group.description} /></>}
+    {group.items.length > 0 && <div class="foundation-concepts">{group.items.map(item => <article>
+      <Text as={'title' in group ? 'h4' : 'h3'} class="foundation-card-title" value={item.title} />
       <Text as="p" value={item.description} />
       {item.code && <pre tabindex="0"><code>{item.code}</code></pre>}
       <ConceptSource source={item.source} conceptTitle={item.title.en} />
-    </article>)}</div>
-  </section>)}
+    </article>)}</div>}</>)}
+  </section></>)}
+  {guide.questions.length > 0 && <><hr class="section-separator" />
   <div class="foundation-practice">
     <Text as="h2" class="section-title" value={{ es: 'Explícalo sin mirar', en: 'Explain it without looking' }} />
     <Text as="p" value={{ es: 'Aparta la vista del esquema y responde con tus palabras antes de abrir cada solución. Después compara y corrige tu explicación.', en: 'Look away from the diagram and answer in your own words before opening each solution. Then compare and correct your explanation.' }} />
     {guide.questions.map(question => <details><summary><Text value={question.prompt} /><Icon name="down" size={16} /></summary><Text as="p" value={question.answer} /></details>)}
-  </div>
+  </div></>}
   <ConceptSource source={guide.source} conceptTitle={guide.label} />
-  <nav class="foundation-related" aria-label={t('Guías relacionadas')}>
+  {guide.related.length > 0 && <nav class="foundation-related" aria-label={t('Guías relacionadas')}>
     {guide.related.map(route => {
       const related = foundationGuides.find(item => item.route === route)!;
       return <a href={`/${route}`} data-route={route}><Text value={related.title} /><Icon name="arrow" size={16} /></a>;
     })}
-  </nav>
+  </nav>}
 </section>

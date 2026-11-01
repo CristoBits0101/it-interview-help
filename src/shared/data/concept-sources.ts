@@ -328,6 +328,31 @@ export const mcpClientSources = {
   custom: source('Model Context Protocol', 'Build an MCP client', 'https://modelcontextprotocol.io/docs/develop/build-client'),
 };
 
+export const javaSetupSources = {
+  bashStartup: source('GNU', 'Bash Startup Files', 'https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html'),
+  javaPath: source('Oracle', 'PATH and CLASSPATH', 'https://docs.oracle.com/javase/tutorial/essential/environment/paths.html'),
+  jdkLinux: source('Oracle', 'JDK 21 Installation on Linux', 'https://docs.oracle.com/en/java/javase/21/install/installation-jdk-linux-platforms.html'),
+  containers: source('Docker', 'What Is a Container?', 'https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/'),
+  jdkInstall: source('Oracle', 'JDK 21 Installation on Windows', 'https://docs.oracle.com/en/java/javase/21/install/installation-jdk-microsoft-windows-platforms.html'),
+  jdkTools: source('Oracle', 'JDK 21 Tool Specifications', 'https://docs.oracle.com/en/java/javase/21/docs/specs/man/index.html'),
+  javac: source('Oracle', 'The javac Command', 'https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html'),
+  jdkRuntime: source('Oracle', 'JDK Migration · Removed Tools and Components', 'https://docs.oracle.com/en/java/javase/21/migrate/removed-tools-and-components.html'),
+  jdkDownloads: source('Oracle', 'Java Downloads', 'https://www.oracle.com/es/java/technologies/downloads/'),
+  jdkLicense: source('Oracle', 'Oracle JDK License General FAQs', 'https://www.oracle.com/java/technologies/javase/jdk-faqs.html'),
+  jdkArchive: source('OpenJDK', 'JDK 21 Releases', 'https://jdk.java.net/21/'),
+  mavenSetup: source('Apache Maven', 'Installation', 'https://maven.apache.org/install.html'),
+  gradleJava: source('Gradle', 'Build Environment Configuration', 'https://docs.gradle.org/current/userguide/build_environment.html'),
+  initializr: source('Spring', 'Spring Initializr Reference Guide', 'https://docs.spring.io/initializr/docs/current/reference/html/'),
+  springStart: source('Spring', 'Building an Application with Spring Boot', 'https://spring.io/guides/gs/spring-boot/'),
+  springPackages: source('Spring', 'Spring Boot · Structuring Your Code', 'https://docs.spring.io/spring-boot/reference/using/structuring-your-code.html'),
+  mavenCoordinates: source('Apache Maven', 'Naming Conventions of Maven Coordinates', 'https://maven.apache.org/guides/mini/guide-naming-conventions.html'),
+  mavenPom: source('Apache Maven', 'POM Reference', 'https://maven.apache.org/pom.html'),
+  tomcatVersions: source('Apache Tomcat', 'Which Version Do I Want?', 'https://tomcat.apache.org/whichversion.html'),
+  tomcatSetup: source('Apache Tomcat', 'Tomcat 10.1 Setup', 'https://tomcat.apache.org/tomcat-10.1-doc/setup.html'),
+  tomcatIntroduction: source('Apache Tomcat', 'Tomcat 10.1 Introduction', 'https://tomcat.apache.org/tomcat-10.1-doc/introduction.html'),
+  tomcatDeployment: source('Apache Tomcat', 'Application Deployment', 'https://tomcat.apache.org/tomcat-10.1-doc/appdev/deployment.html'),
+};
+
 export const mcpServerSources = {
   tutorial: source('Model Context Protocol', 'Build an MCP server', 'https://modelcontextprotocol.io/docs/develop/build-server'),
   repository: source('Model Context Protocol · GitHub', 'Official TypeScript SDK', 'https://github.com/modelcontextprotocol/typescript-sdk'),

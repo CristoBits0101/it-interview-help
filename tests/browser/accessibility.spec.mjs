@@ -30,8 +30,10 @@ for (const language of ['en', 'es']) {
     await expect(page.locator('[data-nav-branch="Cybersecurity"]')).toBeHidden();
     expect(await page.evaluate(() => localStorage.getItem('tech-training:navigation:v1'))).toBe(saved);
     await page.locator('#search').fill('Rust');
-    await expect(page.locator('.navigation-disabled').filter({ hasText: /^Rust$/ })).toBeVisible();
-    await expect(page.locator('.navigation-disabled').filter({ hasText: /^Rust$/ })).not.toHaveAttribute('href');
+    const rust = page.locator('[data-nav-branch$="/Rust"]');
+    await expect(rust).toBeVisible();
+    await expect(rust.locator('.navigation-disabled').first()).toBeVisible();
+    await expect(rust.locator('.navigation-disabled').first()).not.toHaveAttribute('href');
     await page.locator('#search').fill('ciberseguridad');
     await expect(page.locator('[data-nav-branch="Cybersecurity"]')).toBeVisible();
     await page.locator('#search').fill('zzzz-no-match');

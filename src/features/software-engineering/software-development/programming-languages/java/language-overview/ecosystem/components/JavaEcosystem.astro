@@ -16,11 +16,13 @@ import '../../../styles/java-learning-paths.css';
     <h2 class="section-title">{t('Tecnologías para Java')}</h2>
     <div class="java-ecosystem-grid">{javaTechnologies.map(technology => <JavaTechnologyCard technology={technology} />)}</div>
   </div>
+  <hr class="section-separator" />
   <div class="java-path-group">
     <h2 class="section-title">Spring + Java</h2>
     <Text as="p" value={{ es: 'Herramientas para distintas necesidades de aplicaciones Java con Spring. JUnit y Mockito son herramientas de pruebas independientes.', en: 'Tools for different needs of Java applications with Spring. JUnit and Mockito are independent testing tools.' }} />
     <div class="java-ecosystem-grid">{springTechnologies.map(technology => <JavaTechnologyCard technology={technology} />)}</div>
   </div>
+  <hr class="section-separator" />
   <div class="java-path-group">
     <h2 class="section-title">{t('Estilos Arquitectónicos')}</h2>
     <Text as="p" value={{ es: 'Los microservicios describen cómo organizar un sistema. Son un estilo arquitectónico y no una biblioteca de Java.', en: 'Microservices describes how to organize a system. It is an architectural style rather than a Java library.' }} />

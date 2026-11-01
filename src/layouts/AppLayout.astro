@@ -1,5 +1,7 @@
 ---
 import '@fontsource-variable/google-sans-flex';
+import AppRuntime from '../app/components/AppRuntime.astro';
+import NotFoundRuntime from '../app/components/NotFoundRuntime.astro';
 import '@fontsource/dancing-script/latin-400.css';
 import { t } from '../shared/lib/translations';
 import { createRouteTitles, documentTitle } from '../shared/lib/document-title';
@@ -13,14 +15,14 @@ import ReviewDialog from '../shared/components/dialogs/ReviewDialog.astro';
 import SourcesDialog from '../shared/components/dialogs/SourcesDialog.astro';
 import type { NavigationNode } from '../app/data/navigation';
 import type { ConceptSource } from '../shared/data/concept-sources';
-interface Props { navigation: NavigationNode[]; sources: Pick<ConceptSource, 'title' | 'url'>[] }
-const { navigation, sources } = Astro.props;
+interface Props { notFound?: boolean; navigation: NavigationNode[]; sources: Pick<ConceptSource, 'title' | 'url'>[] }
+const { navigation, sources, notFound = false } = Astro.props;
 const isPreferences = Astro.url.pathname.replace(/\/$/, '') === '/preferences';
 const defaultDescription = 'Review key concepts and prepare your answers for technical interviews across different roles and companies.';
-const description = isPreferences ? t('Configura la aplicación según tus necesidades y gustos.') : defaultDescription;
+const description = notFound ? t('No encontramos esta página.') : isPreferences ? t('Configura la aplicación según tus necesidades y gustos.') : defaultDescription;
 const routeTitles = createRouteTitles(navigation);
-const pageTitle = documentTitle(Astro.url.pathname, routeTitles, 'en');
-const canonicalUrl = isPreferences && Astro.site ? new URL('preferences', Astro.site).href : Astro.site?.href;
+const pageTitle = notFound ? documentTitle('/404', {}, 'en', 'Page Not Found') : documentTitle(Astro.url.pathname, routeTitles, 'en');
+const canonicalUrl = notFound ? undefined : isPreferences && Astro.site ? new URL('preferences', Astro.site).href : Astro.site?.href;
 const canvasColor = designTokens.match(/--canvas:\s*(#[\da-fA-F]{6})\s*;/)?.[1];
 if (!canvasColor) throw new Error('The canvas design token must define a six-digit hex color.');
 ---
@@ -46,12 +48,12 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
     <Sidebar nodes={navigation} />
 
     <div class="workspace">
-      <Topbar />
+      <Topbar notFound={notFound} />
 
       <main id="main" tabindex="-1">
         <slot />
 
-        <noscript><p class="noscript-note">{t('Puedes consultar el resumen y el primer itinerario. Activa JavaScript para elegir otro perfil, navegar entre módulos, buscar y guardar tu progreso.')}</p></noscript>
+        {!notFound && <noscript><p class="noscript-note">{t('Puedes consultar el resumen y el primer itinerario. Activa JavaScript para elegir otro perfil, navegar entre módulos, buscar y guardar tu progreso.')}</p></noscript>}
       </main>
     </div>
 
@@ -59,6 +61,6 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
 
     <SourcesDialog sources={sources} />
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script>import '../app/scripts/app';</script>
+    {notFound ? <NotFoundRuntime /> : <AppRuntime />}
   </body>
 </html>

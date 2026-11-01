@@ -1,0 +1,8 @@
+---
+import AppLayout from '../layouts/AppLayout.astro';
+import NotFoundPage from '../app/components/NotFoundPage.astro';
+import { publishedNavigation } from '../app/data/published-catalog';
+---
+<AppLayout navigation={publishedNavigation} sources={[]} notFound>
+  <NotFoundPage />
+</AppLayout>

@@ -1,5 +1,6 @@
 import { calculateCarouselLayout, formatCarouselRange, formatCarouselSelection, getCarouselSelectionState, getCarouselFocusIndex, getCarouselPage, getCarouselRange, getNearestCarouselScroll, type CarouselLayout } from '../lib/horizontal-carousel';
 import { initializeCarouselPositions } from './carousel-position-controls';
+import { measureProfileColumns } from './profile-card-widths';
 
 type CarouselController = { refresh(): void; destroy(): void };
 
@@ -107,7 +108,12 @@ function initializeCarousel(root: HTMLElement): CarouselController | undefined {
     insetStart = Number.parseFloat(viewportStyles.paddingInlineStart) || 0;
     insetEnd = Number.parseFloat(viewportStyles.paddingInlineEnd) || 0;
     layout = calculateCarouselLayout(contentWidth(), items.length, cssLength(styles.getPropertyValue('--carousel-min-width'), rootSize, 9 * rootSize), cssLength(styles.getPropertyValue('--carousel-max-width'), rootSize, 18 * rootSize), gap);
-    const itemWidth = Array.from({ length: layout.slots }, (_, index) => `${Math.round((index + 1) * layout.itemWidth) - Math.round(index * layout.itemWidth)}px`).join(' ');
+    const profileColumns = !selectionMode && layout.slots && viewport.classList.contains('career-profile-options')
+      ? measureProfileColumns(viewport, items, layout.slots, contentWidth(), gap, cssLength(styles.getPropertyValue('--carousel-min-width'), rootSize, 9 * rootSize))
+      : undefined;
+    if (profileColumns) layout.slots = profileColumns.slots;
+    const widths = profileColumns?.widths ?? Array.from({ length: layout.slots }, (_, index) => Math.round((index + 1) * layout.itemWidth) - Math.round(index * layout.itemWidth));
+    const itemWidth = widths.map(width => `${width}px`).join(' ');
     if (layout.slots && viewport.style.getPropertyValue('--carousel-item-width') !== itemWidth) viewport.style.setProperty('--carousel-item-width', itemWidth);
     const width = contentWidth();
     const language = document.documentElement.lang;

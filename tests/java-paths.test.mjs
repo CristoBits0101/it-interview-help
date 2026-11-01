@@ -16,8 +16,8 @@ test('Java groups its three overview dimensions and preserves versions', () => {
   assert.deepEqual(java.children[0].children.map(node => node.label), ['Version History', 'Ecosystem', 'Career Paths']);
   const roadmap = java.children.find(node => node.label === 'Developer Roadmap');
   assert.equal(roadmap.href, undefined);
-  assert.deepEqual(roadmap.children.map(node => node.label), ['Programming Fundamentals', 'Data Structures', 'Algorithms']);
-  assert(roadmap.children.every(node => node.href === undefined));
+  assert.deepEqual(roadmap.children.map(node => node.label), ['Development Environment', 'Programming Fundamentals', 'Data Structures', 'Algorithms']);
+  assert(roadmap.children.slice(1).every(node => node.href === undefined));
   assert(!publishedGuides.some(guide => guide.href === '#java/developer-roadmap'));
   for (const page of javaGuidePages) {
     assert(publishedGuides.some(guide => guide.href === page.href));

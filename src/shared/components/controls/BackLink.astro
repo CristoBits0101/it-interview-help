@@ -1,0 +1,8 @@
+---
+import Icon from '../primitives/Icon.astro';
+import { t } from '../../lib/translations';
+import './back-link.css';
+interface Props { id: string; hidden?: boolean }
+const { id, hidden = false } = Astro.props;
+---
+<a id={id} class="preferences-back" href="/" hidden={hidden}><span class="preferences-back-circle" aria-hidden="true"><span class="preferences-back-disc"><Icon name="back" size={24} /></span></span><span>{t('Volver')}</span></a>

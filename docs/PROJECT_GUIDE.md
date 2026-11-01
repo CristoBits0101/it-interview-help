@@ -2,6 +2,37 @@
 
 La estructura vigente del código se describe en [Componentes y continuidad](COMPONENT_ARCHITECTURE.md). Las rutas de los apartados históricos reflejan su organización original.
 
+## Referencia tipográfica vigente
+
+Home es la referencia de jerarquía para el desarrollo futuro. Se elige el estilo por función y se reutilizan componentes y tokens existentes. Los valores en píxeles de esta tabla corresponden a una raíz de 16 px; las unidades `rem` permiten ampliación. Esta referencia no autoriza cambios masivos en páginas aprobadas. Los apartados fechados posteriores son antecedentes históricos.
+
+| Función | Familia | Tamaño base / peso | Token o selector |
+| --- | --- | --- | --- |
+| Título de página y sección decorada | IBM Plex Mono | 15 px / 500 | `PageHeading`, `.section-title`, `--font-title` |
+| Introducción y prosa | Google Sans Flex | 13 px / 300 | `.page-description`, `--font-body` |
+| Título de tarjeta de puesto | IBM Plex Mono | 13 px / 500 | `.career-option-title`, `--font-body` |
+| Título de área del plan | IBM Plex Mono | 14 px / 500 | `.career-area-heading`, `--font-small` |
+| Título de categoría de Amplía tu Alcance | IBM Plex Mono | 15 px / 500 | `.career-branch h3`, `--font-title` |
+| Descripción compacta de puesto | Google Sans Flex | 12 px / 300 | `.career-option-description`, `--font-caption` |
+| Controles de texto y enlaces de opciones | Google Sans Flex | 14 px / 400 | `--font-small` |
+| Etiquetas y experiencia de etapas | Google Sans Flex | 13 px / 300 | `--font-meta` |
+| Preguntas de selección de Home | Dancing Script | 20 px / 400 | `.career-control-label`, `--font-career-heading` |
+| Preguntas de crecimiento y objetivo del plan | Dancing Script | 20 px / 300 | `.career-growth-question`, `.career-list-label` |
+| Numeración y especialidad de puesto | Dancing Script | 16 px / 400 | `.career-option-number`, `--font-career-meta` |
+| Marca | IBM Plex Mono | 20 px / 500 | `.brand`, `--font-brand` |
+
+La línea común es `--line-body: 1rem`. Las preguntas de Home usan `--line-career-question: 1.5625rem` y su metadato manuscrito usa `--line-career-meta: 1.5rem`. Las cabeceras decoradas conservan mayúsculas y borde izquierdo. Las introducciones no adoptan la tipografía manuscrita de las preguntas de Home.
+
+Las guías reutilizan la misma cabecera de página, sección decorada e introducción. Sus tarjetas educativas conservan Google Sans Flex a 15 px/500 y su prosa a 13 px/300; no se convierten en tarjetas de puestos. El código usa IBM Plex Mono mediante `--code` a 13 px en estas guías. Las variantes de Home no justifican sustituir tipografías en controles o tarjetas aprobados de otros dominios.
+
+La jerarquía se decide por función y no solo por la etiqueta HTML. El título de página usa `h1` y las secciones principales `h2` con la decoración común. Las preguntas explicativas subordinadas usan `h3` con el rol de preguntas de Home: Dancing Script a 20 px/400 e interlineado de 25 px mediante los tokens compartidos. En Introducción al JDK las dos preguntas pertenecen a la misma sección y no llevan separadores propios. Las tarjetas bajo una sección usan `h3` y bajo un subgrupo `h4` sin cambiar su tipografía educativa. Los separadores marcan cambios de sección y conservan los 21 px a ambos lados.
+
+Las preguntas interactivas de repaso en `summary` conservan su rol de control y su estilo aprobado. Los títulos mono de tarjetas de conceptos y versiones Java también conservan sus variantes. No se aplica la tipografía manuscrita a todas las preguntas ni la de puestos a todas las tarjetas.
+
+El 404 conserva su excepción propia: «ERROR 404» en Redaction 20 a 20 px/700 y el mensaje de cabecera en Dancing Script a 22.5 px/400. Su interlineado y composición permanecen locales al 404. Preferencias conserva sus estilos aprobados.
+
+Fuentes de implementación: [tokens](../src/shared/styles/tokens.css), [estilos comunes](../src/shared/styles/global.css), [Home](../src/features/home/styles/home.css), [cabecera compartida](../src/shared/components/guides/PageHeading.astro), [guías](../src/shared/styles/foundation-guides.css) y [404](../src/app/styles/not-found.css).
+
 ## 24 de octubre de 2026 — inglés por defecto con preferencia local
 
 Sin preferencia válida la interfaz arranca en inglés. Una elección guardada de español o inglés se conserva entre visitas; valores inválidos o almacenamiento inaccesible usan inglés. No se detecta el idioma del navegador. El botón permite cambiar manualmente y guarda solo la clave de idioma existente. Los metadatos y lang iniciales usan inglés. El catálogo estático conserva sus textos fuente y se traduce mediante la inicialización existente antes de revelar el cuerpo; una liberación a los 1500 ms evita dejar una página vacía si falla el arranque. Sin JavaScript la barrera no se activa y se conserva el contenido estático de respaldo. No se añaden otros idiomas.

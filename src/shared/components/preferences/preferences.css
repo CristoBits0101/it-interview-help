@@ -1,15 +1,9 @@
 @layer components {
   .topbar-route-row { display: contents; }
   .topbar-route-row:has(#preferences-back:not([hidden])) { display: flex; flex: 1 1 20rem; align-items: center; gap: var(--gap-horizontal); min-width: 0; }
+  #preferences-back { margin-inline-start: auto; }
   #preferences-view { row-gap: 0; }
   #preferences-view > .preferences-sections { margin-block-start: var(--space-section); }
-  .preferences-back { display: inline-flex; align-items: center; flex-shrink: 0; gap: var(--gap-control); margin-inline-start: auto; border-radius: var(--radius-control); color: var(--text-secondary); font-size: var(--font-small); line-height: var(--line-body); }
-  .preferences-back-circle { display: grid; place-items: center; flex-shrink: 0; inline-size: calc(2.3375 * var(--line-body)); block-size: calc(2.3375 * var(--line-body)); padding: calc(var(--line-body) / 4); border: 1px solid var(--border-strong); border-radius: var(--radius-full); background: var(--sidebar); color: var(--green); }
-  .preferences-back-disc { display: grid; place-items: center; inline-size: 100%; block-size: 100%; border: 2px solid var(--text-soft); border-radius: var(--radius-full); background: var(--surface-tinted); transition: background-color var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease); }
-  .preferences-back svg { inline-size: calc(1.275 * var(--line-body)); block-size: calc(1.275 * var(--line-body)); display: block; }
-  .preferences-back:is(:hover, :focus-visible) .preferences-back-disc { background: var(--surface-selected); border-color: var(--green); }
-  @media (forced-colors: active) { .preferences-back-circle, .preferences-back-disc { border-color: ButtonText; } }
-  @media (prefers-reduced-motion: reduce) { .preferences-back-disc { transition: none; } }
   .preferences-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--space-section); min-width: 0; }
   .sidebar-preferences { position: sticky; bottom: 0; z-index: 2; flex: 0 0 auto; display: grid; gap: var(--sidebar-padding); margin-block-start: auto; padding-block: var(--space-section) 0; min-width: 0; background: var(--sidebar); }
   .sidebar-preferences::after { content: ''; position: absolute; inset: auto calc(-1 * var(--sidebar-padding)) calc(-1 * var(--sidebar-padding)); height: var(--sidebar-padding); background: var(--sidebar); pointer-events: none; }

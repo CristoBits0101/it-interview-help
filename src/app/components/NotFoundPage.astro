@@ -1,0 +1,20 @@
+---
+import PageHeading from '../../shared/components/guides/PageHeading.astro';
+import BackLink from '../../shared/components/controls/BackLink.astro';
+import { t } from '../../shared/lib/translations';
+import '../../shared/components/preferences/preferences.css';
+import '../styles/not-found.css';
+---
+<section id="not-found-view" class="page-flow" aria-labelledby="not-found-title">
+  <PageHeading id="not-found-title" titleClass="not-found-heading">
+    <Fragment slot="title">
+      <span class="not-found-code">ERROR 404</span>{' '}
+      <span class="not-found-headline"><span>{t('Vas más rápido que nuestro equipo de desarrollo')}</span>{' '}<span aria-hidden="true">🚀</span></span>
+    </Fragment>
+    <p>{t('Íbamos a decir que esta página era exclusiva para ti. Técnicamente lo es. Nadie más consigue verla.')}</p>
+  </PageHeading>
+  <div class="not-found-actions">
+    <BackLink id="not-found-back" hidden />
+    <a class="primary-button" href="/">{t('Ir a Home')}</a>
+  </div>
+</section>

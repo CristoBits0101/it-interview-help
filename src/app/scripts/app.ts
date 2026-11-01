@@ -279,6 +279,7 @@ document.addEventListener('click', event => {
   if (!link || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || link.target || link.hasAttribute('download')) return;
   const destination = new URL(link.href);
   if (destination.origin !== location.origin || destination.hash) return;
+  if (destination.pathname !== '/preferences' && !returnRoutes.has(destination.pathname.replace(/\/$/, '') || '/')) return;
   event.preventDefault();
   if (destination.pathname !== location.pathname) history.pushState(null, '', destination.pathname);
   goToRoute();

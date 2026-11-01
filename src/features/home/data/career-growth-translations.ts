@@ -7,7 +7,7 @@ export const careerGrowthTranslations: Record<string, string> = {
   'Liderazgo': 'Leadership',
   'Gestión': 'Management',
   'Ejecutivo': 'Executive',
-  'Elige el próximo paso en la trayectoria hacia tu progresión profesional.': 'Choose the next step on the path toward your career progression.',
+  'Selecciona hacia qué trayectoria profesional quieres progresar.': 'Select the career path you want to progress towards.',
   'Preparación para el alcance seleccionado': 'Preparation for the selected scope',
   'Base técnica del puesto': 'Technical foundations for the role',
   'Qué preparar': 'What to prepare',

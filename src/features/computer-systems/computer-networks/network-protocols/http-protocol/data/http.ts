@@ -1,6 +1,6 @@
-import { conceptSources } from '../../../../../shared/data/concept-sources';
-import type { FoundationGuide } from '../../../../../shared/lib/foundation-guide';
-import { localizedText as text } from '../../../../../shared/lib/localized-text';
+import { conceptSources } from '../../../../../../shared/data/concept-sources';
+import type { FoundationGuide } from '../../../../../../shared/lib/foundation-guide';
+import { localizedText as text } from '../../../../../../shared/lib/localized-text';
 
 export const httpGuide: FoundationGuide = {
     route: 'computer-networks/http', label: 'HTTP Protocol', title: text('Protocolo HTTP', 'HTTP Protocol'),

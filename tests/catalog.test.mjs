@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readFileSync } from 'node:fs';
 import { navigation } from '../src/app/data/navigation.ts';
 import { publishedTracks, publishedNavigation, publishedSources, pendingPages, publishedGuides } from '../src/app/data/published-catalog.ts';
 import { createConceptViews } from '../src/shared/lib/concept-views.ts';
@@ -11,6 +12,15 @@ const routeIds = publishedTracks.flatMap(track => track.modules.map(module => `#
 const pendingIds = pendingPages.map(page => page.href);
 const availableIds = [...routeIds, ...pendingIds, ...publishedGuides.map(guide => guide.href)];
 const publishedNodes = flatten(publishedNavigation);
+
+test('README stability groups account for every existing page exactly once', () => {
+  const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8');
+  const inventory = readme.split('## Rutas de producción estables')[1].split('## Home y contenido')[0];
+  const routes = [...inventory.matchAll(/^\| `([^`]+)` \|/gm)].map(match => match[1]);
+  const expected = [...new Set(['/', '/preferences', '/404.html', ...availableIds.map(id => id.replace(/^#/, '/'))])];
+  assert.equal(new Set(routes).size, routes.length);
+  assert.deepEqual(routes.sort(), expected.sort());
+});
 
 test('programming language placeholders remain bilingual and unavailable without invented pages', () => {
   const languages = publishedNodes.find(node => node.label === 'Programming Languages');
@@ -36,17 +46,20 @@ test('programming language placeholders remain bilingual and unavailable without
       ['Developer Roadmap', ['Programming Fundamentals', 'Data Structures', 'Algorithms']],
     ]) {
       const group = language.children.find(node => node.label === label);
-      assert.deepEqual(group.children.map(node => node.label), children);
+      const hasEnvironment = language.label === 'Java' && label === 'Developer Roadmap';
+      assert.deepEqual(group.children.map(node => node.label), [...(hasEnvironment ? ['Development Environment'] : []), ...children]);
       assert.equal(group.href, undefined);
       if (language.label !== 'Java' || label === 'Developer Roadmap') {
-        assert(group.children.every(node => node.href === undefined && node.children === undefined));
+        assert(group.children.slice(hasEnvironment ? 1 : 0).every(node => node.href === undefined && node.children === undefined));
       }
     }
     for (const label of ['Libraries', 'Frameworks']) {
       const entries = language.children.filter(node => node.label === label);
       assert.equal(entries.length, 1);
       assert.equal(entries[0].href, undefined);
-      assert.equal(entries[0].children, undefined);
+      if (language.label === 'Java' && label === 'Frameworks') {
+        assert.deepEqual(entries[0].children.map(node => node.label), ['Spring Boot']);
+      } else assert.equal(entries[0].children, undefined);
     }
   }
 });

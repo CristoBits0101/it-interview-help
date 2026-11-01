@@ -1,4 +1,5 @@
 export const computerSystemsDescriptions: Record<string, { es: string; en: string }> = {
+  'Network Protocols': { es: 'Reúne reglas que permiten intercambiar mensajes entre sistemas conectados.', en: 'Brings together rules that allow connected systems to exchange messages.' },
   'Computing Fundamentals': { es: 'Explica cómo se representa y procesa la información en un ordenador.', en: 'Explains how information is represented and processed in a computer.' },
   'Computer Architecture': { es: 'Ayuda a razonar sobre procesadores y memoria al analizar el rendimiento.', en: 'Helps reason about processors and memory when analyzing performance.' },
   'Operating Systems': { es: 'Explica cómo se gestionan procesos y recursos compartidos del ordenador.', en: 'Explains how computer processes and shared resources are managed.' },

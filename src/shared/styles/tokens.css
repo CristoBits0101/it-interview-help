@@ -26,6 +26,8 @@
     --border-accent: #bacdab;
     --border-strong: #94ad7c;
     --body: 'Google Sans Flex Variable', sans-serif;
+    --not-found-headline: var(--career-heading);
+    --error-label: 'Redaction 20', serif;
     --display: var(--body);
     --brand: 'IBM Plex Mono', monospace;
     --career-heading: 'Dancing Script', cursive;
@@ -39,6 +41,8 @@
     --font-body: .8125rem;
     --font-caption: .75rem;
     --font-title: .9375rem;
+    --font-error-label: 1.25rem;
+    --font-not-found-headline: 1.40625rem;
     --font-section: .9375rem;
     --line-body: 1rem;
     --line-career-meta: calc(var(--line-body) * 1.5);

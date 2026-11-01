@@ -8,10 +8,19 @@ import { careerContentTranslations } from '../../features/home/data/career-conte
 export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
+  'Protocolos de Red': 'Network Protocols',
+  'Entorno de Desarrollo': 'Development Environment',
+  'Creación de Proyectos': 'Project Creation',
+  'Contenedores de Servlets': 'Servlet Containers',
   'Computación Cuántica': 'Quantum Computing',
   'Preferencias': 'Preferences',
   'Ajuste de Preferencias': 'Preference Settings',
   'Volver': 'Back',
+  'Página no encontrada': 'Page Not Found',
+  'No encontramos esta página.': 'We could not find this page.',
+  'Vas más rápido que nuestro equipo de desarrollo': 'You are moving faster than our development team',
+  'Íbamos a decir que esta página era exclusiva para ti. Técnicamente lo es. Nadie más consigue verla.': 'We were going to say that this page was exclusive to you. Technically it is. No one else manages to see it.',
+  'Ir a Home': 'Go to Home',
   'No hay coincidencias en el menú.': 'No matches in the menu.',
   'Sonido': 'Sound',
   'Configura la aplicación según tus necesidades y gustos.': 'Configure the application according to your needs and tastes.',
@@ -72,7 +81,7 @@ const spanishToEnglish: Record<string, string> = {
   'Mostrar página': 'Show page',
   'Puestos': 'Roles',
   'Prepara tu próxima entrevista técnica': 'Prepare for your next technical interview',
-  'Prepara tus entrevistas y pruebas técnicas con los fundamentos esenciales de las áreas relevantes para tu puesto objetivo reunidos en un solo lugar con contenido respaldado por fuentes verificadas.': 'Prepare for your technical interviews and assessments with the essential knowledge from the areas relevant to your target role gathered in one place with content backed by verified sources.',
+  'Prepara tus procesos de selección con los conocimientos esenciales para tu puesto objetivo centralizados en un solo lugar y respaldados por fuentes verificadas.': 'Prepare for your recruitment processes with the essential knowledge for your target role gathered in one place and backed by verified sources.',
   '0 años': '0 years',
   '0 - 2 años': '0 - 2 years',
   '2 - 5 años': '2 - 5 years',

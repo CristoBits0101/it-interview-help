@@ -1,13 +1,16 @@
 ---
 import { t } from '../../lib/translations';
 import Icon from '../primitives/Icon.astro';
+import BackLink from '../controls/BackLink.astro';
+interface Props { notFound?: boolean }
+const { notFound = false } = Astro.props;
 const isPreferences = Astro.url.pathname.replace(/\/$/, '') === '/preferences';
 
 ---
 <header class="topbar">
         <button class="icon-button mobile-toggle" id="mobile-toggle" aria-label={t('Abrir menú de rutas')} aria-controls="sidebar" aria-expanded="false"><Icon name="menu" /></button>
         <div class="topbar-route-row">
-        <nav class="breadcrumb" aria-label={t('Ruta actual')}><a href="/" data-home-link aria-current={isPreferences ? undefined : 'page'} lang="en">{t('Home')}</a><span class="breadcrumb-path" id="breadcrumb-path" hidden={!isPreferences}>{isPreferences && <><span class="breadcrumb-slash" aria-hidden="true">/</span><span class="breadcrumb-current" aria-current="page">{t('Preferencias')}</span></>}</span></nav>
-        <a id="preferences-back" class="preferences-back" href="/" hidden={!isPreferences}><span class="preferences-back-circle" aria-hidden="true"><span class="preferences-back-disc"><Icon name="back" size={24} /></span></span><span>{t('Volver')}</span></a>
+        <nav class="breadcrumb" aria-label={t('Ruta actual')}><a href="/" data-home-link aria-current={isPreferences || notFound ? undefined : 'page'} lang="en">{t('Home')}</a><span class="breadcrumb-path" id="breadcrumb-path" hidden={!isPreferences && !notFound}>{(isPreferences || notFound) && <><span class="breadcrumb-slash" aria-hidden="true">/</span><span class="breadcrumb-current" aria-current="page">{t(notFound ? 'Página no encontrada' : 'Preferencias')}</span></>}</span></nav>
+        <BackLink id="preferences-back" hidden={!isPreferences} />
         </div>
 </header>

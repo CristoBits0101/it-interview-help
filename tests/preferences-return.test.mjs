@@ -13,7 +13,7 @@ test('preferences return preserves internal paths and anchors', () => {
 });
 
 test('preferences return rejects external destinations and preferences loops', () => {
-  for (const route of [null, {}, '', 'https://other.example/software-design/solid', '//other.example/', 'javascript:alert(1)', '/preferences', '/preferences/', '/#preferences', '/#preferences/', '/unknown', 'https://user@interview.example/']) {
+  for (const route of [null, {}, '', 'https://other.example/software-design/solid', '//other.example/', 'javascript:alert(1)', '/preferences', '/preferences/', '/#preferences', '/#preferences/', '/unknown', '/404', '/404.html', '/#404', '/#404.html', 'https://user@interview.example/']) {
     assert.equal(safePreferencesReturn(route, origin, routes), null);
   }
 });

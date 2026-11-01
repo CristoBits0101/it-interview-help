@@ -14,7 +14,7 @@ export function createRouteTitles(nodes: TitleNode[]): Record<string, string> {
   return titles;
 }
 
-export function documentTitle(pathname: string, titles: Record<string, string>, language: Language): string {
+export function documentTitle(pathname: string, titles: Record<string, string>, language: Language, fallback = 'Home'): string {
   const route = pathname.replace(/\/$/, '') || '/';
-  return `${translate(titles[route] ?? 'Home', language)} | IT Interview Help`;
+  return `${translate(titles[route] ?? fallback, language)} | IT Interview Help`;
 }

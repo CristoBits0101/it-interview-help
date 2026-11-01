@@ -10,7 +10,7 @@ import PageHeading from '../../../../shared/components/guides/PageHeading.astro'
 ---
 <section id="system-design/sd-fundamentals" class="system-design-summary page-flow" data-resource-route="system-design/sd-fundamentals" data-resource-title="System Design" aria-labelledby="system-design-summary-title" hidden>
   <PageHeading id="system-design-summary-title"><span slot="title">{t('System Design')}</span><Text as="p" value={{ es: 'Repasa cómo definir requisitos y elegir componentes para diseñar sistemas. Compara sus límites y justifica tus decisiones técnicas.', en: 'Review how to define requirements and choose components when designing systems. Compare their limits and explain your technical decisions.' }} /></PageHeading>
-  {systemDesignGroups.map(group => <section class="system-design-group" aria-labelledby={`system-design-group-${group.id}`}>
+  {systemDesignGroups.map((group, groupIndex) => <>{groupIndex > 0 && <hr class="section-separator" />}<section class="system-design-group" aria-labelledby={`system-design-group-${group.id}`}>
     <h2 class="section-title" id={`system-design-group-${group.id}`}><Text value={group.title} /></h2>
     {group.topicIds.map(id => {
       const topic = systemDesignSummary.find(item => item.id === id)!;
@@ -25,5 +25,5 @@ import PageHeading from '../../../../shared/components/guides/PageHeading.astro'
         </div>
       </details>;
     })}
-  </section>)}
+  </section></>)}
 </section>

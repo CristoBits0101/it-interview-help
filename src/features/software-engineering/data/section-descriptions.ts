@@ -1,4 +1,9 @@
 export const softwareEngineeringSectionDescriptions: Record<string, { es: string; en: string }> = {
+  'Development Environment': { es: 'Reúne las herramientas y la configuración para desarrollar y ejecutar programas Java.', en: 'Brings together the tools and configuration for developing and running Java programs.' },
+  'Spring Boot': { es: 'Facilita crear aplicaciones Spring con configuración inicial y dependencias coordinadas.', en: 'Helps create Spring applications with initial configuration and coordinated dependencies.' },
+  'Project Creation': { es: 'Explica cómo generar un proyecto con Spring Initializr y distinguir sus metadatos.', en: 'Explains how to generate a project with Spring Initializr and distinguish its metadata.' },
+  'Servlet Containers': { es: 'Reúne entornos de software que gestionan el ciclo de vida y la ejecución de servlets.', en: 'Brings together software environments that manage servlet lifecycle and execution.' },
+  'Apache Tomcat': { es: 'Explica el contenedor de servlets de Apache y su relación con HTTP y las aplicaciones Java.', en: 'Explains the Apache servlet container and its relationship with HTTP and Java applications.' },
   'Heuristic Methods': { es: 'Ayuda a aplicar criterios prácticos cuando no existe una solución exacta sencilla.', en: 'Helps apply practical criteria when there is no simple exact solution.' },
   'Formal Methods': { es: 'Permite especificar y verificar propiedades del software mediante razonamiento matemático.', en: 'Enables specifying and verifying software properties through mathematical reasoning.' },
   'Prototyping Methods': { es: 'Ayuda a probar ideas y resolver incertidumbres antes de construir la solución completa.', en: 'Helps test ideas and resolve uncertainties before building the complete solution.' },

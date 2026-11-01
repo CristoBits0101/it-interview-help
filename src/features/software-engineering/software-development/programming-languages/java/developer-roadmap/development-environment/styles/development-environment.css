@@ -1,0 +1,5 @@
+@layer components {
+  [data-resource-route='java/jdk-environment'] > .foundation-practice { gap: var(--space-section); }
+  [data-resource-route='java/jdk-environment'] .foundation-concepts > article { padding: var(--space-home-panel); gap: var(--gap-home-panel); }
+  [data-resource-route='java/jdk-environment'] .foundation-question { padding: 0; border: 0; font-family: var(--career-heading); font-size: var(--font-career-heading); line-height: var(--line-career-question); font-weight: 400; text-transform: none; color: var(--text-secondary); }
+}

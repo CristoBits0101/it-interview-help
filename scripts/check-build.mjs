@@ -103,6 +103,15 @@ for (const [page, preferencesVisible] of [[html, false], [preferencesHtml, true]
 assert.match(preferencesHtml, /Preferences \| IT Interview Help<\/title>/);
 assert(preferencesHtml.includes('Configure the application according to your needs and tastes.'));
 assert(!existsSync(join(outputRoot, 'settings/index.html')), 'Only the Preferences route is published.');
+const notFoundHtml = readFileSync(join(outputRoot, '404.html'), 'utf8');
+assert.match(notFoundHtml, /Page Not Found \| IT Interview Help<\/title>/);
+assert(notFoundHtml.includes('We could not find this page.'));
+assert(notFoundHtml.includes('You are moving faster than our development team'));
+assert(notFoundHtml.includes('We were going to say that this page was exclusive to you. Technically it is. No one else manages to see it.'));
+assert(notFoundHtml.includes('id="not-found-back"') && notFoundHtml.includes('Go to Home'));
+assert(!notFoundHtml.includes('id="concept-library"') && !notFoundHtml.includes('id="home-view"'));
+assert(!Object.keys(routeTitles).includes('/404'));
+
 const csp = tags.find(tag => tag.name === 'meta' && tag.attributes['http-equiv']?.toLowerCase() === 'content-security-policy')?.attributes.content;
 assert(csp, 'The built document must carry the static CSP.');
 assert(!/'unsafe-(?:inline|eval)'/.test(csp), 'The CSP must not allow unsafe inline or eval scripts.');

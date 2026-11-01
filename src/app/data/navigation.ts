@@ -36,7 +36,7 @@ const navigationTree: (NavigationNode & { icon: IconName })[] = [
   { label: 'Computer Systems', icon: 'cpu', children: [
     { label: 'Computing Fundamentals' },
     { label: 'Computer Architecture' }, { label: 'Operating Systems', children: [{ label: 'Buffer', href: '#computer-systems/buffer' }] },
-    { label: 'Computer Networks', children: [{ label: 'HTTP Protocol', href: '#computer-networks/http' }] }, { label: 'Parallel Computing' },
+    { label: 'Computer Networks', children: [{ label: 'Network Protocols', children: [{ label: 'HTTP Protocol', href: '#computer-networks/http' }] }] }, { label: 'Parallel Computing' },
     { label: 'Quantum Computing' },
     { label: 'Distributed Systems', href: '#distributed-systems/fundamentos' },
     { label: 'Cloud Computing' },
@@ -103,9 +103,11 @@ const navigationTree: (NavigationNode & { icon: IconName })[] = [
             ...javaGuidePages,
           ] },
           { label: 'Developer Roadmap', children: [
+            { label: 'Development Environment', href: '#java/jdk-environment' },
             { label: 'Programming Fundamentals' },
             { label: 'Data Structures' }, { label: 'Algorithms' },
           ] },
+          { label: 'Frameworks', children: [{ label: 'Spring Boot', children: [{ label: 'Project Creation', href: '#spring-boot/project-creation' }] }] },
         ] }, { label: 'Python', children: [{ label: 'Language Overview', children: [
           { label: 'Version History' }, { label: 'Ecosystem' }, { label: 'Career Paths' },
         ] }, { label: 'Developer Roadmap', children: [
@@ -128,8 +130,9 @@ const navigationTree: (NavigationNode & { icon: IconName })[] = [
               { label: 'Programming Fundamentals' }, { label: 'Data Structures' }, { label: 'Algorithms' },
             ],
           },
-          ...(language.children ?? []).filter(node => !['Language Overview', 'Developer Roadmap'].includes(node.label)),
-          { label: 'Libraries' }, { label: 'Frameworks' },
+          ...(language.children ?? []).filter(node => !['Language Overview', 'Developer Roadmap', 'Libraries', 'Frameworks'].includes(node.label)),
+          language.children?.find(node => node.label === 'Libraries') ?? { label: 'Libraries' },
+          language.children?.find(node => node.label === 'Frameworks') ?? { label: 'Frameworks' },
         ],
       })) },
       { label: 'Development Domains', children: [
@@ -144,7 +147,9 @@ const navigationTree: (NavigationNode & { icon: IconName })[] = [
       ] },
     ] },
     { label: 'Software Testing' }, { label: 'Software Quality' },
-    { label: 'Software Engineering Operations' }, { label: 'Software Maintenance' },
+    { label: 'Software Engineering Operations', children: [
+      { label: 'Servlet Containers', children: [{ label: 'Apache Tomcat', href: '#servlet-containers/apache-tomcat' }] },
+    ] }, { label: 'Software Maintenance' },
   ] },
   { label: 'Data Technologies', id: 'Data', icon: 'database', separatorBefore: true, group: true, children: [
     { label: 'Data Engineering', icon: 'workflow', children: [

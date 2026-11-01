@@ -13,7 +13,7 @@ const groupIcons: Record<CareerGrowthTarget['group'], IconName> = { specializati
   <header class="home-section-heading">
     <h2 class="section-title" id="growth-title">{t('Amplía tu Alcance')}</h2>
   </header>
-  <p class="career-growth-introduction">{t('Elige el próximo paso en la trayectoria hacia tu progresión profesional.')}</p>
+  <p class="career-growth-introduction">{t('Selecciona hacia qué trayectoria profesional quieres progresar.')}</p>
   <div class="career-branches">
     {careerGrowthGroups.map(group => <article class="career-branch" data-growth-group={group.id}>
       <h3 class="career-icon-heading" id={`growth-${group.id}-title`}><Icon name={groupIcons[group.id]} class="career-heading-icon" /><span>{t(group.title)}</span></h3>

@@ -1,7 +1,7 @@
 export const careerRoleTranslations: Record<string, string> = {
   Generalista: 'Generalist',
   Especialista: 'Specialist',
-  'Explora los puestos desde las bases compartidas hasta la integración y la especialización. El orden y los años de cada etapa son orientativos y las especialidades son caminos paralelos con sus propias etapas.': 'Explore roles from shared foundations to integration and specialization. The order and years for each stage are a guide and specialties are parallel paths with their own stages.',
+  'Selecciona el área profesional y el puesto objetivo según tu nivel de experiencia.': 'Select the professional area and target role according to your experience level.',
   'Especialista de soporte TI': 'IT Support Specialist',
   'Resuelve problemas técnicos de usuarios': 'Resolves users’ technical issues',
   'Resuelve incidencias para que las personas puedan usar sus herramientas de trabajo.': 'Resolves issues so people can use their work tools.',

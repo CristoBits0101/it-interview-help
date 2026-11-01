@@ -1,0 +1,9 @@
+@layer components {
+  .preferences-back { display: inline-flex; align-items: center; flex-shrink: 0; gap: var(--gap-control); border-radius: var(--radius-control); color: var(--text-secondary); font-size: var(--font-small); line-height: var(--line-body); }
+  .preferences-back-circle { display: grid; place-items: center; flex-shrink: 0; inline-size: calc(2.3375 * var(--line-body)); block-size: calc(2.3375 * var(--line-body)); padding: calc(var(--line-body) / 4); border: 1px solid var(--border-strong); border-radius: var(--radius-full); background: var(--sidebar); color: var(--green); }
+  .preferences-back-disc { display: grid; place-items: center; inline-size: 100%; block-size: 100%; border: 2px solid var(--text-soft); border-radius: var(--radius-full); background: var(--surface-tinted); transition: background-color var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease); }
+  .preferences-back svg { inline-size: calc(1.275 * var(--line-body)); block-size: calc(1.275 * var(--line-body)); display: block; }
+  .preferences-back:is(:hover, :focus-visible) .preferences-back-disc { background: var(--surface-selected); border-color: var(--green); }
+  @media (forced-colors: active) { .preferences-back-circle, .preferences-back-disc { border-color: ButtonText; } }
+  @media (prefers-reduced-motion: reduce) { .preferences-back-disc { transition: none; } }
+}
