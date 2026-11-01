@@ -3,10 +3,20 @@ import test from 'node:test';
 import { resolveCareerSelection, restoreCareerSelectionState, toggleCareerSelection } from '../src/features/home/lib/career-selection.ts';
 import { careerDirections } from '../src/features/home/data/career-directions.ts';
 import { careerProfiles } from '../src/features/home/data/career-paths.ts';
+import { careerRoleScopes } from '../src/features/home/data/career-role-scopes.ts';
 import { navigation } from '../src/app/data/navigation.ts';
 import { translate } from '../src/shared/lib/translations.ts';
 
 const profileIds = careerProfiles.map(profile => profile.id);
+
+test('every career role has an explicit bilingual scope independent of its stage', () => {
+  assert.deepEqual(Object.keys(careerRoleScopes).sort(), [...profileIds].sort());
+  for (const scope of Object.values(careerRoleScopes)) {
+    assert(['Generalista', 'Especialista'].includes(scope));
+    assert.notEqual(translate(scope, 'en'), scope);
+    assert.equal(translate(translate(scope, 'en'), 'es'), scope);
+  }
+});
 
 test('every role belongs to one nonempty professional area without publishing new concepts', () => {
   assert.equal(careerDirections.length, 6);

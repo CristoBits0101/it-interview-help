@@ -10,6 +10,7 @@ import type { Track } from '../../../shared/lib/curriculum';
 import type { NavigationNode } from '../../../app/data/navigation';
 import type { CareerProfile } from '../data/career-paths';
 import type { CareerDirection } from '../data/career-directions';
+import { careerRoleScopes } from '../data/career-role-scopes';
 
 interface Props {
   profiles: CareerProfile[];
@@ -38,7 +39,7 @@ const profilesById = new Map(profiles.map(profile => [profile.id, profile]));
   <CareerCarousel id="career-profile-options" icon="briefcase" label="Puestos del área" previousLabel="Puestos anteriores" nextLabel="Puestos siguientes" class="career-profile-options">
     {directions.map(direction => direction.profileIds.map((id, index) => {
       const profile = profilesById.get(id)!;
-      return <CareerProfileOption profile={profile} index={index} directionId={direction.id} hidden={direction.id !== initialDirection.id} selected={profile.id === profiles[0].id} />;
+      return <CareerProfileOption profile={profile} scope={careerRoleScopes[id]} index={index} directionId={direction.id} hidden={direction.id !== initialDirection.id} selected={profile.id === profiles[0].id} />;
     }))}
   </CareerCarousel>
 

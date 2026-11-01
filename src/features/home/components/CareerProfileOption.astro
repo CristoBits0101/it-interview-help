@@ -2,20 +2,23 @@
 import { t } from '../../../shared/lib/translations';
 import Icon from '../../../shared/components/primitives/Icon.astro';
 import type { CareerProfile } from '../data/career-paths';
+import type { CareerRoleScope } from '../data/career-role-scopes';
 
 interface Props {
   profile: Pick<CareerProfile, 'id' | 'label' | 'purpose'>;
+  scope: CareerRoleScope;
   index: number;
   directionId: string;
   hidden?: boolean;
   selected?: boolean;
   controls?: string;
 }
-const { profile, index, directionId, hidden = false, selected = false, controls = 'career-panels' } = Astro.props;
+const { profile, scope, index, directionId, hidden = false, selected = false, controls = 'career-panels' } = Astro.props;
 const descriptionId = `career-purpose-${profile.id}`;
+const scopeId = `career-role-scope-${profile.id}`;
 ---
-<button type="button" data-carousel-item data-profile-direction={directionId} hidden={hidden} data-career-profile={profile.id} aria-label={t(profile.label)} aria-describedby={descriptionId} aria-pressed={selected} aria-controls={controls}>
-  <span class="career-option-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+<button type="button" data-carousel-item data-profile-direction={directionId} hidden={hidden} data-career-profile={profile.id} aria-label={t(profile.label)} aria-describedby={`${scopeId} ${descriptionId}`} aria-pressed={selected} aria-controls={controls}>
+  <span class="career-option-number"><span aria-hidden="true">{String(index + 1).padStart(2, '0')} · </span><span id={scopeId}>{t(scope)}</span></span>
   <span class="career-option-copy">
     <span class="career-option-title">{t(profile.label)}</span>
     <span class="career-option-description" id={descriptionId}>{t(profile.purpose)}</span>
