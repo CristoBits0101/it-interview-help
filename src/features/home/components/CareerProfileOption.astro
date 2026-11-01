@@ -18,7 +18,7 @@ const descriptionId = `career-purpose-${profile.id}`;
 const scopeId = `career-role-scope-${profile.id}`;
 ---
 <button type="button" data-carousel-item data-profile-direction={directionId} hidden={hidden} data-career-profile={profile.id} aria-label={t(profile.label)} aria-describedby={`${scopeId} ${descriptionId}`} aria-pressed={selected} aria-controls={controls}>
-  <span class="career-option-number"><span aria-hidden="true">{String(index + 1).padStart(2, '0')} · </span><span id={scopeId}>{t(scope)}</span></span>
+  <span class="career-option-number"><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><span class="career-option-separator" aria-hidden="true">·</span><span id={scopeId}>{t(scope)}</span></span>
   <span class="career-option-copy">
     <span class="career-option-title">{t(profile.label)}</span>
     <span class="career-option-description" id={descriptionId}>{t(profile.purpose)}</span>
