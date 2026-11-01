@@ -1,4 +1,4 @@
-import { writeSessionPreference } from '../lib/preferences';
+import { readSessionJsonPreference, writeSessionPreference } from '../lib/preferences';
 import { safePreferencesReturn, lastVisitedRouteKey } from '../lib/preferences-return';
 
 export function initializePreferencesReturn(routes: ReadonlySet<string>) {
@@ -12,14 +12,8 @@ export function initializePreferencesReturn(routes: ReadonlySet<string>) {
       if (previous) writeSessionPreference(lastVisitedRouteKey, JSON.stringify(previous));
       return;
     }
-    let state: Record<string, unknown> = {};
-    try {
-      if (history.state && typeof history.state === 'object' && !Array.isArray(history.state)) state = history.state;
-    } catch {}
-    const destination = safe(state.preferencesReturn) ?? previous ?? safe(document.referrer) ?? '/';
+    const destination = previous ?? safe(readSessionJsonPreference(lastVisitedRouteKey)) ?? safe(document.referrer) ?? '/';
     if (link) link.href = destination;
-    try { history.replaceState({ ...state, preferencesReturn: destination }, '', location.href); }
-    catch {}
   };
   window.addEventListener('hashchange', update);
   return update;

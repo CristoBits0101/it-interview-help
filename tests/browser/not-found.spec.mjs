@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.mjs';
 
 test('unknown URLs return an accessible bilingual 404 and retain safe return navigation', async ({ page }) => {
   const errors = [];
@@ -62,6 +62,8 @@ test('404 defaults to English without a valid saved preference regardless of bro
       }, storage);
       const page = await context.newPage();
       await page.goto('http://127.0.0.1:4322/missing-language');
+      await expect(page.locator('#storage-consent-dialog')).toBeVisible();
+  await page.keyboard.press('Escape');
       await expect(page).toHaveTitle('Page Not Found | IT Interview Help');
       await expect(page.locator('#not-found-back')).toBeHidden();
       await expect(page.locator('#language-selector')).toHaveCount(0);

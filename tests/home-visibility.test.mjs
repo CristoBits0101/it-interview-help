@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { initializeCareerPaths } from '../src/features/home/scripts/home.ts';
-import { preferenceKeys } from '../src/shared/lib/preferences.ts';
+import { preferenceKeys, setStorageConsent, writePreference, writeSessionPreference } from '../src/shared/lib/preferences.ts';
 
 class ElementFixture {
   constructor(dataset = {}, attributes = {}) {
@@ -26,7 +26,7 @@ function withHome(storedStage, run, storedSession) {
   const original = new Map(['document', 'HTMLElement', 'HTMLHRElement', 'localStorage', 'sessionStorage'].map(key => [key, Object.getOwnPropertyDescriptor(globalThis, key)]));
   const values = new Map(storedStage === null ? [] : [[preferenceKeys.careerStage, storedStage]]);
   const session = new Map(storedSession ? [[preferenceKeys.careerStage, JSON.stringify(storedSession)]] : []);
-  const storage = entries => ({ getItem: key => entries.get(key) ?? null, setItem: (key, value) => entries.set(key, value) });
+  const storage = entries => ({ getItem: key => entries.get(key) ?? null, setItem: (key, value) => entries.set(key, value), removeItem: key => entries.delete(key) });
   const container = new ElementFixture();
   const panelContainer = new ElementFixture();
   panelContainer.hidden = true;
@@ -50,6 +50,9 @@ function withHome(storedStage, run, storedSession) {
     for (const [key, value] of Object.entries({ document, HTMLElement: ElementFixture, HTMLHRElement: class {}, localStorage: storage(values), sessionStorage: storage(session) })) {
       Object.defineProperty(globalThis, key, { configurable: true, writable: true, value });
     }
+    setStorageConsent('accepted', true);
+    writePreference(preferenceKeys.careerStage, storedStage ?? 'null');
+    writeSessionPreference(preferenceKeys.careerStage, JSON.stringify(storedSession ?? null));
     const update = initializeCareerPaths();
     update();
     run({ update, stages, panels, panelContainer, values });

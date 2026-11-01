@@ -1,0 +1,30 @@
+---
+import Icon from '../primitives/Icon.astro';
+import { t } from '../../lib/translations';
+import './storage-consent.css';
+---
+<dialog id="storage-consent-dialog" aria-labelledby="storage-consent-title" aria-describedby="storage-consent-description">
+  <div class="dialog-top">
+    <h2 id="storage-consent-title"><Icon name="cookie" size={22} /><span>{t('Solicitud de Consentimiento')}</span></h2>
+  </div>
+  <hr class="section-separator storage-consent-heading-separator" aria-hidden="true" />
+  <div id="storage-consent-description" class="storage-consent-copy">
+    <p>{t('Para recordar tu configuración y tu progreso entre visitas desde este navegador necesitamos que nos des consentimiento para almacenar información en tu almacenamiento local. Si quieres desactivar el consentimiento de almacenamiento local, puedes hacerlo desde la página de Preferencias.')}</p>
+    <h3 class="storage-consent-question">{t('¿Qué queremos almacenar?')}</h3>
+    <ul class="storage-consent-items">
+      <li>{t('Idioma Seleccionado')}</li>
+      <li>{t('Progreso de Aprendizaje')}</li>
+      <li>{t('Etapa Seleccionada')}</li>
+      <li>{t('Despliegue de las Ramas del Menú')}</li>
+      <li>{t('Sonido Activado o Desactivado')}</li>
+      <li>{t('Nivel de Volumen')}</li>
+    </ul>
+    <hr class="section-separator" />
+    <p id="storage-consent-privacy">{t('No utilizamos cookies y no realizamos sincronizaciones remotas. Si continúas sin guardar la aplicación recordará su negativa y no se le volverá a preguntar. Puedes cambiar esta decisión en la página de Preferencias.')}</p>
+  </div>
+  <hr class="section-separator storage-consent-actions-separator" aria-hidden="true" />
+  <div class="storage-consent-actions">
+    <button type="button" class="primary-button" id="storage-consent-accept" autofocus>{t('Guardar mis preferencias')}</button>
+    <button type="button" class="secondary-button" id="storage-consent-reject">{t('Continuar sin guardar')}</button>
+  </div>
+</dialog>

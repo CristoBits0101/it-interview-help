@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.mjs';
 
 test('sidebar preserves its full height scrollbar and pinned controls with a long tree', async ({ page }) => {
   await page.goto('/preferences');

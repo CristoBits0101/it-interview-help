@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.mjs';
 
 test('surplus width keeps the reference Spanish role titles on one line', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop');

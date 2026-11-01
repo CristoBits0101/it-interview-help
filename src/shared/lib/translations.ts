@@ -8,6 +8,21 @@ import { careerContentTranslations } from '../../features/home/data/career-conte
 export type Language = 'es' | 'en';
 
 const spanishToEnglish: Record<string, string> = {
+  "¿Qué queremos almacenar?": "What do we want to store?",
+  "Para recordar tu configuración y tu progreso entre visitas desde este navegador necesitamos que nos des consentimiento para almacenar información en tu almacenamiento local. Si quieres desactivar el consentimiento de almacenamiento local, puedes hacerlo desde la página de Preferencias.": "To remember your settings and your progress between visits from this browser we need your consent to store information in your local storage. If you want to withdraw consent for local storage, you can do so from the Preferences page.",
+  "Idioma Seleccionado": "Selected Language",
+  "Progreso de Aprendizaje": "Learning Progress",
+  "Etapa Seleccionada": "Selected Stage",
+  "Despliegue de las Ramas del Menú": "Menu Branch Expansion",
+  "Sonido Activado o Desactivado": "Sound On or Off",
+  "Nivel de Volumen": "Volume Level",
+  "Solicitud de Consentimiento": "Consent Request",
+  "No utilizamos cookies y no realizamos sincronizaciones remotas. Si continúas sin guardar la aplicación recordará su negativa y no se le volverá a preguntar. Puedes cambiar esta decisión en la página de Preferencias.": "We do not use cookies and we do not perform remote synchronizations. If you continue without saving the application will remember your refusal and you will not be asked again. You can change this decision on the Preferences page.",
+  "Guardar mis preferencias": "Save my preferences",
+  "Continuar sin guardar": "Continue without saving",
+  "Almacenamiento de Preferencias": "Preference Storage",
+  "Guardar preferencias": "Save preferences",
+  "No se pudo actualizar el almacenamiento del navegador. Los cambios se mantienen en memoria. La decisión o los datos anteriores podrían seguir guardados.": "Browser storage could not be updated. Changes are kept in memory. The previous decision or data may still be saved.",
   'Protocolos de Red': 'Network Protocols',
   'Entorno de Desarrollo': 'Development Environment',
   'Creación de Proyectos': 'Project Creation',

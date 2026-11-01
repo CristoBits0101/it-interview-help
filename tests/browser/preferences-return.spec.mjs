@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.mjs';
 
 test('preferences preserves the previous internal route and hash through reload', async ({ page }) => {
   await page.goto('/software-design/solid#concept-srp');
@@ -35,9 +35,13 @@ test('direct preferences entry safely falls back to Home with unavailable storag
     for (const key of ['localStorage', 'sessionStorage']) Object.defineProperty(window, key, { get() { throw new Error('Unavailable'); } });
   });
   await page.goto('/preferences');
+  await expect(page.locator('#storage-consent-dialog')).toBeVisible();
+  await page.keyboard.press('Escape');
   await expect(page.locator('#preferences-back')).toHaveAttribute('href', '/');
   await page.evaluate(() => history.replaceState({ preferencesReturn: 'https://external.example/' }, '', location.href));
   await page.reload();
+  await expect(page.locator('#storage-consent-dialog')).toBeVisible();
+  await page.keyboard.press('Escape');
   await expect(page.locator('#preferences-back')).toHaveAttribute('href', '/');
   await page.locator('#preferences-back').click();
   await expect(page.locator('#home-view')).toBeVisible();

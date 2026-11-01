@@ -3,26 +3,33 @@ import test from 'node:test';
 import { defaultLanguage, t, translate, translatePatternTitle, stageAreaCount, availableConceptCount } from '../src/shared/lib/translations.ts';
 import { getSavedLanguage, saveLanguage, applyStaticTranslations } from '../src/shared/scripts/i18n.ts';
 import { publishedTracks } from '../src/app/data/published-catalog.ts';
-import { preferenceKeys } from '../src/shared/lib/preferences.ts';
+import { preferenceKeys, setStorageConsent, writePreference } from '../src/shared/lib/preferences.ts';
 import { careerProfiles } from '../src/features/home/data/career-paths.ts';
 
 test('English is the deterministic default and persisted manual choices take precedence', () => {
   const original = Object.getOwnPropertyDescriptor(globalThis, 'localStorage');
   const writes = [];
+  const values = new Map();
   try {
-    for (const [stored, expected] of [[null, 'en'], ['en', 'en'], ['es', 'es'], ['fr', 'en'], ['', 'en']]) {
-      Object.defineProperty(globalThis, 'localStorage', { configurable: true, value: {
-        getItem: key => { assert.equal(key, preferenceKeys.language); return stored; },
-        setItem: (key, value) => writes.push([key, value]),
-      }});
+    Object.defineProperty(globalThis, 'localStorage', { configurable: true, value: {
+      getItem: key => values.get(key) ?? null,
+      setItem: (key, value) => { writes.push([key, value]); values.set(key, value); },
+      removeItem: key => values.delete(key),
+    }});
+    assert.equal(getSavedLanguage(), 'en');
+    setStorageConsent('accepted', true);
+    for (const [stored, expected] of [['en', 'en'], ['es', 'es'], ['fr', 'en'], ['', 'en']]) {
+      writePreference(preferenceKeys.language, stored);
       assert.equal(getSavedLanguage(), expected);
     }
+    writes.length = 0;
     saveLanguage('es');
     saveLanguage('en');
-    assert.deepEqual(writes, [[preferenceKeys.language, 'es'], [preferenceKeys.language, 'en']]);
+    assert.deepEqual(writes.filter(([key]) => key === preferenceKeys.language), [[preferenceKeys.language, 'es'], [preferenceKeys.language, 'en']]);
     Object.defineProperty(globalThis, 'localStorage', { configurable: true, get() { throw new Error('Storage blocked'); }});
     assert.equal(getSavedLanguage(), 'en');
     assert.doesNotThrow(() => saveLanguage('es'));
+    assert.equal(getSavedLanguage(), 'es');
     assert.equal(defaultLanguage, 'en');
   } finally {
     if (original) Object.defineProperty(globalThis, 'localStorage', original);
@@ -31,6 +38,7 @@ test('English is the deterministic default and persisted manual choices take pre
 });
 
 test('published explanations retain their approved Spanish through English rendering', () => {
+  assert.equal(translate('No utilizamos cookies y no realizamos sincronizaciones remotas. Si continúas sin guardar la aplicación recordará su negativa y no se le volverá a preguntar. Puedes cambiar esta decisión en la página de Preferencias.', 'en'), 'We do not use cookies and we do not perform remote synchronizations. If you continue without saving the application will remember your refusal and you will not be asked again. You can change this decision on the Preferences page.');
   for (const track of publishedTracks) for (const module of track.modules) for (const concept of module.concepts) {
     const english = t(concept.description);
     assert.notEqual(english, concept.description, concept.id);

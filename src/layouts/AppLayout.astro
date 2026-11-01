@@ -13,6 +13,7 @@ import Sidebar from '../shared/components/navigation/Sidebar.astro';
 import Topbar from '../shared/components/navigation/Topbar.astro';
 import ReviewDialog from '../shared/components/dialogs/ReviewDialog.astro';
 import SourcesDialog from '../shared/components/dialogs/SourcesDialog.astro';
+import StorageConsentDialog from '../shared/components/preferences/StorageConsentDialog.astro';
 import type { NavigationNode } from '../app/data/navigation';
 import type { ConceptSource } from '../shared/data/concept-sources';
 interface Props { notFound?: boolean; navigation: NavigationNode[]; sources: Pick<ConceptSource, 'title' | 'url'>[] }
@@ -60,6 +61,7 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
     <ReviewDialog />
 
     <SourcesDialog sources={sources} />
+    <StorageConsentDialog />
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     {notFound ? <NotFoundRuntime /> : <AppRuntime />}
   </body>

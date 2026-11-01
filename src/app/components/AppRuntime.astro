@@ -1,1 +1,5 @@
-<script>import '../scripts/app';</script>
+<script>
+  import { initializeStorageConsent } from '../../shared/scripts/storage-consent';
+  import { initializeApp } from '../scripts/app';
+  void initializeStorageConsent().then(initializeApp);
+</script>

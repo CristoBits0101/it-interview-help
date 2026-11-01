@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.mjs';
 
 const routes = [
   ['java/jdk-environment', 'Development Environment', 'Entorno de Desarrollo'],

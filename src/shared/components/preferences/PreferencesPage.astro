@@ -14,6 +14,13 @@ const { hidden = true } = Astro.props;
     <p>{t('Configura la aplicación según tus necesidades y gustos.')}</p>
   </PageHeading>
   <div class="preferences-sections">
+  <section class="preferences-section" aria-labelledby="preferences-storage-title">
+    <h2 id="preferences-storage-title"><Icon name="shield" size={18} />{t('Almacenamiento de Preferencias')}</h2>
+    <div class="preferences-options">
+      <label class="storage-save-control" for="storage-save-toggle"><span class="storage-save-indicator"><input id="storage-save-toggle" type="checkbox" role="switch" disabled /><Icon name="check" size={16} /></span>{t('Guardar preferencias')}</label>
+    </div>
+    <p id="storage-saving-status" class="storage-saving-status" role="status" hidden></p>
+  </section>
   <section class="preferences-section" aria-labelledby="preferences-language-title">
     <h2 id="preferences-language-title"><Icon name="languages" size={18} />{t('Idioma')}</h2>
     <div class="preferences-options"><LanguageSelector /></div>

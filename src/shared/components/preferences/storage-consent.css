@@ -1,0 +1,40 @@
+@layer components {
+  html:has(#storage-consent-dialog[open]) { overflow: hidden; }
+  #storage-consent-dialog { --space-consent: var(--space-section); padding: var(--space-consent); border-radius: var(--radius-profile); }
+  #storage-consent-dialog .dialog-top { gap: var(--space-consent); }
+  #storage-consent-dialog .dialog-top h2 { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-consent); width: 100%; font-family: var(--brand); font-weight: 500; text-align: center; overflow-wrap: normal; hyphens: none; }
+  #storage-consent-title span { min-width: 0; }
+  .storage-consent-copy { display: grid; gap: var(--space-consent); margin-block: var(--space-consent); }
+  .storage-consent-copy p { text-align: justify; text-align-last: start; overflow-wrap: normal; word-break: normal; hyphens: none; }
+  #storage-consent-title > svg { width: 1.375rem; height: 1.375rem; color: var(--consent-cookie); flex-shrink: 0; }
+  .storage-consent-question { font-family: var(--career-heading); font-size: var(--font-career-heading); line-height: var(--line-career-question); font-weight: 400; color: var(--text-secondary); }
+  .storage-consent-items { list-style: disc; padding-inline-start: var(--space-consent); margin: 0; text-align: start; }
+  .storage-consent-items li { line-height: var(--line-body); }
+  .storage-consent-heading-separator { margin-block-start: var(--space-consent); }
+  .storage-consent-actions-separator { margin-block-end: var(--space-consent); }
+  .storage-consent-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-consent); }
+  .storage-consent-actions button { min-height: 44px; border-radius: var(--radius-full); white-space: normal; overflow-wrap: normal; }
+  #storage-consent-accept { background: transparent; border: 1px solid var(--green); color: var(--green); }
+  #storage-consent-accept:hover { background: var(--accent-strong); border-color: var(--accent-strong); color: var(--paper); }
+  #storage-consent-accept:focus-visible { outline: none; box-shadow: inset 0 -2px 0 var(--green); }
+  .storage-save-control { display: flex; align-items: center; gap: var(--gap-control); min-height: 44px; font-size: var(--font-small); font-weight: 400; cursor: pointer; }
+  .storage-save-indicator { display: inline-grid; place-items: center; flex-shrink: 0; }
+  .storage-save-indicator > * { grid-area: 1 / 1; }
+  .storage-save-control input { appearance: none; margin: 0; inline-size: 1.25rem; block-size: 1.25rem; border: 1px solid var(--border-strong); border-radius: var(--radius-full); background: var(--paper); }
+  .storage-save-control input:checked { border-color: var(--green); background: var(--green); }
+  .storage-save-indicator svg { inline-size: 1rem; block-size: 1rem; color: var(--paper); pointer-events: none; visibility: hidden; }
+  .storage-save-control input:checked + svg { visibility: visible; }
+  .storage-save-control input:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 3px; box-shadow: none; }
+  .storage-save-control:focus-within { box-shadow: inset 0 -2px 0 var(--green); }
+  .storage-saving-status { font-size: var(--font-body); color: var(--text-secondary); }
+  @media (forced-colors: active) {
+    .storage-save-control:focus-within, .storage-consent-actions button:focus-visible { outline: 2px solid Highlight; }
+    #storage-consent-accept { border-color: ButtonText; color: ButtonText; }
+    #storage-consent-accept:hover { background: Highlight; border-color: Highlight; color: HighlightText; }
+    #storage-consent-accept:focus-visible { outline: 2px solid Highlight; outline-offset: 2px; }
+    .storage-save-control input { border-color: ButtonText; background: Canvas; }
+    .storage-save-control input:checked { border-color: Highlight; background: Highlight; }
+    .storage-save-control input:focus-visible { outline-color: Highlight; }
+    .storage-save-indicator svg { color: HighlightText; }
+  }
+}

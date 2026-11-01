@@ -1,1 +1,5 @@
-<script>import '../scripts/not-found';</script>
+<script>
+  import { initializeStorageConsent } from '../../shared/scripts/storage-consent';
+  import { initializeNotFoundPage } from '../scripts/not-found';
+  void initializeStorageConsent().then(initializeNotFoundPage);
+</script>

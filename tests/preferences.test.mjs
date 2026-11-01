@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { preferenceKeys, readPreference, writePreference, parseStoredJson, readJsonPreference, restoreKnownIds, restoreLearnedIds, restoreCareerStage } from '../src/shared/lib/preferences.ts';
+import { preferenceKeys, createPreferenceStore, storageConsentKey, parseStoredJson, restoreKnownIds, restoreLearnedIds, restoreCareerStage } from '../src/shared/lib/preferences.ts';
 import { migrateBranchId } from '../src/app/data/navigation-migrations.ts';
 import { navigation } from '../src/app/data/navigation.ts';
 
@@ -13,29 +13,124 @@ test('existing preferences keep their persistent keys', () => {
   });
 });
 
-test('blocked storage reads and writes do not escape to application startup', () => {
-  const blocked = { getItem() { throw new Error('blocked'); }, setItem() { throw new Error('quota'); } };
-  assert.equal(readPreference('key', blocked), null);
-  assert.equal(readJsonPreference('key', blocked), undefined);
-  assert.equal(writePreference('key', 'value', blocked), false);
-  assert.equal(writePreference('key', 'value', null), false);
+function memoryStorage(initial = {}) {
+  const values = new Map(Object.entries(initial));
+  return { values, getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value), removeItem: key => values.delete(key) };
+}
+
+test('missing or invalid consent only reads the legacy language and never writes preferences', () => {
+  for (const decision of [undefined, 'true', 'false', '{}', 'invalid']) {
+    const local = memoryStorage({ [preferenceKeys.language]: 'es', ...(decision ? { [storageConsentKey]: decision } : {}) });
+    const reads = [];
+    const store = createPreferenceStore(() => ({ ...local, getItem(key) { reads.push(key); return local.getItem(key); } }), () => memoryStorage());
+    assert.equal(store.getConsent(), null);
+    assert.equal(store.read(preferenceKeys.language), 'es');
+    assert.equal(store.read(preferenceKeys.progress), null);
+    assert.equal(store.write(preferenceKeys.language, 'en'), true);
+    assert.equal(store.read(preferenceKeys.language), 'en');
+    assert(reads.length > 0 && reads.every(key => key === storageConsentKey || key === preferenceKeys.language));
+    assert.equal(local.getItem(preferenceKeys.language), 'es');
+  }
 });
 
-test('malformed progress can be replaced and recovered on the next visit', () => {
-  let saved = '{invalid';
-  const storage = { getItem: () => saved, setItem: (_key, value) => { saved = value; } };
-  const valid = new Set(['prototype']);
-  assert.deepEqual(restoreLearnedIds(readJsonPreference(preferenceKeys.progress, storage), valid), []);
-  assert.equal(writePreference(preferenceKeys.progress, JSON.stringify({ learned: ['prototype'] }), storage), true);
-  assert.deepEqual(restoreLearnedIds(readJsonPreference(preferenceKeys.progress, storage), valid), ['prototype']);
+test('initial acceptance restores legacy values only after the explicit decision', () => {
+  const local = memoryStorage({ [preferenceKeys.language]: 'es' });
+  const session = memoryStorage();
+  const store = createPreferenceStore(() => local, () => session);
+  assert.equal(store.getConsent(), null);
+  assert.equal(store.decide('accepted', true), true);
+  assert.equal(store.read(preferenceKeys.language), 'es');
+  assert.equal(local.getItem(storageConsentKey), 'accepted');
 });
 
-test('storage can recover after a transient write error', () => {
-  let unavailable = true;
-  const storage = { getItem: () => null, setItem() { if (unavailable) throw new Error('quota'); } };
-  assert.equal(writePreference('key', 'value', storage), false);
-  unavailable = false;
-  assert.equal(writePreference('key', 'value', storage), true);
+test('rejection and revocation remove only owned data and preserve current memory', () => {
+  const local = memoryStorage({ [storageConsentKey]: 'accepted', [preferenceKeys.language]: 'es', 'tech-training:sound:v1': '{}', unrelated: 'keep' });
+  const session = memoryStorage({ [preferenceKeys.careerStage]: '{}', 'tech-training:last-route:v1': '"/"', unrelated: 'keep' });
+  const store = createPreferenceStore(() => local, () => session);
+  assert.equal(store.read(preferenceKeys.language), 'es');
+  assert.equal(store.decide('rejected'), true);
+  assert.deepEqual([...local.values], [[storageConsentKey, 'rejected'], ['unrelated', 'keep']]);
+  assert.deepEqual([...session.values], [['unrelated', 'keep']]);
+  assert.equal(store.read(preferenceKeys.language), 'es');
+  store.write(preferenceKeys.careerStage, '"senior"');
+  store.write(preferenceKeys.careerStage, '{}', true);
+  assert.equal(local.getItem(preferenceKeys.careerStage), null);
+  assert.equal(session.getItem(preferenceKeys.careerStage), null);
+  const nextVisit = createPreferenceStore(() => local, () => session);
+  assert.equal(nextVisit.getConsent(), 'rejected');
+  assert.equal(nextVisit.read(preferenceKeys.language), null);
+  assert.equal(store.decide('accepted'), true);
+  assert.equal(local.getItem(preferenceKeys.language), 'es');
+  assert.equal(local.getItem(preferenceKeys.careerStage), '"senior"');
+});
+
+test('acceptance after using memory saves current state without restoring unread old data', () => {
+  const local = memoryStorage({ [preferenceKeys.progress]: '{"learned":["prototype"]}' });
+  const store = createPreferenceStore(() => local, () => memoryStorage());
+  assert.equal(store.read(preferenceKeys.progress), null);
+  store.write(preferenceKeys.language, 'es');
+  assert.equal(store.decide('accepted'), true);
+  assert.equal(local.getItem(preferenceKeys.progress), null);
+  assert.equal(local.getItem(preferenceKeys.language), 'es');
+});
+
+test('blocked getters and storage keep the decision and settings in memory', () => {
+  const store = createPreferenceStore(() => { throw Error('blocked'); }, () => { throw Error('blocked'); });
+  assert.equal(store.getConsent(), null);
+  assert.equal(store.decide('accepted', true), false);
+  assert.equal(store.write(preferenceKeys.language, 'es'), false);
+  assert.equal(store.read(preferenceKeys.language), 'es');
+  assert.equal(store.decide('rejected'), false);
+  assert.equal(store.getConsent(), 'rejected');
+  assert.equal(store.write(preferenceKeys.language, 'en'), true);
+});
+
+test('transient quota failures retry the decision and all in-memory changes', () => {
+  const local = memoryStorage();
+  let blocked = true;
+  const store = createPreferenceStore(() => ({ ...local, setItem(key, value) { if (blocked) throw Error('quota'); local.setItem(key, value); } }), () => memoryStorage());
+  assert.equal(store.decide('accepted', true), false);
+  assert.equal(store.write(preferenceKeys.language, 'es'), false);
+  blocked = false;
+  assert.equal(store.write(preferenceKeys.careerStage, '"junior"'), true);
+  assert.equal(local.getItem(storageConsentKey), 'accepted');
+  assert.equal(local.getItem(preferenceKeys.language), 'es');
+  assert.equal(local.getItem(preferenceKeys.careerStage), '"junior"');
+});
+
+test('corrupt JSON does not prevent later valid writes', () => {
+  const local = memoryStorage({ [storageConsentKey]: 'accepted', [preferenceKeys.progress]: '{invalid' });
+  const store = createPreferenceStore(() => local, () => memoryStorage());
+  assert.equal(parseStoredJson(store.read(preferenceKeys.progress)), undefined);
+  store.write(preferenceKeys.progress, '{"learned":["prototype"]}');
+  assert.deepEqual(parseStoredJson(local.getItem(preferenceKeys.progress)), { learned: ['prototype'] });
+});
+
+test('a decision revoked in another document cannot be overwritten by a stale writer', () => {
+  const local = memoryStorage({ [storageConsentKey]: 'accepted' });
+  const session = memoryStorage();
+  const first = createPreferenceStore(() => local, () => session);
+  const second = createPreferenceStore(() => local, () => session);
+  first.write(preferenceKeys.language, 'es');
+  second.decide('rejected');
+  first.write(preferenceKeys.language, 'en');
+  assert.equal(first.getConsent(), 'rejected');
+  assert.equal(local.getItem(storageConsentKey), 'rejected');
+  assert.equal(local.getItem(preferenceKeys.language), null);
+});
+
+test('failed deletion keeps old data inaccessible and retries before accepting current state', () => {
+  const local = memoryStorage({ [storageConsentKey]: 'accepted', [preferenceKeys.progress]: '{"learned":["prototype"]}' });
+  let blocked = true;
+  const store = createPreferenceStore(() => ({ ...local, removeItem(key) { if (blocked) throw Error('blocked deletion'); local.removeItem(key); } }), () => memoryStorage());
+  assert.equal(store.decide('rejected'), false);
+  assert.equal(store.read(preferenceKeys.progress), null);
+  assert.equal(store.decide('accepted'), false);
+  assert.equal(local.getItem(storageConsentKey), 'rejected');
+  blocked = false;
+  assert.equal(store.write(preferenceKeys.language, 'en'), true);
+  assert.equal(local.getItem(storageConsentKey), 'accepted');
+  assert.equal(local.getItem(preferenceKeys.progress), null);
 });
 
 test('only current concept IDs survive unknown or corrupt progress shapes', () => {

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.mjs';
 
 test('available study titles keep their link icon and color the heading on hover', async ({ page }) => {
   await page.goto('/');
