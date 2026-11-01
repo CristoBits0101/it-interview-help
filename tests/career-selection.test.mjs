@@ -70,7 +70,7 @@ test('role exploration introduces shared foundations before integrated specializ
   assert(software.indexOf('embedded-software') < software.indexOf('iot-developer'));
   assert.equal(software.at(-1), 'software-architect');
   assert.equal(roles('infrastructure-platforms')[0], 'it-support-specialist');
-  assert.equal(roles('cybersecurity')[0], 'security-analyst');
+  assert.equal(roles('cybersecurity')[0], 'soc-analyst');
   assert.equal(roles('data-engineering')[0], 'data-analyst');
   for (const id of ['research-engineer', 'research-scientist']) {
     assert(roles('data-ai').includes(id));

@@ -13,15 +13,15 @@ const directionProfiles: Record<string, Omit<CareerDirection, 'label'>> = {
   },
   Cybersecurity: {
     id: 'cybersecurity',
-    profileIds: ['security-analyst', 'soc-analyst', 'grc-analyst', 'security-engineer', 'application-security-engineer', 'cloud-security-engineer', 'penetration-tester', 'detection-engineer'],
+    profileIds: ['soc-analyst', 'grc-analyst', 'security-analyst', 'security-engineer', 'application-security-engineer', 'penetration-tester', 'cloud-security-engineer', 'detection-engineer'],
   },
   'Human-Computer Interaction': {
     id: 'ux-design',
-    profileIds: ['ui-designer', 'ux-writer', 'information-architect', 'ux-ui-designer', 'ux-researcher', 'ux-designer', 'product-designer', 'content-strategist', 'ux-strategist'],
+    profileIds: ['ux-writer', 'ui-designer', 'information-architect', 'ux-ui-designer', 'ux-researcher', 'ux-designer', 'product-designer', 'content-strategist', 'ux-strategist'],
   },
   'Software Engineering': {
     id: 'software-development',
-    profileIds: ['software-engineer', 'product-engineer', 'business-analyst', 'qa-engineer', 'frontend', 'backend', 'full-stack', 'mobile', 'desktop', 'game-developer', 'embedded-software', 'iot-developer', 'software-architect'],
+    profileIds: ['business-analyst', 'qa-engineer', 'software-engineer', 'frontend', 'backend', 'desktop', 'mobile', 'full-stack', 'product-engineer', 'game-developer', 'embedded-software', 'iot-developer', 'software-architect'],
   },
   Data: {
     id: 'data-engineering',
