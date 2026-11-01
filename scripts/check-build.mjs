@@ -1,9 +1,10 @@
+import { createRouteTitles, documentTitle } from '../src/shared/lib/document-title.ts';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, extname, join, relative, resolve, sep } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
-import { publishedTracks, pendingPages, publishedGuides } from '../src/app/data/published-catalog.ts';
+import { publishedTracks, pendingPages, publishedGuides, publishedNavigation } from '../src/app/data/published-catalog.ts';
 import { patternGuides } from '../src/features/software-engineering/software-design/design-patterns/data/index.ts';
 import { t } from '../src/shared/lib/translations.ts';
 import { careerGrowthTargets } from '../src/features/home/data/career-growth.ts';
@@ -22,6 +23,13 @@ const html = readFileSync(join(outputRoot, 'index.html'), 'utf8');
 const decode = value => value.replace(/&(?:amp|quot|apos|lt|gt|#39|#x27);/g, entity => ({
   '&amp;': '&', '&quot;': '"', '&apos;': "'", '&lt;': '<', '&gt;': '>', '&#39;': "'", '&#x27;': "'",
 })[entity]);
+const routeTitles = createRouteTitles(publishedNavigation);
+for (const route of Object.keys(routeTitles)) {
+  const page = readFileSync(join(outputRoot, route, 'index.html'), 'utf8');
+  const expected = documentTitle(route, routeTitles, 'en');
+  assert.equal(decode(page.match(/<title\b[^>]*>([^<]*)<\/title>/)?.[1] ?? ''), expected, route);
+  assert.equal(decode(page.match(/<meta property="og:title" content="([^"]*)"/)?.[1] ?? ''), expected, route);
+}
 const withoutScriptBodies = html.replace(/(<script\b[^>]*>)[\s\S]*?<\/script>/gi, '$1</script>');
 const tags = [...withoutScriptBodies.matchAll(/<([a-z][a-z\d-]*)\b([^>]*)>/gi)].map(match => {
   const [, name, source] = match;
@@ -60,7 +68,7 @@ for (const tag of growthLinks) {
 assert(!idSet.has('growth-preparation'));
 assert.equal(tags.find(tag => tag.name === 'html')?.attributes.lang, 'en', 'The static document must default to English.');
 assert.equal(tags.find(tag => tag.name === 'body')?.attributes.lang, 'en', 'The static body must use the document language.');
-assert.match(html, /Foundations for technical interviews/);
+assert.match(html, /Home \| IT Interview Help<\/title>/);
 const canonical = tags.find(tag => tag.name === 'link' && tag.attributes.rel === 'canonical')?.attributes.href;
 assert(canonical && new URL(canonical).protocol === 'https:', 'Missing HTTPS canonical URL.');
 assert.equal(tags.find(tag => tag.name === 'meta' && tag.attributes.property === 'og:url')?.attributes.content, canonical);
@@ -92,8 +100,8 @@ for (const [page, preferencesVisible] of [[html, false], [preferencesHtml, true]
   const navigationIndex = page.indexOf('id="course-navigation"');
   assert(navigationHeadingIndex < searchIndex && searchIndex < navigationIndex);
 }
-assert.match(preferencesHtml, /<title>Preferences · IT Interview Help<\/title>/);
-assert(preferencesHtml.includes('Configure the application according to your preferences.'));
+assert.match(preferencesHtml, /Preferences \| IT Interview Help<\/title>/);
+assert(preferencesHtml.includes('Configure the application according to your needs and tastes.'));
 assert(!existsSync(join(outputRoot, 'settings/index.html')), 'Only the Preferences route is published.');
 const csp = tags.find(tag => tag.name === 'meta' && tag.attributes['http-equiv']?.toLowerCase() === 'content-security-policy')?.attributes.content;
 assert(csp, 'The built document must carry the static CSP.');

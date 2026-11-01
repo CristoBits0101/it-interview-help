@@ -10,9 +10,11 @@ export type Language = 'es' | 'en';
 const spanishToEnglish: Record<string, string> = {
   'Computación Cuántica': 'Quantum Computing',
   'Preferencias': 'Preferences',
+  'Ajuste de Preferencias': 'Preference Settings',
+  'Volver': 'Back',
   'No hay coincidencias en el menú.': 'No matches in the menu.',
   'Sonido': 'Sound',
-  'Configura la aplicación según tus preferencias.': 'Configure the application according to your preferences.',
+  'Configura la aplicación según tus necesidades y gustos.': 'Configure the application according to your needs and tastes.',
   'Cerrar': 'Close',
   'Documentación': 'Documentation',
   'Todas las funciones': 'All functions',

@@ -1,3 +1,5 @@
+import { documentTitle } from '../../shared/lib/document-title';
+import { initializePreferencesReturn } from '../../shared/scripts/preferences-return';
 import { initializeAiEcosystem } from '../../features/artificial-intelligence/generative-artificial-intelligence/ecosystem/scripts/ai-ecosystem';
 import { preferenceKeys, readJsonPreference, restoreLearnedIds, writePreference } from '../../shared/lib/preferences';
 import { $, $$ } from '../../shared/scripts/dom';
@@ -13,6 +15,7 @@ import { initializeCareerPaths } from '../../features/home/scripts/home';
 import { initializeCareerTooltips } from '../../features/home/scripts/career-tooltips';
 import { applyStaticTranslations, getSavedLanguage, saveLanguage, translate, translatePatternTitle, type Language } from '../../shared/scripts/i18n';
 
+const routeTitles: Record<string, string> = JSON.parse(document.querySelector<HTMLTitleElement>('title')!.dataset.routeTitles!);
 let language: Language = getSavedLanguage();
 applyStaticTranslations(language);
 const filterNavigation = initializeNavigation();
@@ -43,6 +46,8 @@ const pendingSections = $$<HTMLElement>('[data-pending-route]');
 let currentPending: HTMLElement | undefined;
 const resourceSections = $$<HTMLElement>('[data-resource-route]');
 let currentResource: HTMLElement | undefined;
+const returnRoutes = new Set(['/', ...sections.map(section => `/${section.dataset.trackId}/${section.dataset.moduleId}`), ...pendingSections.map(section => `/${section.dataset.pendingRoute}`), ...resourceSections.map(section => `/${section.dataset.resourceRoute}`)]);
+const updatePreferencesReturn = initializePreferencesReturn(returnRoutes);
 const cards = $$<HTMLElement>('.concept-card');
 const validIds = new Set(cards.map(card => card.dataset.conceptId!));
 const resourceSearch = new Map([...resourceSections, ...$$<HTMLElement>('[data-learning-guide]')].map(section => [section.dataset.resourceRoute ?? section.id, normalize(`${section.textContent} ${Array.from(section.querySelectorAll<HTMLElement>('[data-i18n-es]'), item => `${item.dataset.i18nEs} ${item.dataset.i18nEn}`).join(' ')}`)]));
@@ -132,6 +137,7 @@ function refreshView() {
   const isHome = mode === 'home';
   const isPreferences = mode === 'preferences';
   $('#preferences-view').hidden = !isPreferences;
+  $('#preferences-back').hidden = !isPreferences;
   if (isPreferences) $('#preferences-link').setAttribute('aria-current', 'page');
   else $('#preferences-link').removeAttribute('aria-current');
   const canonical = document.querySelector<HTMLLinkElement>('link[rel=canonical]');
@@ -140,7 +146,7 @@ function refreshView() {
     document.querySelector<HTMLMetaElement>('meta[property="og:url"]')!.content = canonical.href;
   }
   const descriptionMeta = document.querySelector<HTMLMetaElement>('meta[name=description]')!;
-  descriptionMeta.content = translate(isPreferences ? 'Configura la aplicación según tus preferencias.' : descriptionMeta.dataset.defaultDescription!, language);
+  descriptionMeta.content = translate(isPreferences ? 'Configura la aplicación según tus necesidades y gustos.' : descriptionMeta.dataset.defaultDescription!, language);
   document.querySelector<HTMLMetaElement>('meta[property="og:description"]')!.content = descriptionMeta.content;
   const isGrouped = mode === 'search';
   $('#home-view').hidden = !isHome;
@@ -176,7 +182,7 @@ function refreshView() {
   const homeLink = $('[data-home-link]');
   if (isHome) homeLink.setAttribute('aria-current', 'page');
   else homeLink.removeAttribute('aria-current');
-  document.title = isPreferences ? `${translate('Preferencias', language)} · IT Interview Help` : isHome ? `IT Interview Help · ${translate('Home', language)}` : mode === 'search' ? `${translate('Búsqueda', language)} · IT Interview Help` : `${translate(mode === 'resource' ? currentResource!.dataset.resourceTitle! : mode === 'pending' ? currentPending!.dataset.pendingTitle! : selectedSection.dataset.moduleTitle!, language)} · IT Interview Help`;
+  document.title = documentTitle(location.pathname, routeTitles, language);
   document.querySelector<HTMLMetaElement>('meta[property="og:title"]')!.content = document.title;
   let visibleCount = 0;
   sections.forEach(section => {
@@ -222,9 +228,10 @@ function refreshView() {
 }
 
 function goToRoute(initial = false) {
+  updatePreferencesReturn();
   document.querySelectorAll<HTMLDialogElement>('[data-implementation][open], [data-learning-guide][open]').forEach(dialog => dialog.close());
   const legacyRoute = location.hash.slice(1);
-  if (initial && legacyRoute && legacyRoute !== 'main') history.replaceState(null, '', legacyRoute === 'home' ? '/' : `/${legacyRoute}`);
+  if (initial && location.pathname === '/' && (legacyRoute === 'home' || legacyRoute === 'preferences' || returnRoutes.has(`/${legacyRoute}`))) history.replaceState(history.state, '', legacyRoute === 'home' ? '/' : `/${legacyRoute}`);
   const route = location.pathname.replace(/^\/|\/$/g, '');
   if (route === 'main' && !initial) return;
   if (route === 'study' && routeMode === 'module') return;
@@ -259,6 +266,9 @@ function goToRoute(initial = false) {
   }
 }
 window.addEventListener('popstate', () => goToRoute());
+window.addEventListener('hashchange', () => {
+  if (location.pathname === '/' && (location.hash === '#home' || location.hash === '#preferences' || returnRoutes.has(`/${location.hash.slice(1)}`))) goToRoute(true);
+});
 $('.skip-link').addEventListener('click', event => {
   event.preventDefault();
   $('#main').focus({ preventScroll: true });

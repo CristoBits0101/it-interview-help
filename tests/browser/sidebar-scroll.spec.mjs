@@ -43,7 +43,7 @@ test('all menu explanations switch language without changing destinations', asyn
   for (const language of ['es', 'en']) {
     await page.locator(`label[lang="${language}"]`).click();
     expect(await page.locator('.navigation-description-trigger').evaluateAll((buttons, language) => buttons.every(button => button.dataset.navigationDescription === button.getAttribute(`data-i18n-${language}`)), language)).toBe(true);
-    const expected = language === 'es' ? 'Configura la aplicación según tus preferencias.' : 'Configure the application according to your preferences.';
+    const expected = language === 'es' ? 'Configura la aplicación según tus necesidades y gustos.' : 'Configure the application according to your needs and tastes.';
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', expected);
     if (await page.locator('#mobile-toggle').isVisible()) await page.locator('#mobile-toggle').click();
     const firstBranch = page.locator('.navigation-root > li > details').first();

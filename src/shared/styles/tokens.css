@@ -41,6 +41,7 @@
     --font-title: .9375rem;
     --font-section: .9375rem;
     --line-body: 1rem;
+    --line-career-meta: calc(var(--line-body) * 1.5);
     --line-career-question: 1.5625rem;
     --control-border: var(--text-soft);
     --topbar-control-size: 2.5rem;

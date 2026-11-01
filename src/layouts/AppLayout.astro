@@ -2,6 +2,7 @@
 import '@fontsource-variable/google-sans-flex';
 import '@fontsource/dancing-script/latin-400.css';
 import { t } from '../shared/lib/translations';
+import { createRouteTitles, documentTitle } from '../shared/lib/document-title';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '../shared/styles/global.css';
@@ -16,8 +17,9 @@ interface Props { navigation: NavigationNode[]; sources: Pick<ConceptSource, 'ti
 const { navigation, sources } = Astro.props;
 const isPreferences = Astro.url.pathname.replace(/\/$/, '') === '/preferences';
 const defaultDescription = 'Review key concepts and prepare your answers for technical interviews across different roles and companies.';
-const description = isPreferences ? t('Configura la aplicación según tus preferencias.') : defaultDescription;
-const pageTitle = isPreferences ? `${t('Preferencias')} · IT Interview Help` : 'IT Interview Help · Home';
+const description = isPreferences ? t('Configura la aplicación según tus necesidades y gustos.') : defaultDescription;
+const routeTitles = createRouteTitles(navigation);
+const pageTitle = documentTitle(Astro.url.pathname, routeTitles, 'en');
 const canonicalUrl = isPreferences && Astro.site ? new URL('preferences', Astro.site).href : Astro.site?.href;
 const canvasColor = designTokens.match(/--canvas:\s*(#[\da-fA-F]{6})\s*;/)?.[1];
 if (!canvasColor) throw new Error('The canvas design token must define a six-digit hex color.');
@@ -32,11 +34,11 @@ if (!canvasColor) throw new Error('The canvas design token must define a six-dig
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} data-base-url={Astro.site?.href} />}
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
     <meta name="theme-color" content={canvasColor} />
-    <meta property="og:title" content={isPreferences ? pageTitle : 'IT Interview Help · Foundations for technical interviews'} />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=writing-hand-1" />
-    <title>{pageTitle}</title>
+    <title data-route-titles={JSON.stringify(routeTitles)}>{pageTitle}</title>
   </head>
   <body lang="en">
     <a href="#main" class="skip-link">{t('Saltar al contenido')}</a>

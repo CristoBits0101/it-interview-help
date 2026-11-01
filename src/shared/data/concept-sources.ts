@@ -8,6 +8,9 @@ const source = (publisher: string, title: string, url: string): ConceptSource =>
 const refactoringGuru = (title: string, slug: string) => source('Refactoring.Guru', `${title} — Patrones de diseño`, `https://refactoring.guru/es/design-patterns/${slug}`);
 
 export const conceptSources = {
+  normativeFramework: source('RAE · ASALE', 'Normativo · normativa', 'https://dle.rae.es/normativo'),
+  regulation: source('RAE · ASALE', 'Reglamentación', 'https://dle.rae.es/reglamentaci%C3%B3n'),
+  technicalRegulation: source('BOE', 'Ley 21/1992 · Artículo 8', 'https://www.boe.es/buscar/act.php?id=BOE-A-1992-17363#a8'),
   webRendering: source('Astro', 'Islands architecture', 'https://docs.astro.build/en/concepts/islands/'),
   buffer: source('Oracle', 'Buffer · Java SE 22', 'https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/Buffer.html'),
   http: source('IETF · RFC 9110', 'HTTP Semantics', 'https://www.rfc-editor.org/rfc/rfc9110.html'),

@@ -60,7 +60,7 @@ const navigationTree: (NavigationNode & { icon: IconName })[] = [
     { label: 'Usability Evaluation' },
   ] },
   { label: 'Software Engineering', icon: 'blocks', children: [
-    { label: 'Software Requirements' },
+    { label: 'Software Requirements', href: '#software-requirements/product-constraints' },
     { label: 'Software Engineering Methods', children: [
       { label: 'Heuristic Methods' }, { label: 'Formal Methods' },
       { label: 'Prototyping Methods' }, { label: 'Agile Methods' },
