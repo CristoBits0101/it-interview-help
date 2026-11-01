@@ -182,8 +182,8 @@
   .learn-button[aria-pressed='true'] { color: var(--accent-strong); }
   .check-circle { border: 1px solid var(--control-border); border-radius: 50%; width: var(--card-leading-size, 20px); height: var(--card-leading-size, 20px); flex-shrink: 0; display: grid; place-items: center; }
   .learn-button[aria-pressed='true'] .check-circle { background: var(--accent); color: var(--paper); border-color: var(--green); }
-  .module-bottom { display: flex; justify-content: flex-end; align-items: center; margin-top: var(--space-page); gap: var(--space-gap); }
-  .next-module { display: inline-flex; align-items: center; gap: var(--gap-compact); color: var(--accent); font-size: var(--font-small); font-weight: 400; min-height: 44px; padding: var(--space-compact); }
+  .module-bottom { display: flex; justify-content: flex-start; align-items: center; gap: var(--space-gap); }
+  .next-module { display: inline-flex; align-items: center; gap: var(--gap-compact); color: var(--accent); font-size: var(--font-small); font-weight: 400; min-height: 44px; }
   .next-module:hover { color: var(--ink); }
   .search-group-heading { font: 400 var(--font-small)/var(--line-body) var(--body); color: var(--text-soft); display: flex; align-items: center; gap: var(--gap-card); margin: var(--gap-card) 0; }
   .empty-state { padding: 70px 24px; text-align: center; border: 1px dashed var(--border-soft); border-radius: var(--radius-card); }
